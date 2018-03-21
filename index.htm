@@ -25,21 +25,21 @@
 </script>
   <!-- END WHAT DOES THIS DO? -->
 
+  <!-- BEGIN STYLE DEFINITION -->
   <style type="text/css">
     img.wp-smiley,
-    img.emoji {
-    display: inline !important;
-    border: none !important;
-    box-shadow: none !important;
-    height: 1em !important;
-    width: 1em !important;
-    margin: 0 .07em !important;
-    vertical-align: -0.1em !important;
-    background: none !important;
-    padding: 0 !important;
-    }
+    img.emoji { display: inline !important;
+                border: none !important;
+                box-shadow: none !important;
+                height: 1em !important;
+                width: 1em !important;
+                margin: 0 .07em !important;
+                vertical-align: -0.1em !important;
+                background: none !important;
+                padding: 0 !important; }
   </style>
-
+  <!-- END STYLE DEFINITION -->
+  
   <!-- BEGIN GO THROUGH THIS BLOCK LINE FOR LNE AND CLEAN UP IF POSSIBLE -->
   <link rel='stylesheet' id='avada-parent-stylesheet-css'  href='http://www.deepoceanobserving.org/wp-content/themes/Avada/style.css?ver=4.8.4' type='text/css' media='all' />
   <link rel='stylesheet' id='avada-stylesheet-css'  href='http://www.deepoceanobserving.org/wp-content/themes/Avada/assets/css/style.min.css?ver=5.2' type='text/css' media='all' />
@@ -270,10 +270,17 @@
 <!-- BEGIN ABOVE THE FOLD WITH THE BIG AND BOLD THINGS -->
 <div id="sliders-container">
   <div class="fusion-slider-container fusion-slider-13  full-width-slider-container" style="height:500px;max-width:100%;">
+
+    <!-- BEGIN SCOPED STYLE DEFINITION -->
     <style type="text/css" scoped="scoped">
       .fusion-slider-13 
-      .flex-direction-nav a {width:63px;height:63px;line-height:63px;font-size:25px;}
+      .flex-direction-nav 
+      a { width:63px;height:63px;
+          line-height:63px;
+          font-size:25px; }
     </style>
+  <!-- END SCOPED STYLE DEFINITION -->
+
     <div class="fusion-slider-loading">Loading...</div>
     <div class="tfs-slider flexslider main-flex full-width-slider" style="max-width:100%;" data-slider_width="100%" data-slider_height="500px" data-slider_content_width="" data-full_screen="0" data-parallax="0" data-nav_arrows="0" data-nav_box_width="63px" data-nav_box_height="63px" data-nav_arrow_size="25px" data-pagination_circles="0" data-autoplay="1" data-loop="0" data-animation="fade" data-slideshow_speed="7000" data-animation_speed="600" data-typo_sensitivity="2" data-typo_factor="1.5" >
       <ul class="slides" style="max-width:100%;">
@@ -292,26 +299,42 @@
 	      <div class="buttons" >
 		<div class="tfs-button-1">
 		  <div class="fusion-button-wrapper">
-		    <style type="text/css" scoped="scoped">.fusion-button.button-1
-		      .fusion-button-text, .fusion-button.button-1 i
-		      {color:#ffffff;}.fusion-button.button-1
-		      {border-width:0px;border-color:#ffffff;}.fusion-button.button-1
-		      .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-1:hover
-		      .fusion-button-text, .fusion-button.button-1:hover
-		      i,.fusion-button.button-1:focus
-		      .fusion-button-text, .fusion-button.button-1:focus
-		      i,.fusion-button.button-1:active
-		      .fusion-button-text,
-		      .fusion-button.button-1:active{color:#ffffff;}.fusion-button.button-1:hover,
-		      .fusion-button.button-1:focus,
-		      .fusion-button.button-1:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-1:hover
-		      .fusion-button-icon-divider,
+
+		    <!-- BEGIN SCOPED STYLE DEFINITION -->
+		    <style type="text/css" scoped="scoped">
+		      .fusion-button.button-1
+		      .fusion-button-text 
+		      .fusion-button.button-1 
+		      i { color:#ffffff;}
+		      .fusion-button.button-1 { border-width:0px;
+                                                border-color:#ffffff;}
+		      .fusion-button.button-1
+		      .fusion-button-icon-divider { border-color:#ffffff; }
 		      .fusion-button.button-1:hover
-		      .fusion-button-icon-divider,
+		      .fusion-button-text
+		      .fusion-button.button-1:hover i
+		      .fusion-button.button-1:focus
+		      .fusion-button-text
+		      .fusion-button.button-1:focus i
 		      .fusion-button.button-1:active
-		      .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-1{background:
-		      #726454;}.fusion-button.button-1:hover,.button-1:focus,.fusion-button.button-1:active{background:
-		      #857462;}.fusion-button.button-1{width:auto;}</style>  
+		      .fusion-button-text 
+		      .fusion-button.button-1:active{color:#ffffff;}
+		      .fusion-button.button-1:hover
+		      .fusion-button.button-1:focus
+		      .fusion-button.button-1:active{ border-width:0px;
+                                                      border-color:#ffffff; }
+		      .fusion-button.button-1:hover
+		      .fusion-button-icon-divider
+		      .fusion-button.button-1:hover
+		      .fusion-button-icon-divider
+		      .fusion-button.button-1:active
+		      .fusion-button-icon-divider { border-color:#ffffff; }
+		      .fusion-button.button-1{ background: #726454;}
+		      .fusion-button.button-1:hover
+		      .button-1:focus
+		      .fusion-button.button-1:active{ background: #857462; }
+		      .fusion-button.button-1{ width:auto; }
+		    </style>  
 		    <a class="fusion-button button-flat
 			      fusion-button-default button-xlarge button-custom
 			      button-1 btn btn--hero" target="_self"
@@ -330,6 +353,7 @@
 		      sizingMethod='scale');-ms-filter:'progid:DXImageTransform.Microsoft.AlphaImageLoader(src='',
 		      sizingMethod='scale')';" data-imgwidth="">
             <img src = "images/water00.jpg"/>
+	  <!-- THERE IS NOTHING TO CLOSE HERE -->
 </video>
 	  <!-- END NEEDS TO BE DISAMBIGUATED -->
 	  </div>
@@ -345,7 +369,7 @@
 <main id="main" role="main" class="clearfix width-100" style="padding-left:30px;padding-right:30px">
   <div class="fusion-row" style="max-width:100%;">
     <section id="content" class="full-width">
-
+      
       <!-- BEGIN TARGET FOR DELETION -->
       <div id="post-13" class="post-13 page type-page status-publish hentry">
         <span class="entry-title rich-snippet-hidden">Home</span>
@@ -356,7 +380,7 @@
         </span>
         <span class="updated rich-snippet-hidden">2017-11-08T21:11:33+00:00</span>
         <!-- END TARGET FOR DELETION -->
-
+	
         <div class="post-content">
           <div  class="fusion-fullwidth fullwidth-box nonhundred-percent-fullwidth"  style='background-color: #00344c;background-position: left top;background-repeat: no-repeat;padding-top:20px;padding-right:30px;padding-bottom:20px;padding-left:30px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;'>
 	    <div class="fusion-builder-row fusion-row ">
@@ -365,7 +389,8 @@
                 <div class="fusion-column-wrapper" style="background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"  data-bg-url="">
                 <div class="fusion-title title fusion-title-center fusion-title-size-one" style="margin-top:0px;margin-bottom:31px;">
 		  <div class="title-sep-container title-sep-container-left">
-		    <div class="title-sep sep-double" style="border-color:#e0dede;"></div>
+		    <div class="title-sep sep-double" style="border-color:#e0dede;">
+		    </div>
 		  </div>
 		  <h1 class="title-heading-center">
 		    <p style="text-align: center;">A GLOBAL PROGRAM FOR AUTONOMOUS MEASUREMENTS IN THE OCEANS </p>
@@ -378,51 +403,52 @@
 		<p style="text-align: center; color: #ffffff; font-size: 2.1rem;"><a href="http://www.google.com">Seismology</a></p>
                 <p style="text-align: center; color: #ffffff; font-size: 2.1rem;"><a href="http://www.google.com">Bioacoustics</p>
                 <p style="text-align: center; color: #ffffff; font-size: 2.1rem;"><a href="http://www.google.com">Meteorology</p>
-                <div class="fusion-clearfix"></div>
+                <div class="fusion-clearfix">
+		</div>
     
-                <div id="mapAnchor"></div>
-
+                <div id="mapAnchor">
+		</div>
+		
                 </div>
-                
-                </div></div></div><div  class="fusion-fullwidth fullwidth-box nonhundred-percent-fullwidth"  style='background-color: #e5f5ff;background-position: left top;background-repeat: no-repeat;padding-top:50px;padding-right:30px;padding-bottom:50px;padding-left:30px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;'><div class="fusion-builder-row fusion-row "><div  class="fusion-layout-column fusion_builder_column fusion_builder_column_2_5  fusion-two-fifth fusion-column-first 2_5"  style='margin-top:63px;margin-bottom:63px;width:37.6%; margin-right: 4%;'>
-                
-                
+          </div>
+	    </div>
+	  </div>
+	  <div  class="fusion-fullwidth fullwidth-box nonhundred-percent-fullwidth"  style='background-color: #e5f5ff;background-position: left top;background-repeat: no-repeat;padding-top:50px;padding-right:30px;padding-bottom:50px;padding-left:30px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;'>
+	    <div class="fusion-builder-row fusion-row ">
+	      <div  class="fusion-layout-column fusion_builder_column fusion_builder_column_2_5  fusion-two-fifth fusion-column-first 2_5"  style='margin-top:63px;margin-bottom:63px;width:37.6%; margin-right: 4%;'>
                 
                 <span class="fusion-column-inner-bg hover-type-none">
-                <a href="http://www.deepoceanobserving.org/observations/deep-ocean-observations/" aria-label="">
-                <span class="fusion-column-inner-bg-image" style="background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"></span></a>
+                  <a href="http://www.deepoceanobserving.org/observations/deep-ocean-observations/" aria-label="">
+                    <span class="fusion-column-inner-bg-image" style="background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"></span></a>
                 </span>
-                </div></div></div>
-                
-
-                <!DOCTYPE html>
-                <html>
-                <head>
-                <style>
+              </div>
+	    </div>
+	  </div>
+          
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <style>
                 #map
                 {
-                    height: 400px;
-                    width: 100%;
-                    }
-                    
-                </style>
-                </head>
-                <body>
-
-
+                height: 400px;
+                width: 100%;
+                }
                 
-                <script type='text/javascript' src='http://www.deepoceanobserving.org/wp-content/uploads/fusion-scripts/b8e9917aa0d11f986c14d75b4411eb53.js?timestamp=1516453109'></script>
+              </style>
+            </head>
+            <body>
+              <script type='text/javascript' src='http://www.deepoceanobserving.org/wp-content/uploads/fusion-scripts/b8e9917aa0d11f986c14d75b4411eb53.js?timestamp=1516453109'>
+	      </script>
+</h3>
 
 
-                </h3>
+<!-- ###################### BEGIN SCROLLER  ########################################################## -->
 
-                
-        <!-- ###################### BEGIN SCROLLER  ########################################################## -->
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-        div.scrollmenu {
-            background-color: #333;
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  div.scrollmenu {
+  background-color: #333;
             overflow: auto;
             white-space: nowrap;
         }
@@ -484,15 +510,16 @@
         fclose($file_handle);
         
         ?>
+
+        </body>
+        </html>
+
         <!-- ###################### END FILE READER  ########################################################## -->
 
 	<!-- ###################### BEGIN MAPS  ########################################################## -->
         
-        </body>
-        </html>
-
-                <div id="map"></div>
-                <script>
+        <div id="map"></div>
+        <script>
                   function initMap() {
                     var guyot = {lat: 40.34585, lng: -74.65475};
                     var map = new google.maps.Map(document.getElementById('map'), {
@@ -593,142 +620,162 @@
     <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_3  fusion-one-third fusion-column-last card--home 1_3"  style='margin-top:0px;margin-bottom:20px;width:30.6666%'>
             
             <div class="fusion-column-wrapper" style="background-color:#ffffff;border:1px solid #111111;background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"  data-bg-url="">
-            <div class="fusion-column-content-centered"><div class="fusion-column-content"><span class="fusion-imageframe imageframe-none imageframe-4 hover-type-zoomin">
-
-            <a class="fusion-no-lightbox" target="_self" aria-label="MERMAID">
-            <img src="images/inthewater01.jpg" width="528" height="353" alt="" class="img-responsive wp-image-76"/>
-            </a>
-            
-            </span>
-		<div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;">
-		  <h5 class="title-heading-center">
-		    <a href="/observations/deep-sea-life-habitats/">Science</a>
-	    </h5>
-	    </div>
+              <div class="fusion-column-content-centered">
+		<div class="fusion-column-content"><span class="fusion-imageframe imageframe-none imageframe-4 hover-type-zoomin">
+		    
+		    <a class="fusion-no-lightbox" target="_self" aria-label="MERMAID">
+		      <img src="images/inthewater01.jpg" width="528" height="353" alt="" class="img-responsive wp-image-76"/>
+		    </a>
+		    
+		  </span>
+		  <div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;">
+		    <h5 class="title-heading-center">
+		      <a href="/observations/deep-sea-life-habitats/">Science</a>
+		    </h5>
+		  </div>
+		</div>
 	      </div>
-	    </div><div class="fusion-clearfix"></div>
-
-        <!-- ######################  END THREE IMAGES  ########################################################## -->
-
+	      <div class="fusion-clearfix">
+	      </div>
             </div>
-                </div></div></div><div  class="fusion-fullwidth fullwidth-box callout__wrapper callout__wrapper--home nonhundred-percent-fullwidth fusion-equal-height-columns"  style='background-color: #ebebeb;background-position: left top;background-repeat: no-repeat;padding-top:165px;padding-right:30px;padding-bottom:88px;padding-left:30px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;'><div class="fusion-builder-row fusion-row "><div  class="fusion-layout-column fusion_builder_column fusion_builder_column_1_2  fusion-one-half fusion-column-first 1_2"  style='margin-top:0px;margin-bottom:20px;width:48%; margin-right: 4%;'>
-                <div class="fusion-column-wrapper" style="background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"  data-bg-url="">
-                <div class="fusion-column-content-centered"><div class="fusion-column-content"><div class="callout"><span class="callout__text"></span><i class="fa fa-long-arrow-right callout__icon"></i></div>
-                </div></div><div class="fusion-clearfix"></div>
-                
-                </div>
-                </div><div  class="fusion-layout-column fusion_builder_column fusion_builder_column_1_2  fusion-one-half fusion-column-last 1_2"  style='margin-top:0px;margin-bottom:20px;width:70%'>
-                <div class="fusion-column-wrapper" style="background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"  data-bg-url="">
-                
-                </div>
-                </div></div></div>
-                </div>
-                </div>
-                </section>
-                
-                </div>  <!-- fusion-row -->
-                </main>  <!-- #main -->
-                
-                <div class="fusion-footer">
-                
-                <footer role="contentinfo" class="fusion-footer-widget-area fusion-widget-area">
-                <div class="fusion-row">
-                <div class="fusion-columns fusion-columns-1 fusion-widget-area">
-                
-                <div class="fusion-column fusion-column-last col-lg-12 col-md-12 col-sm-12">
+    </div>
+  </div>
+</div>
+<!-- ######################  END THREE IMAGES  ########################################################## -->
 
-                  <section="menu-widget-2" class="fusion-footer-widget-column widget menu">
+<!-- ######################  BEGIN ARROWED SECTION   ########################################################## -->
+<div class="fusion-fullwidth fullwidth-box callout__wrapper callout__wrapper--home nonhundred-percent-fullwidth fusion-equal-height-columns" style='background-color: #ebebeb;background-position: left top;background-repeat: no-repeat;padding-top:165px;padding-right:30px;padding-bottom:88px;padding-left:30px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;'> 
+  <div class="fusion-builder-row fusion-row">
+    <div  class="fusion-layout-column fusion_builder_column fusion_builder_column_1_2 fusion-one-half fusion-column-first 1_2" style='margin-top:0px;margin-bottom:20px;width:48%; margin-right: 4%;'>
+      <div class="fusion-column-wrapper" style="background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"  data-bg-url="">
+        <div class="fusion-column-content-centered">
+	  <div class="fusion-column-content">
+	    <div class="callout">
+	      <span class="callout__text"></span>
+	      <i class="fa fa-long-arrow-right callout__icon"></i>
+	    </div>
+          </div>
+	</div>
+	<div class="fusion-clearfix">
+	</div>
+      </div>
+    </div>
+    <div  class="fusion-layout-column fusion_builder_column fusion_builder_column_1_2  fusion-one-half fusion-column-last 1_2"  style='margin-top:0px;margin-bottom:20px;width:70%'>
+      <div class="fusion-column-wrapper" style="background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"  data-bg-url="">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- ######################  END ARROWED SECTION   ########################################################## -->
 
-		  <style type="text/css">#menu-widget-2 >
-		  .fusion-widget-menu
-		  ul{text-align:center;}#menu-widget-2 >
-		  .fusion-widget-menu li{display:
-		  inline-block;}#menu-widget-2 ul li a{display:
-		  inline-block;padding:0;border:0;color:#726454;font-size:20px;}#menu-widget-2
-		  ul li
-		  a:after{content:'|';color:#726454;padding-right:25px;padding-left:25px;font-size:20px;}#menu-widget-2
-		  ul li a:hover, #menu-widget-2 ul
-		  .menu-item.current-menu-item a
-		  {color:#ffffff;}#menu-widget-2 ul li:last-child
-		  a:after{display: none}#menu-widget-2 ul li
-		  .fusion-widget-cart-number{margin:0
-		  7px;background-color:#ffffff;color:#726454;}#menu-widget-2
-		  ul li.fusion-active-cart-icon
-		  .fusion-widget-cart-icon:after{color:#ffffff;}</style>
+</div>
+</section>
+</div>
+</main>
+<!-- END MAIN PAGE  -->
 
-
-		      <!-- ###################### BEGIN BOTTOM LINKS ########################################################## -->
-		      <nav class="fusion-widget-menu">
-			<ul id="menu-footer-menu" class="menu">
-		      
-			  <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-13 current_page_item menu-item-449"> 
-			    <a href="http://earthscopeoceans.org/">Home</a>
-			  </li> 
-			  
-			  <li class="menu-item menu-item-type-post_type menu-item-object-page">
-			    <a href="">Page 1</a>
-			  </li>
-			  
-			  <li class="menu-item menu-item-type-post_type menu-item-object-page">
-			    <a href="">Page 2</a>
-			  </li>
-			  
-			  <li class="menu-item menu-item-type-post_type menu-item-object-page">
-			    <a href="">Page 3</a>
-			  </li>
-			  
-			  <li  class="menu-item menu-item-type-post_type menu-item-object-page">
-			    <a href="">Page 4</a>
-			  </li>
-			  
-			  <li id="menu-item-451" class="menu-item menu-item-type-post_type menu-item-object-page">
-			    <a href="">Page 5</a>
-			  </li>
-			</ul>
-		      </nav>
-		      <!-- ###################### BEGIN BOTTOM LINKS ########################################################## -->
-
-		      <div style="clear:both;"></div>
-		</section>
+<!-- BEGIN FOOTER -->
+<div class="fusion-footer">
+  <footer role="contentinfo" class="fusion-footer-widget-area fusion-widget-area">
+    <div class="fusion-row">
+      <div class="fusion-columns fusion-columns-1 fusion-widget-area">
+	<div class="fusion-column fusion-column-last col-lg-12 col-md-12 col-sm-12">
+	  <section="menu-widget-2" class="fusion-footer-widget-column widget menu">
+	    <style type="text/css">#menu-widget-2
+	      .fusion-widget-menu
+	      ul{text-align:center;}#menu-widget-2
+	      .fusion-widget-menu li{display:
+	      inline-block;}#menu-widget-2 ul li a{display:
+	      inline-block;padding:0;border:0;color:#726454;font-size:20px;}#menu-widget-2
+	      ul li
+	      a:after{content:'|';color:#726454;padding-right:25px;padding-left:25px;font-size:20px;}#menu-widget-2
+	      ul li a:hover, #menu-widget-2 ul
+	      .menu-item.current-menu-item a
+	      {color:#ffffff;}#menu-widget-2 ul li:last-child
+	      a:after{display: none}#menu-widget-2 ul li
+	      .fusion-widget-cart-number{margin:0
+	      7px;background-color:#ffffff;color:#726454;}#menu-widget-2
+	      ul li.fusion-active-cart-icon
+	      .fusion-widget-cart-icon:after{color:#ffffff;}
+	    </style>
+	    
+	    <!-- ###################### BEGIN BOTTOM LINKS ########################################################## -->
+	    <nav class="fusion-widget-menu">
+	      <ul id="menu-footer-menu" class="menu">
+		
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item current_page_item"> 
+		  <a href="http://earthscopeoceans.org/">Home</a>
+		</li> 
+		<li class="menu-item menu-item-type-post_type menu-item-object-page">
+		  <a href="">Page 1</a>
+		</li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page">
+		  <a href="">Page 2</a>
+		</li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page">
+		  <a href="">Page 3</a>
+		</li>
+		<li  class="menu-item menu-item-type-post_type menu-item-object-page">
+		  <a href="">Page 4</a>
+		</li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page">
+		  <a href="">Page 5</a>
+		</li>
+	      </ul>
+	    </nav>
+	    <!-- ###################### BEGIN BOTTOM LINKS ########################################################## -->
+	    
+	    <div style="clear:both;"></div>
+</section>
 
 <section id="text-2" class="fusion-footer-widget-column widget widget_text">            
-<div class="textwidget"><p><img class="aligncenter" src="/wp-content/uploads/2016/10/doos_logo_2x.png" alt="" width="537" height="164" style="max-width:239px;"/></p>
-                </div>
-                <div style="clear:both;"></div></section>                                                                                                                                                </div>
-                
-                <div class="fusion-clearfix"></div>
-                </div> <!-- fusion-columns -->
-                </div> <!-- fusion-row -->
-                </footer> <!-- fusion-footer-widget-area -->
-                
-                
-                <footer id="footer" class="fusion-footer-copyright-area fusion-footer-copyright-center">
-                <div class="fusion-row">
-                <div class="fusion-copyright-content">
-                
-                <div class="fusion-copyright-notice">
-                </div>
-                </div>
-                <div class="fusion-social-links-footer">
-                </div>
-                
-                </div> <!-- fusion-fusion-copyright-content -->
-                </div> <!-- fusion-row -->
-                </footer> <!-- #footer -->
-                </div> <!-- fusion-footer -->
-                </div> <!-- wrapper -->
-                
-                <a class="fusion-one-page-text-link fusion-page-load-link"></a>
-                
-                <script type="text/javascript">
-                jQuery( document ).ready( function() {
-                var ajaxurl = 'http://www.deepoceanobserving.org/wp-admin/admin-ajax.php';
-                if ( 0 < jQuery( '.fusion-login-nonce' ).length ) {
-                jQuery.get( ajaxurl, { 'action': 'fusion_login_nonce' }, function( response ) {
-                jQuery( '.fusion-login-nonce' ).html( response );
-                });
-                }
-                });
-                </script>
-                </body>
-                </html>
+  <div class="textwidget">
+    <p>
+	<!-- END LOGO -->
+          <a class="fusion-logo-link" href="http://earthscopeoceans.org/">
+            <img src="images/esologo.png" alt="Logo">
+          </a>
+        </div>
+	<!-- END LOGO -->
+    </p>
+  </div>
+  <div style="clear:both;"></div>
+</section>
+
+</div>
+
+<div class="fusion-clearfix"></div>
+</div> <!-- fusion-columns -->
+</div> <!-- fusion-row -->
+</footer> <!-- fusion-footer-widget-area -->
+
+<footer id="footer" class="fusion-footer-copyright-area fusion-footer-copyright-center">
+  <div class="fusion-row">
+    <div class="fusion-copyright-content">
+      <div class="fusion-copyright-notice">
+	Frederik J Simons
+      </div>
+    </div>
+    <div class="fusion-social-links-footer">
+    </div>
+  </div> <!-- fusion-fusion-copyright-content -->
+</div> <!-- fusion-row -->
+</footer> <!-- #footer -->
+</div> <!-- fusion-footer -->
+</div> <!-- wrapper -->
+
+<a class="fusion-one-page-text-link fusion-page-load-link"></a>
+
+<script type="text/javascript">
+  jQuery( document ).ready( function() {
+  var ajaxurl = 'http://www.deepoceanobserving.org/wp-admin/admin-ajax.php';
+  if ( 0 < jQuery( '.fusion-login-nonce' ).length ) {
+           jQuery.get( ajaxurl, { 'action': 'fusion_login_nonce' }, function( response ) {
+           jQuery( '.fusion-login-nonce' ).html( response );
+           });
+           }
+           });
+           </script>
+</body>
+</html>
