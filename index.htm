@@ -12,7 +12,7 @@
             <meta property="og:title" content="Home"/>
             <meta property="og:type" content="article"/>
             <meta property="og:url" content="http://earthscopeoceans.org/"/>
-            <meta property="og:site_name" content="Deep Ocean Observing Strategy"/>
+            <meta property="og:site_name" content="Earth Scope Oceans"/>
             <meta property="og:description" content="ANNOUNCEMENTS"/>
             <meta property="og:image" content="https://pixabay.com/p-361514/?no_redirect"/>
             <script type="text/javascript">
@@ -217,6 +217,10 @@
                 
                 <div id="sliders-container">
                 
+                
+                
+                
+
                 <div class="fusion-slider-container fusion-slider-13  full-width-slider-container" style="height:500px;max-width:100%;">
                 <style type="text/css" scoped="scoped">
                 .fusion-slider-13 .flex-direction-nav a {
@@ -265,11 +269,11 @@
                 </div>
                 <div class="mobile_video_image" style="background-image: url('https://vimeo.com/169542456');"></div>
                 <div class="background self-hosted-video-bg"
-                style="max-width:100%;height:500px;filter:
+                style="max-width:100%;height:500;filter:
                 progid:DXImageTransform.Microsoft.AlphaImageLoader(src='',
                 sizingMethod='scale');-ms-filter:'progid:DXImageTransform.Microsoft.AlphaImageLoader(src='',
                 sizingMethod='scale')';" data-imgwidth="">
-                <img src = "images/water00.jpg"/>
+                <img src = "images/this.jpg"/>
 
                 </video>
                 </div>
@@ -278,6 +282,8 @@
                 </div>
                 </div>
                 </div>
+                
+
                 
                 <main id="main" role="main" class="clearfix width-100" style="padding-left:30px;padding-right:30px">
                 <div class="fusion-row" style="max-width:100%;">
@@ -323,6 +329,7 @@
                 </div></div></div><div  class="fusion-fullwidth fullwidth-box nonhundred-percent-fullwidth"  style='background-color: #e5f5ff;background-position: left top;background-repeat: no-repeat;padding-top:50px;padding-right:30px;padding-bottom:50px;padding-left:30px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;'><div class="fusion-builder-row fusion-row "><div  class="fusion-layout-column fusion_builder_column fusion_builder_column_2_5  fusion-two-fifth fusion-column-first 2_5"  style='margin-top:63px;margin-bottom:63px;width:37.6%; margin-right: 4%;'>
                 
                 
+                
                 <span class="fusion-column-inner-bg hover-type-none">
                 <a href="http://www.deepoceanobserving.org/observations/deep-ocean-observations/" aria-label="">
                 <span class="fusion-column-inner-bg-image" style="background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"></span></a>
@@ -344,13 +351,93 @@
                 </head>
                 <body>
 
-                <script type='text/javascript' src='http://www.deepoceanobserving.org/wp-includes/js/comment-reply.min.js?ver=4.8.5'></script>
+
+                
                 <script type='text/javascript' src='http://www.deepoceanobserving.org/wp-content/uploads/fusion-scripts/b8e9917aa0d11f986c14d75b4411eb53.js?timestamp=1516453109'></script>
-                <script type='text/javascript' src='http://www.deepoceanobserving.org/wp-includes/js/wp-embed.min.js?ver=4.8.5'></script>
+
 
                 </h3>
 
+                
+        <!-- ###################### BEGIN SCROLLER  ########################################################## -->
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        div.scrollmenu {
+            background-color: #333;
+            overflow: auto;
+            white-space: nowrap;
+        }
+        
+        div.scrollmenu a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            text-decoration: none;
+        }
+        
+        div.scrollmenu a:hover {
+            background-color: #777;
+        }
+        </style>
+        </head>
+        <body>
+        
+        <div class="scrollmenu">
+        <a href="#all">All</a>
+        <a href="#raffa">Raffa</a>
+        <a href="#robin">Robin</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+        <a href="#blank">blank</a>
+
+        </div>
+        
+        <!-- ###################### BEGIN FILE READER  ########################################################## -->
+        
+        
+        <?PHP
+        
+        $file_handle = fopen("http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt", "rb");
+        
+        while (!feof($file_handle) ) {
+        
+        $line_of_text = fgets($file_handle);
+        $parts = explode('=', $line_of_text);
+        
+        print $parts[0] . $parts[1]. "<BR>";
+        
+        }
+        
+        fclose($file_handle);
+        
+        ?>
+
+
+
 		<!-- ###################### BEGIN MAPS  ########################################################## -->
+        
+
+        
+        
+        </body>
+        </html>
+        
 
                 <div id="map"></div>
                 <script>
@@ -378,8 +465,17 @@
                 </html>
                
                 
-                <div class="fusion-column-wrapper" style="background-color:#f4fbff;border:2px solid #ffffff;padding: 14px;background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"  data-bg-url="">
-                <div class="fusion-column-content-centered"><div class="fusion-column-content"><div class="fusion-title title fusion-title-center fusion-title-size-one useful-links__header" style="margin-top:0px;margin-bottom:0px;"><div class="title-sep-container title-sep-container-left"><div class="title-sep sep-double sep-dotted" style="border-color:#e0dede;"></div></div><h1 class="title-heading-center">More Here</h1><div class="title-sep-container title-sep-container-right"><div class="title-sep sep-double sep-dotted" style="border-color:#e0dede;"></div></div></div><div class="fusion-button-wrapper"><style type="text/css" scoped="scoped">.fusion-button.button-2 .fusion-button-text, .fusion-button.button-2 i {color:#ffffff;}.fusion-button.button-2 {border-width:0px;border-color:#ffffff;}.fusion-button.button-2 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-2:hover .fusion-button-text, .fusion-button.button-2:hover i,.fusion-button.button-2:focus .fusion-button-text, .fusion-button.button-2:focus i,.fusion-button.button-2:active .fusion-button-text, .fusion-button.button-2:active{color:#ffffff;}.fusion-button.button-2:hover, .fusion-button.button-2:focus, .fusion-button.button-2:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-2:hover .fusion-button-icon-divider, .fusion-button.button-2:hover .fusion-button-icon-divider, .fusion-button.button-2:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-2{width:100%;}</style><a class="fusion-button button-flat fusion-button-square button-large button-default button-2 btn--useful-links" target="_self" href="/doos-terms-of-reference/"><span class="fusion-button-icon-divider button-icon-divider-left"><i class="fa fa-list-ul"></i></span><span class="fusion-button-text fusion-button-text-left">Info</span></a></div><div class="fusion-button-wrapper"><style type="text/css" scoped="scoped">.fusion-button.button-3 .fusion-button-text, .fusion-button.button-3 i {color:#ffffff;}.fusion-button.button-3 {border-width:0px;border-color:#ffffff;}.fusion-button.button-3 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-3:hover .fusion-button-text, .fusion-button.button-3:hover i,.fusion-button.button-3:focus .fusion-button-text, .fusion-button.button-3:focus i,.fusion-button.button-3:active .fusion-button-text, .fusion-button.button-3:active{color:#ffffff;}.fusion-button.button-3:hover, .fusion-button.button-3:focus, .fusion-button.button-3:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-3:hover .fusion-button-icon-divider, .fusion-button.button-3:hover .fusion-button-icon-divider, .fusion-button.button-3:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-3{width:100%;}</style><a class="fusion-button button-flat fusion-button-square button-large button-default button-3 btn--useful-links btn--useful-links-draft" target="_self" href="/key-science-questions/"><span class="fusion-button-icon-divider button-icon-divider-left"><i class="fa fa-globe"></i></span><span class="fusion-button-text fusion-button-text-left">Info (cont.)</span></a></div><div class="fusion-button-wrapper"><style type="text/css" scoped="scoped">.fusion-button.button-4 .fusion-button-text, .fusion-button.button-4 i {color:#ffffff;}.fusion-button.button-4 {border-width:0px;border-color:#ffffff;}.fusion-button.button-4 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-4:hover .fusion-button-text, .fusion-button.button-4:hover i,.fusion-button.button-4:focus .fusion-button-text, .fusion-button.button-4:focus i,.fusion-button.button-4:active .fusion-button-text, .fusion-button.button-4:active{color:#ffffff;}.fusion-button.button-4:hover, .fusion-button.button-4:focus, .fusion-button.button-4:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-4:hover .fusion-button-icon-divider, .fusion-button.button-4:hover .fusion-button-icon-divider, .fusion-button.button-4:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-4{width:100%;}</style><a class="fusion-button button-flat fusion-button-square button-large button-default button-4 btn--useful-links" target="_self" href="/activities/upcoming-milestones/"><span class="fusion-button-icon-divider button-icon-divider-left"><i class="fa fa-calendar"></i></span><span class="fusion-button-text fusion-button-text-left">Info (cont.)</span></a></div><div class="fusion-button-wrapper"><style type="text/css" scoped="scoped">.fusion-button.button-5 .fusion-button-text, .fusion-button.button-5 i {color:#ffffff;}.fusion-button.button-5 {border-width:0px;border-color:#ffffff;}.fusion-button.button-5 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-5:hover .fusion-button-text, .fusion-button.button-5:hover i,.fusion-button.button-5:focus .fusion-button-text, .fusion-button.button-5:focus i,.fusion-button.button-5:active .fusion-button-text, .fusion-button.button-5:active{color:#ffffff;}.fusion-button.button-5:hover, .fusion-button.button-5:focus, .fusion-button.button-5:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-5:hover .fusion-button-icon-divider, .fusion-button.button-5:hover .fusion-button-icon-divider, .fusion-button.button-5:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-5{width:100%;}</style><a class="fusion-button button-flat fusion-button-square button-large button-default button-5 btn--useful-links" target="_self" href="/activities/webinars/"><span class="fusion-button-icon-divider button-icon-divider-left"><i class="fa fa-film"></i></span><span class="fusion-button-text fusion-button-text-left">Info (cont.)</span></a></div></div></div><div class="fusion-clearfix"></div>
+               <div class="fusion-column-wrapper" style="background-color:#f4fbff;border:2px solid #ffffff;padding: 14px;background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"  data-bg-url="">
+               
+               <div class="fusion-column-content-centered"><div class="fusion-column-content">
+               <div class="fusion-title title fusion-title-center fusion-title-size-one useful-links__header" style="margin-top:0px;margin-bottom:0px;">
+               <div class="title-sep-container title-sep-container-left"><div class="title-sep sep-double sep-dotted" style="border-color:#e0dede;">
+               
+               </div></div>
+               <h1 class="title-heading-center">More Here</h1><div class="title-sep-container title-sep-container-right"><div class="title-sep sep-double sep-dotted" style="border-color:#e0dede;">
+               </div></div></div>
+               
+               <div class="fusion-button-wrapper"><style type="text/css" scoped="scoped">.fusion-button.button-2 .fusion-button-text, .fusion-button.button-2 i {color:#ffffff;}.fusion-button.button-2 {border-width:0px;border-color:#ffffff;}.fusion-button.button-2 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-2:hover .fusion-button-text, .fusion-button.button-2:hover i,.fusion-button.button-2:focus .fusion-button-text, .fusion-button.button-2:focus i,.fusion-button.button-2:active .fusion-button-text, .fusion-button.button-2:active{color:#ffffff;}.fusion-button.button-2:hover, .fusion-button.button-2:focus, .fusion-button.button-2:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-2:hover .fusion-button-icon-divider, .fusion-button.button-2:hover .fusion-button-icon-divider, .fusion-button.button-2:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-2{width:100%;}</style><a class="fusion-button button-flat fusion-button-square button-large button-default button-2 btn--useful-links" target="_self" href="/doos-terms-of-reference/"><span class="fusion-button-icon-divider button-icon-divider-left"><i class="fa fa-list-ul"></i></span><span class="fusion-button-text fusion-button-text-left">Info</span></a></div><div class="fusion-button-wrapper"><style type="text/css" scoped="scoped">.fusion-button.button-3 .fusion-button-text, .fusion-button.button-3 i {color:#ffffff;}.fusion-button.button-3 {border-width:0px;border-color:#ffffff;}.fusion-button.button-3 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-3:hover .fusion-button-text, .fusion-button.button-3:hover i,.fusion-button.button-3:focus .fusion-button-text, .fusion-button.button-3:focus i,.fusion-button.button-3:active .fusion-button-text, .fusion-button.button-3:active{color:#ffffff;}.fusion-button.button-3:hover, .fusion-button.button-3:focus, .fusion-button.button-3:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-3:hover .fusion-button-icon-divider, .fusion-button.button-3:hover .fusion-button-icon-divider, .fusion-button.button-3:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-3{width:100%;}</style><a class="fusion-button button-flat fusion-button-square button-large button-default button-3 btn--useful-links btn--useful-links-draft" target="_self" href="/key-science-questions/"><span class="fusion-button-icon-divider button-icon-divider-left"><i class="fa fa-globe"></i></span><span class="fusion-button-text fusion-button-text-left">Info (cont.)</span></a></div><div class="fusion-button-wrapper"><style type="text/css" scoped="scoped">.fusion-button.button-4 .fusion-button-text, .fusion-button.button-4 i {color:#ffffff;}.fusion-button.button-4 {border-width:0px;border-color:#ffffff;}.fusion-button.button-4 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-4:hover .fusion-button-text, .fusion-button.button-4:hover i,.fusion-button.button-4:focus .fusion-button-text, .fusion-button.button-4:focus i,.fusion-button.button-4:active .fusion-button-text, .fusion-button.button-4:active{color:#ffffff;}.fusion-button.button-4:hover, .fusion-button.button-4:focus, .fusion-button.button-4:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-4:hover .fusion-button-icon-divider, .fusion-button.button-4:hover .fusion-button-icon-divider, .fusion-button.button-4:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-4{width:100%;}</style><a class="fusion-button button-flat fusion-button-square button-large button-default button-4 btn--useful-links" target="_self" href="/activities/upcoming-milestones/"><span class="fusion-button-icon-divider button-icon-divider-left"><i class="fa fa-calendar"></i></span><span class="fusion-button-text fusion-button-text-left">Info (cont.)</span></a></div><div class="fusion-button-wrapper"><style type="text/css" scoped="scoped">.fusion-button.button-5 .fusion-button-text, .fusion-button.button-5 i {color:#ffffff;}.fusion-button.button-5 {border-width:0px;border-color:#ffffff;}.fusion-button.button-5 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-5:hover .fusion-button-text, .fusion-button.button-5:hover i,.fusion-button.button-5:focus .fusion-button-text, .fusion-button.button-5:focus i,.fusion-button.button-5:active .fusion-button-text, .fusion-button.button-5:active{color:#ffffff;}.fusion-button.button-5:hover, .fusion-button.button-5:focus, .fusion-button.button-5:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-5:hover .fusion-button-icon-divider, .fusion-button.button-5:hover .fusion-button-icon-divider, .fusion-button.button-5:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-5{width:100%;}</style><a class="fusion-button button-flat fusion-button-square button-large button-default button-5 btn--useful-links" target="_self" href="/activities/webinars/"><span class="fusion-button-icon-divider button-icon-divider-left"><i class="fa fa-film"></i></span><span class="fusion-button-text fusion-button-text-left">Info (cont.)</span></a></div></div></div><div class="fusion-clearfix"></div>
 
 
 
@@ -387,7 +483,9 @@
                 
                 </div>
                 <span class="fusion-column-inner-bg hover-type-none">
+                
                 <a href="#mapAnchor">
+                
                 <span class="fusion-column-inner-bg-image" style="background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"></span></a>
                 </span>
                 </div></div></div><div  class="fusion-fullwidth fullwidth-box fusion-blend-mode nonhundred-percent-fullwidth fusion-equal-height-columns"  style='background-color: rgba(255,255,255,0);background-position: left top;background-repeat: no-repeat;padding-top:75px;padding-right:30px;padding-bottom:45px;padding-left:30px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;'><div class="fusion-builder-row fusion-row "><div  class="fusion-layout-column fusion_builder_column fusion_builder_column_1_3  fusion-one-third fusion-column-first card--home 1_3"  style='margin-top:0px;margin-bottom:20px;width:30.6666%; margin-right: 4%;'>
@@ -396,27 +494,45 @@
 
 		<!-- ###################### BEGIN THREE IMAGES  ########################################################## -->
 
-		      <a class="fusion-no-lightbox" target="_self" aria-label="hurricane">
+            <a class="fusion-no-lightbox" target="_self" aria-label="hurricane">
 			<img src="images/mermaid01.jpg" width="528" height="353" class="img-responsive wp-image-71" srcset="images/mermaid01.jpg 200w, images/mermaid01.jpg 400w, images/mermaid01.jpg 528w" sizes="(max-width: 800px) 100vw, 400px"/>
-		      </a>
+            </a>
+            
+            </span><div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;"><h5 class="title-heading-center"><a href="/observations/physics-climate/">Information</a></h5></div></div></div><div class="fusion-clearfix"></div>
+            </div>
+            
+            </div><div  class="fusion-layout-column fusion_builder_column fusion_builder_column_1_3  fusion-one-third card--home 1_3"  style='margin-top:0px;margin-bottom:20px;width:30.6666%; margin-right: 4%;'>
+            
+            <div class="fusion-column-wrapper" style="background-color:#ffffff;border:1px solid #111111;background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"  data-bg-url="">
+            <div class="fusion-column-content-centered"><div class="fusion-column-content"><span class="fusion-imageframe imageframe-none imageframe-3 hover-type-zoomin">
 
-		<!-- ###################### BEGIN THREE IMAGES  ########################################################## -->
+            <a class="fusion-no-lightbox" target="_self" aria-label="hurricane">
+            <img src="images/inthewater01.jpg" width="528" height="353" class="img-responsive wp-image-71" srcset="images/inthewater01.jpg 200w, images/inthewater01.jpg 400w, images/i.jpg 528w" sizes="(max-      width: 800px) 100vw, 400px"/>
+            </a>
 
 
-</span><div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;"><h5 class="title-heading-center"><a href="/observations/physics-climate/">Information</a></h5></div></div></div><div class="fusion-clearfix"></div>
+            </span><div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;"><h5 class="title-heading-center"><a href="/observations/carbon-cycle-biogeochemistry/">Blank</a></h5></div></div></div><div class="fusion-clearfix"></div>
+            </div>
+            
+            
+            </div><div  class="fusion-layout-column fusion_builder_column fusion_builder_column_1_3  fusion-one-third fusion-column-last card--home 1_3"  style='margin-top:0px;margin-bottom:20px;width:30.6666%'>
+            
+            <div class="fusion-column-wrapper" style="background-color:#ffffff;border:1px solid #111111;background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"  data-bg-url="">
+            <div class="fusion-column-content-centered"><div class="fusion-column-content"><span class="fusion-imageframe imageframe-none imageframe-4 hover-type-zoomin">
 
-              </div>
-                </div><div  class="fusion-layout-column fusion_builder_column fusion_builder_column_1_3  fusion-one-third card--home 1_3"  style='margin-top:0px;margin-bottom:20px;width:30.6666%; margin-right: 4%;'>
-                <div class="fusion-column-wrapper" style="background-color:#ffffff;border:1px solid #111111;background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"  data-bg-url="">
-                <div class="fusion-column-content-centered"><div class="fusion-column-content"><span class="fusion-imageframe imageframe-none imageframe-3 hover-type-zoomin"><a class="fusion-no-lightbox" href="/observations/carbon-cycle-biogeochemistry/" target="_self" aria-label="shrimp"><img src="" width="528" height="353" alt="" class="img-responsive wp-image-77" srcset=" 200w,  400w,  528w" sizes="(max-width: 800px) 100vw, 400px"/></a></span><div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;"><h5 class="title-heading-center"><a href="/observations/carbon-cycle-biogeochemistry/">Blank</a></h5></div></div></div><div class="fusion-clearfix"></div>
-                
-                
-                
-                
-                </div>
-                </div><div  class="fusion-layout-column fusion_builder_column fusion_builder_column_1_3  fusion-one-third fusion-column-last card--home 1_3"  style='margin-top:0px;margin-bottom:20px;width:30.6666%'>
-                <div class="fusion-column-wrapper" style="background-color:#ffffff;border:1px solid #111111;background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;"  data-bg-url="">
-                <div class="fusion-column-content-centered"><div class="fusion-column-content"><span class="fusion-imageframe imageframe-none imageframe-4 hover-type-zoomin"><a class="fusion-no-lightbox" href="/observations/deep-sea-life-habitats/" target="_self" aria-label="iridigorgia"><img src="" width="528" height="353" alt="" class="img-responsive wp-image-76" srcset="http:// 200w,  400w,  528w" sizes="(max-width: 800px) 100vw, 400px"/></a></span><div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;"><h5 class="title-heading-center"><a href="/observations/deep-sea-life-habitats/">Blank</a></h5></div></div></div><div class="fusion-clearfix"></div>
+            <a class="fusion-no-lightbox" target="_self" aria-label="iridigorgia">
+            <img src="images/deployment02.jpg" width="528" height="353" alt="" class="img-responsive wp-image-76" srcset="images/deployment02.jpg 200w, images/deployment02.jpg  400w,images/deployment02.jpg  528w" sizes="(max-width: 800px) 100vw, 400px"/>
+            </a>
+            
+            </span><div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;"><h5 class="title-heading-center"><a href="/observations/deep-sea-life-habitats/">Blank</a></h5></div></div></div><div class="fusion-clearfix"></div>
+
+        <!-- ###################### BEGIN THREE IMAGES  ########################################################## -->
+
+
+
+
+               
+
                 
                 </div>
                 </div></div></div><div  class="fusion-fullwidth fullwidth-box callout__wrapper callout__wrapper--home nonhundred-percent-fullwidth fusion-equal-height-columns"  style='background-color: #ebebeb;background-position: left top;background-repeat: no-repeat;padding-top:165px;padding-right:30px;padding-bottom:88px;padding-left:30px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;'><div class="fusion-builder-row fusion-row "><div  class="fusion-layout-column fusion_builder_column fusion_builder_column_1_2  fusion-one-half fusion-column-first 1_2"  style='margin-top:0px;margin-bottom:20px;width:48%; margin-right: 4%;'>
