@@ -462,13 +462,14 @@
                 <script>
                   function initMap() {
                   var guyot = {lat: 40.34585, lng: -74.65475};
+                  var papeete = {lat: -17.53733, lng: -149.5665};
                   var map = new google.maps.Map(document.getElementById('map'), {
                   zoom: 13,
-                  center: guyot
+                  center: papeete
                   });
                   
                   var marker = new google.maps.Marker({
-                  position: guyot,
+                  position: papeete,
                   map: map
                   });
                   }
