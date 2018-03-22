@@ -446,128 +446,128 @@
         
         <!-- ###################### BEGIN FILE READER  ########################################################## -->
         
-        <?PHP
+        <!-- <?PHP -->
 
-        $file_handle = fopen("http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt", "rb");
+        <!-- $file_handle = fopen("http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt", "rb"); -->
 
-        while (!feof($file_handle) ) {
+        <!-- while (!feof($file_handle) ) { -->
         
-        $line_of_text = fgets($file_handle);
-        $parts = explode('=', $line_of_text);
+        <!-- $line_of_text = fgets($file_handle); -->
+        <!-- $parts = explode('=', $line_of_text); -->
         
-        print $parts[0] . $parts[1]. "<BR>";
+        <!-- print $parts[0] . $parts[1]. "<BR>"; -->
         
-        }
+        <!-- } -->
         
-        fclose($file_handle);
+        <!-- fclose($file_handle); -->
         
-        ?>
+        <!-- ?> -->
+
         <!-- ###################### END FILE READER  ########################################################## -->
 
 	<!-- ###################### BEGIN MAPS  ########################################################## -->
         
-                <div id="map"></div>
-                <script>
-                  function initMap() {
-                  var guyot = {lat: 40.34585, lng: -74.65475};
-                  var papeete = {lat: -17.53733, lng: -149.5665};
-                  var map = new google.maps.Map(document.getElementById('map'), {
-                  zoom: 13,
-                  center: papeete
-                  });
-                  
-                  var marker = new google.maps.Marker({
-                  position: papeete,
-                  map: map
-                  });
-                  }
-                </script>
-                <script async defer
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3QorlGGuH3JaGqJwP8vGxhJFRFnxQOp0&callback=initMap">
-                </script>
-		
-		<!-- ###################### END MAPS  ########################################################## -->
+        <div id="map"></div>
+        <script>
+          function initMap() {
+          var guyot = {lat: 40.34585, lng: -74.65475};
+          var papeete = {lat: -17.53733, lng: -149.5665};
+          var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: papeete
+          });
+          
+          var marker = new google.maps.Marker({
+          position: papeete,
+          map: map
+          });
+          }
+        </script>
+        <script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3QorlGGuH3JaGqJwP8vGxhJFRFnxQOp0&callback=initMap">
+        </script>
+	<!-- ###################### END MAPS  ########################################################## -->
 		               
                 
-               <div class="fusion-column-wrapper" style="background-color:#f4fbff;border:2px solid #ffffff;padding: 14px;background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
+        <div class="fusion-column-wrapper" style="background-color:#f4fbff;border:2px solid #ffffff;padding: 14px;background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
                
-		<!-- ###################### BEGIN ADDITIONAL INFO BARS  ########################################################## -->
-		 <div class="fusion-column-content-centered">
-		   <div class="fusion-column-content">
-		     <div class="fusion-title title fusion-title-center fusion-title-size-one useful-links__header" style="margin-top:0px;margin-bottom:0px;">
-		       <div class="title-sep-container title-sep-container-left">
-			 <div class="title-sep sep-double sep-dotted" style="border-color:#e0dede;">
-			 </div>
-		       </div>
-		       <h1 class="title-heading-center">Further Information</h1> 
-		       <div class="title-sep-container title-sep-container-right">
-			 <div class="title-sep sep-double sep-dotted" style="border-color:#e0dede;">
-			 </div>
-		       </div>
-		     </div>
-		     
-	     <!-- ###################### BEGIN FIRST BUTTON BAR ##################################-->
-             <div class="fusion-button-wrapper">
-	       <style type="text/css" scoped="scoped">.fusion-button.button-2 .fusion-button-text, .fusion-button.button-2 i {color:#ffffff;}.fusion-button.button-2 {border-width:0px;border-color:#ffffff;}.fusion-button.button-2 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-2:hover .fusion-button-text, .fusion-button.button-2:hover i,.fusion-button.button-2:focus .fusion-button-text, .fusion-button.button-2:focus i,.fusion-button.button-2:active .fusion-button-text, .fusion-button.button-2:active{color:#ffffff;}.fusion-button.button-2:hover, .fusion-button.button-2:focus, .fusion-button.button-2:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-2:hover .fusion-button-icon-divider, .fusion-button.button-2:hover .fusion-button-icon-divider, .fusion-button.button-2:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-2{width:100%;}
-	       </style>
-	       <a class="fusion-button button-flat fusion-button-square button-large button-default button-2 btn--useful-links">
-		 <span class="fusion-button-icon-divider button-icon-divider-left">
-		   <i class="fa fa-list-ul"></i>
-		 </span>
-		 <span class="fusion-button-text fusion-button-text-left">For the public</span></a>
-	     </div>
-	     <!-- ###################### END FIRST BUTTON BAR #####################################-->
-
-
-	     <!-- ###################### BEGIN SECOND BUTTON BAR ##################################-->
-	       <div class="fusion-button-wrapper">
-		 <style type="text/css" scoped="scoped">.fusion-button.button-3 .fusion-button-text, .fusion-button.button-3 i {color:#ffffff;}.fusion-button.button-3 {border-width:0px;border-color:#ffffff;}.fusion-button.button-3 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-3:hover .fusion-button-text, .fusion-button.button-3:hover i,.fusion-button.button-3:focus .fusion-button-text, .fusion-button.button-3:focus i,.fusion-button.button-3:active .fusion-button-text, .fusion-button.button-3:active{color:#ffffff;}.fusion-button.button-3:hover, .fusion-button.button-3:focus, .fusion-button.button-3:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-3:hover .fusion-button-icon-divider, .fusion-button.button-3:hover .fusion-button-icon-divider, .fusion-button.button-3:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-3{width:100%;}
-		 </style>
-
-		 <a class="fusion-button button-flat fusion-button-square button-large button-default button-3 btn--useful-links btn--useful-links-draft">
-		   <span class="fusion-button-icon-divider button-icon-divider-left">
-		     <i class="fa fa-globe"></i>
-		   </span>
-		   <span class="fusion-button-text fusion-button-text-left">For scientists</span></a>
-	       </div>
-	       <!-- ###################### END SECOND BUTTON BAR ###################################-->
-
-	       <!-- ###################### BEGIN THIRD BUTTON BAR ##################################-->
-	       <div class="fusion-button-wrapper">
-		 <style type="text/css" scoped="scoped">.fusion-button.button-4 .fusion-button-text, .fusion-button.button-4 i {color:#ffffff;}.fusion-button.button-4 {border-width:0px;border-color:#ffffff;}.fusion-button.button-4 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-4:hover .fusion-button-text, .fusion-button.button-4:hover i,.fusion-button.button-4:focus .fusion-button-text, .fusion-button.button-4:focus i,.fusion-button.button-4:active .fusion-button-text, .fusion-button.button-4:active{color:#ffffff;}.fusion-button.button-4:hover, .fusion-button.button-4:focus, .fusion-button.button-4:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-4:hover .fusion-button-icon-divider, .fusion-button.button-4:hover .fusion-button-icon-divider, .fusion-button.button-4:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-4{width:100%;}
-		 </style>
-		 <a class="fusion-button button-flat fusion-button-square button-large button-default button-4 btn--useful-links">
-		   <span class="fusion-button-icon-divider button-icon-divider-left">
-		     <i class="fa fa-calendar"></i>
-		   </span>
-		   <span class="fusion-button-text fusion-button-text-left">Important dates</span></a>
-	       </div>
-	       <!-- ###################### END THIRD BUTTON BAR ####################################-->
-
-	       <!-- ###################### BEGIN FOURTH BUTTON BAR ##################################-->
-	       <div class="fusion-button-wrapper">
-		 <style type="text/css" scoped="scoped">.fusion-button.button-5 .fusion-button-text, .fusion-button.button-5 i {color:#ffffff;}.fusion-button.button-5 {border-width:0px;border-color:#ffffff;}.fusion-button.button-5 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-5:hover .fusion-button-text, .fusion-button.button-5:hover i,.fusion-button.button-5:focus .fusion-button-text, .fusion-button.button-5:focus i,.fusion-button.button-5:active .fusion-button-text, .fusion-button.button-5:active{color:#ffffff;}.fusion-button.button-5:hover, .fusion-button.button-5:focus, .fusion-button.button-5:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-5:hover .fusion-button-icon-divider, .fusion-button.button-5:hover .fusion-button-icon-divider, .fusion-button.button-5:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-5{width:100%;} 
-		 </style>
-		 <a class="fusion-button button-flat fusion-button-square button-large button-default button-5 btn--useful-links">
-		   <span class="fusion-button-icon-divider button-icon-divider-left">
-		     <i class="fa fa-film"></i>
-		   </span>
-		   <span class="fusion-button-text fusion-button-text-left">
-		     Adopt-A-Float
- 		   </span>
-		 </a>
-	       </div>
-		   </div>
-		 </div>
-		 <div class="fusion-clearfix"></div>
-               </div>
-	       <!-- ###################### END FOURTH BUTTON BAR ##################################-->
-	       
-              <span class="fusion-column-inner-bg hover-type-none">
-                <a><span class="fusion-column-inner-bg-image" style="background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
+	  <!-- ###################### BEGIN ADDITIONAL INFO BARS  ########################################################## -->
+	  <div class="fusion-column-content-centered">
+	    <div class="fusion-column-content">
+	      <div class="fusion-title title fusion-title-center fusion-title-size-one useful-links__header" style="margin-top:0px;margin-bottom:0px;">
+		<div class="title-sep-container title-sep-container-left">
+		  <div class="title-sep sep-double sep-dotted" style="border-color:#e0dede;">
+		  </div>
+		</div>
+		<h1 class="title-heading-center">Further Information</h1> 
+		<div class="title-sep-container title-sep-container-right">
+		  <div class="title-sep sep-double sep-dotted" style="border-color:#e0dede;">
+		  </div>
+		</div>
+	      </div>
+	      
+	      <!-- ###################### BEGIN FIRST BUTTON BAR ##################################-->
+              <div class="fusion-button-wrapper">
+		<style type="text/css" scoped="scoped">.fusion-button.button-2 .fusion-button-text, .fusion-button.button-2 i {color:#ffffff;}.fusion-button.button-2 {border-width:0px;border-color:#ffffff;}.fusion-button.button-2 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-2:hover .fusion-button-text, .fusion-button.button-2:hover i,.fusion-button.button-2:focus .fusion-button-text, .fusion-button.button-2:focus i,.fusion-button.button-2:active .fusion-button-text, .fusion-button.button-2:active{color:#ffffff;}.fusion-button.button-2:hover, .fusion-button.button-2:focus, .fusion-button.button-2:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-2:hover .fusion-button-icon-divider, .fusion-button.button-2:hover .fusion-button-icon-divider, .fusion-button.button-2:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-2{width:100%;}
+		</style>
+		<a class="fusion-button button-flat fusion-button-square button-large button-default button-2 btn--useful-links">
+		  <span class="fusion-button-icon-divider button-icon-divider-left">
+		    <i class="fa fa-list-ul"></i>
 		  </span>
+		  <span class="fusion-button-text fusion-button-text-left">For the public</span></a>
+	      </div>
+	      <!-- ###################### END FIRST BUTTON BAR #####################################-->
+	      
+	      
+	      <!-- ###################### BEGIN SECOND BUTTON BAR ##################################-->
+	      <div class="fusion-button-wrapper">
+		<style type="text/css" scoped="scoped">.fusion-button.button-3 .fusion-button-text, .fusion-button.button-3 i {color:#ffffff;}.fusion-button.button-3 {border-width:0px;border-color:#ffffff;}.fusion-button.button-3 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-3:hover .fusion-button-text, .fusion-button.button-3:hover i,.fusion-button.button-3:focus .fusion-button-text, .fusion-button.button-3:focus i,.fusion-button.button-3:active .fusion-button-text, .fusion-button.button-3:active{color:#ffffff;}.fusion-button.button-3:hover, .fusion-button.button-3:focus, .fusion-button.button-3:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-3:hover .fusion-button-icon-divider, .fusion-button.button-3:hover .fusion-button-icon-divider, .fusion-button.button-3:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-3{width:100%;}
+		</style>
+		
+		<a class="fusion-button button-flat fusion-button-square button-large button-default button-3 btn--useful-links btn--useful-links-draft">
+		  <span class="fusion-button-icon-divider button-icon-divider-left">
+		    <i class="fa fa-globe"></i>
+		  </span>
+		  <span class="fusion-button-text fusion-button-text-left">For scientists</span></a>
+	      </div>
+	      <!-- ###################### END SECOND BUTTON BAR ###################################-->
+	      
+	      <!-- ###################### BEGIN THIRD BUTTON BAR ##################################-->
+	      <div class="fusion-button-wrapper">
+		<style type="text/css" scoped="scoped">.fusion-button.button-4 .fusion-button-text, .fusion-button.button-4 i {color:#ffffff;}.fusion-button.button-4 {border-width:0px;border-color:#ffffff;}.fusion-button.button-4 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-4:hover .fusion-button-text, .fusion-button.button-4:hover i,.fusion-button.button-4:focus .fusion-button-text, .fusion-button.button-4:focus i,.fusion-button.button-4:active .fusion-button-text, .fusion-button.button-4:active{color:#ffffff;}.fusion-button.button-4:hover, .fusion-button.button-4:focus, .fusion-button.button-4:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-4:hover .fusion-button-icon-divider, .fusion-button.button-4:hover .fusion-button-icon-divider, .fusion-button.button-4:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-4{width:100%;}
+		</style>
+		<a class="fusion-button button-flat fusion-button-square button-large button-default button-4 btn--useful-links">
+		  <span class="fusion-button-icon-divider button-icon-divider-left">
+		    <i class="fa fa-calendar"></i>
+		  </span>
+		  <span class="fusion-button-text fusion-button-text-left">Important dates</span></a>
+	      </div>
+	      <!-- ###################### END THIRD BUTTON BAR ####################################-->
+	      
+	      <!-- ###################### BEGIN FOURTH BUTTON BAR ##################################-->
+	      <div class="fusion-button-wrapper">
+		<style type="text/css" scoped="scoped">.fusion-button.button-5 .fusion-button-text, .fusion-button.button-5 i {color:#ffffff;}.fusion-button.button-5 {border-width:0px;border-color:#ffffff;}.fusion-button.button-5 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-5:hover .fusion-button-text, .fusion-button.button-5:hover i,.fusion-button.button-5:focus .fusion-button-text, .fusion-button.button-5:focus i,.fusion-button.button-5:active .fusion-button-text, .fusion-button.button-5:active{color:#ffffff;}.fusion-button.button-5:hover, .fusion-button.button-5:focus, .fusion-button.button-5:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-5:hover .fusion-button-icon-divider, .fusion-button.button-5:hover .fusion-button-icon-divider, .fusion-button.button-5:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-5{width:100%;} 
+		</style>
+		<a class="fusion-button button-flat fusion-button-square button-large button-default button-5 btn--useful-links">
+		  <span class="fusion-button-icon-divider button-icon-divider-left">
+		    <i class="fa fa-film"></i>
+		  </span>
+		  <span class="fusion-button-text fusion-button-text-left">
+		    Adopt-A-Float
+ 		  </span>
 		</a>
-              </span>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="fusion-clearfix"></div>
+        </div>
+	<!-- ###################### END FOURTH BUTTON BAR ##################################-->
+	
+        <span class="fusion-column-inner-bg hover-type-none">
+          <a><span class="fusion-column-inner-bg-image" style="background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">HELLO
+	    </span>
+	  </a>
+        </span>
         </div>
       </div>
   </div>
