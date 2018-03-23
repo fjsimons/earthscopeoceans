@@ -345,7 +345,7 @@
 		    <div class="title-sep-container title-sep-container-left">
 		      <div class="title-sep sep-double" style="border-color:#e0dede;"></div>
 		    </div>
-		      <h1 class="title-heading-center">
+		    <h1 class="title-heading-center">
 		      A GLOBAL PROGRAM FOR AUTONOMOUS <br>MEASUREMENTS IN THE OCEANS
 		    </h1>
 		    <div class="title-sep-container title-sep-container-right">
@@ -368,7 +368,7 @@
 	  <!-- A BOX OF MATERIAL --> 
           <div class="fusion-clearfix"></div>
           <div class="fusion-clearfix"></div>
-
+	  
 	  <!-- ###################### Begin A BIT OF TEXT  ########################################################## -->
 	  <div class="fusion-builder-row fusion-row">
 	    <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_1 fusion-one-full fusion-column-first fusion-column-last fusion-column-no-min-height 1_1" style='margin-top:50px;margin-bottom:0px;'>
@@ -393,293 +393,289 @@
 	    </div>
 	  </div>
 	  <!-- ###################### END A BIT OF TEXT  ########################################################## -->
-          	  
+          
 	  <!-- THIS NEEDS TO STAY HERE CONTROLS THE APPEARANCE OF THE TOP IMAGE-->
           <script src='http://www.deepoceanobserving.org/wp-content/uploads/fusion-scripts/b8e9917aa0d11f986c14d75b4411eb53.js?timestamp=1516453109'></script>
 	  <!-- THIS NEEDS TO STAY HERE CONTROLS THE APPEARANCE OF THE TOP IMAGE-->
 	  
 	  <!-- ###################### BEGIN SCROLLER  ########################################################## -->
-        
-        <meta content="width=device-width, initial-scale=1">
-        <style>
-        div.scrollmenu {
+          
+          <meta content="width=device-width, initial-scale=1">
+          <style>
+            div.scrollmenu {
             background-color: #333;
             overflow: auto;
             white-space: nowrap;
-        }
-        
-        div.scrollmenu a {
+            }
+            
+            div.scrollmenu a {
             display: inline-block;
             color: white;
             text-align: center;
             padding: 14px;
             text-decoration: none;
-        }
-        
-        div.scrollmenu a:hover {
+            }
+            
+            div.scrollmenu a:hover {
             background-color: #777;
-        }
-        </style>
-        
-        <div class="scrollmenu">
-        <a href="#all">All</a>
-        <a href="#raffa">Raffa</a>
-        <a href="#robin">Robin</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-        <a href="#blank">blank</a>
-
-        </div>
-        
-        <!-- ###################### BEGIN FILE READER  ########################################################## -->
-        
-        <!-- <?PHP -->
-
-        <!-- $file_handle = fopen("http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt", "rb"); -->
-
-        <!-- while (!feof($file_handle) ) { -->
-        
-        <!-- $line_of_text = fgets($file_handle); -->
-        <!-- $parts = explode('=', $line_of_text); -->
-        
-        <!-- print $parts[0] . $parts[1]. "<BR>"; -->
-        
-        <!-- } -->
-        
-        <!-- fclose($file_handle); -->
-        
-        <!-- ?> -->
-
-        <!-- ###################### END FILE READER  ########################################################## -->
-
-	<!-- ###################### BEGIN MAPS  ########################################################## -->
-        
-        <div id="map"></div>
-        <style>
-          #map
-          {
-          height: 400px;
-          width: 100%;
-          }
-        </style>
-        
-        <script>
-          function initMap() {
-          var guyot = {lat: 40.34585, lng: -74.65475};
-          var papeete = {lat: -17.53733, lng: -149.5665};
-          var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: papeete
-          });
+            }
+          </style>
           
-          var marker = new google.maps.Marker({
-          position: papeete,
-          map: map
-          });
-          }
-        </script>
-        <script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3QorlGGuH3JaGqJwP8vGxhJFRFnxQOp0&callback=initMap">
-        </script>
-	<!-- ###################### END MAPS  ########################################################## -->
-                
-        <div class="fusion-column-wrapper" style="background-color:#f4fbff;border:2px solid #ffffff;padding: 14px;background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
+          <div class="scrollmenu">
+            <a href="#all">All</a>
+            <a href="#raffa">Raffa</a>
+            <a href="#robin">Robin</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+            <a href="#blank">blank</a>
+	    
+          </div>
+          
+          <!-- ###################### BEGIN FILE READER  ########################################################## -->
+          
+          <!-- <?PHP -->
+	       
+               <!-- $file_handle = fopen("http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt", "rb"); -->
+	       
+               <!-- while (!feof($file_handle) ) { -->
                
-	  <!-- ###################### BEGIN ADDITIONAL INFO BARS  ########################################################## -->
-	  <div class="fusion-column-content-centered">
-	    <div class="fusion-column-content">
-	      <div class="fusion-title title fusion-title-center fusion-title-size-one useful-links__header" style="margin-top:0px;margin-bottom:0px;">
-		<div class="title-sep-container title-sep-container-left">
-		  <div class="title-sep sep-double sep-dotted" style="border-color:#e0dede;">
+               <!-- $line_of_text = fgets($file_handle); -->
+               <!-- $parts = explode('=', $line_of_text); -->
+               
+               <!-- print $parts[0] . $parts[1]. "<BR>"; -->
+               
+               <!-- } -->
+               
+               <!-- fclose($file_handle); -->
+               
+               <!-- ?> -->
+	       
+               <!-- ###################### END FILE READER  ########################################################## -->
+	       
+	       <!-- ###################### BEGIN MAPS  ########################################################## -->
+               
+               <div id="map"></div>
+               <style>
+		 #map
+		 {
+		 height: 400px;
+		 width: 100%;
+		 }
+               </style>
+               
+               <script>
+		 function initMap() {
+		 var guyot = {lat: 40.34585, lng: -74.65475};
+		 var papeete = {lat: -17.53733, lng: -149.5665};
+		 var map = new google.maps.Map(document.getElementById('map'), {
+		 zoom: 13,
+		 center: papeete
+		 });
+		 
+		 var marker = new google.maps.Marker({
+		 position: papeete,
+		 map: map
+		 });
+		 }
+               </script>
+
+               <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3QorlGGuH3JaGqJwP8vGxhJFRFnxQOp0&callback=initMap">
+               </script>
+	       <!-- ###################### END MAPS  ########################################################## -->
+               
+               <div class="fusion-column-wrapper" style="background-color:#f4fbff;border:2px solid #ffffff;padding: 14px;background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
+		 
+		 <!-- ###################### BEGIN ADDITIONAL INFO BARS  ########################################################## -->
+		 <div class="fusion-column-content-centered">
+		   <div class="fusion-column-content">
+		     <div class="fusion-title title fusion-title-center fusion-title-size-one useful-links__header" style="margin-top:0px;margin-bottom:0px;">
+		       <div class="title-sep-container title-sep-container-left">
+			 <div class="title-sep sep-double sep-dotted" style="border-color:#e0dede;">
+			 </div>
+		       </div>
+		       <h1 class="title-heading-center">Further Information</h1> 
+		       <div class="title-sep-container title-sep-container-right">
+			 <div class="title-sep sep-double sep-dotted" style="border-color:#e0dede;">
+			 </div>
+		       </div>
+		     </div>
+		     
+		     <!-- ###################### BEGIN FIRST BUTTON BAR ##################################-->
+		     <div class="fusion-button-wrapper">
+		       <style>.fusion-button.button-2 .fusion-button-text, .fusion-button.button-2 i {color:#ffffff;}.fusion-button.button-2 {border-width:0px;border-color:#ffffff;}.fusion-button.button-2 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-2:hover .fusion-button-text, .fusion-button.button-2:hover i,.fusion-button.button-2:focus .fusion-button-text, .fusion-button.button-2:focus i,.fusion-button.button-2:active .fusion-button-text, .fusion-button.button-2:active{color:#ffffff;}.fusion-button.button-2:hover, .fusion-button.button-2:focus, .fusion-button.button-2:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-2:hover .fusion-button-icon-divider, .fusion-button.button-2:hover .fusion-button-icon-divider, .fusion-button.button-2:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-2{width:100%;}
+		       </style>
+		       <a class="fusion-button button-flat fusion-button-square button-large button-default button-2 btn--useful-links">
+			 <span class="fusion-button-icon-divider button-icon-divider-left">
+			   <i class="fa fa-list-ul"></i>
+			 </span>
+			 <span class="fusion-button-text fusion-button-text-left">For the public</span></a>
+		     </div>
+		     <!-- ###################### END FIRST BUTTON BAR #####################################-->
+		     
+		     
+		     <!-- ###################### BEGIN SECOND BUTTON BAR ##################################-->
+		     <div class="fusion-button-wrapper">
+		       <style>.fusion-button.button-3 .fusion-button-text, .fusion-button.button-3 i {color:#ffffff;}.fusion-button.button-3 {border-width:0px;border-color:#ffffff;}.fusion-button.button-3 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-3:hover .fusion-button-text, .fusion-button.button-3:hover i,.fusion-button.button-3:focus .fusion-button-text, .fusion-button.button-3:focus i,.fusion-button.button-3:active .fusion-button-text, .fusion-button.button-3:active{color:#ffffff;}.fusion-button.button-3:hover, .fusion-button.button-3:focus, .fusion-button.button-3:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-3:hover .fusion-button-icon-divider, .fusion-button.button-3:hover .fusion-button-icon-divider, .fusion-button.button-3:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-3{width:100%;}
+		       </style>
+		       
+		       <a class="fusion-button button-flat fusion-button-square button-large button-default button-3 btn--useful-links btn--useful-links-draft">
+			 <span class="fusion-button-icon-divider button-icon-divider-left">
+			   <i class="fa fa-globe"></i>
+			 </span>
+			 <span class="fusion-button-text fusion-button-text-left">For scientists</span></a>
+		     </div>
+		     <!-- ###################### END SECOND BUTTON BAR ###################################-->
+		     
+		     <!-- ###################### BEGIN THIRD BUTTON BAR ##################################-->
+		     <div class="fusion-button-wrapper">
+		       <style>.fusion-button.button-4 .fusion-button-text, .fusion-button.button-4 i {color:#ffffff;}.fusion-button.button-4 {border-width:0px;border-color:#ffffff;}.fusion-button.button-4 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-4:hover .fusion-button-text, .fusion-button.button-4:hover i,.fusion-button.button-4:focus .fusion-button-text, .fusion-button.button-4:focus i,.fusion-button.button-4:active .fusion-button-text, .fusion-button.button-4:active{color:#ffffff;}.fusion-button.button-4:hover, .fusion-button.button-4:focus, .fusion-button.button-4:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-4:hover .fusion-button-icon-divider, .fusion-button.button-4:hover .fusion-button-icon-divider, .fusion-button.button-4:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-4{width:100%;}
+		       </style>
+		       <a class="fusion-button button-flat fusion-button-square button-large button-default button-4 btn--useful-links">
+			 <span class="fusion-button-icon-divider button-icon-divider-left">
+			   <i class="fa fa-calendar"></i>
+			 </span>
+			 <span class="fusion-button-text fusion-button-text-left">Important dates</span></a>
+		     </div>
+		     <!-- ###################### END THIRD BUTTON BAR ####################################-->
+		     
+		     <!-- ###################### BEGIN FOURTH BUTTON BAR ##################################-->
+		     <div class="fusion-button-wrapper">
+		       <style>.fusion-button.button-5 .fusion-button-text, .fusion-button.button-5 i {color:#ffffff;}.fusion-button.button-5 {border-width:0px;border-color:#ffffff;}.fusion-button.button-5 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-5:hover .fusion-button-text, .fusion-button.button-5:hover i,.fusion-button.button-5:focus .fusion-button-text, .fusion-button.button-5:focus i,.fusion-button.button-5:active .fusion-button-text, .fusion-button.button-5:active{color:#ffffff;}.fusion-button.button-5:hover, .fusion-button.button-5:focus, .fusion-button.button-5:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-5:hover .fusion-button-icon-divider, .fusion-button.button-5:hover .fusion-button-icon-divider, .fusion-button.button-5:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-5{width:100%;} 
+		       </style>
+		       <a class="fusion-button button-flat fusion-button-square button-large button-default button-5 btn--useful-links">
+			 <span class="fusion-button-icon-divider button-icon-divider-left">
+			   <i class="fa fa-film"></i>
+			 </span>
+			 <span class="fusion-button-text fusion-button-text-left">
+			   Adopt-A-Float
+ 			 </span>
+		       </a>
+		     </div>
+		   </div>
+		 </div>
+		 <div class="fusion-clearfix"></div>
+               </div>
+	       <!-- ###################### END FOURTH BUTTON BAR ##################################-->
+        </div>
+      </div>
+      
+      <!-- ###################### BEGIN IMAGE TRIPLETS  ########################################################## -->
+      <div class="fusion-fullwidth fullwidth-box fusion-blend-mode nonhundred-percent-fullwidth fusion-equal-height-columns" style='background-color: rgba(255,255,255,0);background-position: left top;background-repeat: no-repeat;padding-top:75px;padding-right:30px;padding-bottom:45px;padding-left:30px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;'>
+	<div class="fusion-builder-row fusion-row ">
+	  
+	  <!-- ###################### BEGIN FIRST IMAGE COLUMN ########################################################## -->
+	  <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_3 fusion-one-third fusion-column-first card--home 1_3" style='margin-top:0px;margin-bottom:20px;width:30.6666%; margin-right: 4%;'> 
+            <div class="fusion-column-wrapper" style="background-color:#ffffff;border:1px solid #111111;background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
+              <div class="fusion-column-content-centered">
+		<div class="fusion-column-content">
+		  <!-- THE IMAGE -->
+		  <span class="fusion-imageframe imageframe-none imageframe-2 hover-type-zoomin">
+		    <a class="fusion-no-lightbox" target="_self" aria-label="MERMAID1"><img src="images/mermaid01.jpg" alt="mermaid" width="396" height="528"></a>
+		  </span>
+		  <!-- THE TITLE/CAPTION -->
+		  <div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;">
+		    <h5 class="title-heading-center"><a>Information</a></h5>
 		  </div>
 		</div>
-		<h1 class="title-heading-center">Further Information</h1> 
-		<div class="title-sep-container title-sep-container-right">
-		  <div class="title-sep sep-double sep-dotted" style="border-color:#e0dede;">
+	      </div>
+	      <div class="fusion-clearfix">
+	      </div>
+	    </div>
+	  </div>
+	  <!-- ###################### END FIRST IMAGE COLUMN ########################################################## -->
+	  
+	  <!-- ###################### BEGIN SECOND IMAGE COLUMN ####################################################### -->
+	  <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_3 fusion-one-third card--home 1_3" style='margin-top:0px;margin-bottom:20px;width:30.6666%; margin-right: 4%;'>
+            <div class="fusion-column-wrapper" style="background-color:#ffffff;border:1px solid #111111;background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
+              <div class="fusion-column-content-centered">
+		<div class="fusion-column-content">
+		  <!-- THE IMAGE -->
+		  <span class="fusion-imageframe imageframe-none imageframe-3 hover-type-zoomin">
+		    <a class="fusion-no-lightbox" target="_self" aria-label="MERMAID2"><img src="images/mermaid02.jpg" alt="mermaid"  width="396" height="528"></a>
+		  </span>
+		  <!-- THE TITLE/CAPTION -->
+		  <div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;">
+		    <h5 class="title-heading-center"><a>Instrumentation</a></h5>
 		  </div>
 		</div>
 	      </div>
-	      
-	      <!-- ###################### BEGIN FIRST BUTTON BAR ##################################-->
-              <div class="fusion-button-wrapper">
-		<style>.fusion-button.button-2 .fusion-button-text, .fusion-button.button-2 i {color:#ffffff;}.fusion-button.button-2 {border-width:0px;border-color:#ffffff;}.fusion-button.button-2 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-2:hover .fusion-button-text, .fusion-button.button-2:hover i,.fusion-button.button-2:focus .fusion-button-text, .fusion-button.button-2:focus i,.fusion-button.button-2:active .fusion-button-text, .fusion-button.button-2:active{color:#ffffff;}.fusion-button.button-2:hover, .fusion-button.button-2:focus, .fusion-button.button-2:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-2:hover .fusion-button-icon-divider, .fusion-button.button-2:hover .fusion-button-icon-divider, .fusion-button.button-2:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-2{width:100%;}
-		</style>
-		<a class="fusion-button button-flat fusion-button-square button-large button-default button-2 btn--useful-links">
-		  <span class="fusion-button-icon-divider button-icon-divider-left">
-		    <i class="fa fa-list-ul"></i>
-		  </span>
-		  <span class="fusion-button-text fusion-button-text-left">For the public</span></a>
+	      <div class="fusion-clearfix">
 	      </div>
-	      <!-- ###################### END FIRST BUTTON BAR #####################################-->
-	      
-	      
-	      <!-- ###################### BEGIN SECOND BUTTON BAR ##################################-->
-	      <div class="fusion-button-wrapper">
-		<style>.fusion-button.button-3 .fusion-button-text, .fusion-button.button-3 i {color:#ffffff;}.fusion-button.button-3 {border-width:0px;border-color:#ffffff;}.fusion-button.button-3 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-3:hover .fusion-button-text, .fusion-button.button-3:hover i,.fusion-button.button-3:focus .fusion-button-text, .fusion-button.button-3:focus i,.fusion-button.button-3:active .fusion-button-text, .fusion-button.button-3:active{color:#ffffff;}.fusion-button.button-3:hover, .fusion-button.button-3:focus, .fusion-button.button-3:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-3:hover .fusion-button-icon-divider, .fusion-button.button-3:hover .fusion-button-icon-divider, .fusion-button.button-3:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-3{width:100%;}
-		</style>
-		
-		<a class="fusion-button button-flat fusion-button-square button-large button-default button-3 btn--useful-links btn--useful-links-draft">
-		  <span class="fusion-button-icon-divider button-icon-divider-left">
-		    <i class="fa fa-globe"></i>
+            </div>
+	  </div>
+	  <!-- ###################### END SECOND IMAGE COLUMN ####################################################### -->
+	  
+	  <!-- ###################### BEGIN THIRD IMAGE COLUMN ###################################################### -->
+	  <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_3 fusion-one-third fusion-column-last card--home 1_3" style='margin-top:0px;margin-bottom:20px;width:30.6666%'>
+            <div class="fusion-column-wrapper" style="background-color:#ffffff;border:1px solid #111111;background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
+              <div class="fusion-column-content-centered">
+		<div class="fusion-column-content">
+		  <!-- THE IMAGE -->
+		  <span class="fusion-imageframe imageframe-none imageframe-4 hover-type-zoomin">
+		    <a class="fusion-no-lightbox" target="_self" aria-label="MERMAID3"><img src="images/inthewater01.jpg" alt="mermaid" width="396" height="528" >
+		    </a>
 		  </span>
-		  <span class="fusion-button-text fusion-button-text-left">For scientists</span></a>
+		  <!-- THE TITLE/CAPTION -->
+		  <div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;">
+		    <h5 class="title-heading-center"><a>Science</a></h5>
+		  </div>
+		</div>
 	      </div>
-	      <!-- ###################### END SECOND BUTTON BAR ###################################-->
-	      
-	      <!-- ###################### BEGIN THIRD BUTTON BAR ##################################-->
-	      <div class="fusion-button-wrapper">
-		<style>.fusion-button.button-4 .fusion-button-text, .fusion-button.button-4 i {color:#ffffff;}.fusion-button.button-4 {border-width:0px;border-color:#ffffff;}.fusion-button.button-4 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-4:hover .fusion-button-text, .fusion-button.button-4:hover i,.fusion-button.button-4:focus .fusion-button-text, .fusion-button.button-4:focus i,.fusion-button.button-4:active .fusion-button-text, .fusion-button.button-4:active{color:#ffffff;}.fusion-button.button-4:hover, .fusion-button.button-4:focus, .fusion-button.button-4:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-4:hover .fusion-button-icon-divider, .fusion-button.button-4:hover .fusion-button-icon-divider, .fusion-button.button-4:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-4{width:100%;}
-		</style>
-		<a class="fusion-button button-flat fusion-button-square button-large button-default button-4 btn--useful-links">
-		  <span class="fusion-button-icon-divider button-icon-divider-left">
-		    <i class="fa fa-calendar"></i>
-		  </span>
-		  <span class="fusion-button-text fusion-button-text-left">Important dates</span></a>
-	      </div>
-	      <!-- ###################### END THIRD BUTTON BAR ####################################-->
-	      
-	      <!-- ###################### BEGIN FOURTH BUTTON BAR ##################################-->
-	      <div class="fusion-button-wrapper">
-		<style>.fusion-button.button-5 .fusion-button-text, .fusion-button.button-5 i {color:#ffffff;}.fusion-button.button-5 {border-width:0px;border-color:#ffffff;}.fusion-button.button-5 .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-5:hover .fusion-button-text, .fusion-button.button-5:hover i,.fusion-button.button-5:focus .fusion-button-text, .fusion-button.button-5:focus i,.fusion-button.button-5:active .fusion-button-text, .fusion-button.button-5:active{color:#ffffff;}.fusion-button.button-5:hover, .fusion-button.button-5:focus, .fusion-button.button-5:active{border-width:0px;border-color:#ffffff;}.fusion-button.button-5:hover .fusion-button-icon-divider, .fusion-button.button-5:hover .fusion-button-icon-divider, .fusion-button.button-5:active .fusion-button-icon-divider{border-color:#ffffff;}.fusion-button.button-5{width:100%;} 
-		</style>
-		<a class="fusion-button button-flat fusion-button-square button-large button-default button-5 btn--useful-links">
-		  <span class="fusion-button-icon-divider button-icon-divider-left">
-		    <i class="fa fa-film"></i>
-		  </span>
-		  <span class="fusion-button-text fusion-button-text-left">
-		    Adopt-A-Float
- 		  </span>
-		</a>
+	      <div class="fusion-clearfix">
 	      </div>
 	    </div>
 	  </div>
-	  <div class="fusion-clearfix"></div>
-        </div>
-	<!-- ###################### END FOURTH BUTTON BAR ##################################-->
-        </div>
+	</div>
+	<!-- ###################### END THIRD IMAGE COLUMN ####################################################### -->
       </div>
-  </div>
-  
-  <!-- ###################### BEGIN IMAGE TRIPLETS  ########################################################## -->
-  <div class="fusion-fullwidth fullwidth-box fusion-blend-mode nonhundred-percent-fullwidth fusion-equal-height-columns" style='background-color: rgba(255,255,255,0);background-position: left top;background-repeat: no-repeat;padding-top:75px;padding-right:30px;padding-bottom:45px;padding-left:30px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;'>
-    <div class="fusion-builder-row fusion-row ">
+      <!-- ###################### END IMAGE TRIPLETS  ########################################################## -->
       
-      <!-- ###################### BEGIN FIRST IMAGE COLUMN ########################################################## -->
-      <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_3 fusion-one-third fusion-column-first card--home 1_3" style='margin-top:0px;margin-bottom:20px;width:30.6666%; margin-right: 4%;'> 
-        <div class="fusion-column-wrapper" style="background-color:#ffffff;border:1px solid #111111;background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
-          <div class="fusion-column-content-centered">
-	    <div class="fusion-column-content">
-	      <!-- THE IMAGE -->
-	      <span class="fusion-imageframe imageframe-none imageframe-2 hover-type-zoomin">
-		<a class="fusion-no-lightbox" target="_self" aria-label="MERMAID1"><img src="images/mermaid01.jpg" alt="mermaid" width="396" height="528"></a>
-	      </span>
-	      <!-- THE TITLE/CAPTION -->
-	      <div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;">
-		<h5 class="title-heading-center"><a>Information</a></h5>
+      
+      
+      <!--- #################### BEGIN A BIT OF HISTORY ? ######################################## -->
+      <div class="fusion-fullwidth fullwidth-box callout__wrapper callout__wrapper--home nonhundred-percent-fullwidth fusion-equal-height-columns" style='background-color: #ebebeb;background-position: left top;background-repeat: no-repeat;padding-top:165px;padding-right:30px;padding-bottom:88px;padding-left:30px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;'>
+	<div class="fusion-builder-row fusion-row">
+	  
+	  <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_2 fusion-one-half fusion-column-first 1_2" style='margin-top:0px;margin-bottom:20px;width:100%; margin-right: 4%;'>
+	    <div class="fusion-column-wrapper" style="background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
+	      <div class="fusion-column-content-centered">
+		<div class="fusion-column-content">
+		  <div class="callout">
+		    <span class="callout__text">
+		    </span>
+		  </div>
+		  In the last few decades seismologists have mapped out
+		  elastic wavespeeds of the Earth's interior with often perplexing if not always uncontested detail. Earthquake sources used in seismic
+		  tomography lie mostly on plate boundaries; receivers mostly on dry land. The uneven coverage resulting from this fundamentally inadequate
+		  source-station distribution leaves large volumes inside the Earth entirely unsampled. Placing seismic stations on the ocean bottom is
+		  often touted as the only solution. MERMAID, short for Mobile Earthquake Recorder in Marine Areas by Independent Divers, is a
+		  radical low-cost alternative that uses passively drifting autonomous hydrophones with a now proven potential to record hundreds of distant
+		  earthquakes over their projected life span.
+		</div> 
+	      </div>
+	      <div class="fusion-clearfix">
 	      </div>
 	    </div>
-	  </div>
-	  <div class="fusion-clearfix">
 	  </div>
 	</div>
       </div>
-      <!-- ###################### END FIRST IMAGE COLUMN ########################################################## -->
-
-      <!-- ###################### BEGIN SECOND IMAGE COLUMN ####################################################### -->
-      <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_3 fusion-one-third card--home 1_3" style='margin-top:0px;margin-bottom:20px;width:30.6666%; margin-right: 4%;'>
-        <div class="fusion-column-wrapper" style="background-color:#ffffff;border:1px solid #111111;background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
-          <div class="fusion-column-content-centered">
-	    <div class="fusion-column-content">
-	      <!-- THE IMAGE -->
-	      <span class="fusion-imageframe imageframe-none imageframe-3 hover-type-zoomin">
-		<a class="fusion-no-lightbox" target="_self" aria-label="MERMAID2"><img src="images/mermaid02.jpg" alt="mermaid"  width="396" height="528"></a>
-              </span>
-	      <!-- THE TITLE/CAPTION -->
-	      <div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;">
-		<h5 class="title-heading-center"><a>Instrumentation</a></h5>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="fusion-clearfix">
-	  </div>
-        </div>
-      </div>
-      <!-- ###################### END SECOND IMAGE COLUMN ####################################################### -->
-      
-      <!-- ###################### BEGIN THIRD IMAGE COLUMN ###################################################### -->
-      <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_3 fusion-one-third fusion-column-last card--home 1_3" style='margin-top:0px;margin-bottom:20px;width:30.6666%'>
-        <div class="fusion-column-wrapper" style="background-color:#ffffff;border:1px solid #111111;background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
-          <div class="fusion-column-content-centered">
-	    <div class="fusion-column-content">
-	      <!-- THE IMAGE -->
-	      <span class="fusion-imageframe imageframe-none imageframe-4 hover-type-zoomin">
-		<a class="fusion-no-lightbox" target="_self" aria-label="MERMAID3"><img src="images/inthewater01.jpg" alt="mermaid" width="396" height="528" >
-		</a>
-              </span>
-	      <!-- THE TITLE/CAPTION -->
-	      <div class="fusion-title title fusion-sep-none fusion-title-center fusion-title-size-five card__title card--home__title" style="margin-top:31px;margin-bottom:31px;">
-		<h5 class="title-heading-center"><a>Science</a></h5>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="fusion-clearfix">
-	  </div>
-	</div>
-      </div>
-    </div>
-    <!-- ###################### END THIRD IMAGE COLUMN ####################################################### -->
+      <!--- #################### END A BIT OF HISTORY ? ######################################## -->
+    </section>
   </div>
-  <!-- ###################### END IMAGE TRIPLETS  ########################################################## -->
-  
-
-
-  <!--- #################### BEGIN A BIT OF HISTORY ? ######################################## -->
-  <div class="fusion-fullwidth fullwidth-box callout__wrapper callout__wrapper--home nonhundred-percent-fullwidth fusion-equal-height-columns" style='background-color: #ebebeb;background-position: left top;background-repeat: no-repeat;padding-top:165px;padding-right:30px;padding-bottom:88px;padding-left:30px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;'>
-    <div class="fusion-builder-row fusion-row">
-      
-      <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_2 fusion-one-half fusion-column-first 1_2" style='margin-top:0px;margin-bottom:20px;width:100%; margin-right: 4%;'>
-	<div class="fusion-column-wrapper" style="background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
-	  <div class="fusion-column-content-centered">
-	    <div class="fusion-column-content">
-	      <div class="callout">
-		<span class="callout__text">
-		</span>
-	      </div>
-	      In the last few decades seismologists have mapped out
-	      elastic wavespeeds of the Earth's interior with often perplexing if not always uncontested detail. Earthquake sources used in seismic
-	      tomography lie mostly on plate boundaries; receivers mostly on dry land. The uneven coverage resulting from this fundamentally inadequate
-	      source-station distribution leaves large volumes inside the Earth entirely unsampled. Placing seismic stations on the ocean bottom is
-	      often touted as the only solution. MERMAID, short for Mobile Earthquake Recorder in Marine Areas by Independent Divers, is a
-	      radical low-cost alternative that uses passively drifting autonomous hydrophones with a now proven potential to record hundreds of distant
-	      earthquakes over their projected life span.
-	    </div> 
-	  </div>
-	  <div class="fusion-clearfix">
-	  </div>
-	</div>
-      </div>
-    </div>
-  </div>
-  <!--- #################### END A BIT OF HISTORY ? ######################################## -->
-  </div>
-</div>
-</section>
-
-</div>
 </main>
 <!-- ###################### END MAIN ########################################################## -->
 
@@ -707,8 +703,8 @@
 				   ul li.fusion-active-cart-icon
 				   .fusion-widget-cart-icon:after{color:#ffffff;}
              </style>
-             <nav class="fusion-widget-menu"><ul id="menu-footer-menu" class="menu">
-	
+             <nav class="fusion-widget-menu">
+	       <ul id="menu-footer-menu" class="menu">
 		 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item current_page_item"> 
 		   <a href="http://earthscopeoceans.org/">Home</a>
 		 </li> 
@@ -724,11 +720,9 @@
 	       </ul>
 	     </nav>
 	     <div style="clear:both;"></div>
-   </section>
+</section>
+</footer> 
 <!-- ###################### END BOTTOM LINKS ########################################################## -->
-
-                </footer> 
-
 
 <section id="text-2" class="fusion-footer-widget-column widget widget_text">            
   <div class="textwidget">
@@ -739,9 +733,9 @@
   <div style="clear:both;"></div>
 </section>
 </div>
-                <div class="fusion-clearfix"></div>
-                </div>
-                </div>
+<div class="fusion-clearfix"></div>
+</div>
+</div>
                 
 <!-- ###################### BEGIN COPYRIGHT SECTION  ########################################################## -->
 <footer id="footer" class="fusion-footer-copyright-area fusion-footer-copyright-center">
@@ -751,15 +745,11 @@
 	Copyright © 2018 Frederik J Simons
       </div>
     </div>
-    <div class="fusion-social-links-footer">
-    </div>
   </div> 
 </div> 
 </footer> 
 <!-- ###################### BEGIN COPYRIGHT SECTION  ########################################################## -->
     
-</div>
-</div>
 <a class="fusion-one-page-text-link fusion-page-load-link"></a>
 
 <script>
@@ -771,6 +761,6 @@
            });
            }
            });
-           </script>
+</script>
 </body>
 </html>
