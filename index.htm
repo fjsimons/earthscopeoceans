@@ -439,24 +439,43 @@
           </div>
           
           <!-- ###################### BEGIN FILE READER  ########################################################## -->
+		
+	  <button type="button" onclick="loadDoc()">Request data</button>                 
+          <p id="fileReader"></p>                                    
           
-          <!-- <?PHP -->
-	       
-               <!-- $file_handle = fopen("http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt", "rb"); -->
-	       
-               <!-- while (!feof($file_handle) ) { -->
-               
-               <!-- $line_of_text = fgets($file_handle); -->
-               <!-- $parts = explode('=', $line_of_text); -->
-               
-               <!-- print $parts[0] . $parts[1]. "<BR>"; -->
-               
-               <!-- } -->
-               
-               <!-- fclose($file_handle); -->
-               
-               <!-- ?> -->
-	       
+	  <script>
+          function loadDoc() {
+                        
+          	// store locations in two parallel arrays
+          	var x = [];
+                var y = [];                      
+                        
+                // initialie http request
+                var xhttp = new XMLHttpRequest();
+                        
+                xhttp.onreadystatechange = function() {
+                        
+                	// make sure data has loaded from texfile
+                       	if (this.readyState == 4 && this.status == 200) {
+                        	var rows = this.responseText.split('\n');
+                        
+                        	// iterate over array of rows, push x and y values
+                        	for (i = 0; i < rows.length; i++) {
+                        		var coords = rows[i].split(/\s+/);
+
+                    			//alert(coords[1]);
+                       			x.push(coords[8]);
+                        		y.push(coords[9]);
+                        	}
+                        	alert(x);
+                        	alert(y);
+                        }
+                   };
+                   xhttp.open("GET", "http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt", true);
+                   xhttp.send();
+              }
+              </script>
+
                <!-- ###################### END FILE READER  ########################################################## -->
 	       
 	       <!-- ###################### BEGIN MAPS  ########################################################## -->
