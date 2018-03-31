@@ -440,41 +440,30 @@
           
           <!-- ###################### BEGIN FILE READER  ########################################################## -->
 		
-	  <button type="button" onclick="loadDoc()">Request data</button>                 
-          <p id="fileReader"></p>                                    
-          
-	  <script>
-          function loadDoc() {
-                        
-          	// store locations in two parallel arrays
-          	var x = [];
-                var y = [];                      
-                        
-                // initialie http request
-                var xhttp = new XMLHttpRequest();
-                        
-                xhttp.onreadystatechange = function() {
-                        
-                	// make sure data has loaded from texfile
-                       	if (this.readyState == 4 && this.status == 200) {
-                        	var rows = this.responseText.split('\n');
-                        
-                        	// iterate over array of rows, push x and y values
-                        	for (i = 0; i < rows.length; i++) {
-                        		var coords = rows[i].split(/\s+/);
+	  	  <script>
 
-                    			//alert(coords[1]);
-                       			x.push(coords[8]);
-                        		y.push(coords[9]);
-                        	}
-                        	alert(x);
-                        	alert(y);
-                        }
-                   };
-                   xhttp.open("GET", "http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt", true);
-                   xhttp.send();
-              }
-              </script>
+	  	  //add callback to handle asynchronous response 
+	  	  function get(url, callback) {
+
+	  	      var xhr = new XMLHttpRequest();
+	  	      xhr.open("GET", url, true);
+	  	      xhr.onreadystatechange = function () {
+
+	  	      	  // defensive check
+	  	          if (xhr.readyState == 4) {
+	  	              if (typeof callback === "function") {
+
+	  	              	  //apply callback to response
+	  	                  callback.apply(xhr);
+	  	              }
+	  	          }
+	  	      };
+	  	      xhr.send();
+	  	  }
+
+
+        
+        </script>
 
                <!-- ###################### END FILE READER  ########################################################## -->
 	       
