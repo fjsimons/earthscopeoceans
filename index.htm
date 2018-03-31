@@ -469,29 +469,110 @@
 	       
 	       <!-- ###################### BEGIN MAPS  ########################################################## -->
                
-               <div id="map"></div>
-               <style>
-		 #map
-		 {
-		 	height: 400px;
-		 	width: 100%;
-		 }
-               </style>
+                 <div id="map"></div>
+                 <style>
+		 		 #map
+		 		 {
+		 			height: 400px;
+		 			width: 100%;
+		 		 }
+                </style>
                
-               <script>
-		 function initMap() {
-		 	var guyot = {lat: 40.34585, lng: -74.65475};
-		 	var papeete = {lat: -17.53733, lng: -149.5665};
-		 	var map = new google.maps.Map(document.getElementById('map'), {
-		 		zoom: 13,
-		 		center: papeete
-		 	});
+                <script>
+		 	    function initMap() {
+
+		 	    	// ID the map
+		 	    	var mapDiv = document.getElementById('map');
+		 	    	
+		 	    	// some default locations
+		 	    	var guyot = {lat: 40.34585, lng: -74.65475};
+		 			var papeete = {lat: -17.53733, lng: -149.5665};
+
+		 			// default map center
+		 			var map = new google.maps.Map(mapDiv, {
+		 				zoom: 13,
+		 				center: papeete
+		 			});
 		 
-		 	var marker = new google.maps.Marker({
-				position: papeete,
-		 		map: map
-		 	});
-		 }
+		 			// place marker
+		 			var marker = new google.maps.Marker({
+						position: papeete,
+		 				map: map
+		 			});
+
+		 			// add data to map
+		 			function addToMap(data) {
+
+		 				// store coords in parallel arrays
+          				var x = [];
+            			var y = [];  
+
+            			// scrape data from text callback response
+		 				var rows = data.split('\n');
+
+		 				 for (i = 0; i < rows.length; i++) {
+		 				    var coords = rows[i].split(/\s+/);
+
+		 				   	x.push(coords[8]);
+		 				    y.push(coords[9]);
+		 				}
+
+		 				// iterate over arrays, placing markers
+		 				for (var i = 0; i < x.length; i++) {
+          					var latLng = new google.maps.LatLng(x[i],y[i]);
+          					var marker = new google.maps.Marker({
+            					position: latLng,
+            					map: map
+          					});
+        				}
+
+
+		 			}
+
+		 			// listen for use of scrollbar
+
+		 			//all
+		 			google.maps.event.addDomListener(all, 'click', function() {
+		 				window.alert("all clicked");
+
+        			});
+
+		 			//raffa
+        			google.maps.event.addDomListener(raffa, 'click', function() {
+        				var url = "http://geoweb.princeton.edu/people/simons/SOM/RAFFA_030.txt"
+
+		 				resp = get(url,
+		 				    // this callback is invoked AFTER the response arrives
+		 				    function () {
+		 				        
+		 				        var data  = this.responseText;
+
+		 				        // now do something with response
+		 				        addToMap(data);
+		 				    }
+		 				);
+        			});
+
+        			//robin
+        			google.maps.event.addDomListener(robin, 'click', function() {
+        				var url = "http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt" 
+
+		 				resp = get(url,
+		 				    // this callback is invoked AFTER the response arrives
+		 				    function () {
+		 				        
+		 				        var data  = this.responseText;
+
+		 				        // now do something with response
+		 				        addToMap(data);
+		 				    }
+		 				);
+        			});
+
+
+
+		 	}
+
                </script>
 
                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3QorlGGuH3JaGqJwP8vGxhJFRFnxQOp0&callback=initMap">
