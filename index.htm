@@ -500,17 +500,22 @@
 		 				map: map
 		 			});
 
-		 			// add data to map
+// add data to map
 		 			function addToMap(data) {
 
 		 				// store coords in parallel arrays
           				var x = [];
             			var y = [];  
 
+
+            			// pan to coordinates
+            			//var xCenter = 0;
+            			//var yCenter = 0;
+
             			// scrape data from text callback response
 		 				var rows = data.split('\n');
 
-		 				 for (i = 0; i < rows.length; i++) {
+		 				 for (i = 0; i < rows.length-1; i++) {
 		 				    var coords = rows[i].split(/\s+/);
 
 		 				   	x.push(coords[8]);
@@ -523,8 +528,31 @@
           					var marker = new google.maps.Marker({
             					position: latLng,
             					map: map
+
           					});
+
         				}
+
+        				// for (var i = 0; i < x.length; i ++) {
+        				// 	xCenter += parseFloat(x[i]);
+        				// 	yCenter += parseFloat(y[i]);
+        				// }
+
+
+
+
+        				//xCenter /= (rows.length - 1);
+        				//yCenter /= (rows.length - 1);
+
+        				//alert("x: " + xCenter);
+
+        				//alert("y: " + yCenter);
+
+
+        				var latLng = new google.maps.LatLng(x[Math.floor(x.length/2)], y[Math.floor(y.length/2)]);
+
+
+        				map.panTo(latLng);
 
 
 		 			}
