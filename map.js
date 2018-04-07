@@ -11,60 +11,103 @@ function initMap() {
 		center: papeete
 	});
 
+	//infowindow = new google.maps.InfoWindow;
+
+
 	// place marker
 	var marker = new google.maps.Marker({
 	position: papeete,
 		map: map
 	});
 
+	// use haversine formula do determine distance between points
+	function getDisplacement(lat1, lon1, lat2, lon2){  // generally used geo measurement function
+	    var R = 6378.137; // Radius of earth in KM
+	    var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
+	    var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
+	    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+	    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+	    Math.sin(dLon/2) * Math.sin(dLon/2);
+	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	    var d = R * c;
+	    return d * 1000; // meters
+	}
+
+
 	// add data to map
-	function addToMap(data) {
+	function addToMap(data, name) {
 		// store coords in parallel arrays
-		var x = [];
-		var y = [];  
+		var lat = [];
+		var lon = [];  
+
+		var markers = [];
 	
 
 		// scrape data from text callback response
 		var rows = data.split('\n');
-		 for (i = 0; i < rows.length-1; i++) {
+		 for (i = 0; i < rows.length-2; i++) {
 		    var coords = rows[i].split(/\s+/);
-		   	x.push(coords[8]);
-		    y.push(coords[9]);
+		   	lat.push(coords[8]);
+		    lon.push(coords[9]);
 		}
 
+		var displacement = getDisplacement(lat[1], lon[1], lat[lat.length-1], lon[lon.length-1]);
+
+       
+
 		// iterate over arrays, placing markers
-		for (var i = 0; i < x.length; i++) {
-			var latLng = new google.maps.LatLng(x[i],y[i]);
+		for (var i = 0; i < lat.length; i++) {
+			var latLng = new google.maps.LatLng(lat[i],lon[i]);
+
+			
 			var marker = new google.maps.Marker({
 			position: latLng,
-			map: map
+			map: map,
+			clickable: true
+			//content: node
 			});
-	}
-		
 
-	//use exact center for panning
-	//var xCenter = 0;
-	//var yCenter = 0;
 
-	// for (var i = 0; i < x.length; i ++) {
-	// 	xCenter += parseFloat(x[i]);
-	// 	yCenter += parseFloat(y[i]);
-	// }
+			marker.info = new google.maps.InfoWindow({
+			  content: '<b>Name:</b> ' + name + ' '
+			});
 
-	// xCenter /= (rows.length - 1);
-	// yCenter /= (rows.length - 1);
+			google.maps.event.addListener(marker, 'click', function() {
+    			marker.info.open(map, this);
+			});
+
+
+			markers.push(marker);
+
 	
-	//use aprox. center for panning (middle location)
-	xCenter = x[Math.floor(x.length/2)];
-	yCenter = y[Math.floor(y.length/2)];
-		
+		}
 
-	var latLng = new google.maps.LatLng(xCenter, yCenter);
-	map.panTo(latLng);
-	map.setZoom(11);
+		//use exact center for panning
+		//var latCenter = 0;
+		//var lonCenter = 0;
+
+		// for (var i = 0; i < lat.length; i ++) {
+		// 	latCenter += parseFloat(lat[i]);
+		// 	lonCenter += parseFloat(lon[i]);
+		// }
+
+		// latCenter /= (rows.length - 1);
+		// lonCenter /= (rows.length - 1);
+		
+		//use aprox. center for panning (middle location)
+		latCenter = lat[Math.floor(lat.length/2)];
+		lonCenter = lon[Math.floor(lon.length/2)];
+			
+		var latLng = new google.maps.LatLng(latCenter, lonCenter);
+
+
+
+		map.panTo(latLng);
+		map.setZoom(11);
 	}
+
 	
-	// listen for use of scrollbar
+	//listen for use of scrollbar
 	//all
 	google.maps.event.addDomListener(all, 'click', function() {
 		window.alert("all clicked");
@@ -72,26 +115,28 @@ function initMap() {
 		//raffa
 	google.maps.event.addDomListener(raffa, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/RAFFA_030.txt"
+		var name = "Raffa";
 			resp = get(url,
 			    // this callback is invoked AFTER the response arrives
 			    function () {
 			        
 			        var data  = this.responseText;
 			        // now do something with response
-			        addToMap(data);
+			        addToMap(data, name);
 			    }
 			);
 	});
 	//robin
 	google.maps.event.addDomListener(robin, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt" 
+		var name = "Robin";
 			resp = get(url,
 			    // this callback is invoked AFTER the response arrives
 			    function () {
 			        
 			        var data  = this.responseText;
 			        // now do something with response
-			        addToMap(data);
+			        addToMap(data, name);
 			    }
 			);
 	});
