@@ -20,6 +20,7 @@ function initMap() {
 		map: map
 	});
 
+	// get rough distance by getting displacement between all coord elements
 	function getDistance(lat, lon) {
 		var distance = 0
 
@@ -29,7 +30,7 @@ function initMap() {
 		return distance;
 	}
 
-	// use haversine formula do determine distance between points
+	// use haversine formula do determine distance between lat/ lng points
 	function getDisplacement(lat1, lon1, lat2, lon2){  // generally used geo measurement function
 	    var R = 6378.137; // Radius of earth in KM
 	    var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
@@ -40,6 +41,11 @@ function initMap() {
 	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 	    var d = R * c;
 	    return d * 1000; // meters
+	}
+
+	// for rounding to two decimal places
+	function roundTwo(num) {
+		return parseFloat(num).toFixed(2);
 	}
 
 	// add data to map
@@ -56,9 +62,11 @@ function initMap() {
 		    lon.push(coords[9]);
 		}
 
-		var displacement = getDisplacement(lat[1], lon[1], lat[lat.length-1], lon[lon.length-1]);
-		var distance = getDistance(lat, lon);
-		alert(distance);
+		// do calculations (units: km/h)
+		var displacement = getDisplacement(lat[1], lon[1], lat[lat.length-1], lon[lon.length-1]) / 1000;
+		var distance = getDistance(lat, lon) / 1000;
+		var velocity = distance / lat.length;
+
 
        
 		// iterate over arrays, placing markers
@@ -67,29 +75,22 @@ function initMap() {
 
 			
 			var marker = new google.maps.Marker({
-			position: latLng,
-			map: map,
-			clickable: true
-			//content: node
+				position: latLng,
+				map: map,
+				clickable: true
 			});
-
 
 			marker.info = new google.maps.InfoWindow({
 			  content: '<b>Float Name:</b> ' + name + 
 			  		   '<BR/><b>Lat/ lng:</b> ' + ' not yet functional' +
-			  		   '<BR/><b>Distance Travelled:</b> ' + parseFloat(distance).toFixed(2) + ' meters' +
-			  		   '<BR/><b>Net Displacement:</b> ' + parseFloat(displacement).toFixed(2) + ' meters' +
-			  		   '<BR/><b>Average Velocity:</b> ' + ' not yet functional' 
-
-
-			  		   //'<BR/><b>Lat/ lon:</b> '  + this.getPosition().lat() + ', ' + this.getPosition().lng()
-
+			  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' kilometers' +
+			  		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' kilometers' +
+			  		   '<BR/><b>Average Velocity:</b> ' + roundTwo(velocity) + ' km/h' 
 			});
 
 			google.maps.event.addListener(marker, 'click', function() {
     			marker.info.open(map, this);
 			});
-
 
 			markers.push(marker);
 		}
@@ -112,8 +113,6 @@ function initMap() {
 			
 		var latLng = new google.maps.LatLng(latCenter, lonCenter);
 
-
-
 		map.panTo(latLng);
 		map.setZoom(11);
 	}
@@ -125,7 +124,6 @@ function initMap() {
   		}	
  		markers.length = 0;
 	}
-
 	
 	// listen for use of scrollbar
 	// all
