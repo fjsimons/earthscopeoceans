@@ -65,9 +65,10 @@ function initMap() {
 		// do calculations (units: km/h)
 		var displacement = getDisplacement(lat[1], lon[1], lat[lat.length-1], lon[lon.length-1]) / 1000;
 		var distance = getDistance(lat, lon) / 1000;
+
+		// this only works as long as the intervals between 
+		// updates are all 1 hour, or sum to 1 hr * numUpdates
 		var velocity = distance / lat.length;
-
-
        
 		// iterate over arrays, placing markers
 		for (var i = 0; i < lat.length; i++) {
