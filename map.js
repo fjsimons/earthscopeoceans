@@ -1,6 +1,9 @@
 function initMap() {
 	// ID the map
 	var mapDiv = document.getElementById('map');
+
+	// keep track of markers
+	var markers = [];
 	
 	// some default locations
 	var guyot = {lat: 40.34585, lng: -74.65475};
@@ -10,9 +13,6 @@ function initMap() {
 		zoom: 13,
 		center: papeete
 	});
-
-	//infowindow = new google.maps.InfoWindow;
-
 
 	// place marker
 	var marker = new google.maps.Marker({
@@ -33,15 +33,11 @@ function initMap() {
 	    return d * 1000; // meters
 	}
 
-
 	// add data to map
 	function addToMap(data, name) {
 		// store coords in parallel arrays
 		var lat = [];
-		var lon = [];  
-
-		var markers = [];
-	
+		var lon = [];  	
 
 		// scrape data from text callback response
 		var rows = data.split('\n');
@@ -54,7 +50,6 @@ function initMap() {
 		var displacement = getDisplacement(lat[1], lon[1], lat[lat.length-1], lon[lon.length-1]);
 
        
-
 		// iterate over arrays, placing markers
 		for (var i = 0; i < lat.length; i++) {
 			var latLng = new google.maps.LatLng(lat[i],lon[i]);
@@ -73,7 +68,6 @@ function initMap() {
 			  		   '<BR/><b>Net Displacement:</b> ' + parseFloat(displacement).toFixed(2) + ' meters' //+
 			  		   //'<BR/><b>Lat/ lon:</b> '  + this.getPosition().lat() + ', ' + this.getPosition().lng()
 
-
 			});
 
 			google.maps.event.addListener(marker, 'click', function() {
@@ -82,8 +76,6 @@ function initMap() {
 
 
 			markers.push(marker);
-
-	
 		}
 
 		//use exact center for panning
@@ -110,13 +102,28 @@ function initMap() {
 		map.setZoom(11);
 	}
 
+	// delete all added markers
+	function clearMarkers() {
+  		for (var i = 0; i < markers.length; i++ ) {
+    		markers[i].setMap(null);
+  		}	
+ 		markers.length = 0;
+	}
+
 	
-	//listen for use of scrollbar
-	//all
+	// listen for use of scrollbar
+	// all
 	google.maps.event.addDomListener(all, 'click', function() {
-		window.alert("all clicked");
+		window.alert("clicked all");
 	});
-		//raffa
+
+	// clear
+	google.maps.event.addDomListener(clear, 'click', function() {
+		clearMarkers();
+	});
+
+
+	// raffa
 	google.maps.event.addDomListener(raffa, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/RAFFA_030.txt"
 		var name = "Raffa";
@@ -130,7 +137,7 @@ function initMap() {
 			    }
 			);
 	});
-	//robin
+	// robin
 	google.maps.event.addDomListener(robin, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt" 
 		var name = "Robin";
