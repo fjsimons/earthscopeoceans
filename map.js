@@ -69,7 +69,11 @@ function initMap() {
 
 
 			marker.info = new google.maps.InfoWindow({
-			  content: '<b>Name:</b> ' + name + ' '
+			  content: '<b>Float Name:</b> ' + name + 
+			  		   '<BR/><b>Net Displacement:</b> ' + parseFloat(displacement).toFixed(2) + ' meters' //+
+			  		   //'<BR/><b>Lat/ lon:</b> '  + this.getPosition().lat() + ', ' + this.getPosition().lng()
+
+
 			});
 
 			google.maps.event.addListener(marker, 'click', function() {
