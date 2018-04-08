@@ -20,6 +20,15 @@ function initMap() {
 		map: map
 	});
 
+	function getDistance(lat, lon) {
+		var distance = 0
+
+		for (var i = 0; i < lat.length - 2; i++) {
+			distance += getDisplacement(lat[i], lon[i], lat[i+1], lon[i+1])
+		}
+		return distance;
+	}
+
 	// use haversine formula do determine distance between points
 	function getDisplacement(lat1, lon1, lat2, lon2){  // generally used geo measurement function
 	    var R = 6378.137; // Radius of earth in KM
@@ -41,13 +50,15 @@ function initMap() {
 
 		// scrape data from text callback response
 		var rows = data.split('\n');
-		 for (i = 0; i < rows.length-2; i++) {
+		 for (i = 0; i < rows.length - 2; i++) {
 		    var coords = rows[i].split(/\s+/);
 		   	lat.push(coords[8]);
 		    lon.push(coords[9]);
 		}
 
 		var displacement = getDisplacement(lat[1], lon[1], lat[lat.length-1], lon[lon.length-1]);
+		var distance = getDistance(lat, lon);
+		alert(distance);
 
        
 		// iterate over arrays, placing markers
@@ -65,7 +76,12 @@ function initMap() {
 
 			marker.info = new google.maps.InfoWindow({
 			  content: '<b>Float Name:</b> ' + name + 
-			  		   '<BR/><b>Net Displacement:</b> ' + parseFloat(displacement).toFixed(2) + ' meters' //+
+			  		   '<BR/><b>Lat/ lng:</b> ' + ' not yet functional' +
+			  		   '<BR/><b>Distance Travelled:</b> ' + parseFloat(distance).toFixed(2) + ' meters' +
+			  		   '<BR/><b>Net Displacement:</b> ' + parseFloat(displacement).toFixed(2) + ' meters' +
+			  		   '<BR/><b>Average Velocity:</b> ' + ' not yet functional' 
+
+
 			  		   //'<BR/><b>Lat/ lon:</b> '  + this.getPosition().lat() + ', ' + this.getPosition().lng()
 
 			});
