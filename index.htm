@@ -330,7 +330,7 @@
 <!-- END SLIDING IMAGES -->
 
 <!-- BEGIN THE REAL DEAL -->
-<main id="main" class="clearfix width-100" style="padding-left:30px;padding-right:30px">
+<main id="main" class="clearfix width-100" style="background-color: #ebebeb;padding-left:30px;padding-right:30px">
   <div class="fusion-row" style="max-width:100%;">
     <section id="content" class="full-width">
       <div id="post-13" class="post-13 page type-page status-publish hentry">
@@ -370,7 +370,7 @@
           <div class="fusion-clearfix"></div>
 
 	  <!-- ###################### Begin A BIT OF TEXT  ########################################################## -->
-	  <div class="fusion-builder-row fusion-row">
+	  <div class="fusion-builder-row fusion-row" >
 	    <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_1 fusion-one-full fusion-column-first fusion-column-last fusion-column-no-min-height 1_1" style='margin-top:50px;margin-bottom:0px;'>
 	      <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_1 fusion-column-first 1_1" style='margin-top:0px;margin-bottom:50px;width:100%; margin-right: 4%;'>
 		<div class="fusion-column-wrapper" style="background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
@@ -402,8 +402,9 @@
 
           <meta property='stylesheet' content="width=device-width, initial-scale=1">
           <style>
+
             div.scrollmenu {
-            background-color: #333;
+            background-color: #00344c;
             overflow: auto;
             white-space: nowrap;
             }
@@ -421,7 +422,7 @@
             }
           </style>
 
-         <div class="scrollmenu">
+         <div id ="scroller" class="scrollmenu">
          	<a href="#all:void(0)" id="all">All</a>
             <a href="#clear:void(0)" id="clear">Clear</a>
             <a href="#raffa:void(0)" id="raffa">Raffa</a>
@@ -439,6 +440,10 @@
 
           </div>
 
+
+
+
+
           <!-- ###################### BEGIN FILE READER  ########################################################## -->
 
               <script src="fileReader.js"></script>
@@ -454,8 +459,11 @@
 		 		 #map
 		 		 {
 		 			height: 400px;
-		 			width: 100%;
-		 		 }
+          float: right;
+		 			width: 50%;
+          position: relative;
+          z-index: 100;
+        }
                 </style>
 
                 <script src="map.js">
@@ -466,7 +474,17 @@
                 </script>
 	       <!-- ###################### END MAPS  ########################################################## -->
 
-               <div class="fusion-column-wrapper" style="background-color:#f4fbff;border:2px solid #ffffff;padding: 14px;background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
+               <div id="infoBars" class="fusion-column-wrapper" style="background-color: #ebebeb;border:2px solid #ebebeb;padding: 14px;background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
+                 <style>
+		 		 #infoBars
+		 		 {
+		 			height: 600;
+          float: left;
+		 			width: 50%;
+          position: relative;
+          z-index: 100;
+		 		 }
+                </style>
 
 		 <!-- ###################### BEGIN ADDITIONAL INFO BARS  ########################################################## -->
 		 <div class="fusion-column-content-centered">
