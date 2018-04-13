@@ -4,7 +4,7 @@ function initMap() {
 
 	// keep track of markers
 	var markers = [];
-	
+
 	// some default locations
 	var guyot = {lat: 40.34585, lng: -74.65475};
 	var papeete = {lat: -17.53733, lng: -149.5665};
@@ -13,6 +13,8 @@ function initMap() {
 		zoom: 13,
 		center: papeete
 	});
+
+	map.setMapTypeId('hybrid');
 
 	// place marker
 	var marker = new google.maps.Marker({
@@ -52,7 +54,7 @@ function initMap() {
 	function addToMap(data, name) {
 		// store coords in parallel arrays
 		var lat = [];
-		var lon = [];  	
+		var lon = [];
 
 		// scrape data from text callback response
 		var rows = data.split('\n');
@@ -66,15 +68,16 @@ function initMap() {
 		var displacement = getDisplacement(lat[1], lon[1], lat[lat.length-1], lon[lon.length-1]) / 1000;
 		var distance = getDistance(lat, lon) / 1000;
 
-		// this only works as long as the intervals between 
+		// this only works as long as the intervals between
 		// updates are all 1 hour, or sum to 1 hr * numUpdates
 		var velocity = distance / lat.length;
-       
+
 		// iterate over arrays, placing markers
+
 		for (var i = 0; i < lat.length; i++) {
 			var latLng = new google.maps.LatLng(lat[i],lon[i]);
 
-			
+
 			var marker = new google.maps.Marker({
 				position: latLng,
 				map: map,
@@ -82,19 +85,34 @@ function initMap() {
 			});
 
 			marker.info = new google.maps.InfoWindow({
-			  content: '<b>Float Name:</b> ' + name + 
-			  		   '<BR/><b>Lat/ lng:</b> ' + ' not yet functional' +
+			  content:'<b>Float Name:</b> ' + name +
+			  		   //'<BR/><b>Lat/ lng:</b> ' + ' not yet functional' +
 			  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' kilometers' +
 			  		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' kilometers' +
-			  		   '<BR/><b>Average Velocity:</b> ' + roundTwo(velocity) + ' km/h' 
+			  		   '<BR/><b>Average Velocity:</b> ' + roundTwo(velocity) + ' km/h'
 			});
 
-			google.maps.event.addListener(marker, 'click', function() {
+			//popupDirections(marker, lat.length, lat);
+
+
+			google.maps.event.addListener(marker, 'click', function(event) {
+					marker.info.close();
     			marker.info.open(map, this);
 			});
 
 			markers.push(marker);
 		}
+
+		// attempt to display lat lng as part of popup
+		// function popupDirections(marker, len, lat) {
+    //     //this function created listener listens for click on a marker
+    //     google.maps.event.addListener(marker, 'click', function () {
+		// 				marker.info.setContent("Stop coords: " + this.getPosition());
+		// 				//marker.info.close();
+    //         marker.info.open(map, this);
+		//
+    //     });
+    // }
 
 		//use exact center for panning
 		//var latCenter = 0;
@@ -107,25 +125,37 @@ function initMap() {
 
 		// latCenter /= (rows.length - 1);
 		// lonCenter /= (rows.length - 1);
-		
+
 		//use aprox. center for panning (middle location)
 		latCenter = lat[Math.floor(lat.length/2)];
 		lonCenter = lon[Math.floor(lon.length/2)];
-			
+
 		var latLng = new google.maps.LatLng(latCenter, lonCenter);
 
 		map.panTo(latLng);
-		map.setZoom(11);
+		map.setZoom(10);
 	}
 
 	// delete all added markers
 	function clearMarkers() {
   		for (var i = 0; i < markers.length; i++ ) {
     		markers[i].setMap(null);
-  		}	
+  		}
  		markers.length = 0;
 	}
-	
+
+	//handles asnyc use of data
+	function useCallback(url, name) {
+		resp = get(url,
+				// this callback is invoked after the response arrives
+				function () {
+						var data  = this.responseText;
+						addToMap(data, name);
+				}
+		);
+
+	}
+
 	// listen for use of scrollbar
 	// all
 	google.maps.event.addDomListener(all, 'click', function() {
@@ -137,33 +167,17 @@ function initMap() {
 		clearMarkers();
 	});
 
-
 	// raffa
 	google.maps.event.addDomListener(raffa, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/RAFFA_030.txt"
 		var name = "Raffa";
-			resp = get(url,
-			    // this callback is invoked AFTER the response arrives
-			    function () {
-			        
-			        var data  = this.responseText;
-			        // now do something with response
-			        addToMap(data, name);
-			    }
-			);
+		useCallback(url, name);
 	});
+
 	// robin
 	google.maps.event.addDomListener(robin, 'click', function() {
-		var url = "http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt" 
+		var url = "http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt"
 		var name = "Robin";
-			resp = get(url,
-			    // this callback is invoked AFTER the response arrives
-			    function () {
-			        
-			        var data  = this.responseText;
-			        // now do something with response
-			        addToMap(data, name);
-			    }
-			);
+		useCallback(url, name);
 	});
 }
