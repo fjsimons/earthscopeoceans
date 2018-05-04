@@ -426,73 +426,43 @@
           </style>
           
           <div class="scrollmenu">
-            <a href="#all">All</a>
-            <a href="#raffa">Raffa</a>
-            <a href="#robin">Robin</a>
-            <a href="#blank">P001</a>
-            <a href="#blank">P002</a>
-            <a href="#blank">P003</a>
-            <a href="#blank">P004</a>
-            <a href="#blank">P005</a>
-            <a href="#blank">P006</a>
-            <a href="#blank">P007</a>
-            <a href="#blank">P008</a>
-            <a href="#blank">P009</a>
-            <a href="#blank">P010</a>
-	    
+            <a href="#all:void(0)"   id="all">All</a>
+            <a href="#clear:void(0)" id="clear">Clear</a>
+            <a href="#P001:void(0)"  id="P001">P001</a>
+            <a href="#P002:void(0)"  id="P002">P002</a>
+            <a href="#P003:void(0)"  id="P003">P003</a>
+            <a href="#P004:void(0)"  id="P004">P004</a>
+            <a href="#P005:void(0)"  id="P005">P005</a>
+            <a href="#P006:void(0)"  id="P006">P006</a>
+            <a href="#P007:void(0)"  id="P007">P007</a>
+            <a href="#P008:void(0)"  id="P008">P008</a>
+            <a href="#P009:void(0)"  id="P009">P009</a>
+            <a href="#P010:void(0)"  id="P009">P010</a>
+            <a href="#P011:void(0)"  id="P009">P011</a>
+            <a href="#P012:void(0)"  id="P009">P012</a>
+            <a href="#P013:void(0)"  id="P009">P013</a>
+            <a href="#P014:void(0)"  id="P009">P014</a>
+            <a href="#P015:void(0)"  id="P009">P015</a>
+            <a href="#P016:void(0)"  id="P009">P016</a>
           </div>
           
           <!-- ###################### BEGIN FILE READER  ########################################################## -->
+          <script src="fileReader.js"></script>
+          <!-- ###################### END FILE READER  ########################################################## -->
+	            
+	  <!-- ###################### BEGIN MAPS  ########################################################## -->
+	  <div id="map"></div>
+          <style>
+	    #map
+	    {
+	    height: 400px;
+	    width: 100%;
+	    }
+          </style>
           
-          <!-- <?PHP -->
-	       
-               <!-- $file_handle = fopen("http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt", "rb"); -->
-	       
-               <!-- while (!feof($file_handle) ) { -->
-               
-               <!-- $line_of_text = fgets($file_handle); -->
-               <!-- $parts = explode('=', $line_of_text); -->
-               
-               <!-- print $parts[0] . $parts[1]. "<BR>"; -->
-               
-               <!-- } -->
-               
-               <!-- fclose($file_handle); -->
-               
-               <!-- ?> -->
-	       
-               <!-- ###################### END FILE READER  ########################################################## -->
-	       
-	       <!-- ###################### BEGIN MAPS  ########################################################## -->
-               
-               <div id="map"></div>
-               <style>
-		 #map
-		 {
-		 height: 400px;
-		 width: 100%;
-		 }
-               </style>
-               
-               <script>
-		 function initMap() {
-		 var guyot = {lat: 40.34585, lng: -74.65475};
-		 var papeete = {lat: -17.53733, lng: -149.5665};
-		 var map = new google.maps.Map(document.getElementById('map'), {
-		 zoom: 13,
-		 center: papeete
-		 });
-		 
-		 var marker = new google.maps.Marker({
-		 position: papeete,
-		 map: map
-		 });
-		 }
-               </script>
-
-               <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3QorlGGuH3JaGqJwP8vGxhJFRFnxQOp0&callback=initMap">
-               </script>
-	       <!-- ###################### END MAPS  ########################################################## -->
+          <script src="map.js"></script>
+	  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3QorlGGuH3JaGqJwP8vGxhJFRFnxQOp0&callback=initMap"></script>
+	  <!-- ###################### END MAPS  ########################################################## -->
                
                <div class="fusion-column-wrapper" style="background-color:#f4fbff;border:2px solid #ffffff;padding: 14px;background-position:center center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;">
 		 
