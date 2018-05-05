@@ -159,7 +159,10 @@ function initMap() {
 	// listen for use of scrollbar
 	// all
 	google.maps.event.addDomListener(all, 'click', function() {
-		window.alert("clicked all");
+		document.getElementById("raffa").click()
+		document.getElementById("robin").click()
+
+ 		map.setZoom(2);
 	});
 
 	// clear
