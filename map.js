@@ -60,8 +60,12 @@ function initMap() {
 		var rows = data.split('\n');
 		 for (i = 0; i < rows.length - 2; i++) {
 		    var coords = rows[i].split(/\s+/);
-		   	lat.push(coords[8]);
-		    lon.push(coords[9]);
+
+				if (!isNaN(coords[8]) && !isNaN(coords[8])) {
+					lat.push(coords[8]);
+					lon.push(coords[9]);
+				}
+
 		}
 
 		// do calculations (units: km/h)
@@ -73,10 +77,8 @@ function initMap() {
 		var velocity = distance / lat.length;
 
 		// iterate over arrays, placing markers
-
 		for (var i = 0; i < lat.length; i++) {
 			var latLng = new google.maps.LatLng(lat[i],lon[i]);
-
 
 			var marker = new google.maps.Marker({
 				position: latLng,
@@ -86,14 +88,10 @@ function initMap() {
 
 			marker.info = new google.maps.InfoWindow({
 			  content:'<b>Float Name:</b> ' + name +
-			  		   //'<BR/><b>Lat/ lng:</b> ' + ' not yet functional' +
 			  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' kilometers' +
 			  		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' kilometers' +
 			  		   '<BR/><b>Average Velocity:</b> ' + roundTwo(velocity) + ' km/h'
 			});
-
-			//popupDirections(marker, lat.length, lat);
-
 
 			google.maps.event.addListener(marker, 'click', function(event) {
 					marker.info.close();
@@ -102,17 +100,6 @@ function initMap() {
 
 			markers.push(marker);
 		}
-
-		// attempt to display lat lng as part of popup
-		// function popupDirections(marker, len, lat) {
-    //     //this function created listener listens for click on a marker
-    //     google.maps.event.addListener(marker, 'click', function () {
-		// 				marker.info.setContent("Stop coords: " + this.getPosition());
-		// 				//marker.info.close();
-    //         marker.info.open(map, this);
-		//
-    //     });
-    // }
 
 		//use exact center for panning
 		//var latCenter = 0;
@@ -142,6 +129,11 @@ function initMap() {
     		markers[i].setMap(null);
   		}
  		markers.length = 0;
+	}
+
+	//draw expected trajectory of float
+	function drawArrow() {
+
 	}
 
 	//handles asnyc use of data
