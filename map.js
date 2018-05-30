@@ -8,6 +8,7 @@ function initMap() {
 	// some default locations
 	var guyot = {lat: 40.34585, lng: -74.65475};
 	var papeete = {lat: -17.53733, lng: -149.5665};
+
 	// default map center
 	var map = new google.maps.Map(mapDiv, {
 		zoom: 13,
@@ -25,7 +26,6 @@ function initMap() {
 	// get rough distance by getting displacement between all coord elements
 	function getDistance(lat, lon) {
 		var distance = 0
-
 		for (var i = 0; i < lat.length - 2; i++) {
 			distance += getDisplacement(lat[i], lon[i], lat[i+1], lon[i+1])
 		}
@@ -33,7 +33,7 @@ function initMap() {
 	}
 
 	// use haversine formula do determine distance between lat/ lng points
-	function getDisplacement(lat1, lon1, lat2, lon2){  // generally used geo measurement function
+	function getDisplacement(lat1, lon1, lat2, lon2){
 	    var R = 6378.137; // Radius of earth in KM
 	    var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
 	    var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
@@ -53,32 +53,37 @@ function initMap() {
 	// add data to map
 	function addToMap(data, name) {
 		// store coords in parallel arrays
-		var lat = [];
-		var lon = [];
+		var dataPoints = []
 
 		// scrape data from text callback response
 		var rows = data.split('\n');
-		 for (i = 0; i < rows.length - 2; i++) {
-		    var coords = rows[i].split(/\s+/);
+		 for (i = 0; i < rows.length - 1; i++) {
+		    var elements = rows[i].split(/\s+/);
 
-				if (!isNaN(coords[8]) && !isNaN(coords[8])) {
-					lat.push(coords[8]);
-					lon.push(coords[9]);
-				}
+				// store each data point as an object
+				var dataPoint = new DataPoint(elements[0] + " " + elements[1], elements[2], elements[3],
+																			elements[4],elements[5],elements[6],elements[7], elements[8],
+																		  elements[9], elements[10], elements[11], elements[12], elements[13]);
+
+
+				dataPoints.push(dataPoint);
 
 		}
 
 		// do calculations (units: km/h)
-		var displacement = getDisplacement(lat[1], lon[1], lat[lat.length-1], lon[lon.length-1]) / 1000;
-		var distance = getDistance(lat, lon) / 1000;
+
+		var displacement = getDisplacement(dataPoints[1].stla, dataPoints[1].stlo,
+																			 dataPoints[dataPoints.length-1].stla, dataPoints[dataPoints.length-1].stlo) / 1000;
+
+		//var distance = getDistance(lat, lon) / 1000;
 
 		// this only works as long as the intervals between
 		// updates are all 1 hour, or sum to 1 hr * numUpdates
-		var velocity = distance / lat.length;
+		//var velocity = distance / lat.length;
 
 		// iterate over arrays, placing markers
-		for (var i = 0; i < lat.length; i++) {
-			var latLng = new google.maps.LatLng(lat[i],lon[i]);
+		for (var i = 0; i < dataPoints.length; i++) {
+			var latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
 
 			var marker = new google.maps.Marker({
 				position: latLng,
@@ -86,17 +91,19 @@ function initMap() {
 				clickable: true
 			});
 
-			marker.info = new google.maps.InfoWindow({
-			  content:'<b>Float Name:</b> ' + name +
-			  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' kilometers' +
-			  		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' kilometers' +
-			  		   '<BR/><b>Average Velocity:</b> ' + roundTwo(velocity) + ' km/h'
-			});
 
-			google.maps.event.addListener(marker, 'click', function(event) {
-					marker.info.close();
-    			marker.info.open(map, this);
-			});
+
+			// marker.info = new google.maps.InfoWindow({
+			//   content:'<b>Float Name:</b> ' + name +
+			//   		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' kilometers' +
+			//   		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' kilometers' +
+			//   		   '<BR/><b>Average Velocity:</b> ' + roundTwo(velocity) + ' km/h'
+			// });
+			//
+			// google.maps.event.addListener(marker, 'click', function(event) {
+			// 		marker.info.close();
+    	// 		marker.info.open(map, this);
+			// });
 
 			markers.push(marker);
 		}
@@ -113,14 +120,14 @@ function initMap() {
 		// latCenter /= (rows.length - 1);
 		// lonCenter /= (rows.length - 1);
 
-		//use aprox. center for panning (middle location)
-		latCenter = lat[Math.floor(lat.length/2)];
-		lonCenter = lon[Math.floor(lon.length/2)];
+		// use aprox. center for panning (middle location)
+		latCenter = dataPoints[Math.floor(dataPoints.length/2)].stla;
+		lonCenter = dataPoints[Math.floor(dataPoints.length/2)].stlo;
 
 		var latLng = new google.maps.LatLng(latCenter, lonCenter);
 
 		map.panTo(latLng);
-		map.setZoom(10);
+		//map.setZoom(10);
 	}
 
 	// delete all added markers
@@ -131,22 +138,21 @@ function initMap() {
  		markers.length = 0;
 	}
 
-	//draw expected trajectory of float
-	function drawArrow() {
-
-	}
 
 	//handles asnyc use of data
 	function useCallback(url, name) {
 		resp = get(url,
 				// this callback is invoked after the response arrives
 				function () {
+
 						var data  = this.responseText;
+
 						addToMap(data, name);
 				}
 		);
 
 	}
+
 
 	// listen for use of scrollbar
 	// all
@@ -164,15 +170,43 @@ function initMap() {
 
 	// raffa
 	google.maps.event.addDomListener(raffa, 'click', function() {
-		var url = "http://geoweb.princeton.edu/people/simons/SOM/RAFFA_030.txt"
-		var name = "Raffa";
+		var url = "http://geoweb.princeton.edu/people/simons/SOM/Raffa_030.txt"
+
 		useCallback(url, name);
 	});
 
 	// robin
 	google.maps.event.addDomListener(robin, 'click', function() {
-		var url = "http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt"
-		var name = "Robin";
+		var url = "http://geoweb.princeton.edu/people/simons/SOM/Robin_030.txt"
 		useCallback(url, name);
 	});
 }
+
+// create datapoint object
+function DataPoint(stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, Prange, cmdrdc, f2up, fupl) {
+
+	this.stdt = stdt;
+  this.stla = stla;
+  this.stlo = stlo;
+  this.hdop = hdop;
+	this.vdop = vdop;
+	this.Vbat = Vbat;
+	this.minV = minV;
+	this.Pint = Pint;
+	this.Pext = Pext;
+	this.Prange = Prange;
+  this.cmdrdc = cmdrdc;
+  this.f2up = f2up;
+  this.fupl = fupl;
+
+  this.getStla = function() {
+  	return this.stla
+  };
+
+	this.getStlo = function() {
+		return this.stlo;
+	};
+
+
+}
+
