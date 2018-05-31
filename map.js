@@ -76,6 +76,9 @@ function initMap() {
 
 		var distance = getDistance(dataPoints) / 1000;
 
+		var bounds = new google.maps.LatLngBounds();
+
+
 		// iterate over arrays, placing markers
 		for (var i = 0; i < dataPoints.length; i++) {
 			var latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
@@ -86,6 +89,8 @@ function initMap() {
 				clickable: true,
 				opacity: (i + 1) / dataPoints.length
 			});
+
+			bounds.extend(marker.getPosition());
 			setInfoWindow(i, marker, displacement, distance);
 
 			markers.push(marker);
@@ -96,8 +101,10 @@ function initMap() {
 		lonCenter = dataPoints[Math.floor(dataPoints.length/2)].stlo;
 
 		var latLng = new google.maps.LatLng(latCenter, lonCenter);
+
+
+		map.fitBounds(bounds);
 		map.panTo(latLng);
-		map.setZoom(20);
 	}
 
 	function setInfoWindow(i, marker, displacement, distance) {
