@@ -63,7 +63,7 @@ function initMap() {
 		    var elements = rows[i].split(/\s+/);
 
 				// store each data point as an object
-				var dataPoint = new DataPoint(elements[0] + " " + elements[1], elements[2], elements[3],
+				var dataPoint = new DataPoint(name, elements[0] + " " + elements[1], elements[2], elements[3],
 																			elements[4],elements[5],elements[6],elements[7], elements[8],
 																		  elements[9], elements[10], elements[11], elements[12], elements[13]);
 
@@ -83,10 +83,10 @@ function initMap() {
 			var marker = new google.maps.Marker({
 				position: latLng,
 				map: map,
-				clickable: true
+				clickable: true,
+				opacity: i/dataPoints.length
 			});
-
-			setInfoWindow(i, marker, name, displacement, distance);
+			setInfoWindow(i, marker, displacement, distance);
 
 			markers.push(marker);
 		}
@@ -101,7 +101,7 @@ function initMap() {
 		map.setZoom(10);
 	}
 
-	function setInfoWindow(i, marker, name, displacement, distance) {
+	function setInfoWindow(i, marker, displacement, distance) {
 		google.maps.event.addListener(marker, 'click', function(event) {
 			if (iwindows.length == 1) {
 				iwindows[0].close();
@@ -109,13 +109,13 @@ function initMap() {
 			}
 
 			var iwindow = new google.maps.InfoWindow();
-			iwindow.setContent('<b>Float Name:</b> ' + name +
+			iwindow.setContent('<b>Float Name:</b> ' + dataPoints[i].name +
 		  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' kilometers' +
 		  		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' kilometers' +
+						 '<BR/><b>Lat/ lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
 						 '<BR/><b>Date:</b> ' + dataPoints[i].stdt)
 
 			iwindow.open(map, this);
-
 			iwindows.push(iwindow);
 		});
 
@@ -136,7 +136,6 @@ function initMap() {
 				function () {
 
 						var data  = this.responseText;
-
 						addToMap(data, name);
 				}
 		);
@@ -161,19 +160,19 @@ function initMap() {
 	google.maps.event.addDomListener(raffa, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/Raffa_030.txt"
 
-		useCallback(url, name);
+		useCallback(url, "Raffa");
 	});
 
 	// robin
 	google.maps.event.addDomListener(robin, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/Robin_030.txt"
-		useCallback(url, name);
+		useCallback(url, "Robin");
 	});
 }
 
 // create datapoint object
-function DataPoint(stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, Prange, cmdrdc, f2up, fupl) {
-
+function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, Prange, cmdrdc, f2up, fupl) {
+	this.name = name;
 	this.stdt = stdt;
   this.stla = stla;
   this.stlo = stlo;
@@ -189,5 +188,3 @@ function DataPoint(stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, Prange,
   this.fupl = fupl;
 
 }
-
-
