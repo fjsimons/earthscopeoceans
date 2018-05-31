@@ -84,7 +84,7 @@ function initMap() {
 				position: latLng,
 				map: map,
 				clickable: true,
-				opacity: i/dataPoints.length
+				opacity: (i + 1) / dataPoints.length
 			});
 			setInfoWindow(i, marker, displacement, distance);
 
@@ -96,9 +96,8 @@ function initMap() {
 		lonCenter = dataPoints[Math.floor(dataPoints.length/2)].stlo;
 
 		var latLng = new google.maps.LatLng(latCenter, lonCenter);
-
 		map.panTo(latLng);
-		map.setZoom(10);
+		map.setZoom(20);
 	}
 
 	function setInfoWindow(i, marker, displacement, distance) {
@@ -108,6 +107,7 @@ function initMap() {
 				iwindows = [];
 			}
 
+			// set up info windows
 			var iwindow = new google.maps.InfoWindow();
 			iwindow.setContent('<b>Float Name:</b> ' + dataPoints[i].name +
 		  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' kilometers' +
@@ -127,6 +127,7 @@ function initMap() {
     		markers[i].setMap(null);
   		}
  		markers.length = 0;
+		dataPoints.length = 0;
 	}
 
 	//handles asnyc use of data
@@ -160,12 +161,15 @@ function initMap() {
 	google.maps.event.addDomListener(raffa, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/Raffa_030.txt"
 
+		clearMarkers();
 		useCallback(url, "Raffa");
 	});
 
 	// robin
 	google.maps.event.addDomListener(robin, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/Robin_030.txt"
+
+		clearMarkers();
 		useCallback(url, "Robin");
 	});
 }
@@ -188,3 +192,4 @@ function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, P
   this.fupl = fupl;
 
 }
+
