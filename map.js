@@ -57,6 +57,8 @@ function initMap() {
 	// add data to map
 	function addToMap(data, name) {
 
+		//getTimeElapsed();
+
 		// scrape data from text callback response
 		var rows = data.split('\n');
 		 for (i = 0; i < rows.length - 1; i++) {
@@ -71,10 +73,12 @@ function initMap() {
 		}
 
 		// do calculations (units: km/h)
-		var displacement = getDisplacement(dataPoints[1].stla, dataPoints[1].stlo,
+		var displacement = getDisplacement(dataPoints[0].stla, dataPoints[0].stlo,
 																			 dataPoints[dataPoints.length-1].stla, dataPoints[dataPoints.length-1].stlo) / 1000;
-
 		var distance = getDistance(dataPoints) / 1000;
+		var time = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
+		var velocity = (distance / time);
+
 
 		var bounds = new google.maps.LatLngBounds();
 
@@ -91,7 +95,7 @@ function initMap() {
 			});
 
 			bounds.extend(marker.getPosition());
-			setInfoWindow(i, marker, displacement, distance);
+			setInfoWindow(i, marker, displacement, distance, velocity);
 
 			markers.push(marker);
 		}
@@ -107,7 +111,7 @@ function initMap() {
 		map.panTo(latLng);
 	}
 
-	function setInfoWindow(i, marker, displacement, distance) {
+	function setInfoWindow(i, marker, displacement, distance, velocity) {
 		google.maps.event.addListener(marker, 'click', function(event) {
 			if (iwindows.length == 1) {
 				iwindows[0].close();
@@ -117,8 +121,10 @@ function initMap() {
 			// set up info windows
 			var iwindow = new google.maps.InfoWindow();
 			iwindow.setContent('<b>Float Name:</b> ' + dataPoints[i].name +
-		  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' kilometers' +
-		  		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' kilometers' +
+		  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' km' +
+		  		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' km' +
+						 '<BR/><b>Avg Velocity:</b> ' + roundTwo(velocity) + ' km/h' +
+
 						 '<BR/><b>Lat/ lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
 						 '<BR/><b>Date:</b> ' + dataPoints[i].stdt)
 
@@ -152,12 +158,12 @@ function initMap() {
 
 	// listen for use of scrollbar
 	// all
-	google.maps.event.addDomListener(all, 'click', function() {
-		document.getElementById("raffa").click()
-		document.getElementById("robin").click()
-
- 		map.setZoom(2);
-	});
+	// google.maps.event.addDomListener(all, 'click', function() {
+	// 	document.getElementById("raffa").click()
+	// 	document.getElementById("robin").click()
+	//
+ 	// 	map.setZoom(2);
+	// });
 
 	// clear
 	google.maps.event.addDomListener(clear, 'click', function() {
@@ -180,23 +186,3 @@ function initMap() {
 		useCallback(url, "Robin");
 	});
 }
-
-// create datapoint object
-function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, Prange, cmdrdc, f2up, fupl) {
-	this.name = name;
-	this.stdt = stdt;
-  this.stla = stla;
-  this.stlo = stlo;
-  this.hdop = hdop;
-	this.vdop = vdop;
-	this.Vbat = Vbat;
-	this.minV = minV;
-	this.Pint = Pint;
-	this.Pext = Pext;
-	this.Prange = Prange;
-  this.cmdrdc = cmdrdc;
-  this.f2up = f2up;
-  this.fupl = fupl;
-
-}
-
