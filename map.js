@@ -2,8 +2,12 @@ function initMap() {
 	// ID the map
 	var mapDiv = document.getElementById('map');
 
-	// keep track of markers
+	// store data points
+	var dataPoints = []
+
+	// keep track of markers and their info windows
 	var markers = [];
+	var iwindows = []
 
 	// some default locations
 	var guyot = {lat: 40.34585, lng: -74.65475};
@@ -24,10 +28,10 @@ function initMap() {
 	});
 
 	// get rough distance by getting displacement between all coord elements
-	function getDistance(lat, lon) {
+	function getDistance(dataPoints) {
 		var distance = 0
-		for (var i = 0; i < lat.length - 2; i++) {
-			distance += getDisplacement(lat[i], lon[i], lat[i+1], lon[i+1])
+		for (var i = 0; i < dataPoints.length - 2; i++) {
+			distance += getDisplacement(dataPoints[i].stla, dataPoints[i].stlo, dataPoints[i+1].stla, dataPoints[i+1].stlo)
 		}
 		return distance;
 	}
@@ -52,8 +56,6 @@ function initMap() {
 
 	// add data to map
 	function addToMap(data, name) {
-		// store coords in parallel arrays
-		var dataPoints = []
 
 		// scrape data from text callback response
 		var rows = data.split('\n');
@@ -65,21 +67,14 @@ function initMap() {
 																			elements[4],elements[5],elements[6],elements[7], elements[8],
 																		  elements[9], elements[10], elements[11], elements[12], elements[13]);
 
-
 				dataPoints.push(dataPoint);
-
 		}
 
 		// do calculations (units: km/h)
-
 		var displacement = getDisplacement(dataPoints[1].stla, dataPoints[1].stlo,
 																			 dataPoints[dataPoints.length-1].stla, dataPoints[dataPoints.length-1].stlo) / 1000;
 
-		//var distance = getDistance(lat, lon) / 1000;
-
-		// this only works as long as the intervals between
-		// updates are all 1 hour, or sum to 1 hr * numUpdates
-		//var velocity = distance / lat.length;
+		var distance = getDistance(dataPoints) / 1000;
 
 		// iterate over arrays, placing markers
 		for (var i = 0; i < dataPoints.length; i++) {
@@ -91,34 +86,10 @@ function initMap() {
 				clickable: true
 			});
 
-
-
-			// marker.info = new google.maps.InfoWindow({
-			//   content:'<b>Float Name:</b> ' + name +
-			//   		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' kilometers' +
-			//   		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' kilometers' +
-			//   		   '<BR/><b>Average Velocity:</b> ' + roundTwo(velocity) + ' km/h'
-			// });
-			//
-			// google.maps.event.addListener(marker, 'click', function(event) {
-			// 		marker.info.close();
-    	// 		marker.info.open(map, this);
-			// });
+			setInfoWindow(i, marker, name, displacement, distance);
 
 			markers.push(marker);
 		}
-
-		//use exact center for panning
-		//var latCenter = 0;
-		//var lonCenter = 0;
-
-		// for (var i = 0; i < lat.length; i ++) {
-		// 	latCenter += parseFloat(lat[i]);
-		// 	lonCenter += parseFloat(lon[i]);
-		// }
-
-		// latCenter /= (rows.length - 1);
-		// lonCenter /= (rows.length - 1);
 
 		// use aprox. center for panning (middle location)
 		latCenter = dataPoints[Math.floor(dataPoints.length/2)].stla;
@@ -127,7 +98,27 @@ function initMap() {
 		var latLng = new google.maps.LatLng(latCenter, lonCenter);
 
 		map.panTo(latLng);
-		//map.setZoom(10);
+		map.setZoom(10);
+	}
+
+	function setInfoWindow(i, marker, name, displacement, distance) {
+		google.maps.event.addListener(marker, 'click', function(event) {
+			if (iwindows.length == 1) {
+				iwindows[0].close();
+				iwindows = [];
+			}
+
+			var iwindow = new google.maps.InfoWindow();
+			iwindow.setContent('<b>Float Name:</b> ' + name +
+		  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' kilometers' +
+		  		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' kilometers' +
+						 '<BR/><b>Date:</b> ' + dataPoints[i].stdt)
+
+			iwindow.open(map, this);
+
+			iwindows.push(iwindow);
+		});
+
 	}
 
 	// delete all added markers
@@ -137,7 +128,6 @@ function initMap() {
   		}
  		markers.length = 0;
 	}
-
 
 	//handles asnyc use of data
 	function useCallback(url, name) {
@@ -152,7 +142,6 @@ function initMap() {
 		);
 
 	}
-
 
 	// listen for use of scrollbar
 	// all
@@ -199,14 +188,6 @@ function DataPoint(stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, Prange,
   this.f2up = f2up;
   this.fupl = fupl;
 
-  this.getStla = function() {
-  	return this.stla
-  };
-
-	this.getStlo = function() {
-		return this.stlo;
-	};
-
-
 }
+
 
