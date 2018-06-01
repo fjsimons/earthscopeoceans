@@ -27,7 +27,7 @@ function initMap() {
 		map: map
 	});
 
-	// get rough distance by getting displacement between all coord elements
+	// get rough distance by getting displacement between all locations
 	function getDistance(dataPoints) {
 		var distance = 0
 		for (var i = 0; i < dataPoints.length - 2; i++) {
@@ -57,8 +57,6 @@ function initMap() {
 	// add data to map
 	function addToMap(data, name) {
 
-		//getTimeElapsed();
-
 		// scrape data from text callback response
 		var rows = data.split('\n');
 		 for (i = 0; i < rows.length - 1; i++) {
@@ -79,14 +77,14 @@ function initMap() {
 		var time = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
 		var velocity = (distance / time);
 
-
+		// set up panning bounds
 		var bounds = new google.maps.LatLngBounds();
-
 
 		// iterate over arrays, placing markers
 		for (var i = 0; i < dataPoints.length; i++) {
 			var latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
 
+			// set up marker, fade on age
 			var marker = new google.maps.Marker({
 				position: latLng,
 				map: map,
@@ -94,23 +92,20 @@ function initMap() {
 				opacity: (i + 1) / dataPoints.length
 			});
 
+			// expand bounds to fit all markers
 			bounds.extend(marker.getPosition());
+
+			// create infowindow
 			setInfoWindow(i, marker, displacement, distance, velocity);
 
 			markers.push(marker);
 		}
 
-		// use aprox. center for panning (middle location)
-		latCenter = dataPoints[Math.floor(dataPoints.length/2)].stla;
-		lonCenter = dataPoints[Math.floor(dataPoints.length/2)].stlo;
-
-		var latLng = new google.maps.LatLng(latCenter, lonCenter);
-
-
+		// pan to bounds
 		map.fitBounds(bounds);
-		map.panTo(latLng);
 	}
 
+	// for dynamic info windows
 	function setInfoWindow(i, marker, displacement, distance, velocity) {
 		google.maps.event.addListener(marker, 'click', function(event) {
 			if (iwindows.length == 1) {
@@ -118,7 +113,7 @@ function initMap() {
 				iwindows = [];
 			}
 
-			// set up info windows
+			// set up window
 			var iwindow = new google.maps.InfoWindow();
 			iwindow.setContent('<b>Float Name:</b> ' + dataPoints[i].name +
 		  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' km' +
@@ -157,6 +152,7 @@ function initMap() {
 	}
 
 	// listen for use of scrollbar
+
 	// all
 	// google.maps.event.addDomListener(all, 'click', function() {
 	// 	document.getElementById("raffa").click()
@@ -185,4 +181,5 @@ function initMap() {
 		clearMarkers();
 		useCallback(url, "Robin");
 	});
+
 }
