@@ -1,0 +1,24 @@
+#!/bin/csh
+#
+# A shell script that produces lines for map.js corresponding to a set of numbered instruments
+#
+# Written by fjsimons-at-alum.mit.edu and jonahnrubin-at-gmail.com on June 18 2018
+
+# The list of numbers
+set indices = (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16)
+
+foreach index ($indices[*])
+  # The instrument name
+  set fname = `printf "P%3.3i\n" $index`
+
+  # The lines to be added to the map.js script
+  echo	"google.maps.event.addDomListener($fname, 'click', function() {"                >>! addtomapdotjs
+  echo  var url = \"http://geoweb.princeton.edu/people/simons/SOM/"$fname"_030.txt\"    >>  addtomapdotjs
+  echo	"    clearMarkers();"                                                           >>  addtomapdotjs
+  echo	'    useCallback(url,"'$fname'");'                                              >>  addtomapdotjs
+  echo  "    });"                                                                       >>  addtomapdotjs
+  echo  " "                                                                             >>  addtomapdotjs
+end
+
+
+
