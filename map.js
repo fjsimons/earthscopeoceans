@@ -166,14 +166,6 @@ function initMap() {
 		clearMarkers();
 	});
 
-	// raffa
-	google.maps.event.addDomListener(raffa, 'click', function() {
-		var url = "http://geoweb.princeton.edu/people/simons/SOM/Raffa_030.txt"
-
-		clearMarkers();
-		useCallback(url, "Raffa");
-	});
-
 	// robin
 	google.maps.event.addDomListener(robin, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/Robin_030.txt"
