@@ -61,18 +61,18 @@ function initMap() {
 		var rows = data.split('\n');
 		 for (i = 0; i < rows.length - 1; i++) {
 		    var elements = rows[i].split(/\s+/);
-
-				// store each data point as an object
-				var dataPoint = new DataPoint(name, elements[0] + " " + elements[1], elements[2], elements[3],
-																			elements[4],elements[5],elements[6],elements[7], elements[8],
-																		  elements[9], elements[10], elements[11], elements[12], elements[13]);
-
-				dataPoints.push(dataPoint);
+    	            // store each data point as an object
+		    var dataPoint = new DataPoint(name, elements[0] + " " + elements[1], 
+                                                        elements[2], elements[3],elements[4],
+                                                        elements[5], elements[6],elements[7], 
+                                                        elements[8], elements[9], elements[10], 
+                                                        elements[11], elements[12], elements[13]);
+     		     dataPoints.push(dataPoint);
 		}
 
 		// do calculations (units: km/h)
 		var displacement = getDisplacement(dataPoints[0].stla, dataPoints[0].stlo,
-																			 dataPoints[dataPoints.length-1].stla, dataPoints[dataPoints.length-1].stlo) / 1000;
+  			  		           dataPoints[dataPoints.length-1].stla, dataPoints[dataPoints.length-1].stlo) / 1000;
 		var distance = getDistance(dataPoints) / 1000;
 		var time = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
 		var velocity = (distance / time);
@@ -115,14 +115,21 @@ function initMap() {
 
 			// set up window
 			var iwindow = new google.maps.InfoWindow();
-			iwindow.setContent('<b>Float Name:</b> ' + dataPoints[i].name +
-		  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' km' +
-		  		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' km' +
-						 '<BR/><b>Avg Velocity:</b> ' + roundTwo(velocity) + ' km/h' +
-
-						 '<BR/><b>Lat/ lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
-						 '<BR/><b>Date:</b> ' + dataPoints[i].stdt)
-
+			iwindow.setContent('<b>Float Name:</b> '          + dataPoints[i].name +
+				       '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
+				       '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
+    				       '<br/><b>GPS Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
+    				       '<br/><b>GPS Hdop/Vdop:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
+				       '<br/><b>Battery:</b> '            + dataPoints[i].Vbat + ' mV' +
+				       '<br/><b>Internal Pressure:</b> '  + dataPoints[i].Pint + ' Pa' +
+				       '<br/><b>External Pressure:</b> '  + dataPoints[i].Pext + ' mbar' +
+                                       '<br/> ' +
+     		  		       '<br/><b>Leg Length:</b> '         + roundTwo(distance) + ' km' +
+		  		       '<br/><b>Leg Speed:</b> '          + roundTwo(displacement) + ' km/h' +
+     		  		       '<br/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' km' +
+				       '<br/><b>Average Speed:</b> '      + roundTwo(velocity) + ' km/h' +
+     		  		       '<br/><b>Net Displacement:</b> '   + roundTwo(distance) + ' km'
+                                       )
 			iwindow.open(map, this);
 			iwindows.push(iwindow);
 		});
@@ -143,13 +150,14 @@ function initMap() {
 		resp = get(url,
 				// this callback is invoked after the response arrives
 				function () {
-
 						var data  = this.responseText;
 						addToMap(data, name);
 				}
 		);
 
 	}
+
+        //################################################################################//
 
 	// listen for use of scrollbar
 
