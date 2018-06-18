@@ -1,28 +1,26 @@
 // create datapoint object
 function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, Prange, cmdrdc, f2up, fupl) {
 	this.name = name;
-	this.stdt = toDate(stdt);
-  this.stla = stla;
-  this.stlo = stlo;
-  this.hdop = hdop;
+	this.stdt = stdt;
+	this.loct = toDate(stdt);
+        this.stla = stla;
+        this.stlo = stlo;
+        this.hdop = hdop;
 	this.vdop = vdop;
 	this.Vbat = Vbat;
 	this.minV = minV;
 	this.Pint = Pint;
 	this.Pext = Pext;
 	this.Prange = Prange;
-  this.cmdrdc = cmdrdc;
-  this.f2up = f2up;
-  this.fupl = fupl;
-
+        this.cmdrdc = cmdrdc;
+        this.f2up = f2up;
+        this.fupl = fupl;
 }
 
-//10-Apr-2018 03:25:54
-
-// convert to date object
+// INPUT is in UTC, convert to browser time
 function toDate(stdt) {
-  const MonthConversions = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
-                            "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12};
+  const MonthConversions = {"Jan": 0, "Feb": 1, "Mar": 2, "Apr": 3, "May": 4, "Jun": 5,
+                            "Jul": 6, "Aug": 7, "Sep": 8, "Oct": 9, "Nov": 10, "Dec": 11};
 
   day = parseInt(stdt.substring(0, 2));
   month = MonthConversions[stdt.substring(3, 6)];
@@ -38,7 +36,6 @@ function toDate(stdt) {
 
 
 }
-
 
 // get time elapsed between datapoints in hours
 function getTimeElapsed (datapt1, datapt2) {
