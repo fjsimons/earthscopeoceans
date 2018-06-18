@@ -2,12 +2,17 @@ function initMap() {
 	// ID the map
 	var mapDiv = document.getElementById('map');
 
-	// keep track of markers
+	// store data points
+	var dataPoints = []
+
+	// keep track of markers and their info windows
 	var markers = [];
+	var iwindows = []
 
 	// some default locations
 	var guyot = {lat: 40.34585, lng: -74.65475};
 	var papeete = {lat: -17.53733, lng: -149.5665};
+
 	// default map center
 	var map = new google.maps.Map(mapDiv, {
 		zoom: 13,
@@ -22,18 +27,17 @@ function initMap() {
 		map: map
 	});
 
-	// get rough distance by getting displacement between all coord elements
-	function getDistance(lat, lon) {
+	// get rough distance by getting displacement between all locations
+	function getDistance(dataPoints) {
 		var distance = 0
-
-		for (var i = 0; i < lat.length - 2; i++) {
-			distance += getDisplacement(lat[i], lon[i], lat[i+1], lon[i+1])
+		for (var i = 0; i < dataPoints.length - 2; i++) {
+			distance += getDisplacement(dataPoints[i].stla, dataPoints[i].stlo, dataPoints[i+1].stla, dataPoints[i+1].stlo)
 		}
 		return distance;
 	}
 
 	// use haversine formula do determine distance between lat/ lng points
-	function getDisplacement(lat1, lon1, lat2, lon2){  // generally used geo measurement function
+	function getDisplacement(lat1, lon1, lat2, lon2){
 	    var R = 6378.137; // Radius of earth in KM
 	    var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
 	    var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
@@ -52,88 +56,77 @@ function initMap() {
 
 	// add data to map
 	function addToMap(data, name) {
-		// store coords in parallel arrays
-		var lat = [];
-		var lon = [];
 
 		// scrape data from text callback response
 		var rows = data.split('\n');
-		 for (i = 0; i < rows.length - 2; i++) {
-		    var coords = rows[i].split(/\s+/);
-		   	lat.push(coords[8]);
-		    lon.push(coords[9]);
+		 for (i = 0; i < rows.length - 1; i++) {
+		    var elements = rows[i].split(/\s+/);
+
+				// store each data point as an object
+				var dataPoint = new DataPoint(name, elements[0] + " " + elements[1], elements[2], elements[3],
+																			elements[4],elements[5],elements[6],elements[7], elements[8],
+																		  elements[9], elements[10], elements[11], elements[12], elements[13]);
+
+				dataPoints.push(dataPoint);
 		}
 
 		// do calculations (units: km/h)
-		var displacement = getDisplacement(lat[1], lon[1], lat[lat.length-1], lon[lon.length-1]) / 1000;
-		var distance = getDistance(lat, lon) / 1000;
+		var displacement = getDisplacement(dataPoints[0].stla, dataPoints[0].stlo,
+																			 dataPoints[dataPoints.length-1].stla, dataPoints[dataPoints.length-1].stlo) / 1000;
+		var distance = getDistance(dataPoints) / 1000;
+		var time = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
+		var velocity = (distance / time);
 
-		// this only works as long as the intervals between
-		// updates are all 1 hour, or sum to 1 hr * numUpdates
-		var velocity = distance / lat.length;
+		// set up panning bounds
+		var bounds = new google.maps.LatLngBounds();
 
 		// iterate over arrays, placing markers
+		for (var i = 0; i < dataPoints.length; i++) {
+			var latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
 
-		for (var i = 0; i < lat.length; i++) {
-			var latLng = new google.maps.LatLng(lat[i],lon[i]);
-
-
+			// set up marker, fade on age
 			var marker = new google.maps.Marker({
 				position: latLng,
 				map: map,
-				clickable: true
+				clickable: true,
+				opacity: (i + 1) / dataPoints.length
 			});
 
-			marker.info = new google.maps.InfoWindow({
-			  content:'<b>Float Name:</b> ' + name +
-			  		   //'<BR/><b>Lat/ lng:</b> ' + ' not yet functional' +
-			  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' kilometers' +
-			  		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' kilometers' +
-			  		   '<BR/><b>Average Velocity:</b> ' + roundTwo(velocity) + ' km/h'
-			});
+			// expand bounds to fit all markers
+			bounds.extend(marker.getPosition());
 
-			//popupDirections(marker, lat.length, lat);
-
-
-			google.maps.event.addListener(marker, 'click', function(event) {
-					marker.info.close();
-    			marker.info.open(map, this);
-			});
+			// create infowindow
+			setInfoWindow(i, marker, displacement, distance, velocity);
 
 			markers.push(marker);
 		}
 
-		// attempt to display lat lng as part of popup
-		// function popupDirections(marker, len, lat) {
-    //     //this function created listener listens for click on a marker
-    //     google.maps.event.addListener(marker, 'click', function () {
-		// 				marker.info.setContent("Stop coords: " + this.getPosition());
-		// 				//marker.info.close();
-    //         marker.info.open(map, this);
-		//
-    //     });
-    // }
+		// pan to bounds
+		map.fitBounds(bounds);
+	}
 
-		//use exact center for panning
-		//var latCenter = 0;
-		//var lonCenter = 0;
+	// for dynamic info windows
+	function setInfoWindow(i, marker, displacement, distance, velocity) {
+		google.maps.event.addListener(marker, 'click', function(event) {
+			if (iwindows.length == 1) {
+				iwindows[0].close();
+				iwindows = [];
+			}
 
-		// for (var i = 0; i < lat.length; i ++) {
-		// 	latCenter += parseFloat(lat[i]);
-		// 	lonCenter += parseFloat(lon[i]);
-		// }
+			// set up window
+			var iwindow = new google.maps.InfoWindow();
+			iwindow.setContent('<b>Float Name:</b> ' + dataPoints[i].name +
+		  		   '<BR/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' km' +
+		  		   '<BR/><b>Net Displacement:</b> ' + roundTwo(displacement) + ' km' +
+						 '<BR/><b>Avg Velocity:</b> ' + roundTwo(velocity) + ' km/h' +
 
-		// latCenter /= (rows.length - 1);
-		// lonCenter /= (rows.length - 1);
+						 '<BR/><b>Lat/ lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
+						 '<BR/><b>Date:</b> ' + dataPoints[i].stdt)
 
-		//use aprox. center for panning (middle location)
-		latCenter = lat[Math.floor(lat.length/2)];
-		lonCenter = lon[Math.floor(lon.length/2)];
+			iwindow.open(map, this);
+			iwindows.push(iwindow);
+		});
 
-		var latLng = new google.maps.LatLng(latCenter, lonCenter);
-
-		map.panTo(latLng);
-		map.setZoom(10);
 	}
 
 	// delete all added markers
@@ -142,6 +135,7 @@ function initMap() {
     		markers[i].setMap(null);
   		}
  		markers.length = 0;
+		dataPoints.length = 0;
 	}
 
 	//handles asnyc use of data
@@ -149,6 +143,7 @@ function initMap() {
 		resp = get(url,
 				// this callback is invoked after the response arrives
 				function () {
+
 						var data  = this.responseText;
 						addToMap(data, name);
 				}
@@ -157,13 +152,14 @@ function initMap() {
 	}
 
 	// listen for use of scrollbar
-	// all
-	google.maps.event.addDomListener(all, 'click', function() {
-		document.getElementById("raffa").click()
-		document.getElementById("robin").click()
 
- 		map.setZoom(2);
-	});
+	// all
+	// google.maps.event.addDomListener(all, 'click', function() {
+	// 	document.getElementById("raffa").click()
+	// 	document.getElementById("robin").click()
+	//
+ 	// 	map.setZoom(2);
+	// });
 
 	// clear
 	google.maps.event.addDomListener(clear, 'click', function() {
@@ -172,15 +168,18 @@ function initMap() {
 
 	// raffa
 	google.maps.event.addDomListener(raffa, 'click', function() {
-		var url = "http://geoweb.princeton.edu/people/simons/SOM/RAFFA_030.txt"
-		var name = "Raffa";
-		useCallback(url, name);
+		var url = "http://geoweb.princeton.edu/people/simons/SOM/Raffa_030.txt"
+
+		clearMarkers();
+		useCallback(url, "Raffa");
 	});
 
 	// robin
 	google.maps.event.addDomListener(robin, 'click', function() {
-		var url = "http://geoweb.princeton.edu/people/simons/SOM/ROBIN_030.txt"
-		var name = "Robin";
-		useCallback(url, name);
+		var url = "http://geoweb.princeton.edu/people/simons/SOM/Robin_030.txt"
+
+		clearMarkers();
+		useCallback(url, "Robin");
 	});
+
 }
