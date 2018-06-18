@@ -155,8 +155,7 @@ function initMap() {
 
 	// all
 	// google.maps.event.addDomListener(all, 'click', function() {
-	// 	document.getElementById("raffa").click()
-	// 	document.getElementById("robin").click()
+	// 	document.getElementById("P001").click()
 	//
  	// 	map.setZoom(2);
 	// });
