@@ -42,9 +42,15 @@ function initMap() {
 
 	// add data to map
 	function addToMap(data, name) {
+		var empty = new Boolean(false);
 
 		// scrape data from text callback response
 		var rows = data.split('\n');
+		if (rows.length <= 1) {
+			empty = new Boolean(true);
+		}
+
+		if (empty == false) {
 		 for (i = 0; i < rows.length - 1; i++) {
 			  var corrupted = new Boolean(false);
 		    var elements = rows[i].split(/\s+/);
@@ -126,10 +132,12 @@ function initMap() {
 				            totalTime, legLength, legSpeed, legTime);
 
 			markers.push(marker);
+
 		}
 
 		// pan to bounds
 		map.fitBounds(bounds);
+		}
 	}
 
 	// for dynamic info windows
