@@ -78,10 +78,6 @@ function initMap() {
      		     dataPoints.push(dataPoint);
 		}
 
-		var legLength;
-		var legSpeed;
-		var legTime;
-
 		var netDisplacement;
 		var totalDistance;
 		var totalTime;
@@ -91,14 +87,14 @@ function initMap() {
 			// do calculations (units: km/h)
 			netDisplacement = getDisplacement(dataPoints[0].stla, dataPoints[0].stlo,
 	  			  		                     dataPoints[dataPoints.length-1].stla, dataPoints[dataPoints.length-1].stlo) / 1000;
-			distance = getDistance(dataPoints) / 1000;
+			totalDistance = getDistance(dataPoints) / 1000;
 			totalTime = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
 
-			avgVelocity = (netDisplacement / totalTime);
+			avgVelocity = (totalDistance / totalTime);
 
 		} else {
 			netDisplacement = 0;
-			distance = 0;
+			totalDistance = 0
 			totalTime = 0;
 			avgVelocty = 0;
 
@@ -122,12 +118,24 @@ function initMap() {
 			// expand bounds to fit all markers
 			bounds.extend(marker.getPosition());
 
+			var legLength;
+			var legSpeed;
+			var legTime;
+
 			// create infowindow
 			if (i == 0) {
-
+				legLength = 0;
+				legSpeed = 0;
+				legTime = 0;
+			} else {
+				legLength = getDisplacement(dataPoints[i-1].stla, dataPoints[i-1].stlo,
+																		dataPoints[i].stla, dataPoints[i].stlo) / 1000;
+				legTime = getTimeElapsed(dataPoints[i-1], dataPoints[i]);
+				legSpeed = legLength / legTime;
 			}
 
-			setInfoWindow(i, marker, netDisplacement, distance, avgVelocity, totalTime);
+			setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
+				            totalTime, legLength, legSpeed, legTime);
 
 			markers.push(marker);
 		}
@@ -137,7 +145,9 @@ function initMap() {
 	}
 
 	// for dynamic info windows
-	function setInfoWindow(i, marker, netDisplacement, distance, avgVelocity, totalTime) {
+	function setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
+								                     totalTime, legLength, legSpeed, legTime) {
+
 		google.maps.event.addListener(marker, 'click', function(event) {
 			if (iwindows.length == 1) {
 				iwindows[0].close();
@@ -155,9 +165,12 @@ function initMap() {
 				       '<br/><b>Internal Pressure:</b> '  + dataPoints[i].Pint + ' Pa' +
 				       '<br/><b>External Pressure:</b> '  + dataPoints[i].Pext + ' mbar' +
                '<br/> ' +
-     		  		 '<br/><b>Leg Length:</b> '         + roundTwo(distance) + ' km' +
+     		  		 '<br/><b>Leg Length:</b> '         + roundTwo(legLength) + ' km' +
+							 '<br/><b>Leg Time:</b> '           + roundTwo(legTime) + ' h' +
+							 '<br/><b>Leg Speed:</b> '          + roundTwo(legSpeed) + ' km/h' +
+
 		  		     '<br/><b>Total Time:</b> '         + roundTwo(totalTime) + ' h' +
-     		  		 '<br/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' km' +
+     		  		 '<br/><b>Distance Travelled:</b> ' + roundTwo(totalDistance) + ' km' +
 				       '<br/><b>Average Speed:</b> '      + roundTwo(avgVelocity) + ' km/h' +
      		  		 '<br/><b>Net Displacement:</b> '   + roundTwo(netDisplacement) + ' km'
                                        )
