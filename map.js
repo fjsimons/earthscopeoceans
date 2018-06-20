@@ -1,3 +1,11 @@
+/**
+	Map class
+
+	@Author Jonah Rubin
+	5/31/18
+*/
+
+
 function initMap() {
 	// ID the map
 	var mapDiv = document.getElementById('map');
@@ -70,12 +78,37 @@ function initMap() {
      		     dataPoints.push(dataPoint);
 		}
 
-		// do calculations (units: km/h)
-		var displacement = getDisplacement(dataPoints[0].stla, dataPoints[0].stlo,
-  			  		           dataPoints[dataPoints.length-1].stla, dataPoints[dataPoints.length-1].stlo) / 1000;
-		var distance = getDistance(dataPoints) / 1000;
-		var time = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
-		var velocity = (distance / time);
+		var legLength;
+		var legSpeed;
+		var legTime;
+
+		var netDisplacement;
+		var totalDistance;
+		var totalTime;
+		var avgVelocity;
+
+
+		var distance;
+		var time;
+		var velocity;
+
+		if (dataPoints.length > 1) {
+			// do calculations (units: km/h)
+			netDisplacement = getDisplacement(dataPoints[0].stla, dataPoints[0].stlo,
+	  			  		                     dataPoints[dataPoints.length-1].stla, dataPoints[dataPoints.length-1].stlo) / 1000;
+			distance = getDistance(dataPoints) / 1000;
+			totalTime = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
+			alert(totalTime);
+
+			avgVelocity = (netDisplacement / totalTime);
+
+		} else {
+			netDisplacement = 0;
+			distance = 0;
+			totalTime = 0;
+			av = 0;
+
+		}
 
 		// set up panning bounds
 		var bounds = new google.maps.LatLngBounds();
@@ -96,7 +129,11 @@ function initMap() {
 			bounds.extend(marker.getPosition());
 
 			// create infowindow
-			setInfoWindow(i, marker, displacement, distance, velocity);
+			if (i == 0) {
+
+			}
+
+			setInfoWindow(i, marker, netDisplacement, distance, avgVelocity, totalTime);
 
 			markers.push(marker);
 		}
@@ -106,7 +143,7 @@ function initMap() {
 	}
 
 	// for dynamic info windows
-	function setInfoWindow(i, marker, displacement, distance, velocity) {
+	function setInfoWindow(i, marker, netDisplacement, distance, avgVelocity, totalTime) {
 		google.maps.event.addListener(marker, 'click', function(event) {
 			if (iwindows.length == 1) {
 				iwindows[0].close();
@@ -115,20 +152,20 @@ function initMap() {
 
 			// set up window
 			var iwindow = new google.maps.InfoWindow();
-			iwindow.setContent('<b>Float Name:</b> '          + dataPoints[i].name +
+			iwindow.setContent('<b>Float Name:</b> '    + dataPoints[i].name +
 				       '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
 				       '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
-    				       '<br/><b>GPS Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
-    				       '<br/><b>GPS Hdop/Vdop:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
+    				   '<br/><b>GPS Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
+    				   '<br/><b>GPS Hdop/Vdop:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
 				       '<br/><b>Battery:</b> '            + dataPoints[i].Vbat + ' mV' +
 				       '<br/><b>Internal Pressure:</b> '  + dataPoints[i].Pint + ' Pa' +
 				       '<br/><b>External Pressure:</b> '  + dataPoints[i].Pext + ' mbar' +
-                                       '<br/> ' +
-     		  		       '<br/><b>Leg Length:</b> '         + roundTwo(distance) + ' km' +
-		  		       '<br/><b>Leg Speed:</b> '          + roundTwo(displacement) + ' km/h' +
-     		  		       '<br/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' km' +
-				       '<br/><b>Average Speed:</b> '      + roundTwo(velocity) + ' km/h' +
-     		  		       '<br/><b>Net Displacement:</b> '   + roundTwo(distance) + ' km'
+               '<br/> ' +
+     		  		 '<br/><b>Leg Length:</b> '         + roundTwo(distance) + ' km' +
+		  		     '<br/><b>Total Time:</b> '         + roundTwo(totalTime) + ' h' +
+     		  		 '<br/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' km' +
+				       '<br/><b>Average Speed:</b> '      + roundTwo(avgVelocity) + ' km/h' +
+     		  		 '<br/><b>Net Displacement:</b> '   + roundTwo(netDisplacement) + ' km'
                                        )
 			iwindow.open(map, this);
 			iwindows.push(iwindow);

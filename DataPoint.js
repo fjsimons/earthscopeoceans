@@ -1,7 +1,7 @@
 /**
 	DataPoint object class
 
-	@Author Jonah Rubin 
+	@Author Jonah Rubin
 	5/31/18
 */
 
@@ -48,5 +48,6 @@ function toLocDate(stdt) {
 
 // get time elapsed between datapoints in hours
 function getTimeElapsed (datapt1, datapt2) {
-  return (datapt2.stdt - datapt1.stdt) / (1000 * 60 * 60);
+	alert(datapt2.loct.getTime());
+  return (datapt2.loct.getTime() - datapt1.loct.getTime()) / (1000 * 60 * 60);
 }
