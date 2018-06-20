@@ -35,16 +35,6 @@ function initMap() {
 		map: map
 	});
 
-	// get rough distance by getting displacement between all locations
-	function getDistance(dataPoints) {
-		var distance = 0
-		for (var i = 0; i < dataPoints.length - 2; i++) {
-			distance += getDisplacement(dataPoints[i].stla, dataPoints[i].stlo, dataPoints[i+1].stla, dataPoints[i+1].stlo)
-		}
-		return distance;
-	}
-
-
 	// for rounding to two decimal places
 	function roundTwo(num) {
 		return parseFloat(num).toFixed(2);
@@ -56,14 +46,24 @@ function initMap() {
 		// scrape data from text callback response
 		var rows = data.split('\n');
 		 for (i = 0; i < rows.length - 1; i++) {
+			  var corrupted = new Boolean(false);
 		    var elements = rows[i].split(/\s+/);
-    	            // store each data point as an object
-		    var dataPoint = new DataPoint(name, elements[0] + " " + elements[1],
+
+				 for (var j = 2; j < elements.length; j++) {
+					if (isNaN(elements[j])) {
+						corrupted = new Boolean(true);
+					}
+				 }
+
+				// store each data point as an object
+				if (corrupted == false) {
+		    	var dataPoint = new DataPoint(name, elements[0] + " " + elements[1],
                                                         elements[2], elements[3],elements[4],
                                                         elements[5], elements[6],elements[7],
                                                         elements[8], elements[9], elements[10],
                                                         elements[11], elements[12], elements[13]);
-     		     dataPoints.push(dataPoint);
+     			dataPoints.push(dataPoint);
+			}
 		}
 
 		var netDisplacement;
