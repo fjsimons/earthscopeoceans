@@ -84,7 +84,11 @@ function initMap() {
 			totalDistance = getDistance(dataPoints) / 1000;
 			totalTime = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
 
-			avgVelocity = (totalDistance / totalTime);
+			if (totalTime == 0) {
+				avgVelocty = 0
+			} else {
+				avgVelocity = (totalDistance / totalTime);
+			}
 
 		} else {
 			netDisplacement = 0;
@@ -125,7 +129,13 @@ function initMap() {
 				legLength = getDisplacement(dataPoints[i-1].stla, dataPoints[i-1].stlo,
 																		dataPoints[i].stla, dataPoints[i].stlo) / 1000;
 				legTime = getTimeElapsed(dataPoints[i-1], dataPoints[i]);
-				legSpeed = legLength / legTime;
+
+				alert("here");
+				if (legTime == 0) {
+					legSpeed = 0;
+				} else {
+					legSpeed = legLength / legTime;
+				}
 			}
 
 			setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
