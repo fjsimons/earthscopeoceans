@@ -48,6 +48,5 @@ function toLocDate(stdt) {
 
 // get time elapsed between datapoints in hours
 function getTimeElapsed (datapt1, datapt2) {
-	alert(datapt2.loct.getTime());
   return (datapt2.loct.getTime() - datapt1.loct.getTime()) / (1000 * 60 * 60);
 }

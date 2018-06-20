@@ -87,18 +87,12 @@ function initMap() {
 		var totalTime;
 		var avgVelocity;
 
-
-		var distance;
-		var time;
-		var velocity;
-
 		if (dataPoints.length > 1) {
 			// do calculations (units: km/h)
 			netDisplacement = getDisplacement(dataPoints[0].stla, dataPoints[0].stlo,
 	  			  		                     dataPoints[dataPoints.length-1].stla, dataPoints[dataPoints.length-1].stlo) / 1000;
 			distance = getDistance(dataPoints) / 1000;
 			totalTime = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
-			alert(totalTime);
 
 			avgVelocity = (netDisplacement / totalTime);
 
@@ -106,7 +100,7 @@ function initMap() {
 			netDisplacement = 0;
 			distance = 0;
 			totalTime = 0;
-			av = 0;
+			avgVelocty = 0;
 
 		}
 
