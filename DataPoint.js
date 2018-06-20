@@ -50,3 +50,26 @@ function toLocDate(stdt) {
 function getTimeElapsed (datapt1, datapt2) {
   return (datapt2.loct.getTime() - datapt1.loct.getTime()) / (1000 * 60 * 60);
 }
+
+// use haversine formula do determine distance between lat/ lng points
+// src: https://www.movable-type.co.uk/scripts/latlong.html
+function getDisplacement(lat1, lon1, lat2, lon2){
+		var R = 6378.137; // Radius of earth in KM
+		var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
+		var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
+		var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+		Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+		Math.sin(dLon/2) * Math.sin(dLon/2);
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		var d = R * c;
+		return d * 1000; // meters
+}
+
+// get rough distance by getting displacement between all locations
+function getDistance(dataPoints) {
+	var distance = 0
+	for (var i = 0; i < dataPoints.length - 2; i++) {
+		distance += getDisplacement(dataPoints[i].stla, dataPoints[i].stlo, dataPoints[i+1].stla, dataPoints[i+1].stlo)
+	}
+	return distance;
+}
