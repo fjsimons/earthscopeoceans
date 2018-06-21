@@ -1,3 +1,10 @@
+/**
+	Map class
+
+	@Author Jonah Rubin
+	4/1/18
+*/
+
 function initMap() {
 	// ID the map
 	var mapDiv = document.getElementById('map');
@@ -27,28 +34,6 @@ function initMap() {
 		map: map
 	});
 
-	// get rough distance by getting displacement between all locations
-	function getDistance(dataPoints) {
-		var distance = 0
-		for (var i = 0; i < dataPoints.length - 2; i++) {
-			distance += getDisplacement(dataPoints[i].stla, dataPoints[i].stlo, dataPoints[i+1].stla, dataPoints[i+1].stlo)
-		}
-		return distance;
-	}
-
-	// use haversine formula do determine distance between lat/ lng points
-	function getDisplacement(lat1, lon1, lat2, lon2){
-	    var R = 6378.137; // Radius of earth in KM
-	    var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
-	    var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
-	    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-	    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-	    Math.sin(dLon/2) * Math.sin(dLon/2);
-	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-	    var d = R * c;
-	    return d * 1000; // meters
-	}
-
 	// for rounding to two decimal places
 	function roundTwo(num) {
 		return parseFloat(num).toFixed(2);
@@ -56,26 +41,61 @@ function initMap() {
 
 	// add data to map
 	function addToMap(data, name) {
+		var empty = new Boolean(false);
 
 		// scrape data from text callback response
 		var rows = data.split('\n');
-		 for (i = 0; i < rows.length - 1; i++) {
-		    var elements = rows[i].split(/\s+/);
-    	            // store each data point as an object
-		    var dataPoint = new DataPoint(name, elements[0] + " " + elements[1], 
-                                                        elements[2], elements[3],elements[4],
-                                                        elements[5], elements[6],elements[7], 
-                                                        elements[8], elements[9], elements[10], 
-                                                        elements[11], elements[12], elements[13]);
-     		     dataPoints.push(dataPoint);
+		if (rows.length <= 1) {
+			empty = new Boolean(true);
 		}
 
-		// do calculations (units: km/h)
-		var displacement = getDisplacement(dataPoints[0].stla, dataPoints[0].stlo,
-  			  		           dataPoints[dataPoints.length-1].stla, dataPoints[dataPoints.length-1].stlo) / 1000;
-		var distance = getDistance(dataPoints) / 1000;
-		var time = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
-		var velocity = (distance / time);
+		if (empty == false) {
+		 for (i = 0; i < rows.length - 1; i++) {
+			  var corrupted = new Boolean(false);
+		    var elements = rows[i].split(/\s+/);
+
+				 for (var j = 2; j < elements.length; j++) {
+					if (isNaN(elements[j])) {
+						corrupted = new Boolean(true);
+					}
+				 }
+
+				// store each data point as an object
+				if (corrupted == false) {
+		    	var dataPoint = new DataPoint(name, elements[0] + " " + elements[1],
+                                                        elements[2], elements[3],elements[4],
+                                                        elements[5], elements[6],elements[7],
+                                                        elements[8], elements[9], elements[10],
+                                                        elements[11], elements[12], elements[13]);
+     			dataPoints.push(dataPoint);
+			}
+		}
+
+		var netDisplacement;
+		var totalDistance;
+		var totalTime;
+		var avgVelocity;
+
+		if (dataPoints.length > 1) {
+			// do calculations (units: km/h)
+
+			netDisplacement = getDisplacement(dataPoints[0], dataPoints[dataPoints.length-1])/1000;
+
+			totalDistance = getDistance(dataPoints) / 1000;
+			totalTime = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
+
+			if (totalTime == 0) {
+				avgVelocty = 0
+			} else {
+				avgVelocity = (totalDistance / totalTime);
+			}
+
+		} else {
+			netDisplacement = 0;
+			totalDistance = 0
+			totalTime = 0;
+			avgVelocity = 0;
+		}
 
 		// set up panning bounds
 		var bounds = new google.maps.LatLngBounds();
@@ -95,18 +115,43 @@ function initMap() {
 			// expand bounds to fit all markers
 			bounds.extend(marker.getPosition());
 
+			var legLength;
+			var legSpeed;
+			var legTime;
+
 			// create infowindow
-			setInfoWindow(i, marker, displacement, distance, velocity);
+			if (i == 0) {
+				legLength = 0;
+				legSpeed = 0;
+				legTime = 0;
+			} else {
+
+				legLength = getDisplacement(dataPoints[i-1], dataPoints[i]) / 1000;
+				legTime = getTimeElapsed(dataPoints[i-1], dataPoints[i]);
+
+				if (legTime == 0) {
+					legSpeed = 0;
+				} else {
+					legSpeed = legLength / legTime;
+				}
+			}
+
+			setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
+				            totalTime, legLength, legSpeed, legTime);
 
 			markers.push(marker);
+
 		}
 
 		// pan to bounds
 		map.fitBounds(bounds);
+		}
 	}
 
 	// for dynamic info windows
-	function setInfoWindow(i, marker, displacement, distance, velocity) {
+	function setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
+								                     totalTime, legLength, legSpeed, legTime) {
+
 		google.maps.event.addListener(marker, 'click', function(event) {
 			if (iwindows.length == 1) {
 				iwindows[0].close();
@@ -115,20 +160,23 @@ function initMap() {
 
 			// set up window
 			var iwindow = new google.maps.InfoWindow();
-			iwindow.setContent('<b>Float Name:</b> '          + dataPoints[i].name +
+			iwindow.setContent('<b>Float Name:</b> '    + dataPoints[i].name +
 				       '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
 				       '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
-    				       '<br/><b>GPS Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
-    				       '<br/><b>GPS Hdop/Vdop:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
+    				   '<br/><b>GPS Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
+    				   '<br/><b>GPS Hdop/Vdop:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
 				       '<br/><b>Battery:</b> '            + dataPoints[i].Vbat + ' mV' +
 				       '<br/><b>Internal Pressure:</b> '  + dataPoints[i].Pint + ' Pa' +
 				       '<br/><b>External Pressure:</b> '  + dataPoints[i].Pext + ' mbar' +
-                                       '<br/> ' +
-     		  		       '<br/><b>Leg Length:</b> '         + roundTwo(distance) + ' km' +
-		  		       '<br/><b>Leg Speed:</b> '          + roundTwo(displacement) + ' km/h' +
-     		  		       '<br/><b>Distance Travelled:</b> ' + roundTwo(distance) + ' km' +
-				       '<br/><b>Average Speed:</b> '      + roundTwo(velocity) + ' km/h' +
-     		  		       '<br/><b>Net Displacement:</b> '   + roundTwo(distance) + ' km'
+               '<br/> ' +
+     		  		 '<br/><b>Leg Length:</b> '         + roundTwo(legLength) + ' km' +
+							 '<br/><b>Leg Time:</b> '           + roundTwo(legTime) + ' h' +
+							 '<br/><b>Leg Speed:</b> '          + roundTwo(legSpeed) + ' km/h' +
+
+		  		     '<br/><b>Total Time:</b> '         + roundTwo(totalTime) + ' h' +
+     		  		 '<br/><b>Distance Travelled:</b> ' + roundTwo(totalDistance) + ' km' +
+				       '<br/><b>Average Speed:</b> '      + roundTwo(avgVelocity) + ' km/h' +
+     		  		 '<br/><b>Net Displacement:</b> '   + roundTwo(netDisplacement) + ' km'
                                        )
 			iwindow.open(map, this);
 			iwindows.push(iwindow);
@@ -157,7 +205,7 @@ function initMap() {
 
 	}
 
-        //################################################################################//
+  //################################################################################//
 
 	// listen for use of scrollbar
 
@@ -180,96 +228,96 @@ function initMap() {
 		    clearMarkers();
 		useCallback(url,"P001");
 	    });
- 
+
 	google.maps.event.addDomListener(P002, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P002_030.txt"
 		    clearMarkers();
 		useCallback(url,"P002");
 	    });
- 
+
 	google.maps.event.addDomListener(P003, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P003_030.txt"
 		    clearMarkers();
 		useCallback(url,"P003");
 	    });
- 
+
 	google.maps.event.addDomListener(P004, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P004_030.txt"
 		    clearMarkers();
 		useCallback(url,"P004");
 	    });
- 
+
 	google.maps.event.addDomListener(P005, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P005_030.txt"
 		    clearMarkers();
 		useCallback(url,"P005");
 	    });
- 
+
 	google.maps.event.addDomListener(P006, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P006_030.txt"
 		    clearMarkers();
 		useCallback(url,"P006");
 	    });
- 
+
 	google.maps.event.addDomListener(P007, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P007_030.txt"
 		    clearMarkers();
 		useCallback(url,"P007");
 	    });
- 
+
 	google.maps.event.addDomListener(P008, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P008_030.txt"
 		    clearMarkers();
 		useCallback(url,"P008");
 	    });
- 
+
 	google.maps.event.addDomListener(P009, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P009_030.txt"
 		    clearMarkers();
 		useCallback(url,"P009");
 	    });
- 
+
 	google.maps.event.addDomListener(P010, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P010_030.txt"
 		    clearMarkers();
 		useCallback(url,"P010");
 	    });
- 
+
 	google.maps.event.addDomListener(P011, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P011_030.txt"
 		    clearMarkers();
 		useCallback(url,"P011");
 	    });
- 
+
 	google.maps.event.addDomListener(P012, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P012_030.txt"
 		    clearMarkers();
 		useCallback(url,"P012");
 	    });
- 
+
 	google.maps.event.addDomListener(P013, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P013_030.txt"
 		    clearMarkers();
 		useCallback(url,"P013");
 	    });
- 
+
 	google.maps.event.addDomListener(P014, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P014_030.txt"
 		    clearMarkers();
 		useCallback(url,"P014");
 	    });
- 
+
 	google.maps.event.addDomListener(P015, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P015_030.txt"
 		    clearMarkers();
 		useCallback(url,"P015");
 	    });
- 
+
 	google.maps.event.addDomListener(P016, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P016_030.txt"
 		    clearMarkers();
 		useCallback(url,"P016");
 	    });
- 
+
 
 }
