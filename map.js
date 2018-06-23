@@ -161,7 +161,20 @@ function initMap() {
 
 			var  iwindow = new InfoBubble({
 				maxWidth: 250,
-				maxHeight: 275
+				maxHeight: 275,
+				shadowStyle: 1,
+				padding: 10,
+				backgroundColor: 'rgb(255,255,255)',
+				borderRadius: 4,
+				arrowSize: 20,
+				borderWidth: 10,
+				borderColor: '#2c2c2c',
+				disableAutoPan: true,
+				hideCloseButton: false,
+				arrowPosition: 30,
+				backgroundClassName: 'phoney',
+				arrowStyle: 0,
+				disableAnimation: 'true'
 			});
 
 			var contentString = '<div id="content">' +
