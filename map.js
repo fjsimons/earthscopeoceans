@@ -120,15 +120,18 @@ function initMap() {
 			var legSpeed;
 			var legTime;
 
+			// first datapoint initialized to 0
 			if (i == 0) {
 				legLength = 0;
 				legSpeed = 0;
 				legTime = 0;
 			} else {
 
+				// get displacement in m, convert to kilometers
 				legLength = getDisplacement(dataPoints[i-1], dataPoints[i]) / 1000;
 				legTime = getTimeElapsed(dataPoints[i-1], dataPoints[i]);
 
+				// avoid division by zero when calculating velocity
 				if (legTime == 0) {
 					legSpeed = 0;
 				} else {
@@ -154,11 +157,10 @@ function initMap() {
 								                     totalTime, legLength, legSpeed, legTime) {
 
 		google.maps.event.addListener(marker, 'click', function(event) {
-			if (iwindows.length == 1) {
-				iwindows[0].close();
-				iwindows = [];
-			}
+			// close existing windows
+			closeIWindows();
 
+			// info window preferences
 			var  iwindow = new InfoBubble({
 				maxWidth: 250,
 				maxHeight: 275,
@@ -177,7 +179,8 @@ function initMap() {
 				disableAnimation: 'true'
 			});
 
-			var contentString = '<div id="infoWindowContent">' +
+			// content for float data tab
+			var contentString = '<div id="floatDataContent">' +
 							 '<b>Float Name:</b> '    + dataPoints[i].name +
 							 '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
 							 '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
@@ -197,6 +200,7 @@ function initMap() {
 							 '<br/><b>Net Displacement:</b> '   + roundTwo(netDisplacement) + ' km'
 
 
+			// add info window tabs
 		  iwindow.addTab('Float Info', contentString);
 			iwindow.addTab('Earthquakes', "");
 
@@ -214,6 +218,15 @@ function initMap() {
   		}
  		markers.length = 0;
 		dataPoints.length = 0;
+		closeIWindows();
+	}
+
+	// close all info windows
+	function closeIWindows() {
+		if (iwindows.length == 1) {
+			iwindows[0].close();
+			iwindows = [];
+		}
 	}
 
 	//handles asnyc use of data
