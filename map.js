@@ -177,7 +177,7 @@ function initMap() {
 				disableAnimation: 'true'
 			});
 
-			var contentString = '<div id="content">' +
+			var contentString = '<div id="infoWindowContent">' +
 							 '<b>Float Name:</b> '    + dataPoints[i].name +
 							 '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
 							 '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
