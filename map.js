@@ -115,11 +115,11 @@ function initMap() {
 			// expand bounds to fit all markers
 			bounds.extend(marker.getPosition());
 
+			// do calculations
 			var legLength;
 			var legSpeed;
 			var legTime;
 
-			// create infowindow
 			if (i == 0) {
 				legLength = 0;
 				legSpeed = 0;
@@ -136,6 +136,7 @@ function initMap() {
 				}
 			}
 
+			// create info windows
 			setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
 				            totalTime, legLength, legSpeed, legTime);
 
@@ -158,26 +159,35 @@ function initMap() {
 				iwindows = [];
 			}
 
-			// set up window
-			var iwindow = new google.maps.InfoWindow();
-			iwindow.setContent('<b>Float Name:</b> '    + dataPoints[i].name +
-				       '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
-				       '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
-    				   '<br/><b>GPS Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
-    				   '<br/><b>GPS Hdop/Vdop:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
-				       '<br/><b>Battery:</b> '            + dataPoints[i].Vbat + ' mV' +
-				       '<br/><b>Internal Pressure:</b> '  + dataPoints[i].Pint + ' Pa' +
-				       '<br/><b>External Pressure:</b> '  + dataPoints[i].Pext + ' mbar' +
-               '<br/> ' +
-     		  		 '<br/><b>Leg Length:</b> '         + roundTwo(legLength) + ' km' +
+			var  iwindow = new InfoBubble({
+				maxWidth: 250,
+				maxHeight: 275
+			});
+
+			var contentString = '<div id="content">' +
+							 '<b>Float Name:</b> '    + dataPoints[i].name +
+							 '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
+							 '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
+							 '<br/><b>GPS Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
+							 '<br/><b>GPS Hdop/Vdop:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
+							 '<br/><b>Battery:</b> '            + dataPoints[i].Vbat + ' mV' +
+							 '<br/><b>Internal Pressure:</b> '  + dataPoints[i].Pint + ' Pa' +
+							 '<br/><b>External Pressure:</b> '  + dataPoints[i].Pext + ' mbar' +
+							 '<br/> ' +
+							 '<br/><b>Leg Length:</b> '         + roundTwo(legLength) + ' km' +
 							 '<br/><b>Leg Time:</b> '           + roundTwo(legTime) + ' h' +
 							 '<br/><b>Leg Speed:</b> '          + roundTwo(legSpeed) + ' km/h' +
 
-		  		     '<br/><b>Total Time:</b> '         + roundTwo(totalTime) + ' h' +
-     		  		 '<br/><b>Distance Travelled:</b> ' + roundTwo(totalDistance) + ' km' +
-				       '<br/><b>Average Speed:</b> '      + roundTwo(avgVelocity) + ' km/h' +
-     		  		 '<br/><b>Net Displacement:</b> '   + roundTwo(netDisplacement) + ' km'
-                                       )
+							 '<br/><b>Total Time:</b> '         + roundTwo(totalTime) + ' h' +
+							 '<br/><b>Distance Travelled:</b> ' + roundTwo(totalDistance) + ' km' +
+							 '<br/><b>Average Speed:</b> '      + roundTwo(avgVelocity) + ' km/h' +
+							 '<br/><b>Net Displacement:</b> '   + roundTwo(netDisplacement) + ' km'
+
+
+		  iwindow.addTab('Float Info', contentString);
+			iwindow.addTab('Earthquakes', "");
+
+
 			iwindow.open(map, this);
 			iwindows.push(iwindow);
 		});
