@@ -1,4 +1,12 @@
-//add callback to handle asynchronous response 
+/**
+	File reader class
+
+	@author Jonah Rubin
+	4/1/18
+*/
+
+
+//add callback to handle asynchronous response
 function get(url, callback) {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);

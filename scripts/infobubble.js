@@ -1474,6 +1474,7 @@ InfoBubble.prototype.addTab = function(label, content) {
     this.setTabActive_(tab);
   }
 
+  // removing animation
   tab.className = tab.className //+ ' ' + this.animationName_;
 
   this.redraw_();

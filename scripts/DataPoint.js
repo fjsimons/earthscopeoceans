@@ -1,7 +1,7 @@
 /**
 	DataPoint object class
 
-	@Author Jonah Rubin
+	@author Jonah Rubin
 	5/31/18
 */
 

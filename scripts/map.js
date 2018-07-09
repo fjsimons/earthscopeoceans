@@ -1,7 +1,7 @@
 /**
 	Map class
 
-	@Author Jonah Rubin
+	@author Jonah Rubin
 	4/1/18
 */
 
