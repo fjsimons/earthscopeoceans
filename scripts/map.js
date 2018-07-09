@@ -16,7 +16,7 @@ function initMap() {
 	var markers = [];
 	var iwindows = []
 
-	// some default locations
+	// some default locations  
 	var guyot = {lat: 40.34585, lng: -74.65475};
 	var papeete = {lat: -17.53733, lng: -149.5665};
 
@@ -26,6 +26,7 @@ function initMap() {
 		center: papeete
 	});
 
+	//other option: terrrain
 	map.setMapTypeId('hybrid');
 
 	// place marker
