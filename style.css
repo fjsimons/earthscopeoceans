@@ -1,0 +1,66 @@
+
+
+
+/*main jumbotron*/
+.jumbotron {
+  margin-bottom: 20px;
+  background-image: url(images/water01crop.jpg);
+  background-position: 0% 25%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  font-size: 1.3em;
+}
+
+/* secondary buttons */
+.btn-secondary{
+  border-color: #000F35;
+  background-color: #000F35
+}
+
+/* map jumbotron */
+.map-jumbotron{
+  width:100%;
+  height: 930px;
+  background-color: #000F35;
+  background-image: none;
+  padding:10px;
+  margin:0px;
+  text-align: center;
+}
+
+/* scrollbar */
+div.scrollmenu {
+  margin-top: 25px;
+  background-color: #000F35;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
+}
+
+#map {
+  height: 800px;
+  width:  100%;
+  margin-bottom: 25px;
+}
+
+#floatDataContent {
+   font-size: 1.1em;
+ }
+
+/* navbar */
+.navbar {
+  background-color: : #000F35;
+  color: #000F35
+}
