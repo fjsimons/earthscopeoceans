@@ -29,7 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="icon" href="images/globe.png">
 
     <title>Jumbotron Template for Bootstrap</title>
 
@@ -41,12 +41,17 @@
     <link href="jumbotron.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
+    <!-- Favicon -->
+    <link rel='shortcut icon'    href='images/globe.png' />
+    <link rel='apple-touch-icon' href='images/globe.png' />
+
   </head>
 
   <body>
 
+    <!-- #################### START NAVBAR ################## -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">ESO</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -56,20 +61,61 @@
           <li class="nav-item active">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
+
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">People</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="https://www.geoazur.fr/GLOBALSEIS/nolet/">Guust Nolet</a>
+              <a class="dropdown-item" href="https://geoazur.oca.eu/fr/yann-hello">Yann Hello</a>
+              <a class="dropdown-item" href="http://www.frederik.net">Frederik J. Simons</a>
+              <a class="dropdown-item" href="http://eost.unistra.fr/recherche/institut-de-physique-du-globe-de-strasbourg/sismologie/pages-personnelles/alessia-maggi/">Allesia Maggi</a>
+              <a class="dropdown-item" href="http://www.planet.sci.kobe-u.ac.jp/marine/sugioka_e.html">Hiroko Sugioka</a>
+              <a class="dropdown-item" href="http://www.jamstec.go.jp/souran/html/Masayuki_Obayashi001258-e.html">Masayuki Obayashi</a>
+              <a class="dropdown-item" href="http://www.sustc.edu.cn/en/faculty_finder/f/Chen%20Yongshun">John Yongshun Chen</a>
             </div>
           </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Institutions</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="https://geoazur.oca.eu/fr/acc-geoazur">G&eacute;oAzur | Nice</a>
+              <a class="dropdown-item" href="https://www.princeton.edu">Princeton | NJ</a>
+              <a class="dropdown-item" href="https://www.jamstec.go.jp/e/">JAMSTEC |  Tokyo</a>
+              <a class="dropdown-item" href="http://www.sustc.edu.cn/en/">SUSTC | Shenzhen</a>
+              <a class="dropdown-item" href="#">EOST | Strasbourg</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Committees</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">STEERING</a>
+              <a class="dropdown-item" href="#">SCIENCE</a>
+              <a class="dropdown-item" href="#">TECHNICAL</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Deployments</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Kobe April 2018</a>
+              <a class="dropdown-item" href="#">Tahiti September 2018</a>
+              <a class="dropdown-item" href="#">New Caledonia Aug '19</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Press</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="http://www.ucl.ac.uk/news/news-articles/0606/06062701">UCL Homepage</a>
+              <a class="dropdown-item" href="http://www.economist.com/node/10640660">The Economist</a>
+              <a class="dropdown-item" href="https://www.princeton.edu/news/2008/01/28/geoscientist-simons-earths-deepest-secrets-may-come-sea">PU Homepage</a>
+              <a class="dropdown-item" href="http://www.nature.com/news/global-seismic-network-takes-to-the-seas-1.14855">Nature</a>
+              <a class="dropdown-item" href="http://www.fondriest.com/news/son-o-mermaid-holds-promise-tracking-oceanic-earthquakes.htm">Environmental Monitor</a>
+
+            </div>
+          </li>
+
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -77,6 +123,9 @@
         </form>
       </div>
     </nav>
+
+    <!-- #################### END NAVBAR ################## -->
+
 
     <main role="main">
 
