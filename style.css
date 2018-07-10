@@ -10,12 +10,21 @@
   background-repeat: no-repeat;
   color: white;
   font-size: 1.3em;
+  height: 400px
 }
 
 /* secondary buttons */
 .btn-secondary{
   border-color: #000F35;
   background-color: #000F35
+}
+
+/* secondary buttons */
+.about-earthscope{
+  margin-top: 35px;
+  font-size: 1.3em;
+
+
 }
 
 /* map jumbotron */
