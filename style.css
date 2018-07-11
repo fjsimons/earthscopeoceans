@@ -66,10 +66,38 @@ div.scrollmenu a:hover {
 
 #floatDataContent {
    font-size: 1.1em;
+   color: 30px;
  }
 
-/* navbar */
-.navbar {
-  background-color: : #000F35;
-  color: #000F35
+/*navbar*/
+.navbar-inverse {
+  background-color: #000F35
+}
+
+
+.col1 {
+  background-image: url(images/mermaid01.jpg);
+  height: 450px;
+}
+
+.col2 {
+  background-image: url(images/inthewater01.jpg);
+  height: 450px;
+
+}
+
+.col3{
+  background-image: url(images/mermaid02.jpg);
+  height: 450px;
+}
+
+.triplet-container {
+  margin-top: 0px;
+
+}
+
+.triplet-jumbotron {
+  background-color: #000F35;
+  background-image: none;
+  height: 570px
 }

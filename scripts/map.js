@@ -163,7 +163,7 @@ function initMap() {
 
 			// info window preferences
 			var  iwindow = new InfoBubble({
-				maxWidth: 250,
+				maxWidth: 100,
 				maxHeight: 275,
 				shadowStyle: 1,
 				padding: 10,
@@ -181,7 +181,7 @@ function initMap() {
 			});
 
 			// content for float data tab
-			var contentString = '<div id="floatDataContent">' +
+			var floatInfo = '<div id="floatDataContent">' +
 							 '<b>Float Name:</b> '    + dataPoints[i].name +
 							 '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
 							 '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
@@ -200,10 +200,25 @@ function initMap() {
 							 '<br/><b>Average Speed:</b> '      + roundTwo(avgVelocity) + ' km/h' +
 							 '<br/><b>Net Displacement:</b> '   + roundTwo(netDisplacement) + ' km'
 
+			// content for earthquake tabs
+
+			var earthquakeInfo = '<div id="earthquakeTabContent">' +
+							 '<b>Code:</b> '    + dataPoints[i].name +
+							 '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
+							 '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
+							 '<br/><b>Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
+							 '<br/><b>Magnitude:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
+							 '<br/><b>Great Circle Distance:</b> '            + dataPoints[i].Vbat + ' mV' +
+							 '<br/><b>Source:</b> '  + dataPoints[i].Pint + ' Pa' +
+
+
+
 
 			// add info window tabs
-		  iwindow.addTab('Float Info', contentString);
-			iwindow.addTab('Earthquakes', "");
+		  iwindow.addTab('Float Info', floatInfo);
+			iwindow.addTab('Earthquakes', earthquakeInfo);
+			iwindow.addTab('Seismograms', "");
+
 
 
 			iwindow.open(map, this);
@@ -246,13 +261,6 @@ function initMap() {
 
 	// listen for use of scrollbar
 
-	// all
-	// google.maps.event.addDomListener(all, 'click', function() {
-	// 	document.getElementById("P001").click()
-	//
- 	// 	map.setZoom(2);
-	// });
-
 	// clear
 	google.maps.event.addDomListener(clear, 'click', function() {
 		clearMarkers();
@@ -267,6 +275,7 @@ function initMap() {
 	    });
 
 	google.maps.event.addDomListener(P002, 'click', function() {
+		alert("here");
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P002_030.txt"
 		    clearMarkers();
 		useCallback(url,"P002");
