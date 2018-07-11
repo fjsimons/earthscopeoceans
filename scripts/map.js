@@ -203,13 +203,13 @@ function initMap() {
 			// content for earthquake tabs
 
 			var earthquakeTabContent = '<div id="tabContent">' +
-							 '<b>Code:</b> '    + dataPoints[i].name +
-							 '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
-							 '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
-							 '<br/><b>Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
-							 '<br/><b>Magnitude:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
-							 '<br/><b>Great Circle Distance:</b> '            + dataPoints[i].Vbat + ' mV' +
-							 '<br/><b>Source:</b> '
+							 '<b>Code:</b> '    + "/* filler */" +
+							 '<br/><b>UTC Date:</b> '           + "/* filler */" +
+							 '<br/><b>Your Date:</b> '          +"/* filler */" +
+							 '<br/><b>Lat/Lon:</b> '        + "/* filler */" +
+							 '<br/><b>Magnitude:</b> '      + "/* filler */" +
+							 '<br/><b>Great Circle Distance:</b> '            +"/* filler */" +
+							 '<br/><b>Source:</b> ' +"/* filler */"
 
 			var floatName      = '<div id="tabNames">' +
 											     '<b>Float Info</b> '
