@@ -163,15 +163,15 @@ function initMap() {
 
 			// info window preferences
 			var  iwindow = new InfoBubble({
-				maxWidth: 100,
-				maxHeight: 275,
+				maxWidth: 125,
+				maxHeight: 310,
 				shadowStyle: 1,
 				padding: 10,
 				backgroundColor: 'rgb(255,255,255)',
 				borderRadius: 4,
 				arrowSize: 20,
 				borderWidth: 10,
-				borderColor: '#2c2c2c',
+				borderColor: '#000F35',
 				disableAutoPan: true,
 				hideCloseButton: false,
 				arrowPosition: 30,
@@ -181,7 +181,7 @@ function initMap() {
 			});
 
 			// content for float data tab
-			var floatInfo = '<div id="floatDataContent">' +
+			var floatTabContent = '<div id="tabContent">' +
 							 '<b>Float Name:</b> '    + dataPoints[i].name +
 							 '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
 							 '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
@@ -202,22 +202,28 @@ function initMap() {
 
 			// content for earthquake tabs
 
-			var earthquakeInfo = '<div id="earthquakeTabContent">' +
+			var earthquakeTabContent = '<div id="tabContent">' +
 							 '<b>Code:</b> '    + dataPoints[i].name +
 							 '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
 							 '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
 							 '<br/><b>Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
 							 '<br/><b>Magnitude:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
 							 '<br/><b>Great Circle Distance:</b> '            + dataPoints[i].Vbat + ' mV' +
-							 '<br/><b>Source:</b> '  + dataPoints[i].Pint + ' Pa' +
+							 '<br/><b>Source:</b> '
 
+			var floatName      = '<div id="tabNames">' +
+											     '<b>Float Info</b> '
 
+			var earthquakeName = '<div id="tabNames">' +
+											     '<b>EarthQuake Info</b> '
 
+			var seismograms    = '<div id="tabNames">' +
+											     '<b>Seismograms</b> '
 
 			// add info window tabs
-		  iwindow.addTab('Float Info', floatInfo);
-			iwindow.addTab('Earthquakes', earthquakeInfo);
-			iwindow.addTab('Seismograms', "");
+		  iwindow.addTab(floatName, floatTabContent);
+			iwindow.addTab(earthquakeName, earthquakeTabContent);
+			iwindow.addTab(seismograms, "");
 
 
 

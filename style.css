@@ -23,8 +23,6 @@
 .about-earthscope{
   margin-top: 35px;
   font-size: 1.3em;
-
-
 }
 
 /* map jumbotron */
@@ -64,10 +62,20 @@ div.scrollmenu a:hover {
   margin-bottom: 25px;
 }
 
-#floatDataContent {
-   font-size: 1.1em;
-   color: 30px;
+/*info window text*/
+#tabContent {
+   font-size: 1.3em;
+   color: black;
+   text-align: left;
  }
+
+ /*info window tab names*/
+ #tabNames {
+   font-size: 1.1em;
+   color: black;
+   text-align: left;
+ }
+
 
 /*navbar*/
 .navbar-inverse {
