@@ -83,17 +83,24 @@ div.scrollmenu a:hover {
 .col1 {
   background-image: url(images/mermaid01.jpg);
   height: 450px;
+  background-repeat: no-repeat;
+
+
 }
 
 .col2 {
   background-image: url(images/inthewater01.jpg);
   height: 450px;
+  background-repeat: no-repeat;
+
 
 }
 
 .col3{
   background-image: url(images/mermaid02.jpg);
   height: 450px;
+  background-repeat: no-repeat;
+
 }
 
 .triplet-container {
@@ -125,6 +132,11 @@ div.scrollmenu a:hover {
 
 .col-md-4:hover .overlay {
   opacity: .85;
+}
+
+.box-shadow {
+  border-width: 0px;
+  border-color: #000F35
 }
 
 /*footer links*/
