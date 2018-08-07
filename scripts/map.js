@@ -170,7 +170,7 @@ function initMap() {
 			backgroundColor: 'rgb(255,255,255)',
 			borderRadius: 4,
 			arrowSize: 20,
-			borderWidth: 10,
+			borderWidth: 1,
 			borderColor: '#000F35',
 			disableAutoPan: true,
 			hideCloseButton: false,
@@ -182,7 +182,7 @@ function initMap() {
 		
 		// content for float data tab
 		var floatTabContent = '<div id="tabContent">' +
-		    '<b>Float Name:</b> '    + dataPoints[i].name +
+		    '<b>Float Name:</b> '              + dataPoints[i].name +
 		    '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
 		    '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
 		    '<br/><b>GPS Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
@@ -192,16 +192,14 @@ function initMap() {
 		    '<br/><b>External Pressure:</b> '  + dataPoints[i].Pext + ' mbar' +
 		    '<br/> ' +
 		    '<br/><b>Leg Length:</b> '         + roundTwo(legLength) + ' km' +
-		    '<br/><b>Leg Time:</b> '           + roundTwo(legTime) + ' h' +
-		    '<br/><b>Leg Speed:</b> '          + roundTwo(legSpeed) + ' km/h' +
-		    
+		    '<br/><b>Leg Time:</b> '           + roundTwo(legTime)   + ' h' +
+		    '<br/><b>Leg Speed:</b> '          + roundTwo(legSpeed)  + ' km/h' +
 		    '<br/><b>Total Time:</b> '         + roundTwo(totalTime) + ' h' +
 		    '<br/><b>Distance Travelled:</b> ' + roundTwo(totalDistance) + ' km' +
 		    '<br/><b>Average Speed:</b> '      + roundTwo(avgVelocity) + ' km/h' +
 		    '<br/><b>Net Displacement:</b> '   + roundTwo(netDisplacement) + ' km';
 		    
 		// content for earthquake tabs
-		    
 		var earthquakeTabContent = '<div id="tabContent">' +
 		    '<b>Code:</b> '    + "/* filler */" +
 		    '<br/><b>UTC Date:</b> '           + "/* filler */" +
@@ -211,11 +209,9 @@ function initMap() {
 		    '<br/><b>Great Circle Distance:</b> '            +"/* filler */" +
 		    '<br/><b>Source:</b> ' +"/* filler */";
 		
-		var floatName      = '<div id="tabNames">' +   '<b>Float Info</b> ';
-		    
-		var earthquakeName = '<div id="tabNames">' +   '<b>Earthquake Info</b> ';
-		
-		var seismograms    = '<div id="tabNames">' +   '<b>Seismograms</b> ';
+		var floatName      = '<div id="tabNames">' +   '<b>Float</b> ';
+		var earthquakeName = '<div id="tabNames">' +   '<b>Earthquake</b> ';
+		var seismograms    = '<div id="tabNames">' +   '<b>Seismogram</b> ';
 		
 		// add info window tabs
 		iwindow.addTab(floatName, floatTabContent);
