@@ -180,38 +180,39 @@ function initMap() {
 			disableAnimation: 'true'
 		    });
 		
-		// content for float data tab
+		// content for float tab
 		var floatTabContent = '<div id="tabContent">' +
-		    '<b>Float Name:</b> '              + dataPoints[i].name +
-		    '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
-		    '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
-		    '<br/><b>GPS Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
-		    '<br/><b>GPS Hdop/Vdop:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
-		    '<br/><b>Battery:</b> '            + dataPoints[i].Vbat + ' mV' +
-		    '<br/><b>Internal Pressure:</b> '  + dataPoints[i].Pint + ' Pa' +
-		    '<br/><b>External Pressure:</b> '  + dataPoints[i].Pext + ' mbar' +
+		    '<b>Float Name:</b> '              + dataPoints[i].name        +
+		    '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt        +
+		    '<br/><b>Your Date:</b> '          + dataPoints[i].loct        +
+		    '<br/><b>GPS Lat/Lon:</b> '        + dataPoints[i].stla        + ', '    + dataPoints[i].stlo +
+		    '<br/><b>GPS Hdop/Vdop:</b> '      + dataPoints[i].hdop        + ' m , ' + dataPoints[i].vdop + ' m' +
+		    '<br/><b>Battery:</b> '            + dataPoints[i].Vbat        + ' mV'   +
+		    '<br/><b>Internal Pressure:</b> '  + dataPoints[i].Pint        + ' Pa'   +
+		    '<br/><b>External Pressure:</b> '  + dataPoints[i].Pext        + ' mbar' +
 		    '<br/> ' +
-		    '<br/><b>Leg Length:</b> '         + roundTwo(legLength) + ' km' +
-		    '<br/><b>Leg Time:</b> '           + roundTwo(legTime)   + ' h' +
-		    '<br/><b>Leg Speed:</b> '          + roundTwo(legSpeed)  + ' km/h' +
-		    '<br/><b>Total Time:</b> '         + roundTwo(totalTime) + ' h' +
-		    '<br/><b>Distance Travelled:</b> ' + roundTwo(totalDistance) + ' km' +
-		    '<br/><b>Average Speed:</b> '      + roundTwo(avgVelocity) + ' km/h' +
+		    '<br/><b>Leg Length:</b> '         + roundTwo(legLength)       + ' km'   +
+		    '<br/><b>Leg Time:</b> '           + roundTwo(legTime)         + ' h'    +
+		    '<br/><b>Leg Speed:</b> '          + roundTwo(legSpeed)        + ' km/h' +
+		    '<br/><b>Total Time:</b> '         + roundTwo(totalTime)       + ' h'    +
+		    '<br/><b>Distance Travelled:</b> ' + roundTwo(totalDistance)   + ' km' +
+		    '<br/><b>Average Speed:</b> '      + roundTwo(avgVelocity)     + ' km/h' +
 		    '<br/><b>Net Displacement:</b> '   + roundTwo(netDisplacement) + ' km';
 		    
-		// content for earthquake tabs
+		// content for earthquake tab
 		var earthquakeTabContent = '<div id="tabContent">' +
-		    '<b>Code:</b> '    + "/* filler */" +
-		    '<br/><b>UTC Date:</b> '           + "/* filler */" +
-		    '<br/><b>Your Date:</b> '          +"/* filler */" +
-		    '<br/><b>Lat/Lon:</b> '        + "/* filler */" +
-		    '<br/><b>Magnitude:</b> '      + "/* filler */" +
-		    '<br/><b>Great Circle Distance:</b> '            +"/* filler */" +
-		    '<br/><b>Source:</b> ' +"/* filler */";
-		
-		var floatName      = '<div id="tabNames">' +   '<b>Float</b> ';
-		var earthquakeName = '<div id="tabNames">' +   '<b>Earthquake</b> ';
-		var seismograms    = '<div id="tabNames">' +   '<b>Seismogram</b> ';
+		    '<b>Code:</b> '                        + "/* filler */" +
+		    '<br/><b>UTC Date:</b> '               + "/* filler */" +
+		    '<br/><b>Your Date:</b> '              +"/* filler */" +
+		    '<br/><b>Lat/Lon:</b> '                + "/* filler */" +
+		    '<br/><b>Magnitude:</b> '              + "/* filler */" +
+		    '<br/><b>Great Circle Distance:</b> '  +"/* filler */" +
+		    '<br/><b>Source:</b> '                 +"/* filler */";
+
+		// names for float/earthquake/seismogram tabs
+		var floatName      = '<div id="tabNames">' + '<b>Float</b> ';
+		var earthquakeName = '<div id="tabNames">' + '<b>Earthquake</b> ';
+		var seismograms    = '<div id="tabNames">' + '<b>Seismogram</b> ';
 		
 		// add info window tabs
 		iwindow.addTab(floatName, floatTabContent);
