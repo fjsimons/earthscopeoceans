@@ -27,7 +27,7 @@ function initMap() {
 	});
     
     //other option: terrrain
-    map.setMapTypeId('terrain');
+    map.setMapTypeId('satellite');
     
     // place marker
     //var marker = new google.maps.Marker({
