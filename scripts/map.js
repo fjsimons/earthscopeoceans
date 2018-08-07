@@ -1,13 +1,13 @@
 /**
-	Map class
-
-	@author Jonah Rubin
-	4/1/18
+   Map class
+   
+   @author Jonah Rubin
+   4/1/18
 */
 
 function initMap() {
-	// ID the map
-	var mapDiv = document.getElementById('map');
+    // ID the map
+    var mapDiv = document.getElementById('map');
 
 	// store data points
 	var dataPoints = []
