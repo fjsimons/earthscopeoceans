@@ -1,3 +1,9 @@
+body  {
+    /* background-image: url("images/21.jpg"); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 /*main jumbotron*/
 .jumbotron {
   margin-bottom: 20px;
