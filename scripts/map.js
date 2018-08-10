@@ -265,6 +265,12 @@ function initMap() {
 		clearMarkers();
 	    });
 	
+	google.maps.event.addDomListener(all, 'click', function() {
+		var url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt"
+		    clearMarkers();
+		useCallback(url,"all");
+	    });
+
 	google.maps.event.addDomListener(P008, 'click', function() {
 		var url = "http://geoweb.princeton.edu/people/simons/SOM/P008_030.txt"
 		    clearMarkers();
