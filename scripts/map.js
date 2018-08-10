@@ -26,7 +26,7 @@ function initMap() {
     
     // default map center
     var map = new google.maps.Map(mapDiv, {
-	    zoom: 13,
+	    zoom: 09,
 	    center: papeete
 	});
     
@@ -149,7 +149,6 @@ function initMap() {
 			      totalTime, legLength, legSpeed, legTime);
 		
 		markers.push(marker);
-		
 	    }
 	    
 	    // pan to bounds
@@ -170,7 +169,7 @@ function initMap() {
 			maxWidth: 125,
 			maxHeight: 310,
 			shadowStyle: 1,
-			padding: 10,
+			padding: 2,
 			backgroundColor: 'rgb(255,255,255)',
 			borderRadius: 4,
 			arrowSize: 20,
@@ -375,5 +374,4 @@ function initMap() {
 	    });
 
 }
-
 
