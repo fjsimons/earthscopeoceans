@@ -21,6 +21,3 @@ foreach index ($indices[*])
   echo  "    });"                                                                       >>  addtomapdotjs
   echo  " "                                                                             >>  addtomapdotjs
 end
-
-
-
