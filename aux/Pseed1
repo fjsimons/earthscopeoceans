@@ -1,0 +1,14 @@
+#!/bin/csh
+#
+# A shell script that copies coordinate files, for single use
+#
+# Written by fjsimons-at-alum.mit.edu and jonahnrubin-at-gmail.com on 08/10/2018
+
+set indices = (8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25)
+
+foreach index ($indices[*])
+  set fname = `printf "P%3.3i\n" $index`
+  /bin/cp -f  Robin_030.txt {$fname}_030.txt
+  /bin/cp -f Robin_all.txt {$fname}_all.txt
+end
+

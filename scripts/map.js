@@ -105,13 +105,21 @@ function initMap() {
 		for (var i = 0; i < dataPoints.length; i++) {
 			var latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
 
-			// set up marker, fade on age
-			var marker = new google.maps.Marker({
-				position: latLng,
-				map: map,
-				clickable: true,
-				opacity: (i + 1) / dataPoints.length
-			});
+			// set up marker, fade on age, unless using the 'all' option
+			if (dataPoints[i].name === 'all') {
+				var marker = new google.maps.Marker({
+					position: latLng,
+					map: map,
+					clickable: true
+				});
+			} else {
+				var marker = new google.maps.Marker({
+					position: latLng,
+					map: map,
+					clickable: true,
+					opacity: (i + 1) / dataPoints.length
+				});
+			}
 
 			// expand bounds to fit all markers
 			bounds.extend(marker.getPosition());

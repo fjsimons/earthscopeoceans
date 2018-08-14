@@ -1,7 +1,8 @@
+*.~
+
 #images
 images/
 
 #testing
-dummy.txt
 
 #outside files
