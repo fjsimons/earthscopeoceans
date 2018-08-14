@@ -180,7 +180,7 @@ function initMap() {
 				backgroundColor: 'rgb(255,255,255)',
 				borderRadius: 4,
 				arrowSize: 20,
-				borderWidth: 10,
+				borderWidth: 2,
 				borderColor: '#000F35',
 				disableAutoPan: true,
 				hideCloseButton: false,
