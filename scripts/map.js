@@ -1,7 +1,7 @@
 /**
 	Map class
 	@author Jonah Rubin
-	8/13/18
+	8/15/18
 	@author Frederik Simons
 	8/13/18
 */
@@ -158,7 +158,14 @@ function initMap() {
 		}
 
 		// pan to bounds
+		// updated to use a min zoom (13) to avoid missing imagery
 		map.fitBounds(bounds);
+		var listener = google.maps.event.addListener(map, "idle", function() {
+  		if (map.getZoom() > 13) map.setZoom(13);
+  		google.maps.event.removeListener(listener);
+
+		});
+
 		}
 	}
 
