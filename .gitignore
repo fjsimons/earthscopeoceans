@@ -1,4 +1,6 @@
-*.~
+#aux
+.DS_Store
+.gitignore
 
 #images
 images/
