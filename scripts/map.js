@@ -32,10 +32,10 @@ function initMap() {
 	map.setMapTypeId('satellite');
 
 	// place marker
-	var marker = new google.maps.Marker({
-	position: papeete,
-		map: map
-	});
+	// var marker = new google.maps.Marker({
+	// position: papeete,
+	// 	map: map
+	// });
 
 	// for rounding to two decimal places
 	function roundTwo(num) {
