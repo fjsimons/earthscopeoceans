@@ -1,8 +1,9 @@
 /**
 	Map class
-
 	@author Jonah Rubin
-	4/1/18
+	8/13/18
+	@author Frederik Simons
+	8/13/18
 */
 
 function initMap() {
@@ -27,7 +28,7 @@ function initMap() {
 	});
 
 	//other option: terrrain
-	map.setMapTypeId('terrain');
+	map.setMapTypeId('satellite');
 
 	// place marker
 	var marker = new google.maps.Marker({
@@ -172,13 +173,13 @@ function initMap() {
 			// info window preferences
 			var  iwindow = new InfoBubble({
 				maxWidth: 125,
-				maxHeight: 310,
+				maxHeight: 230,
 				shadowStyle: 1,
 				padding: 10,
 				backgroundColor: 'rgb(255,255,255)',
 				borderRadius: 4,
 				arrowSize: 20,
-				borderWidth: 10,
+				borderWidth: 2,
 				borderColor: '#000F35',
 				disableAutoPan: true,
 				hideCloseButton: false,
