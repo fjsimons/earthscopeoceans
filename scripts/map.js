@@ -324,18 +324,6 @@ function initMap() {
 			useCallback(url,"P013");
 		    });
 
-		google.maps.event.addDomListener(P014, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P014_030.txt"
-			    clearMarkers();
-			useCallback(url,"P014");
-		    });
-
-		google.maps.event.addDomListener(P015, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P015_030.txt"
-			    clearMarkers();
-			useCallback(url,"P015");
-		    });
-
 		google.maps.event.addDomListener(P016, 'click', function() {
 			var url = "http://geoweb.princeton.edu/people/simons/SOM/P016_030.txt"
 			    clearMarkers();
