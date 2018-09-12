@@ -4,7 +4,7 @@
 	@author Jonah Rubin
 	8/13/18
 	@author Frederik Simons
-	8/13/18
+	9/3/18
 */
 
 function initMap() {
@@ -286,6 +286,18 @@ function initMap() {
 			var url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt"
 			    clearMarkers();
 			useCallback(url,"all");
+		    });
+
+		google.maps.event.addDomListener(P008, 'click', function() {
+			var url = "http://geoweb.princeton.edu/people/simons/SOM/P006_030.txt"
+			    clearMarkers();
+			useCallback(url,"P006");
+		    });
+
+		google.maps.event.addDomListener(P007, 'click', function() {
+			var url = "http://geoweb.princeton.edu/people/simons/SOM/P007_030.txt"
+			    clearMarkers();
+			useCallback(url,"P007");
 		    });
 
 		google.maps.event.addDomListener(P008, 'click', function() {
