@@ -1,7 +1,7 @@
 /**
 	Map class
 	@author Jonah Rubin
-	8/15/18
+	9/16/18
 	@author Frederik Simons
 	8/13/18
 */
@@ -73,34 +73,17 @@ function initMap() {
 			}
 		}
 
+		// set up panning bounds
+		var bounds = new google.maps.LatLngBounds();
+
+		// set up variables
+		var legLength;
+		var legSpeed;
+		var legTime;
 		var netDisplacement;
 		var totalDistance;
 		var totalTime;
 		var avgVelocity;
-
-		if (dataPoints.length > 1) {
-			// do calculations (units: km/h)
-
-			netDisplacement = getDisplacement(dataPoints[0], dataPoints[dataPoints.length-1])/1000;
-
-			totalDistance = getDistance(dataPoints) / 1000;
-			totalTime = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
-
-			if (totalTime == 0) {
-				avgVelocty = 0
-			} else {
-				avgVelocity = (totalDistance / totalTime);
-			}
-
-		} else {
-			netDisplacement = 0;
-			totalDistance = 0
-			totalTime = 0;
-			avgVelocity = 0;
-		}
-
-		// set up panning bounds
-		var bounds = new google.maps.LatLngBounds();
 
 		// iterate over arrays, placing markers
 		for (var i = 0; i < dataPoints.length; i++) {
@@ -125,17 +108,27 @@ function initMap() {
 			// expand bounds to fit all markers
 			bounds.extend(marker.getPosition());
 
-			// do calculations
-			var legLength;
-			var legSpeed;
-			var legTime;
-
 			// first datapoint initialized to 0
 			if (i == 0) {
 				legLength = 0;
 				legSpeed = 0;
 				legTime = 0;
+				netDisplacement = 0;
+				totalDistance = 0
+				totalTime = 0;
+				avgVelocity = 0;
+
 			} else {
+					// net calculations for each datapoint
+					netDisplacement = getDisplacement(dataPoints[0], dataPoints[i])/1000;
+					totalDistance = getDistance(dataPoints.slice(0, i+1)) / 1000;
+					totalTime = getTimeElapsed(dataPoints[0], dataPoints[i]);
+
+				if (totalTime == 0) {
+					avgVelocty = 0
+				} else {
+						avgVelocity = (totalDistance / totalTime);
+			}
 
 				// get displacement in m, convert to kilometers
 				legLength = getDisplacement(dataPoints[i-1], dataPoints[i]) / 1000;

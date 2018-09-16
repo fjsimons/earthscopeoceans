@@ -2,7 +2,7 @@
 	DataPoint object class
 
 	@author Jonah Rubin
-	5/31/18
+	9/16/18
 */
 
 // create datapoint object
@@ -61,6 +61,7 @@ function getDisplacement(datapt1, datapt2) {
 		lat2 = datapt2.stla
 		lon2 = datapt2.stlo
 
+
 		var R = 6378.137; // Radius of earth in KM
 		var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
 		var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
@@ -75,8 +76,9 @@ function getDisplacement(datapt1, datapt2) {
 // get rough distance by getting displacement between all locations
 function getDistance(dataPoints) {
 	var distance = 0
-	for (var i = 0; i < dataPoints.length - 2; i++) {
-		distance += getDisplacement(dataPoints[i], dataPoints[i+1])
-	}
+
+	for (var i = 0; i < dataPoints.length - 1; i++) {
+		distance += getDisplacement(dataPoints[i], dataPoints[i+1]);
+	}		
 	return distance;
 }
