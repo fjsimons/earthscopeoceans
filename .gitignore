@@ -1,10 +1,10 @@
 #aux
 .DS_Store
-.gitignore
 
 #images
 images/
 
 #testing
-
+scripts/RSAC.js
+testsac.SAC
 #outside files

@@ -47,6 +47,7 @@ function initMap() {
 
 		// scrape data from text callback response
 		var rows = data.split('\n');
+
 		if (rows.length <= 1) {
 			empty = new Boolean(true);
 		}
@@ -240,7 +241,7 @@ function initMap() {
 			iwindows.push(iwindow);
 		});
 
-	}
+}
 
 	// delete all added markers
 	function clearMarkers() {
@@ -272,6 +273,24 @@ function initMap() {
 
 	}
 
+	function useBinCallback(url) {
+		resp = getBin(url,
+				// this callback is invoked after the response arrives
+				function () {
+						var blob = this.response;
+						var reader = new FileReader();
+
+						reader.addEventListener("loadend", function() {
+							ab = reader.result;
+							var sacFile = new SacFile(ab);
+						});
+
+						reader.readAsArrayBuffer(blob);
+				}
+		);
+
+	}
+
 	//################################################################################//
 
 		// listen for use of scrollbar
@@ -279,6 +298,9 @@ function initMap() {
 			// clear
 			google.maps.event.addDomListener(clear, 'click', function() {
 				clearMarkers();
+					var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC.SAC"
+					useBinCallback(url);
+
 			    });
 
 			google.maps.event.addDomListener(all, 'click', function() {
