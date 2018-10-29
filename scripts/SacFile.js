@@ -21,8 +21,9 @@ function SacFile(sacArrayBuffer) {
   // 48 words, 32 bits per word / 8 bits per byte
   var alphanum = new Int32Array(ab.slice(440, 632));
 
+
   // the rest of the file
-  var data = new Float32Array(ab.slice(440, ab.length));
+  var data = new Float32Array(ab.slice(632, ab.length));
 
   // for debugging purposes
   console.log("floats: ", floats);
@@ -36,7 +37,7 @@ function SacFile(sacArrayBuffer) {
   var plotData = [];
 
   // create plotting rows
-  for (var i = 1; i < 8000; i++) {
+  for (var i = 0; i < 200; i++) {
     var row = [];
     row.push(deltaT * i);
     row.push(data[i] / 1000);
