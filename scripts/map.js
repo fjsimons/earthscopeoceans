@@ -298,7 +298,7 @@ function initMap() {
 			// clear
 			google.maps.event.addDomListener(clear, 'click', function() {
 				clearMarkers();
-					var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC.SAC"
+					var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC"
 					useBinCallback(url);
 
 			    });
