@@ -33,7 +33,7 @@ function initMap() {
 	//other option: terrrain
 	map.setMapTypeId('satellite');
 
-	// place marker
+        // place marker
 	// var marker = new google.maps.Marker({
 	// position: papeete,
 	// 	map: map
@@ -50,6 +50,7 @@ function initMap() {
 
 		// scrape data from text callback response
 		var rows = data.split('\n');
+
 		if (rows.length <= 1) {
 			empty = new Boolean(true);
 		}
@@ -76,34 +77,17 @@ function initMap() {
 			}
 		}
 
+		// set up panning bounds
+		var bounds = new google.maps.LatLngBounds();
+
+		// set up variables
+		var legLength;
+		var legSpeed;
+		var legTime;
 		var netDisplacement;
 		var totalDistance;
 		var totalTime;
 		var avgVelocity;
-
-		if (dataPoints.length > 1) {
-			// do calculations (units: km/h)
-
-			netDisplacement = getDisplacement(dataPoints[0], dataPoints[dataPoints.length-1])/1000;
-
-			totalDistance = getDistance(dataPoints) / 1000;
-			totalTime = getTimeElapsed(dataPoints[0], dataPoints[dataPoints.length-1]);
-
-			if (totalTime == 0) {
-				avgVelocty = 0
-			} else {
-				avgVelocity = (totalDistance / totalTime);
-			}
-
-		} else {
-			netDisplacement = 0;
-			totalDistance = 0
-			totalTime = 0;
-			avgVelocity = 0;
-		}
-
-		// set up panning bounds
-		var bounds = new google.maps.LatLngBounds();
 
 		// iterate over arrays, placing markers
 		for (var i = 0; i < dataPoints.length; i++) {
@@ -128,17 +112,27 @@ function initMap() {
 			// expand bounds to fit all markers
 			bounds.extend(marker.getPosition());
 
-			// do calculations
-			var legLength;
-			var legSpeed;
-			var legTime;
-
 			// first datapoint initialized to 0
 			if (i == 0) {
 				legLength = 0;
 				legSpeed = 0;
 				legTime = 0;
+				netDisplacement = 0;
+				totalDistance = 0
+				totalTime = 0;
+				avgVelocity = 0;
+
 			} else {
+					// net calculations for each datapoint
+					netDisplacement = getDisplacement(dataPoints[0], dataPoints[i])/1000;
+					totalDistance = getDistance(dataPoints.slice(0, i+1)) / 1000;
+					totalTime = getTimeElapsed(dataPoints[0], dataPoints[i]);
+
+				if (totalTime == 0) {
+					avgVelocty = 0
+				} else {
+						avgVelocity = (totalDistance / totalTime);
+			}
 
 				// get displacement in m, convert to kilometers
 				legLength = getDisplacement(dataPoints[i-1], dataPoints[i]) / 1000;
@@ -157,18 +151,20 @@ function initMap() {
 				            totalTime, legLength, legSpeed, legTime);
 
 			markers.push(marker);
+
 		}
 
 		// pan to bounds
 		// updated to use a min zoom (13) to avoid missing imagery
 		map.fitBounds(bounds);
 		var listener = google.maps.event.addListener(map, "idle", function() {
-			if (map.getZoom() > 13) map.setZoom(13);
-			google.maps.event.removeListener(listener);
-		    });
-		} // If it wasn't empty
-	} // Closes the addToMap function
-		    
+  		if (map.getZoom() > 13) map.setZoom(13);
+  		google.maps.event.removeListener(listener);
+
+		});
+
+		}
+	}
 
 	// for dynamic info windows
 	function setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
@@ -218,6 +214,7 @@ function initMap() {
 							 '<br/><b>Net Displacement:</b> '   + roundTwo(netDisplacement) + ' km'
 
 			// content for earthquake tabs
+
 			var earthquakeTabContent = '<div id="tabContent">' +
 							 '<b>Code:</b> '    + "/* filler */" +
 							 '<br/><b>UTC Date:</b> '           + "/* filler */" +
@@ -237,15 +234,17 @@ function initMap() {
 											     '<b>Seismograms</b> '
 
 			// add info window tabs
-                        iwindow.addTab(floatName, floatTabContent);
+		  iwindow.addTab(floatName, floatTabContent);
 			iwindow.addTab(earthquakeName, earthquakeTabContent);
 			iwindow.addTab(seismograms, "");
+
+
 
 			iwindow.open(map, this);
 			iwindows.push(iwindow);
 		});
 
-	}
+}
 
 	// delete all added markers
 	function clearMarkers() {
@@ -277,127 +276,148 @@ function initMap() {
 
 	}
 
-  //################################################################################//
+	function useBinCallback(url) {
+		resp = getBin(url,
+				// this callback is invoked after the response arrives
+				function () {
+						var blob = this.response;
+						var reader = new FileReader();
 
-	// listen for use of scrollbar
+						reader.addEventListener("loadend", function() {
+							ab = reader.result;
+							var sacFile = new SacFile(ab);
+						});
 
-		// clear
-		google.maps.event.addDomListener(clear, 'click', function() {
-			clearMarkers();
-		    });
-
-		google.maps.event.addDomListener(all, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt"
-			    clearMarkers();
-			useCallback(url,"all");
-		    });
-
-		google.maps.event.addDomListener(P006, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P006_030.txt"
-			    clearMarkers();
-			useCallback(url,"P006");
-		    });
-
-		google.maps.event.addDomListener(P007, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P007_030.txt"
-			    clearMarkers();
-			useCallback(url,"P007");
-		    });
-
-		google.maps.event.addDomListener(P008, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P008_030.txt"
-			    clearMarkers();
-			useCallback(url,"P008");
-		    });
-
-		google.maps.event.addDomListener(P009, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P009_030.txt"
-			    clearMarkers();
-			useCallback(url,"P009");
-		    });
-
-		google.maps.event.addDomListener(P010, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P010_030.txt"
-			    clearMarkers();
-			useCallback(url,"P010");
-		    });
-
-		google.maps.event.addDomListener(P011, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P011_030.txt"
-			    clearMarkers();
-			useCallback(url,"P011");
-		    });
-
-		google.maps.event.addDomListener(P012, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P012_030.txt"
-			    clearMarkers();
-			useCallback(url,"P012");
-		    });
-
-		google.maps.event.addDomListener(P013, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P013_030.txt"
-			    clearMarkers();
-			useCallback(url,"P013");
-		    });
-
-		google.maps.event.addDomListener(P016, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P016_030.txt"
-			    clearMarkers();
-			useCallback(url,"P016");
-		    });
-
-		google.maps.event.addDomListener(P017, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P017_030.txt"
-			    clearMarkers();
-			useCallback(url,"P017");
-		    });
-
-		google.maps.event.addDomListener(P018, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P018_030.txt"
-			    clearMarkers();
-			useCallback(url,"P018");
-		    });
-
-		google.maps.event.addDomListener(P019, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P019_030.txt"
-			    clearMarkers();
-			useCallback(url,"P019");
-		    });
-
-		google.maps.event.addDomListener(P020, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P020_030.txt"
-			    clearMarkers();
-			useCallback(url,"P020");
-		    });
-
-		google.maps.event.addDomListener(P021, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P021_030.txt"
-			    clearMarkers();
-			useCallback(url,"P021");
-		    });
-
-		google.maps.event.addDomListener(P022, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P022_030.txt"
-			    clearMarkers();
-			useCallback(url,"P022");
-		    });
-
-		google.maps.event.addDomListener(P023, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P023_030.txt"
-			    clearMarkers();
-			useCallback(url,"P023");
-		    });
-
-		google.maps.event.addDomListener(P024, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P024_030.txt"
-			    clearMarkers();
-			useCallback(url,"P024");
-		    });
-
-		google.maps.event.addDomListener(P025, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/simons/SOM/P025_030.txt"
-			    clearMarkers();
-			useCallback(url,"P025");
-		    });
+						reader.readAsArrayBuffer(blob);
+				}
+		);
 
 	}
+
+	//################################################################################//
+
+		// listen for use of scrollbar
+
+			// clear
+			google.maps.event.addDomListener(clear, 'click', function() {
+				clearMarkers();
+					var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC.SAC"
+					useBinCallback(url);
+
+			    });
+
+			google.maps.event.addDomListener(all, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt"
+				    clearMarkers();
+				useCallback(url,"all");
+			    });
+
+			google.maps.event.addDomListener(P006, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P006_030.txt"
+				    clearMarkers();
+				useCallback(url,"P006");
+			    });
+
+			google.maps.event.addDomListener(P007, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P007_030.txt"
+				    clearMarkers();
+				useCallback(url,"P007");
+			    });
+
+			google.maps.event.addDomListener(P008, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P008_030.txt"
+				    clearMarkers();
+				useCallback(url,"P008");
+			    });
+
+			google.maps.event.addDomListener(P009, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P009_030.txt"
+				    clearMarkers();
+				useCallback(url,"P009");
+			    });
+
+			google.maps.event.addDomListener(P010, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P010_030.txt"
+				    clearMarkers();
+				useCallback(url,"P010");
+			    });
+
+			google.maps.event.addDomListener(P011, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P011_030.txt"
+				    clearMarkers();
+				useCallback(url,"P011");
+			    });
+
+			google.maps.event.addDomListener(P012, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P012_030.txt"
+				    clearMarkers();
+				useCallback(url,"P012");
+			    });
+
+			google.maps.event.addDomListener(P013, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P013_030.txt"
+				    clearMarkers();
+				useCallback(url,"P013");
+			    });
+
+			google.maps.event.addDomListener(P016, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P016_030.txt"
+				    clearMarkers();
+				useCallback(url,"P016");
+			    });
+
+			google.maps.event.addDomListener(P017, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P017_030.txt"
+				    clearMarkers();
+				useCallback(url,"P017");
+			    });
+
+			google.maps.event.addDomListener(P018, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P018_030.txt"
+				    clearMarkers();
+				useCallback(url,"P018");
+			    });
+
+			google.maps.event.addDomListener(P019, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P019_030.txt"
+				    clearMarkers();
+				useCallback(url,"P019");
+			    });
+
+			google.maps.event.addDomListener(P020, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P020_030.txt"
+				    clearMarkers();
+				useCallback(url,"P020");
+			    });
+
+			google.maps.event.addDomListener(P021, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P021_030.txt"
+				    clearMarkers();
+				useCallback(url,"P021");
+			    });
+
+			google.maps.event.addDomListener(P022, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P022_030.txt"
+				    clearMarkers();
+				useCallback(url,"P022");
+			    });
+
+			google.maps.event.addDomListener(P023, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P023_030.txt"
+				    clearMarkers();
+				useCallback(url,"P023");
+			    });
+
+			google.maps.event.addDomListener(P024, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P024_030.txt"
+				    clearMarkers();
+				useCallback(url,"P024");
+			    });
+
+			google.maps.event.addDomListener(P025, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/simons/SOM/P025_030.txt"
+				    clearMarkers();
+				useCallback(url,"P025");
+			    });
+
+		}
