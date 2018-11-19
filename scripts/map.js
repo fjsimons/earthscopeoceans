@@ -1,9 +1,9 @@
 /**
 	Map class
+
 	@author Jonah Rubin
-	9/16/18
 	@author Frederik Simons
-	8/13/18
+	11/19/2018
 */
 
 function initMap() {
@@ -21,20 +21,23 @@ function initMap() {
 	var guyot = {lat: 40.34585, lng: -74.65475};
 	var papeete = {lat: -17.53733, lng: -149.5665};
 
-	// default map center
+	// our default map center
 	var map = new google.maps.Map(mapDiv, {
-		zoom: 13,
-		center: papeete
+		// zoom: 13,
+		// center: papeete
 	});
+
+	// landing page
+	useCallback("http://geoweb.princeton.edu/people/simons/SOM/all.txt","all");
 
 	//other option: terrrain
 	map.setMapTypeId('satellite');
 
-	// place marker
-	var marker = new google.maps.Marker({
-	position: papeete,
-		map: map
-	});
+        // place marker
+	// var marker = new google.maps.Marker({
+	// position: papeete,
+	// 	map: map
+	// });
 
 	// for rounding to two decimal places
 	function roundTwo(num) {
