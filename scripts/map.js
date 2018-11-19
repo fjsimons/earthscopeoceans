@@ -21,11 +21,14 @@ function initMap() {
 	var guyot = {lat: 40.34585, lng: -74.65475};
 	var papeete = {lat: -17.53733, lng: -149.5665};
 
-	// default map center
+	// our default map center
 	var map = new google.maps.Map(mapDiv, {
-		zoom: 13,
-		center: papeete
+		// zoom: 13,
+		// center: papeete
 	});
+
+	// landing page
+	useCallback("http://geoweb.princeton.edu/people/simons/SOM/all.txt","all");
 
 	//other option: terrrain
 	map.setMapTypeId('satellite');
@@ -154,17 +157,18 @@ function initMap() {
 				            totalTime, legLength, legSpeed, legTime);
 
 			markers.push(marker);
-
 		}
 
 		// pan to bounds
 		// updated to use a min zoom (13) to avoid missing imagery
 		map.fitBounds(bounds);
 		var listener = google.maps.event.addListener(map, "idle", function() {
-  		if (map.getZoom() > 13) map.setZoom(13);
-  		google.maps.event.removeListener(listener);
-		}
-	}
+			if (map.getZoom() > 13) map.setZoom(13);
+			google.maps.event.removeListener(listener);
+		    });
+		} // If it wasn't empty
+	} // Closes the addToMap function
+		    
 
 	// for dynamic info windows
 	function setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
@@ -214,7 +218,6 @@ function initMap() {
 							 '<br/><b>Net Displacement:</b> '   + roundTwo(netDisplacement) + ' km'
 
 			// content for earthquake tabs
-
 			var earthquakeTabContent = '<div id="tabContent">' +
 							 '<b>Code:</b> '    + "/* filler */" +
 							 '<br/><b>UTC Date:</b> '           + "/* filler */" +
@@ -234,11 +237,9 @@ function initMap() {
 											     '<b>Seismograms</b> '
 
 			// add info window tabs
-		  iwindow.addTab(floatName, floatTabContent);
+                        iwindow.addTab(floatName, floatTabContent);
 			iwindow.addTab(earthquakeName, earthquakeTabContent);
 			iwindow.addTab(seismograms, "");
-
-
 
 			iwindow.open(map, this);
 			iwindows.push(iwindow);
