@@ -34,22 +34,46 @@ function SacFile(sacArrayBuffer) {
   var data = new Float32Array(ab.slice(632, ab.length));
 
   // for debugging purposes
-  console.log("HdrF: ", HdrF);
-  console.log("HdrI: ", HdrI);
-  console.log("HdrL: ", HdrL);
-  console.log("HdrK: ", HdrK);
-  console.log("data: ", data);
+  // console.log("HdrF: ", HdrF);
+  // console.log("HdrI: ", HdrI);
+  // console.log("HdrL: ", HdrL);
+  // console.log("HdrK: ", HdrK);
+  // console.log("data: ", data);
 
   // parsed header variables
-  var DELTA = HdrF[0];  
-  var B     = HdrF[5];  
+  var DELTA = HdrF[0];
+  var B     = HdrF[5];
   var STLA  = HdrF[32];
   var STLO  = HdrF[33];
   var STDP  = HdrF[34];
   var NPTS  = HdrN[9];
-  var IDEP  = HdrN[15];
+  var IDEP  = HdrI[1];
+
+  // resolve the enumerated arrays
+  var IDEPr
+
+      switch (IDEP) {
+	  case 5 :
+	      IDEPr = "unknown";
+	      break;
+	  case 6 :
+	      IDEPr = "displacement";
+	      break;
+	  case 7 :
+	      IDEPr = "velocity";
+	      break;
+	  case 8 :
+	      IDEPr = "acceleration";
+	      break;
+	  case 50:
+	      IDEPr = "volts";
+	  break;
+	  default:
+	      IDEPr = IDEP;
+	  }
 
   console.log("IDEP: ", IDEP);
+  console.log("IDEPr: ", IDEPr);
 
   // check that data.length equals NPTS
 
@@ -57,7 +81,7 @@ function SacFile(sacArrayBuffer) {
   var plotData = [];
 
   // create plotting rows
-  for (var i = 0; i < data.length; i++) {
+  for (var i = 0; i < 200; i++) {
     var row = [];
     row.push(B + DELTA * i);
     row.push(data[i]);
@@ -65,15 +89,15 @@ function SacFile(sacArrayBuffer) {
   }
 
   // makes the plot
-  google.charts.setOnLoadCallback(drawChart(plotData));
+  google.charts.setOnLoadCallback(drawChart(plotData, IDEPr));
 }
 
 // draw chart
 google.charts.load('current', {'packages':['corechart']});
 
-function drawChart(sacData) {
+function drawChart(sacData, IDEPr) {
   var data = google.visualization.arrayToDataTable([
-    ['time', 'displacement'],
+    ['', ''],
     [0,  0]
   ]);
 
@@ -88,11 +112,11 @@ function drawChart(sacData) {
       title: 'time (s)'
     },
     vAxis: {
-      title: 'displacement'
+      title: IDEPr
     },
 
-    curveType: 'function' //,
-    // legend: { position: 'bottom' }
+    curveType: 'function',
+    legend: { position: 'none' }
 
   };
 
