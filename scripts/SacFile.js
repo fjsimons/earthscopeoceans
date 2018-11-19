@@ -61,9 +61,20 @@ function drawChart(sacData) {
 
   // set up chart
   var options = {
-    title: 'Seismogram',
+
+    title: 'Float Name',
+
+    hAxis: {
+      title: 'Time (s)'
+    },
+    vAxis: {
+      title: 'Displacement'
+    },
+
     curveType: 'function',
     legend: { position: 'bottom' }
+
+
   };
 
   var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));

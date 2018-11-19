@@ -298,13 +298,18 @@ function initMap() {
 
 		// listen for use of scrollbar
 
+		google.maps.event.addDomListener(plot, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC"
+				useBinCallback(url);
+
+				});
+
 			// clear
 			google.maps.event.addDomListener(clear, 'click', function() {
 				clearMarkers();
-					var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC.SAC"
-					useBinCallback(url);
-
 			    });
+
+
 
 			google.maps.event.addDomListener(all, 'click', function() {
 				var url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt"
