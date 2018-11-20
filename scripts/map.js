@@ -297,11 +297,15 @@ function initMap() {
 
 	}
 
+setUpScrollBar();
+
 	//################################################################################//
+
+function setUpScrollBar() {
 	// make buttons dynamically
 	const numFloats = 25;
 	makeFloatEvents("all");
-	
+
 	// autogenerate "numFloats" events
 	// if they do not exist, the button will not be created
 	for (var i = 0; i <= numFloats; i++) {
@@ -340,5 +344,5 @@ function initMap() {
 	google.maps.event.addDomListener(clear, 'click', function() {
 		clearMarkers();
 	    });
-
-	}
+		}
+}

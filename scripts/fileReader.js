@@ -2,7 +2,7 @@
 	File reader class
 
 	@author Jonah Rubin
-	4/1/18
+	11/20/2018
 */
 
 
