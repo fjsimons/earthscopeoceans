@@ -174,7 +174,7 @@ function initMap() {
 
 			// info window preferences
 			var  iwindow = new InfoBubble({
-				maxWidth: 125,
+				maxWidth: 320,
 				maxHeight: 230,
 				shadowStyle: 1,
 				padding: 10,
