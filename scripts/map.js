@@ -3,7 +3,7 @@
 
 	@author Jonah Rubin
 	@author Frederik Simons
-	11/19/2018
+	11/20/2018
 */
 
 function initMap() {
@@ -40,8 +40,8 @@ function initMap() {
 	// });
 
 	// for rounding to two decimal places
-	function roundTwo(num) {
-		return parseFloat(num).toFixed(2);
+	function roundit(num) {
+		return parseFloat(num).toFixed(3);
 	}
 
 	// add data to map
@@ -56,26 +56,26 @@ function initMap() {
 		}
 
 		if (empty == false) {
-		 for (i = 0; i < rows.length - 1; i++) {
-			  var corrupted = new Boolean(false);
-		    var elements = rows[i].split(/\s+/);
+		    for (i = 0; i < rows.length - 1; i++) {
+			var corrupted = new Boolean(false);
+			var elements = rows[i].split(/\s+/);
 
-				 for (var j = 2; j < elements.length; j++) {
-					if (isNaN(elements[j])) {
-						corrupted = new Boolean(true);
-					}
-				 }
-
-				// store each data point as an object
-				if (corrupted == false) {
-		    	var dataPoint = new DataPoint(name, elements[0] + " " + elements[1],
-                                                        elements[2], elements[3],elements[4],
-                                                        elements[5], elements[6],elements[7],
-                                                        elements[8], elements[9], elements[10],
-                                                        elements[11], elements[12], elements[13]);
-     			dataPoints.push(dataPoint);
+			for (var j = 2; j < elements.length; j++) {
+			    if (isNaN(elements[j])) {
+				corrupted = new Boolean(true);
+			    }
 			}
-		}
+
+			// store each data point as an object
+			if (corrupted == false) {
+			    var dataPoint = new DataPoint(name, elements[0] + " " + elements[1],
+							  elements[2], elements[3],elements[4],
+							  elements[5], elements[6],elements[7],
+							  elements[8], elements[9], elements[10],
+							  elements[11], elements[12], elements[13]);
+			    dataPoints.push(dataPoint);
+			}
+		    }
 
 		// set up panning bounds
 		var bounds = new google.maps.LatLngBounds();
@@ -151,7 +151,6 @@ function initMap() {
 				            totalTime, legLength, legSpeed, legTime);
 
 			markers.push(marker);
-
 		}
 
 		// pan to bounds
@@ -160,7 +159,6 @@ function initMap() {
 		var listener = google.maps.event.addListener(map, "idle", function() {
   		if (map.getZoom() > 13) map.setZoom(13);
   		google.maps.event.removeListener(listener);
-
 		});
 
 		}
@@ -204,17 +202,16 @@ function initMap() {
 							 '<br/><b>Internal Pressure:</b> '  + dataPoints[i].Pint + ' Pa' +
 							 '<br/><b>External Pressure:</b> '  + dataPoints[i].Pext + ' mbar' +
 							 '<br/> ' +
-							 '<br/><b>Leg Length:</b> '         + roundTwo(legLength) + ' km' +
-							 '<br/><b>Leg Time:</b> '           + roundTwo(legTime) + ' h' +
-							 '<br/><b>Leg Speed:</b> '          + roundTwo(legSpeed) + ' km/h' +
+							 '<br/><b>Leg Length:</b> '         + roundit(legLength) + ' km' +
+							 '<br/><b>Leg Time:</b> '           + roundit(legTime) + ' h' +
+							 '<br/><b>Leg Speed:</b> '          + roundit(legSpeed) + ' km/h' +
 
-							 '<br/><b>Total Time:</b> '         + roundTwo(totalTime) + ' h' +
-							 '<br/><b>Distance Travelled:</b> ' + roundTwo(totalDistance) + ' km' +
-							 '<br/><b>Average Speed:</b> '      + roundTwo(avgVelocity) + ' km/h' +
-							 '<br/><b>Net Displacement:</b> '   + roundTwo(netDisplacement) + ' km'
+							 '<br/><b>Total Time:</b> '         + roundit(totalTime) + ' h' +
+							 '<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
+							 '<br/><b>Average Speed:</b> '      + roundit(avgVelocity) + ' km/h' +
+							 '<br/><b>Net Displacement:</b> '   + roundit(netDisplacement) + ' km'
 
 			// content for earthquake tabs
-
 			var earthquakeTabContent = '<div id="tabContent">' +
 							 '<b>Code:</b> '    + "/* filler */" +
 							 '<br/><b>UTC Date:</b> '           + "/* filler */" +
@@ -224,26 +221,20 @@ function initMap() {
 							 '<br/><b>Great Circle Distance:</b> '            +"/* filler */" +
 							 '<br/><b>Source:</b> ' +"/* filler */"
 
-			var floatName      = '<div id="tabNames">' +
-											     '<b>Float Info</b> '
+			var floatName      = '<div id="tabNames">' + '<b>Float Info</b> '
 
-			var earthquakeName = '<div id="tabNames">' +
-											     '<b>EarthQuake Info</b> '
+			var earthquakeName = '<div id="tabNames">' + '<b>EarthQuake Info</b> '
 
-			var seismograms    = '<div id="tabNames">' +
-											     '<b>Seismograms</b> '
+			var seismograms    = '<div id="tabNames">' + '<b>Seismograms</b> '
 
 			// add info window tabs
-		  iwindow.addTab(floatName, floatTabContent);
-			iwindow.addTab(earthquakeName, earthquakeTabContent);
-			iwindow.addTab(seismograms, "");
-
-
+			iwindow.addTab(floatName, floatTabContent);
+			// iwindow.addTab(earthquakeName, earthquakeTabContent);
+			// iwindow.addTab(seismograms, "");
 
 			iwindow.open(map, this);
 			iwindows.push(iwindow);
 		});
-
 }
 
 	// delete all added markers
@@ -264,33 +255,33 @@ function initMap() {
 		}
 	}
 
-	//handles asnyc use of data
+	// handles async use of data
 	function useCallback(url, name) {
-		resp = get(url,
-				// this callback is invoked after the response arrives
-				function () {
-						var data  = this.responseText;
-						addToMap(data, name);
-				}
-		);
+	    resp = get(url,
+		       // this callback is invoked after the response arrives
+		       function () {
+			   var data  = this.responseText;
+			   addToMap(data, name);
+		       }
+		       );
 
 	}
 
 	function useBinCallback(url) {
-		resp = getBin(url,
-				// this callback is invoked after the response arrives
-				function () {
-						var blob = this.response;
-						var reader = new FileReader();
+	    resp = getBin(url,
+			  // this callback is invoked after the response arrives
+			  function () {
+			      var blob = this.response;
+			      var reader = new FileReader();
 
-						reader.addEventListener("loadend", function() {
-							ab = reader.result;
-							var sacFile = new SacFile(ab);
-						});
+			      reader.addEventListener("loadend", function() {
+				      ab = reader.result;
+				      var sacFile = new SacFile(ab);
+				  });
 
-						reader.readAsArrayBuffer(blob);
-				}
-		);
+			      reader.readAsArrayBuffer(blob);
+			  }
+			  );
 
 	}
 
@@ -298,13 +289,17 @@ function initMap() {
 
 		// listen for use of scrollbar
 
+		google.maps.event.addDomListener(plot, 'click', function() {
+				var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC"
+				useBinCallback(url);
+
+				});
+
 			// clear
 			google.maps.event.addDomListener(clear, 'click', function() {
 				clearMarkers();
-					var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC.SAC"
-					useBinCallback(url);
-
 			    });
+
 
 			google.maps.event.addDomListener(all, 'click', function() {
 				var url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt"
