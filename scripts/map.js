@@ -301,7 +301,7 @@ function initMap() {
 	}
 
 	//################################################################################//
-	// make buttons dynamically 
+	// make buttons dynamically
 	// var floatIDs = [P006, P007, P008, P009, P010, P011, P012];
 	//
 	//
