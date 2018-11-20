@@ -57,14 +57,15 @@ function initMap() {
 
 		if (empty == false) {
 
-		    for (i = 0; i < rows.length - 1; i++) {
-			var corrupted = new Boolean(false);
-			var elements = rows[i].split(/\s+/);
+		  for (i = 0; i < rows.length - 1; i++) {
+				var corrupted = new Boolean(false);
+				var elements = rows[i].split(/\s+/);
 
-			// check to make sure everything but the date is a number
-			for (var j = 3; j < elements.length; j++) {
+				// check to make sure everything but the date is a number
+				for (var j = 3; j < elements.length; j++) {
 			    if (isNaN(elements[j])) {
-				corrupted = new Boolean(true);
+						console.log("Corrupted");
+						corrupted = new Boolean(true);
 
 			    }
 			}
@@ -271,14 +272,11 @@ function initMap() {
 		}
 
 
-	    resp = get(url,
-		       // this callback is invoked after the response arrives
-
-		       function () {
-			   var data  = this.responseText;
-			   addToMap(data, name);
-		       }
-		       );
+	   resp = get(url,
+		 	function () {
+				var data  = this.responseText;
+			  addToMap(data, name);
+		 });
 
 	}
 
@@ -295,115 +293,40 @@ function initMap() {
 				  });
 
 			      reader.readAsArrayBuffer(blob);
-			  }
-			  );
+			  });
 
 	}
 
 	//################################################################################//
 	// make buttons dynamically
-	// var floatIDs = [P006, P007, P008, P009, P010, P011, P012];
-	//
-	//
-	// for (var i = 0; i < floatIDs.length; i++) {
-	// 	google.maps.event.addDomListener(floatIDs[i], 'click', function() {
-	//
-	// 		useCallback(floatStrs[i]);
-	// 	});
-	//
-	// }
+	var floatIDs = ["P006", "P007", "P008", "P009", "P010", "P011", "P012", "P013",
+	                "P016", "P017", "P018", "P019", "P020", "P021", "P022", "P023",
+									"P024", "P025", "all"];
 
-		// listen for use of scrollbar
+	for (var i = 0; i < floatIDs.length; i++) {
+		makeFloatEvents(floatIDs[i]);
+	}
 
-		google.maps.event.addDomListener(plot, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC"
-				useBinCallback(url);
+	function makeFloatEvents(id) {
+		google.maps.event.addDomListener(document.getElementById(id), 'click', function() {
+			useCallback(id);
+		});
+	}
 
-				});
+	// sac event
+	google.maps.event.addDomListener(plot, 'click', function() {
+			var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC"
+			useBinCallback(url);
+			});
 
-			// clear
-			google.maps.event.addDomListener(clear, 'click', function() {
-				clearMarkers();
-			    });
+	// clear event
+	google.maps.event.addDomListener(clear, 'click', function() {
+		clearMarkers();
+	    });
 
 
-			google.maps.event.addDomListener(all, 'click', function() {
-				useCallback("all");
-			    });
+	google.maps.event.addDomListener(all, 'click', function() {
+		useCallback("all");
+	 });
 
-			google.maps.event.addDomListener(P006, 'click', function() {
-				useCallback("P006");
-			    });
-
-			google.maps.event.addDomListener(P007, 'click', function() {
-				useCallback("P007");
-			    });
-
-			google.maps.event.addDomListener(P008, 'click', function() {
-				useCallback("P008");
-			    });
-
-			google.maps.event.addDomListener(P009, 'click', function() {
-				useCallback("P009");
-			    });
-
-			google.maps.event.addDomListener(P010, 'click', function() {
-				useCallback("P010");
-			    });
-
-			google.maps.event.addDomListener(P011, 'click', function() {
-				useCallback("P011");
-			    });
-
-			google.maps.event.addDomListener(P012, 'click', function() {
-				useCallback("P012");
-			    });
-
-			google.maps.event.addDomListener(P013, 'click', function() {
-				useCallback("P013");
-			    });
-
-			google.maps.event.addDomListener(P016, 'click', function() {
-				useCallback("P016");
-			    });
-
-			google.maps.event.addDomListener(P017, 'click', function() {
-				useCallback("P017");
-			    });
-
-			google.maps.event.addDomListener(P018, 'click', function() {
-				useCallback("P018");
-			    });
-
-			google.maps.event.addDomListener(P019, 'click', function() {
-				useCallback("P019");
-			    });
-
-			google.maps.event.addDomListener(P020, 'click', function() {
-				useCallback("P020");
-			    });
-
-			google.maps.event.addDomListener(P021, 'click', function() {
-				useCallback("P021");
-			    });
-
-			google.maps.event.addDomListener(P022, 'click', function() {
-				useCallback("P022");
-			    });
-
-			google.maps.event.addDomListener(P023, 'click', function() {
-				    clearMarkers();
-				useCallback("P023");
-			    });
-
-			google.maps.event.addDomListener(P024, 'click', function() {
-				    clearMarkers();
-				useCallback("P024");
-			    });
-
-			google.maps.event.addDomListener(P025, 'click', function() {
-				    clearMarkers();
-				useCallback("P025");
-			    });
-
-		}
+	}
