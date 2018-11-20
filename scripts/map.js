@@ -299,18 +299,35 @@ function initMap() {
 
 	//################################################################################//
 	// make buttons dynamically
-	var floatIDs = ["P006", "P007", "P008", "P009", "P010", "P011", "P012", "P013",
-	                "P016", "P017", "P018", "P019", "P020", "P021", "P022", "P023",
-									"P024", "P025", "all"];
+	const numFloats = 25;
+	makeFloatEvents("all");
+	
+	// autogenerate "numFloats" events
+	// if they do not exist, the button will not be created
+	for (var i = 0; i <= numFloats; i++) {
+		var floatID;
+		if (i < 10) {
+			floatID = ("P00" + i.toString());
+		} else if (i < 100) {
+			floatID = ("P0" + i.toString());
+		} else {
+			floatID = ("P" + i.toString());
+		}
 
-	for (var i = 0; i < floatIDs.length; i++) {
-		makeFloatEvents(floatIDs[i]);
+		makeFloatEvents(floatID);
 	}
 
+	// float events
 	function makeFloatEvents(id) {
-		google.maps.event.addDomListener(document.getElementById(id), 'click', function() {
-			useCallback(id);
-		});
+		try {
+			google.maps.event.addDomListener(document.getElementById(id), 'click', function() {
+				useCallback(id);
+			});		}
+
+		catch(err) {
+    	console.log(err.message);
+		}
+
 	}
 
 	// sac event
@@ -323,10 +340,5 @@ function initMap() {
 	google.maps.event.addDomListener(clear, 'click', function() {
 		clearMarkers();
 	    });
-
-
-	google.maps.event.addDomListener(all, 'click', function() {
-		useCallback("all");
-	 });
 
 	}
