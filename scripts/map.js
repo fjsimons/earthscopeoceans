@@ -27,7 +27,8 @@ function initMap() {
 	});
 
 	// landing page
-	useCallback("http://geoweb.princeton.edu/people/simons/SOM/all.txt","all");
+	useCallback("all");
+	console.log("here");
 
 	//other option: terrrain
 	map.setMapTypeId('satellite');
@@ -55,23 +56,27 @@ function initMap() {
 		}
 
 		if (empty == false) {
+
 		    for (i = 0; i < rows.length - 1; i++) {
 			var corrupted = new Boolean(false);
 			var elements = rows[i].split(/\s+/);
 
-			for (var j = 2; j < elements.length; j++) {
+			// check to make sure everything but the date is a number
+			for (var j = 3; j < elements.length; j++) {
 			    if (isNaN(elements[j])) {
 				corrupted = new Boolean(true);
+
 			    }
 			}
 
 			// store each data point as an object
 			if (corrupted == false) {
-			    var dataPoint = new DataPoint(name, elements[0] + " " + elements[1],
-							  elements[2], elements[3],elements[4],
-							  elements[5], elements[6],elements[7],
-							  elements[8], elements[9], elements[10],
-							  elements[11], elements[12], elements[13]);
+
+			    var dataPoint = new DataPoint(elements[0], elements[1] + " " + elements[2],
+							  elements[3], elements[4],elements[5],
+							  elements[6], elements[7],elements[8],
+							  elements[9], elements[10], elements[11],
+							  elements[12], elements[13], elements[14]);
 			    dataPoints.push(dataPoint);
 			}
 		    }
@@ -255,9 +260,20 @@ function initMap() {
 	}
 
 	// handles async use of data
-	function useCallback(url, name) {
+	function useCallback(name) {
+		clearMarkers();
+
+		var url;
+		if (name === "all") {
+			url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt";
+		} else {
+			url = "http://geoweb.princeton.edu/people/simons/SOM/" + name + "_030.txt";
+		}
+
+
 	    resp = get(url,
 		       // this callback is invoked after the response arrives
+
 		       function () {
 			   var data  = this.responseText;
 			   addToMap(data, name);
@@ -285,6 +301,17 @@ function initMap() {
 	}
 
 	//################################################################################//
+	// make buttons dynamically 
+	// var floatIDs = [P006, P007, P008, P009, P010, P011, P012];
+	//
+	//
+	// for (var i = 0; i < floatIDs.length; i++) {
+	// 	google.maps.event.addDomListener(floatIDs[i], 'click', function() {
+	//
+	// 		useCallback(floatStrs[i]);
+	// 	});
+	//
+	// }
 
 		// listen for use of scrollbar
 
@@ -301,117 +328,82 @@ function initMap() {
 
 
 			google.maps.event.addDomListener(all, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt"
-				    clearMarkers();
-				useCallback(url,"all");
+				useCallback("all");
 			    });
 
 			google.maps.event.addDomListener(P006, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P006_030.txt"
-				    clearMarkers();
-				useCallback(url,"P006");
+				useCallback("P006");
 			    });
 
 			google.maps.event.addDomListener(P007, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P007_030.txt"
-				    clearMarkers();
-				useCallback(url,"P007");
+				useCallback("P007");
 			    });
 
 			google.maps.event.addDomListener(P008, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P008_030.txt"
-				    clearMarkers();
-				useCallback(url,"P008");
+				useCallback("P008");
 			    });
 
 			google.maps.event.addDomListener(P009, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P009_030.txt"
-				    clearMarkers();
-				useCallback(url,"P009");
+				useCallback("P009");
 			    });
 
 			google.maps.event.addDomListener(P010, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P010_030.txt"
-				    clearMarkers();
-				useCallback(url,"P010");
+				useCallback("P010");
 			    });
 
 			google.maps.event.addDomListener(P011, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P011_030.txt"
-				    clearMarkers();
-				useCallback(url,"P011");
+				useCallback("P011");
 			    });
 
 			google.maps.event.addDomListener(P012, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P012_030.txt"
-				    clearMarkers();
-				useCallback(url,"P012");
+				useCallback("P012");
 			    });
 
 			google.maps.event.addDomListener(P013, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P013_030.txt"
-				    clearMarkers();
-				useCallback(url,"P013");
+				useCallback("P013");
 			    });
 
 			google.maps.event.addDomListener(P016, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P016_030.txt"
-				    clearMarkers();
-				useCallback(url,"P016");
+				useCallback("P016");
 			    });
 
 			google.maps.event.addDomListener(P017, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P017_030.txt"
-				    clearMarkers();
-				useCallback(url,"P017");
+				useCallback("P017");
 			    });
 
 			google.maps.event.addDomListener(P018, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P018_030.txt"
-				    clearMarkers();
-				useCallback(url,"P018");
+				useCallback("P018");
 			    });
 
 			google.maps.event.addDomListener(P019, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P019_030.txt"
-				    clearMarkers();
-				useCallback(url,"P019");
+				useCallback("P019");
 			    });
 
 			google.maps.event.addDomListener(P020, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P020_030.txt"
-				    clearMarkers();
-				useCallback(url,"P020");
+				useCallback("P020");
 			    });
 
 			google.maps.event.addDomListener(P021, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P021_030.txt"
-				    clearMarkers();
-				useCallback(url,"P021");
+				useCallback("P021");
 			    });
 
 			google.maps.event.addDomListener(P022, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P022_030.txt"
-				    clearMarkers();
-				useCallback(url,"P022");
+				useCallback("P022");
 			    });
 
 			google.maps.event.addDomListener(P023, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P023_030.txt"
 				    clearMarkers();
-				useCallback(url,"P023");
+				useCallback("P023");
 			    });
 
 			google.maps.event.addDomListener(P024, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P024_030.txt"
 				    clearMarkers();
-				useCallback(url,"P024");
+				useCallback("P024");
 			    });
 
 			google.maps.event.addDomListener(P025, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/simons/SOM/P025_030.txt"
 				    clearMarkers();
-				useCallback(url,"P025");
+				useCallback("P025");
 			    });
 
 		}
