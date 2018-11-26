@@ -52,7 +52,7 @@ function SacFile(sacArrayBuffer) {
   // resolve the enumerated arrays
   var IDEPr
 
-      switch (IDEP) {
+  switch (IDEP) {
 	  case 5 :
 	      IDEPr = "unknown";
 	      break;
@@ -67,10 +67,10 @@ function SacFile(sacArrayBuffer) {
 	      break;
 	  case 50:
 	      IDEPr = "volts";
-	  break;
+	      break;
 	  default:
 	      IDEPr = IDEP;
-	  }
+	}
 
   console.log("IDEP: ", IDEP);
   console.log("IDEPr: ", IDEPr);

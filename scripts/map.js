@@ -297,14 +297,14 @@ function initMap() {
 
 	}
 
-setUpScrollBar();
+setUpEvents();
 
 	//################################################################################//
 
-function setUpScrollBar() {
+function setUpEvents() {
 	// make buttons dynamically
 	const numFloats = 25;
-	makeFloatEvents("all");
+	addEvents("all");
 
 	// autogenerate "numFloats" events
 	// if they do not exist, the button will not be created
@@ -318,11 +318,11 @@ function setUpScrollBar() {
 			floatID = ("P" + i.toString());
 		}
 
-		makeFloatEvents(floatID);
+		addEvents(floatID);
 	}
 
 	// float events
-	function makeFloatEvents(id) {
+	function addEvents(id) {
 		try {
 			google.maps.event.addDomListener(document.getElementById(id), 'click', function() {
 				useCallback(id);
