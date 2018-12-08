@@ -33,7 +33,7 @@ function initMap() {
 	//other option: terrrain
 	map.setMapTypeId('satellite');
 
-        // place marker
+  // place marker
 	// var marker = new google.maps.Marker({
 	// position: papeete,
 	// 	map: map
@@ -68,19 +68,23 @@ function initMap() {
 						corrupted = new Boolean(true);
 
 			    }
-			}
+			  }
 
-			// store each data point as an object
-			if (corrupted == false) {
+			  // store each data point as an object
+			  if (corrupted == false) {
 
-			    var dataPoint = new DataPoint(elements[0], elements[1] + " " + elements[2],
-							  elements[3], elements[4],elements[5],
-							  elements[6], elements[7],elements[8],
-							  elements[9], elements[10], elements[11],
-							  elements[12], elements[13], elements[14]);
-			    dataPoints.push(dataPoint);
+			       var dataPoint = new DataPoint(elements[0], elements[1] + " " + elements[2],
+							                             elements[3], elements[4],elements[5],
+							                             elements[6], elements[7],elements[8],
+							                             elements[9], elements[10], elements[11],
+							                             elements[12], elements[13], elements[14]);
+			       dataPoints.push(dataPoint);
 			}
-		    }
+	  }
+
+		// sort by date to make sure the datapoints
+		// are in order from oldest to newest
+		dataPoints = selectionSort(dataPoints);
 
 		// set up panning bounds
 		var bounds = new google.maps.LatLngBounds();
@@ -297,52 +301,51 @@ function initMap() {
 
 	}
 
-setUpEvents();
+	setUpEvents();
 
 	//################################################################################//
+	function setUpEvents() {
+  	// make buttons dynamically
+  	const numFloats = 25;
+  	addEvents("all");
 
-function setUpEvents() {
-	// make buttons dynamically
-	const numFloats = 25;
-	addEvents("all");
+  	// autogenerate "numFloats" events
+  	// if they do not exist, the button will not be created
+  	for (var i = 0; i <= numFloats; i++) {
+  		var floatID;
+  		if (i < 10) {
+  			floatID = ("P00" + i.toString());
+  		} else if (i < 100) {
+  			floatID = ("P0" + i.toString());
+  		} else {
+  			floatID = ("P" + i.toString());
+  		}
 
-	// autogenerate "numFloats" events
-	// if they do not exist, the button will not be created
-	for (var i = 0; i <= numFloats; i++) {
-		var floatID;
-		if (i < 10) {
-			floatID = ("P00" + i.toString());
-		} else if (i < 100) {
-			floatID = ("P0" + i.toString());
-		} else {
-			floatID = ("P" + i.toString());
-		}
+  		addEvents(floatID);
+  	}
 
-		addEvents(floatID);
-	}
+  	// float events
+  	function addEvents(id) {
+  		try {
+  			google.maps.event.addDomListener(document.getElementById(id), 'click', function() {
+  				useCallback(id);
+  			});		}
 
-	// float events
-	function addEvents(id) {
-		try {
-			google.maps.event.addDomListener(document.getElementById(id), 'click', function() {
-				useCallback(id);
-			});		}
+  		catch(err) {
+      	console.log(err.message);
+  		}
 
-		catch(err) {
-    	console.log(err.message);
-		}
+  	}
 
-	}
+  	// sac event
+  	google.maps.event.addDomListener(plot, 'click', function() {
+  			var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC"
+  			useBinCallback(url);
+  			});
 
-	// sac event
-	google.maps.event.addDomListener(plot, 'click', function() {
-			var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC"
-			useBinCallback(url);
-			});
-
-	// clear event
-	google.maps.event.addDomListener(clear, 'click', function() {
-		clearMarkers();
-	    });
-		}
+  	// clear event
+  	google.maps.event.addDomListener(clear, 'click', function() {
+  		clearMarkers();
+  	    });
+  		}
 }
