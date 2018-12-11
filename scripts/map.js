@@ -98,7 +98,7 @@ function initMap() {
 			var latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
 
 			// set up marker, fade on age, unless using the 'all' option
-			if (dataPoints[i].name === 'all') {
+			if (name === 'all') {
 				var marker = new google.maps.Marker({
 					position: latLng,
 					map: map,
@@ -273,7 +273,6 @@ function initMap() {
 
 	    resp = get(url,
 		       // this callback is invoked after the response arrives
-
 		       function () {
 			   var data  = this.responseText;
 			   addToMap(data, name);
@@ -315,11 +314,11 @@ function initMap() {
 
 		// listen for use of scrollbar
 
-		google.maps.event.addDomListener(plot, 'click', function() {
-				var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC"
-				useBinCallback(url);
+		// google.maps.event.addDomListener(plot, 'click', function() {
+		// 		var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC"
+		// 		useBinCallback(url);
 
-				});
+		// 		});
 
 			// clear
 			google.maps.event.addDomListener(clear, 'click', function() {
