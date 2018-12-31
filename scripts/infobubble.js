@@ -969,7 +969,7 @@ InfoBubble.prototype['isOpen'] = InfoBubble.prototype.isOpen;
 InfoBubble.prototype.close = function() {
   if (this.bubble_) {
     this.bubble_.style['display'] = 'none';
-    // Remove the animation so we next time it opens it will animate again
+    // Remove the animation so next time it opens it will animate again
     this.bubble_.className =
         this.bubble_.className.replace(this.animationName_, '');
   }
@@ -1483,7 +1483,7 @@ InfoBubble.prototype['addTab'] = InfoBubble.prototype.addTab;
 
 
 /**
- * Update a tab at a speicifc index
+ * Update a tab at a specifc index
  *
  * @param {number} index The index of the tab.
  * @param {?string} opt_label The label to change to.
