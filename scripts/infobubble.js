@@ -26,7 +26,6 @@
  * limitations under the License.
  */
 
-
 /**
  * A CSS3 InfoBubble v0.8
  * @param {Object.<string, *>=} opt_options Optional properties to set.
