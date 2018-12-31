@@ -2,7 +2,7 @@
 	Map class
 	@author Jonah Rubin
 	@author Frederik Simons
-	11/20/2018
+	12/31/2018
 */
 
 function initMap() {
@@ -39,7 +39,7 @@ function initMap() {
 	// 	map: map
 	// });
 
-	// for rounding to two decimal places
+	// for rounding to three decimal places
 	function roundit(num) {
 		return parseFloat(num).toFixed(3);
 	}
@@ -64,8 +64,8 @@ function initMap() {
 			// check to make sure everything but the date is a number
 			for (var j = 3; j < elements.length; j++) {
 			    if (isNaN(elements[j])) {
+				console.log("Corrupted");
 				corrupted = new Boolean(true);
-
 			    }
 			}
 
@@ -80,6 +80,12 @@ function initMap() {
 			    dataPoints.push(dataPoint);
 			}
 		    }
+
+		// sort by date to make sure the datapoints are in
+		// order from oldest to newest, which for "all"
+		// requires work but for the individual floats the
+		// input came sorted already
+		dataPoints = selectionSort(dataPoints);
 
 		// set up panning bounds
 		var bounds = new google.maps.LatLngBounds();
@@ -99,17 +105,19 @@ function initMap() {
 
 			// set up marker, fade on age, unless using the 'all' option
 			if (name === 'all') {
-				var marker = new google.maps.Marker({
-					position: latLng,
-					map: map,
-					clickable: true
+			    var marker = new google.maps.Marker({
+				    position: latLng,
+				    map: map,
+				    clickable: true
+				    // opacity between a minop and maxop
+				    // opacity: (i + 1) / dataPoints.length
 				});
 			} else {
-				var marker = new google.maps.Marker({
-					position: latLng,
-					map: map,
-					clickable: true,
-					opacity: (i + 1) / dataPoints.length
+			    var marker = new google.maps.Marker({
+				    position: latLng,
+				    map: map,
+				    clickable: true,
+				    opacity: (i + 1) / dataPoints.length
 				});
 			}
 
@@ -118,41 +126,41 @@ function initMap() {
 
 			// first datapoint initialized to 0
 			if (i == 0) {
-				legLength = 0;
-				legSpeed = 0;
-				legTime = 0;
-				netDisplacement = 0;
-				totalDistance = 0
+			    legLength = 0;
+			    legSpeed = 0;
+			    legTime = 0;
+			    netDisplacement = 0;
+			    totalDistance = 0
 				totalTime = 0;
-				avgVelocity = 0;
+			    avgVelocity = 0;
 
 			} else {
-					// net calculations for each datapoint
-					netDisplacement = getDisplacement(dataPoints[0], dataPoints[i])/1000;
-					totalDistance = getDistance(dataPoints.slice(0, i+1)) / 1000;
-					totalTime = getTimeElapsed(dataPoints[0], dataPoints[i]);
+			    // net calculations for each datapoint
+			    netDisplacement = getDisplacement(dataPoints[0], dataPoints[i])/1000;
+			    totalDistance = getDistance(dataPoints.slice(0, i+1)) / 1000;
+			    totalTime = getTimeElapsed(dataPoints[0], dataPoints[i]);
 
-				if (totalTime == 0) {
-					avgVelocty = 0
-				} else {
-						avgVelocity = (totalDistance / totalTime);
-			}
+			    if (totalTime == 0) {
+				avgVelocty = 0
+				    } else {
+				avgVelocity = (totalDistance / totalTime);
+			    }
 
-				// get displacement in m, convert to kilometers
-				legLength = getDisplacement(dataPoints[i-1], dataPoints[i]) / 1000;
-				legTime = getTimeElapsed(dataPoints[i-1], dataPoints[i]);
+			    // get displacement in m, convert to kilometers
+			    legLength = getDisplacement(dataPoints[i-1], dataPoints[i]) / 1000;
+			    legTime = getTimeElapsed(dataPoints[i-1], dataPoints[i]);
 
-				// avoid division by zero when calculating velocity
-				if (legTime == 0) {
-					legSpeed = 0;
-				} else {
-					legSpeed = legLength / legTime;
-				}
+			    // avoid division by zero when calculating velocity
+			    if (legTime == 0) {
+				legSpeed = 0;
+			    } else {
+				legSpeed = legLength / legTime;
+			    }
 			}
 
 			// create info windows
 			setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
-				            totalTime, legLength, legSpeed, legTime);
+				      totalTime, legLength, legSpeed, legTime);
 
 			markers.push(marker);
 		}
@@ -161,69 +169,68 @@ function initMap() {
 		// updated to use a min zoom (13) to avoid missing imagery
 		map.fitBounds(bounds);
 		var listener = google.maps.event.addListener(map, "idle", function() {
-  		if (map.getZoom() > 13) map.setZoom(13);
-  		google.maps.event.removeListener(listener);
-		});
-
+			if (map.getZoom() > 13) map.setZoom(13);
+			google.maps.event.removeListener(listener);
+		    });
 		}
 	}
 
 	// for dynamic info windows
 	function setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
-								                     totalTime, legLength, legSpeed, legTime) {
+			       totalTime, legLength, legSpeed, legTime) {
 
-		google.maps.event.addListener(marker, 'click', function(event) {
-			// close existing windows
-			closeIWindows();
+	    google.maps.event.addListener(marker, 'click', function(event) {
+		    // close existing windows
+		    closeIWindows();
 
-			// info window preferences
-			var  iwindow = new InfoBubble({
-				maxWidth: 320,
-				maxHeight: 230,
-				shadowStyle: 1,
-				padding: 10,
-				backgroundColor: 'rgb(255,255,255)',
-				borderRadius: 4,
-				arrowSize: 20,
-				borderWidth: 2,
-				borderColor: '#000F35',
-				disableAutoPan: true,
-				hideCloseButton: false,
-				arrowPosition: 30,
-				backgroundClassName: 'phoney',
-				arrowStyle: 0,
-				disableAnimation: 'true'
+		    // info window preferences
+		    var  iwindow = new InfoBubble({
+			    maxWidth: 320,
+			    maxHeight: 230,
+			    shadowStyle: 1,
+			    padding: 10,
+			    backgroundColor: 'rgb(255,255,255)',
+			    borderRadius: 4,
+			    arrowSize: 20,
+			    borderWidth: 2,
+			    borderColor: '#000F35',
+			    disableAutoPan: true,
+			    hideCloseButton: false,
+			    arrowPosition: 30,
+			    backgroundClassName: 'phoney',
+			    arrowStyle: 0,
+			    disableAnimation: 'true'
 			});
 
-			// content for float data tab
-			var floatTabContent = '<div id="tabContent">' +
-							 '<b>Float Name:</b> '    + dataPoints[i].name +
-							 '<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
-							 '<br/><b>Your Date:</b> '          + dataPoints[i].loct +
-							 '<br/><b>GPS Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
-							 '<br/><b>GPS Hdop/Vdop:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
-							 '<br/><b>Battery:</b> '            + dataPoints[i].Vbat + ' mV' +
-							 '<br/><b>Internal Pressure:</b> '  + dataPoints[i].Pint + ' Pa' +
-							 '<br/><b>External Pressure:</b> '  + dataPoints[i].Pext + ' mbar' +
-							 '<br/> ' +
-							 '<br/><b>Leg Length:</b> '         + roundit(legLength) + ' km' +
-							 '<br/><b>Leg Time:</b> '           + roundit(legTime) + ' h' +
-							 '<br/><b>Leg Speed:</b> '          + roundit(legSpeed) + ' km/h' +
+		    // content for float data tab
+		    var floatTabContent = '<div id="tabContent">' +
+			'<b>Float Name:</b> '    + dataPoints[i].name +
+			'<br/><b>UTC Date:</b> '           + dataPoints[i].stdt +
+			'<br/><b>Your Date:</b> '          + dataPoints[i].loct +
+			'<br/><b>GPS Lat/Lon:</b> '        + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
+			'<br/><b>GPS Hdop/Vdop:</b> '      + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
+			'<br/><b>Battery:</b> '            + dataPoints[i].Vbat + ' mV' +
+			'<br/><b>Internal Pressure:</b> '  + dataPoints[i].Pint + ' Pa' +
+			'<br/><b>External Pressure:</b> '  + dataPoints[i].Pext + ' mbar' +
+			'<br/> ' +
+			'<br/><b>Leg Length:</b> '         + roundit(legLength) + ' km' +
+			'<br/><b>Leg Time:</b> '           + roundit(legTime) + ' h' +
+			'<br/><b>Leg Speed:</b> '          + roundit(legSpeed) + ' km/h' +
 
-							 '<br/><b>Total Time:</b> '         + roundit(totalTime) + ' h' +
-							 '<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
-							 '<br/><b>Average Speed:</b> '      + roundit(avgVelocity) + ' km/h' +
-							 '<br/><b>Net Displacement:</b> '   + roundit(netDisplacement) + ' km'
+			'<br/><b>Total Time:</b> '         + roundit(totalTime) + ' h' +
+			'<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
+			'<br/><b>Average Speed:</b> '      + roundit(avgVelocity) + ' km/h' +
+			'<br/><b>Net Displacement:</b> '   + roundit(netDisplacement) + ' km'
 
 			// content for earthquake tabs
 			var earthquakeTabContent = '<div id="tabContent">' +
-							 '<b>Code:</b> '    + "/* filler */" +
-							 '<br/><b>UTC Date:</b> '           + "/* filler */" +
-							 '<br/><b>Your Date:</b> '          +"/* filler */" +
-							 '<br/><b>Lat/Lon:</b> '        + "/* filler */" +
-							 '<br/><b>Magnitude:</b> '      + "/* filler */" +
-							 '<br/><b>Great Circle Distance:</b> '            +"/* filler */" +
-							 '<br/><b>Source:</b> ' +"/* filler */"
+			'<b>Code:</b> '    + "/* filler */" +
+			'<br/><b>UTC Date:</b> '           + "/* filler */" +
+			'<br/><b>Your Date:</b> '          +"/* filler */" +
+			'<br/><b>Lat/Lon:</b> '        + "/* filler */" +
+			'<br/><b>Magnitude:</b> '      + "/* filler */" +
+			'<br/><b>Great Circle Distance:</b> '            +"/* filler */" +
+			'<br/><b>Source:</b> ' +"/* filler */"
 
 			var floatName      = '<div id="tabNames">' + '<b>Float Info</b> '
 
@@ -243,32 +250,32 @@ function initMap() {
 
 	// delete all added markers
 	function clearMarkers() {
-  		for (var i = 0; i < markers.length; i++ ) {
+	    for (var i = 0; i < markers.length; i++ ) {
     		markers[i].setMap(null);
-  		}
- 		markers.length = 0;
-		dataPoints.length = 0;
-		closeIWindows();
+	    }
+	    markers.length = 0;
+	    dataPoints.length = 0;
+	    closeIWindows();
 	}
 
 	// close all info windows
 	function closeIWindows() {
-		if (iwindows.length == 1) {
-			iwindows[0].close();
-			iwindows = [];
-		}
+	    if (iwindows.length == 1) {
+		iwindows[0].close();
+		iwindows = [];
+	    }
 	}
 
 	// handles async use of data
 	function useCallback(name) {
-		clearMarkers();
+	    clearMarkers();
 
-		var url;
-		if (name === "all") {
-			url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt";
-		} else {
-			url = "http://geoweb.princeton.edu/people/simons/SOM/" + name + "_030.txt";
-		}
+	    var url;
+	    if (name === "all") {
+		url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt";
+	    } else {
+		url = "http://geoweb.princeton.edu/people/simons/SOM/" + name + "_030.txt";
+	    }
 
 
 	    resp = get(url,
@@ -276,9 +283,7 @@ function initMap() {
 		       function () {
 			   var data  = this.responseText;
 			   addToMap(data, name);
-		       }
-		       );
-
+		       });
 	}
 
 	function useBinCallback(url) {
@@ -294,115 +299,72 @@ function initMap() {
 				  });
 
 			      reader.readAsArrayBuffer(blob);
-			  }
-			  );
+			  });
 
 	}
 
+	setUpEvents();
+
 	//################################################################################//
-	// make buttons dynamically 
-	// var floatIDs = [P006, P007, P008, P009, P010, P011, P012];
-	//
-	//
-	// for (var i = 0; i < floatIDs.length; i++) {
-	// 	google.maps.event.addDomListener(floatIDs[i], 'click', function() {
-	//
-	// 		useCallback(floatStrs[i]);
-	// 	});
-	//
-	// }
+	//  We used to  make individual buttons like this
 
-		// listen for use of scrollbar
+	// // clear
+	// google.maps.event.addDomListener(clear, 'click', function() {
+	// 	clearMarkers();
+	//     });
 
-		// google.maps.event.addDomListener(plot, 'click', function() {
-		// 		var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC"
-		// 		useBinCallback(url);
+	// google.maps.event.addDomListener(all, 'click', function() {
+	// 	useCallback("all");
+	//     });
 
-		// 		});
+	// google.maps.event.addDomListener(P006, 'click', function() {
+	// 	useCallback("P006");
+	//     });
 
-			// clear
-			google.maps.event.addDomListener(clear, 'click', function() {
-				clearMarkers();
-			    });
+	// and then one for every explicit number, but now that is all replaced by:
 
+	function setUpEvents() {
+	    // make buttons dynamically - ALL numbers generated (but see below)... up  to:
+	    // this is the maximum
+	    const numFloats = 25;
+	    addEvents("all");
 
-			google.maps.event.addDomListener(all, 'click', function() {
-				useCallback("all");
-			    });
+	    // autogenerate "numFloats" events
+	    // if they do not exist, the button will not be created
+	    for (var i = 0; i <= numFloats; i++) {
+  		var floatID;
+  		if (i < 10) {
+		    floatID = ("P00" + i.toString());
+  		} else if (i < 100) {
+		    floatID = ("P0" + i.toString());
+  		} else {
+		    floatID = ("P" + i.toString());
+  		}
 
-			google.maps.event.addDomListener(P006, 'click', function() {
-				useCallback("P006");
-			    });
+  		addEvents(floatID);
+	    }
 
-			google.maps.event.addDomListener(P007, 'click', function() {
-				useCallback("P007");
-			    });
+	    // float events
+	    function addEvents(id) {
+  		try {
+		    google.maps.event.addDomListener(document.getElementById(id), 'click', function() {
+			    useCallback(id);
+  			});		}
+		// If in the index there wasn't one needed  it doesn't get made
+  		catch(err) {
+		    console.log(err.message);
+  		}
+	    }
 
-			google.maps.event.addDomListener(P008, 'click', function() {
-				useCallback("P008");
-			    });
+	    // sac event
+	    google.maps.event.addDomListener(plot, 'click', function() {
+		    var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC"
+  			useBinCallback(url);
+		});
 
-			google.maps.event.addDomListener(P009, 'click', function() {
-				useCallback("P009");
-			    });
-
-			google.maps.event.addDomListener(P010, 'click', function() {
-				useCallback("P010");
-			    });
-
-			google.maps.event.addDomListener(P011, 'click', function() {
-				useCallback("P011");
-			    });
-
-			google.maps.event.addDomListener(P012, 'click', function() {
-				useCallback("P012");
-			    });
-
-			google.maps.event.addDomListener(P013, 'click', function() {
-				useCallback("P013");
-			    });
-
-			google.maps.event.addDomListener(P016, 'click', function() {
-				useCallback("P016");
-			    });
-
-			google.maps.event.addDomListener(P017, 'click', function() {
-				useCallback("P017");
-			    });
-
-			google.maps.event.addDomListener(P018, 'click', function() {
-				useCallback("P018");
-			    });
-
-			google.maps.event.addDomListener(P019, 'click', function() {
-				useCallback("P019");
-			    });
-
-			google.maps.event.addDomListener(P020, 'click', function() {
-				useCallback("P020");
-			    });
-
-			google.maps.event.addDomListener(P021, 'click', function() {
-				useCallback("P021");
-			    });
-
-			google.maps.event.addDomListener(P022, 'click', function() {
-				useCallback("P022");
-			    });
-
-			google.maps.event.addDomListener(P023, 'click', function() {
-				    clearMarkers();
-				useCallback("P023");
-			    });
-
-			google.maps.event.addDomListener(P024, 'click', function() {
-				    clearMarkers();
-				useCallback("P024");
-			    });
-
-			google.maps.event.addDomListener(P025, 'click', function() {
-				    clearMarkers();
-				useCallback("P025");
-			    });
-
-		}
+	    // clear event
+	    google.maps.event.addDomListener(clear, 'click', function() {
+		    clearMarkers();
+		});
+	}
+}
