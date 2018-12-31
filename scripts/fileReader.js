@@ -5,7 +5,6 @@
 	11/20/2018
 */
 
-
 // for textfiles
 function get(url, callback) {
   var xhr = new XMLHttpRequest();
@@ -37,5 +36,5 @@ function getBin(url, callback) {
       }
   };
   xhr.send();
-
 }
+
