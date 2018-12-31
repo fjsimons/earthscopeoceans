@@ -2,7 +2,7 @@
 	DataPoint object class
 
 	@author Jonah Rubin
-	9/16/18
+	12/8/18
 */
 
 // create datapoint object
@@ -83,6 +83,7 @@ function getDistance(dataPoints) {
 	return distance;
 }
 
+// switch to radix if the datasize grows substantially
 function selectionSort(arr){
   var minIdx, temp,
       len = arr.length;

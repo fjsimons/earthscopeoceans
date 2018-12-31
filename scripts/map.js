@@ -2,7 +2,7 @@
 	Map class
 	@author Jonah Rubin
 	@author Frederik Simons
-	11/20/2018
+	12/8/2018
 */
 
 function initMap() {
@@ -39,7 +39,7 @@ function initMap() {
 	// 	map: map
 	// });
 
-	// for rounding to two decimal places
+	// for uniform rounding
 	function roundit(num) {
 		return parseFloat(num).toFixed(3);
 	}
@@ -103,20 +103,20 @@ function initMap() {
 			var latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
 
 			// set up marker, fade on age, unless using the 'all' option
-			if (dataPoints[i].name === 'all') {
-				var marker = new google.maps.Marker({
-					position: latLng,
-					map: map,
-					clickable: true
-				});
-			} else {
+			// if (name === 'all') {
+			// 	var marker = new google.maps.Marker({
+			// 		position: latLng,
+			// 		map: map,
+			// 		clickable: true
+			// 	});
+			// } else {
 				var marker = new google.maps.Marker({
 					position: latLng,
 					map: map,
 					clickable: true,
 					opacity: (i + 1) / dataPoints.length
 				});
-			}
+			// }
 
 			// expand bounds to fit all markers
 			bounds.extend(marker.getPosition());
