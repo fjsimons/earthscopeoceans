@@ -33,7 +33,7 @@ function initMap() {
 	//other option: terrrain
 	map.setMapTypeId('satellite');
 
-        // place marker
+  // place marker
 	// var marker = new google.maps.Marker({
 	// position: papeete,
 	// 	map: map
