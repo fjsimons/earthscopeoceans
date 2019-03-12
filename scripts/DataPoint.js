@@ -22,6 +22,7 @@ function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, P
     this.cmdrdc = cmdrdc;
     this.f2up = f2up;
     this.fupl = fupl;
+		this.depth = 0;
 }
 
 // INPUT is in UTC, convert to browser time

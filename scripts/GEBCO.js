@@ -1,5 +1,9 @@
-function makeWMSrequest(stlap, stlop, stlam, stlom) {
+function makeWMSrequest(dataPoint) {
 
+  stlap = dataPoint.stla - .5;
+  stlop = dataPoint.stlo - .5;
+  stlam = dataPoint.stla + .5;
+  stlom = dataPoint.stlo + .5;
   const rqtHead = 'http://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?';
 
   // Integer width and height of the map (when requesting a feature, keep it small!)
@@ -19,16 +23,13 @@ function makeWMSrequest(stlap, stlop, stlam, stlom) {
 
   var url = rqtHead + rqtTail;
 
-  getWMSrequest(url);
+  resp = get(url,
+  function () {
+    console.log(this.responseText.split("\'")[7]);
+    dataPoint.depth = this.responseText.split("\'")[7];
 
-}
+  });
 
-function getWMSrequest(url) {
-  const Http = new XMLHttpRequest();
-  Http.open("GET", url);
-  Http.send();
-  Http.onreadystatechange=(e)=>{
-    console.log(Http.responseText)
-  }
+  // console.log(depth);
 
 }

@@ -179,6 +179,8 @@ function initMap() {
 	function setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
 			       totalTime, legLength, legSpeed, legTime) {
 
+		  makeWMSrequest(dataPoints[i]);
+
 	    google.maps.event.addListener(marker, 'click', function(event) {
 		    // close existing windows
 		    closeIWindows();
@@ -202,6 +204,7 @@ function initMap() {
 			    disableAnimation: 'true'
 			});
 
+
 		    // content for float data tab
 		    var floatTabContent = '<div id="tabContent">' +
 			'<b>Float Name:</b> '    + dataPoints[i].name +
@@ -220,7 +223,8 @@ function initMap() {
 			'<br/><b>Total Time:</b> '         + roundit(totalTime) + ' h' +
 			'<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
 			'<br/><b>Average Speed:</b> '      + roundit(avgVelocity) + ' km/h' +
-			'<br/><b>Net Displacement:</b> '   + roundit(netDisplacement) + ' km'
+			'<br/><b>Net Displacement:</b> '   + roundit(netDisplacement) + ' km' +
+			'<br/><b>Depth:</b> '  +  dataPoints[i].depth + ' m'
 
 			// content for earthquake tabs
 			var earthquakeTabContent = '<div id="tabContent">' +
@@ -246,8 +250,6 @@ function initMap() {
 			iwindow.open(map, this);
 			iwindows.push(iwindow);
 		});
-
-		makeWMSrequest(dataPoints[i].stla - .5, dataPoints[i].stlo - .5, dataPoints[i].stla + .5, dataPoints[i].stlo + .5);
 
 }
 
