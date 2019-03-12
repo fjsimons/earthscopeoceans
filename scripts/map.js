@@ -2,7 +2,7 @@
 	Map class
 	@author Jonah Rubin
 	@author Frederik Simons
-	12/31/2018
+	03/12/2019
 */
 
 function initMap() {
@@ -33,7 +33,7 @@ function initMap() {
 	//other option: terrrain
 	map.setMapTypeId('satellite');
 
-        // place marker
+  // place marker
 	// var marker = new google.maps.Marker({
 	// position: papeete,
 	// 	map: map
@@ -179,6 +179,8 @@ function initMap() {
 	function setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
 			       totalTime, legLength, legSpeed, legTime) {
 
+		  makeWMSrequest(dataPoints[i]);
+
 	    google.maps.event.addListener(marker, 'click', function(event) {
 		    // close existing windows
 		    closeIWindows();
@@ -202,6 +204,7 @@ function initMap() {
 			    disableAnimation: 'true'
 			});
 
+
 		    // content for float data tab
 		    var floatTabContent = '<div id="tabContent">' +
 			'<b>Float Name:</b> '    + dataPoints[i].name +
@@ -220,7 +223,8 @@ function initMap() {
 			'<br/><b>Total Time:</b> '         + roundit(totalTime) + ' h' +
 			'<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
 			'<br/><b>Average Speed:</b> '      + roundit(avgVelocity) + ' km/h' +
-			'<br/><b>Net Displacement:</b> '   + roundit(netDisplacement) + ' km'
+			'<br/><b>Net Displacement:</b> '   + roundit(netDisplacement) + ' km' +
+			'<br/><b>GEBCO WMS Depth:</b> '    + dataPoints[i].wmsdepth + ' m'
 
 			// content for earthquake tabs
 			var earthquakeTabContent = '<div id="tabContent">' +
@@ -246,6 +250,7 @@ function initMap() {
 			iwindow.open(map, this);
 			iwindows.push(iwindow);
 		});
+
 }
 
 	// delete all added markers
@@ -277,7 +282,7 @@ function initMap() {
 		url = "http://geoweb.princeton.edu/people/simons/SOM/" + name + "_030.txt";
 	    }
 
-
+	    // This is using the get function defined in fileReader.js
 	    resp = get(url,
 		       // this callback is invoked after the response arrives
 		       function () {
