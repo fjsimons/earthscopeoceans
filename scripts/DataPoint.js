@@ -2,7 +2,7 @@
 	DataPoint object class
 
 	@author Jonah Rubin
-	12/31/18
+	03/12/2019
 */
 
 // create datapoint object
@@ -22,7 +22,7 @@ function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, P
     this.cmdrdc = cmdrdc;
     this.f2up = f2up;
     this.fupl = fupl;
-		this.depth = 0;
+    this.wmsdepth = 0;
 }
 
 // INPUT is in UTC, convert to browser time

@@ -14,20 +14,28 @@ function makeWMSrequest(dataPoint) {
   const pxx = 2;
   const pxy = 2;
 
-
   // get featureInfo
   const rqt = 'getfeatureinfo';
 
   const rqtTail = 'request=' + rqt + '&service=wms&crs=EPSG:4326&layers=gebco_latest_2&query_layers=gebco_latest_2&BBOX='
-                  + stlap +','+ stlop + ','+ stlam + ','+ stlom + '&info_format=text/plain&service=wms&x=200&y=200&width=900&height=900&version=1.3.0'
+                  + stlap +','+ stlop + ','+ stlam + ','+ stlom + '&info_format=text/plain&service=wms&x='
+                  + pxx + '&y=' + pxy + '&width=' + pxw + '&height=' + pxh + '&version=1.3.0'
 
   var url = rqtHead + rqtTail;
 
+  // Use the "get" method defined in the fileReader.js
   resp = get(url,
   function () {
-    console.log(this.responseText.split("\'")[7]);
-    dataPoint.depth = this.responseText.split("\'")[7];
+		 // We expect a return to look like this, so you parse on the quote and get the 7th field
+		 //  GetFeatureInfo results:
+		 // Layer 'GEBCO_LATEST_2'
+		 // Feature 0: 
+		 // x = '23.2375'
+		 // y = '65.095833'
+		 // value_list = '-101'
 
+    console.log(this.responseText.split("\'")[7]);
+    dataPoint.wmsdepth = this.responseText.split("\'")[7];
   });
 
   // console.log(depth);

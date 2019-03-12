@@ -2,7 +2,7 @@
 	Map class
 	@author Jonah Rubin
 	@author Frederik Simons
-	12/31/2018
+	03/12/2019
 */
 
 function initMap() {
@@ -224,7 +224,7 @@ function initMap() {
 			'<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
 			'<br/><b>Average Speed:</b> '      + roundit(avgVelocity) + ' km/h' +
 			'<br/><b>Net Displacement:</b> '   + roundit(netDisplacement) + ' km' +
-			'<br/><b>Depth:</b> '  +  dataPoints[i].depth + ' m'
+			'<br/><b>GEBCO WMS Depth:</b> '    + dataPoints[i].wmsdepth + ' m'
 
 			// content for earthquake tabs
 			var earthquakeTabContent = '<div id="tabContent">' +
@@ -282,7 +282,7 @@ function initMap() {
 		url = "http://geoweb.princeton.edu/people/simons/SOM/" + name + "_030.txt";
 	    }
 
-
+	    // This is using the get function defined in fileReader.js
 	    resp = get(url,
 		       // this callback is invoked after the response arrives
 		       function () {

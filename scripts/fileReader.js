@@ -2,7 +2,7 @@
 	File reader class
 
 	@author Jonah Rubin
-	11/20/2018
+	03/12/2019
 */
 
 // for textfiles
