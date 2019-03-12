@@ -525,12 +525,10 @@
 
 		      <!-- ###################### MAP SCRIPTS  ########################################################## -->
 		      <script src="scripts/fileReader.js"></script>
-          <script src="scripts/GEBCO.js"></script>
 		      <script src="scripts/DataPoint.js"></script>
 		      <script src="scripts/map.js"></script>
 		      <script src="scripts/infobubble.js"></script>
 		      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJDvo3C9Di8Usn-3N4zPNfsS_N7oDKMiA&callback=initMap"></script>
-
 	  <!-- ###################### END MAP UNIT  ########################################################## -->
 
 	  <!-- ###################### END MERMAID LOCATION UNIT ######################################################### -->

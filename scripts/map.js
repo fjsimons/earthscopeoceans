@@ -246,6 +246,9 @@ function initMap() {
 			iwindow.open(map, this);
 			iwindows.push(iwindow);
 		});
+
+		makeWMSrequest(dataPoints[i].stla - .5, dataPoints[i].stlo - .5, dataPoints[i].stla + .5, dataPoints[i].stlo + .5);
+
 }
 
 	// delete all added markers
