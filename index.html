@@ -275,23 +275,23 @@
 	<!-- END TOP NAVIGATION BAR -->
 	<!-- SEEMS IMPORTANT -->
 	<div class="fusion-mobile-menu-icons">
-	  <a href="#" class="fusion-icon fusion-icon-bars" aria-label="Toggle mobile menu"></a>
+	  <a href="#" class="fusion-icon fusion-icon-bars" aria-label="Toggle mobile menu" aria-expanded="false"></a>
         </div>
-        <nav class="fusion-mobile-nav-holder fusion-mobile-menu-text-align-left">
-	</nav>
+        <nav class="fusion-mobile-nav-holder fusion-mobile-menu-text-align-left"  aria-label="Main Menu Mobile"></nav>
 	<!-- SEEMED IMPORTANT -->
       </div>
     </div>
   </div>
   <div class="fusion-clearfix"></div>
 </header>
-<!-- BEGIN HEADER -->
+<!-- END HEADER -->
+
 <!-- BEGIN SLIDING IMAGES -->
 <div id="sliders-container">
   <div class="fusion-slider-container fusion-slider-13 full-width-slider-container"
        style='height:500px;
        max-width:100%;'>
-    <style>
+    <style type="text/css" scoped="scoped">
       .fusion-slider-13 .flex-direction-nav
       a {width:63px;
       height:63px;
@@ -299,7 +299,8 @@
       font-size:25px;
       }
     </style>
-    <div class="tfs-slider flexslider main-flex full-width-slider"
+   <div class="fusion-slider-loading">Loading...</div>
+   <div class="tfs-slider flexslider main-flex full-width-slider"
 	 style='max-width:100%;'
 	 data-slider_width='100%'
 	 data-slider_height='500px'
