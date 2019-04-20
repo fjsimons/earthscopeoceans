@@ -948,5 +948,20 @@
 
 <a class="fusion-one-page-text-link fusion-page-load-link"></a>
 
+	      <!-- BEGIN New lines -->
+	      <script type="text/javascript">
+	      jQuery( document ).ready( function() {
+	      var ajaxurl = 'http://deepoceanobserving.org/wp-admin/admin-ajax.php';
+	      if ( 0 < jQuery( '.fusion-login-nonce' ).length ) {
+	      jQuery.get( ajaxurl, { 'action': 'fusion_login_nonce' }, function( response ) {
+	      jQuery( '.fusion-login-nonce' ).html( response );
+	      });
+	      }
+	      });
+	      </script>
+	      <script type='text/javascript' src='http://deepoceanobserving.org/wp-content/uploads/fusion-scripts/54f6a718d84750412ce7ae9ae4dc7f6a.min.js'></script>
+	      <script type='text/javascript' src='http://deepoceanobserving.org/wp-includes/js/wp-embed.min.js?ver=5.0.4'></script>
+	      <!-- END New lines -->
+
 </body>
 </html>
