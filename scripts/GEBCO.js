@@ -2,7 +2,7 @@ function makeWMSrequest(dataPoint) {
 
     // This is inspired by the known 2014 resolution
     const bb = 1/60/2;
-
+    
     stlap = dataPoint.stla - bb;
     stlop = dataPoint.stlo - bb;
     stlam = dataPoint.stla + bb;
@@ -24,7 +24,11 @@ function makeWMSrequest(dataPoint) {
 	+ stlap +','+ stlop + ','+ stlam + ','+ stlom + '&info_format=text/plain&service=wms&x='
 	+ pxx + '&y=' + pxy + '&width=' + pxw + '&height=' + pxh + '&version=1.3.0'
 
+
+
 	var url = rqtHead + rqtTail;
+
+  console.log(url);
 
     // Use the "get" method defined in the fileReader.js
     resp = get(url,
@@ -32,7 +36,7 @@ function makeWMSrequest(dataPoint) {
 		   // We expect a return to look like this, so you parse on the quote and get the 7th field
 		   //  GetFeatureInfo results:
 		   // Layer 'GEBCO_LATEST_2'
-		   // Feature 0: 
+		   // Feature 0:
 		   // x = '23.2375'
 		   // y = '65.095833'
 		   // value_list = '-101'
