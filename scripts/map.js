@@ -104,11 +104,14 @@ function initMap() {
 			var latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
 
 			// set up marker, fade on age, unless using the 'all' option
+
+
 			if (name === 'all') {
 			    var marker = new google.maps.Marker({
 				    position: latLng,
 				    map: map,
 				    clickable: true
+
 				    // opacity between a minop and maxop
 				    // opacity: (i + 1) / dataPoints.length
 				});
@@ -120,6 +123,12 @@ function initMap() {
 				    opacity: (i + 1) / dataPoints.length
 				});
 			}
+
+			if (dataPoints[i].name[0] == "N") {
+				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+				console.log("here");
+			}
+			//alert(dataPoint)
 
 			// expand bounds to fit all markers
 			bounds.extend(marker.getPosition());
