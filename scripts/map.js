@@ -126,7 +126,8 @@ function initMap() {
 
 			if (dataPoints[i].name[0] == "N") {
 				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
-				console.log("here");
+			} else {
+				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
 			}
 			//alert(dataPoint)
 
