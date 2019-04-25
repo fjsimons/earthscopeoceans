@@ -124,6 +124,7 @@ function initMap() {
 				});
 			}
 
+			// Alternate coloring for floats with N.. IDs
 			if (dataPoints[i].name[0] == "N") {
 				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
 			} else {
