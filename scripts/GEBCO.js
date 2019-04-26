@@ -17,6 +17,9 @@ function makeWMSrequest(dataPoint) {
     // // Integer pixel count inside the map where you want to extract the point
     // const pxx = 2;
     // const pxy = 2;
+    
+    // New values for bb, pxw, pxh, pxx, pxy by playing around and comparing to
+    // fjsimons matlab implementation
 
     // This is inspired by the known 2014 resolution
     const bb = 1/60/2/5;

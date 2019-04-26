@@ -196,6 +196,14 @@ function initMap() {
 		    // close existing windows
 		    closeIWindows();
 
+				// Pan to include entire infowindow
+				var center = new google.maps.LatLng(
+  					parseFloat( marker.position.lat() + .4),
+  					parseFloat( marker.position.lng() )
+				);
+				map.panTo(center);
+
+
 		    // info window preferences
 		    var  iwindow = new InfoBubble({
 			    maxWidth: 320,
