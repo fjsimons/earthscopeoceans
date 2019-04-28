@@ -64,22 +64,22 @@ function getDisplacement(datapt1, datapt2) {
     lon2 = datapt2.stlo;
 
     // Radius of earth in KM
-    var R = 6378.137;
-    var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
-    var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
-    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    let R = 6378.137;
+    let dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
+    let dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
         Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
         Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c;
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let d = R * c;
     return d * 1000; // meters
 }
 
 // get rough distance by getting displacement between all locations
 function getDistance(dataPoints) {
-    var distance = 0
+    let distance = 0;
 
-    for (var i = 0; i < dataPoints.length - 1; i++) {
+    for (let i = 0; i < dataPoints.length - 1; i++) {
         distance += getDisplacement(dataPoints[i], dataPoints[i + 1]);
     }
 
@@ -88,11 +88,11 @@ function getDistance(dataPoints) {
 
 // switch to radix if the datasize grows substantially
 function selectionSort(arr) {
-    var minIdx, temp,
+    let minIdx, temp,
         len = arr.length;
-    for (var i = 0; i < len; i++) {
+    for (let i = 0; i < len; i++) {
         minIdx = i;
-        for (var j = i + 1; j < len; j++) {
+        for (let j = i + 1; j < len; j++) {
             if (arr[j].loct.getTime() < arr[minIdx].loct.getTime()) {
                 minIdx = j;
             }

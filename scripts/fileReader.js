@@ -7,11 +7,11 @@
 
 // for textfiles
 function get(url, callback) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         // defensive check
-        if (xhr.readyState == 4) {
+        if (xhr.readyState === 4) {
             if (typeof callback === "function") {
                 //apply callback to response
                 callback.apply(xhr);
@@ -23,12 +23,12 @@ function get(url, callback) {
 
 // for binary files
 function getBin(url, callback) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     xhr.responseType = 'blob';
     xhr.onreadystatechange = function () {
         // defensive check
-        if (xhr.readyState == 4) {
+        if (xhr.readyState === 4) {
             if (typeof callback === "function") {
                 //apply callback to response
                 callback.apply(xhr);

@@ -5,24 +5,24 @@
  03/12/2019
  */
 
-function initMap() {
+function initMap(listener) {
     // ID the map
-    var mapDiv = document.getElementById('map');
+    let mapDiv = document.getElementById('map');
 
     // store data points
-    var dataPoints = []
+    let dataPoints = [];
 
     // keep track of markers and their info windows
-    var markers = [];
-    var iwindows = [];
-    var markerIndex = -1;
+    let markers = [];
+    let iwindows = [];
+    let markerIndex = -1;
 
     // some default locations
-    var guyot = {lat: 40.34585, lng: -74.65475};
-    var papeete = {lat: -17.53733, lng: -149.5665};
+    let guyot = {lat: 40.34585, lng: -74.65475};
+    let papeete = {lat: -17.53733, lng: -149.5665};
 
     // our default map center
-    var map = new google.maps.Map(mapDiv, {
+    let map = new google.maps.Map(mapDiv, {
         // zoom: 13,
         // center: papeete
     });
@@ -34,7 +34,7 @@ function initMap() {
     map.setMapTypeId('satellite');
 
     // place marker
-    // var marker = new google.maps.Marker({
+    // let marker = new google.maps.Marker({
     // position: papeete,
     // 	map: map
     // });
@@ -46,33 +46,33 @@ function initMap() {
 
     // add data to map
     function addToMap(data, name) {
-        var empty = new Boolean(false);
+        let empty = Boolean(false);
 
         // scrape data from text callback response
-        var rows = data.split('\n');
+        let rows = data.split('\n');
 
         if (rows.length <= 1) {
-            empty = new Boolean(true);
+            empty = Boolean(true);
         }
 
-        if (empty == false) {
+        if (empty === false) {
 
             for (i = 0; i < rows.length - 1; i++) {
-                var corrupted = new Boolean(false);
-                var elements = rows[i].split(/\s+/);
+                let corrupted = Boolean(false);
+                let elements = rows[i].split(/\s+/);
 
                 // check to make sure everything but the date is a number
-                for (var j = 3; j < elements.length; j++) {
+                for (let j = 3; j < elements.length; j++) {
                     if (isNaN(elements[j])) {
                         console.log("Corrupted");
-                        corrupted = new Boolean(true);
+                        corrupted = Boolean(true);
                     }
                 }
 
                 // store each data point as an object
-                if (corrupted == false) {
+                if (corrupted === false) {
 
-                    var dataPoint = new DataPoint(elements[0], elements[1] + " " + elements[2],
+                    let dataPoint = new DataPoint(elements[0], elements[1] + " " + elements[2],
                         elements[3], elements[4], elements[5],
                         elements[6], elements[7], elements[8],
                         elements[9], elements[10], elements[11],
@@ -88,26 +88,27 @@ function initMap() {
             dataPoints = selectionSort(dataPoints);
 
             // set up panning bounds
-            var bounds = new google.maps.LatLngBounds();
+            let bounds = new google.maps.LatLngBounds();
 
-            // set up variables
-            var legLength;
-            var legSpeed;
-            var legTime;
-            var netDisplacement;
-            var totalDistance;
-            var totalTime;
-            var avgVelocity;
+            // set up letiables
+            let legLength;
+            let legSpeed;
+            let legTime;
+            let netDisplacement;
+            let totalDistance;
+            let totalTime;
+            let avgVelocity;
+            let marker;
 
             // iterate over arrays, placing markers
-            for (var i = 0; i < dataPoints.length; i++) {
-                var latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
+            for (let i = 0; i < dataPoints.length; i++) {
+                let latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
 
                 // set up marker, fade on age, unless using the 'all' option
 
 
                 if (name === 'all') {
-                    var marker = new google.maps.Marker({
+                     marker = new google.maps.Marker({
                         position: latLng,
                         map: map,
                         clickable: true
@@ -116,7 +117,7 @@ function initMap() {
                         // opacity: (i + 1) / dataPoints.length
                     });
                 } else {
-                    var marker = new google.maps.Marker({
+                     marker = new google.maps.Marker({
                         position: latLng,
                         map: map,
                         clickable: true,
@@ -125,7 +126,7 @@ function initMap() {
                 }
 
                 // Alternate coloring for floats with N.. IDs
-                if (dataPoints[i].name[0] == "N") {
+                if (dataPoints[i].name[0] === "N") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
                 } else {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
@@ -136,12 +137,12 @@ function initMap() {
                 bounds.extend(marker.getPosition());
 
                 // first datapoint initialized to 0
-                if (i == 0) {
+                if (i === 0) {
                     legLength = 0;
                     legSpeed = 0;
                     legTime = 0;
                     netDisplacement = 0;
-                    totalDistance = 0
+                    totalDistance = 0;
                     totalTime = 0;
                     avgVelocity = 0;
 
@@ -151,8 +152,8 @@ function initMap() {
                     totalDistance = getDistance(dataPoints.slice(0, i + 1)) / 1000;
                     totalTime = getTimeElapsed(dataPoints[0], dataPoints[i]);
 
-                    if (totalTime == 0) {
-                        avgVelocty = 0
+                    if (totalTime === 0) {
+                        avgVelocty = 0;
                     } else {
                         avgVelocity = (totalDistance / totalTime);
                     }
@@ -162,7 +163,7 @@ function initMap() {
                     legTime = getTimeElapsed(dataPoints[i - 1], dataPoints[i]);
 
                     // avoid division by zero when calculating velocity
-                    if (legTime == 0) {
+                    if (legTime === 0) {
                         legSpeed = 0;
                     } else {
                         legSpeed = legLength / legTime;
@@ -179,7 +180,7 @@ function initMap() {
             // pan to bounds
             // updated to use a min zoom (13) to avoid missing imagery
             map.fitBounds(bounds);
-            var listener = google.maps.event.addListener(map, "idle", function () {
+            let listener = google.maps.event.addListener(map, "idle", function () {
                 if (map.getZoom() > 13) map.setZoom(13);
                 google.maps.event.removeListener(listener);
             });
@@ -202,7 +203,7 @@ function initMap() {
             console.log(map.getZoom());
             // map.getZoom()/30)
             // Pan to include entire infowindow
-            var center = new google.maps.LatLng(
+            let center = new google.maps.LatLng(
                 parseFloat(marker.position.lat() + map.getZoom() / 30),
                 parseFloat(marker.position.lng())
             );
@@ -210,7 +211,7 @@ function initMap() {
 
 
             // info window preferences
-            var iwindow = new InfoBubble({
+            let iwindow = new InfoBubble({
                 maxWidth: 320,
                 maxHeight: 250,
                 shadowStyle: 1,
@@ -230,7 +231,7 @@ function initMap() {
 
 
             // content for float data tab
-            var floatTabContent = '<div id="tabContent">' +
+            let floatTabContent = '<div id="tabContent">' +
                 '<b>Float Name:</b> ' + dataPoints[i].name +
                 '<br/><b>UTC Date:</b> ' + dataPoints[i].stdt +
                 '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
@@ -248,23 +249,23 @@ function initMap() {
                 '<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
                 '<br/><b>Average Speed:</b> ' + roundit(avgVelocity) + ' km/h' +
                 '<br/><b>Net Displacement:</b> ' + roundit(netDisplacement) + ' km' +
-                '<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m'
+                '<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m';
 
             // content for earthquake tabs
-            var earthquakeTabContent = '<div id="tabContent">' +
+            let earthquakeTabContent = '<div id="tabContent">' +
                 '<b>Code:</b> ' + "/* filler */" +
                 '<br/><b>UTC Date:</b> ' + "/* filler */" +
                 '<br/><b>Your Date:</b> ' + "/* filler */" +
                 '<br/><b>Lat/Lon:</b> ' + "/* filler */" +
                 '<br/><b>Magnitude:</b> ' + "/* filler */" +
                 '<br/><b>Great Circle Distance:</b> ' + "/* filler */" +
-                '<br/><b>Source:</b> ' + "/* filler */"
+                '<br/><b>Source:</b> ' + "/* filler */";
 
-            var floatName = '<div id="tabNames">' + '<b>Float Info</b> '
+            let floatName = '<div id="tabNames">' + '<b>Float Info</b> ';
 
-            var earthquakeName = '<div id="tabNames">' + '<b>EarthQuake Info</b> '
+            let earthquakeName = '<div id="tabNames">' + '<b>EarthQuake Info</b> ';
 
-            var seismograms = '<div id="tabNames">' + '<b>Seismograms</b> '
+            let seismograms = '<div id="tabNames">' + '<b>Seismograms</b> ';
 
             // add info window tabs
             iwindow.addTab(floatName, floatTabContent);
@@ -279,7 +280,7 @@ function initMap() {
 
     // delete all added markers
     function clearMarkers() {
-        for (var i = 0; i < markers.length; i++) {
+        for (let i = 0; i < markers.length; i++) {
             markers[i].setMap(null);
         }
         markers.length = 0;
@@ -289,7 +290,7 @@ function initMap() {
 
     // close all info windows
     function closeIWindows() {
-        if (iwindows.length == 1) {
+        if (iwindows.length === 1) {
             iwindows[0].close();
             iwindows = [];
         }
@@ -299,7 +300,7 @@ function initMap() {
     function useCallback(name) {
         clearMarkers();
 
-        var url;
+        let url;
         if (name === "all") {
             url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt";
         } else {
@@ -310,7 +311,7 @@ function initMap() {
         resp = get(url,
             // this callback is invoked after the response arrives
             function () {
-                var data = this.responseText;
+                let data = this.responseText;
                 addToMap(data, name);
             });
     }
@@ -319,12 +320,12 @@ function initMap() {
         resp = getBin(url,
             // this callback is invoked after the response arrives
             function () {
-                var blob = this.response;
-                var reader = new FileReader();
+                let blob = this.response;
+                let reader = new FileReader();
 
                 reader.addEventListener("loadend", function () {
                     ab = reader.result;
-                    var sacFile = new SacFile(ab);
+                    let sacFile = new SacFile(ab);
                 });
 
                 reader.readAsArrayBuffer(blob);
@@ -362,8 +363,8 @@ function initMap() {
 
         // autogenerate "numFloats" events
         // if they do not exist, the button will not be created
-        for (var i = 0; i <= numFloats; i++) {
-            var floatID;
+        for (let i = 0; i <= numFloats; i++) {
+            let floatID;
             if (i < 10) {
                 floatID = ("P00" + i.toString());
             } else if (i < 100) {
@@ -392,7 +393,7 @@ function initMap() {
 
         // sac event
         google.maps.event.addDomListener(plot, 'click', function () {
-            var url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC"
+            let url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC";
             useBinCallback(url);
         });
 
@@ -404,8 +405,8 @@ function initMap() {
 
     // enable moving through markers with arrow keys
     google.maps.event.addDomListener(document, 'keyup', function (e) {
-        var code = (e.keyCode ? e.keyCode : e.which);
-        if (markerIndex != -1) {
+        let code = (e.keyCode ? e.keyCode : e.which);
+        if (markerIndex !== -1) {
             if (code === 39 && markerIndex < markers.length - 1) {
                 markerIndex++;
                 google.maps.event.trigger(markers[markerIndex], 'click');

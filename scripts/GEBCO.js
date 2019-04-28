@@ -47,7 +47,7 @@ function makeWMSrequest(dataPoint) {
         + pxx + '&y=' + pxy + '&width=' + pxw + '&height=' + pxh + '&version=1.3.0'
 
 
-    var url = rqtHead + rqtTail;
+    let url = rqtHead + rqtTail;
     if (dataPoint.stdt == "10-Mar-2019 14:09:59") {
     }
 
