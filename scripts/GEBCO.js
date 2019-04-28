@@ -17,7 +17,7 @@ function makeWMSrequest(dataPoint) {
     // // Integer pixel count inside the map where you want to extract the point
     // const pxx = 2;
     // const pxy = 2;
-    
+
     // New values for bb, pxw, pxh, pxx, pxy by playing around and comparing to
     // fjsimons matlab implementation
 
@@ -50,7 +50,6 @@ function makeWMSrequest(dataPoint) {
 
 	var url = rqtHead + rqtTail;
   if (dataPoint.stdt == "10-Mar-2019 14:09:59") {
-    console.log(url);
   }
 
     // Use the "get" method defined in the fileReader.js
@@ -64,7 +63,6 @@ function makeWMSrequest(dataPoint) {
 		   // y = '65.095833'
 		   // value_list = '-101'
 
-		   console.log(this.responseText.split("\'")[7]);
 		   dataPoint.wmsdepth = this.responseText.split("\'")[7];
 	       });
 

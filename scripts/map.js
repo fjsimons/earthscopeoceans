@@ -14,7 +14,8 @@ function initMap() {
 
 	// keep track of markers and their info windows
 	var markers = [];
-	var iwindows = []
+	var iwindows = [];
+	var markerIndex = -1;
 
 	// some default locations
 	var guyot = {lat: 40.34585, lng: -74.65475};
@@ -28,7 +29,6 @@ function initMap() {
 
 	// landing page
 	useCallback("all");
-	console.log("here");
 
 	//other option: terrrain
 	map.setMapTypeId('satellite');
@@ -195,10 +195,15 @@ function initMap() {
 	    google.maps.event.addListener(marker, 'click', function(event) {
 		    // close existing windows
 		    closeIWindows();
+				markerIndex = i;
 
+				// double bottom = vr.latLngBounds.southwest.latitude;
+
+				console.log(map.getZoom());
+				// map.getZoom()/30)
 				// Pan to include entire infowindow
 				var center = new google.maps.LatLng(
-  					parseFloat( marker.position.lat() + .4),
+  					parseFloat( marker.position.lat() + map.getZoom()/30),
   					parseFloat( marker.position.lng() )
 				);
 				map.panTo(center);
@@ -352,6 +357,8 @@ function initMap() {
 	    // this is the maximum
 	    const numFloats = 25;
 	    addEvents("all");
+			markerIndex = 0;
+
 
 	    // autogenerate "numFloats" events
 	    // if they do not exist, the button will not be created
@@ -373,6 +380,8 @@ function initMap() {
   		try {
 		    google.maps.event.addDomListener(document.getElementById(id), 'click', function() {
 			    useCallback(id);
+					markerIndex = 0;
+
   			});		}
 		// If in the index there wasn't one needed  it doesn't get made
   		catch(err) {
@@ -391,4 +400,19 @@ function initMap() {
 		    clearMarkers();
 		});
 	}
+
+	// enable moving through markers with arrow keys
+	google.maps.event.addDomListener(document, 'keyup', function (e) {
+			var code = (e.keyCode ? e.keyCode : e.which);
+			if (markerIndex != -1) {
+				if (code === 39 && markerIndex < markers.length - 1) {
+					markerIndex++;
+					google.maps.event.trigger(markers[markerIndex], 'click');
+
+				} else if (code === 37 && markerIndex > 1) {
+					markerIndex--;
+					google.maps.event.trigger(markers[markerIndex], 'click');
+			}
+		}
+	});
 }
