@@ -25,6 +25,13 @@ function initMap(listener) {
     let map = new google.maps.Map(mapDiv, {
         // zoom: 13,
         // center: papeete
+        disableDefaultUI: true,
+        zoomControl: true,
+        mapTypeControl: true,
+        scaleControl: true,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: true
     });
 
     // landing page
@@ -198,17 +205,12 @@ function initMap(listener) {
             closeIWindows();
             markerIndex = i;
 
-            // double bottom = vr.latLngBounds.southwest.latitude;
-
-            console.log(map.getZoom());
-            // map.getZoom()/30)
             // Pan to include entire infowindow
             let center = new google.maps.LatLng(
-                parseFloat(marker.position.lat() + map.getZoom() / 30),
+                parseFloat(marker.position.lat()),
                 parseFloat(marker.position.lng())
             );
             map.panTo(center);
-
 
             // info window preferences
             let iwindow = new InfoBubble({
