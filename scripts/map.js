@@ -34,10 +34,15 @@ function initMap(listener) {
         fullscreenControl: true
     });
 
+    var DataType = {
+        TEXT: 1,
+        BINARY: 2
+    };
+
     // landing page
     useCallback("all");
 
-    //other option: terrrain
+    //other option: terrain
     map.setMapTypeId('satellite');
 
     // place marker
@@ -64,7 +69,7 @@ function initMap(listener) {
 
         if (empty === false) {
 
-            for (i = 0; i < rows.length - 1; i++) {
+            for (let i = 0; i < rows.length - 1; i++) {
                 let corrupted = Boolean(false);
                 let elements = rows[i].split(/\s+/);
 
@@ -112,8 +117,6 @@ function initMap(listener) {
                 let latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
 
                 // set up marker, fade on age, unless using the 'all' option
-
-
                 if (name === 'all') {
                      marker = new google.maps.Marker({
                         position: latLng,
@@ -132,13 +135,12 @@ function initMap(listener) {
                     });
                 }
 
-                // Alternate coloring for floats with N.. IDs
+                // Alternate coloring for floats with "N.." IDs
                 if (dataPoints[i].name[0] === "N") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
                 } else {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
                 }
-                //alert(dataPoint)
 
                 // expand bounds to fit all markers
                 bounds.extend(marker.getPosition());
@@ -197,7 +199,6 @@ function initMap(listener) {
     // for dynamic info windows
     function setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
                            totalTime, legLength, legSpeed, legTime) {
-
         makeWMSrequest(dataPoints[i]);
 
         google.maps.event.addListener(marker, 'click', function (event) {
@@ -238,7 +239,7 @@ function initMap(listener) {
                 '<br/><b>UTC Date:</b> ' + dataPoints[i].stdt +
                 '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
                 '<br/><b>GPS Lat/Lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
-                '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
+                '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ' m ,' + dataPoints[i].vdop + ' m' +
                 '<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
                 '<br/><b>Internal Pressure:</b> ' + dataPoints[i].Pint + ' Pa' +
                 '<br/><b>External Pressure:</b> ' + dataPoints[i].Pext + ' mbar' +
@@ -292,10 +293,10 @@ function initMap(listener) {
 
     // close all info windows
     function closeIWindows() {
-        if (iwindows.length === 1) {
-            iwindows[0].close();
-            iwindows = [];
+        for (let i = 0; i < iwindows.length; i++) {
+            iwindows[i].close();
         }
+        iwindows = [];
     }
 
     // handles async use of data
@@ -310,7 +311,7 @@ function initMap(listener) {
         }
 
         // This is using the get function defined in fileReader.js
-        resp = get(url,
+        resp = get(DataType.TEXT, url,
             // this callback is invoked after the response arrives
             function () {
                 let data = this.responseText;
@@ -318,8 +319,25 @@ function initMap(listener) {
             });
     }
 
+    // function useBinCallback(url) {
+    //     resp = getBin(url,
+    //         // this callback is invoked after the response arrives
+    //         function () {
+    //             let blob = this.response;
+    //             let reader = new FileReader();
+    //
+    //             reader.addEventListener("loadend", function () {
+    //                 ab = reader.result;
+    //                 let sacFile = new SacFile(ab);
+    //             });
+    //
+    //             reader.readAsArrayBuffer(blob);
+    //         });
+    //
+    // }
+
     function useBinCallback(url) {
-        resp = getBin(url,
+        resp = get(DataType.BINARY, url,
             // this callback is invoked after the response arrives
             function () {
                 let blob = this.response;
@@ -334,6 +352,7 @@ function initMap(listener) {
             });
 
     }
+
 
     setUpEvents();
 
@@ -397,6 +416,7 @@ function initMap(listener) {
         google.maps.event.addDomListener(plot, 'click', function () {
             let url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC";
             useBinCallback(url);
+            alert("here");
         });
 
         // clear event

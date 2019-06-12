@@ -1,5 +1,10 @@
 function makeWMSrequest(dataPoint) {
 
+    var DataType = {
+        TEXT: 1,
+        BINARY: 2
+    };
+
     // // This is inspired by the known 2014 resolution
     // const bb = 1/60/2;
     //
@@ -48,22 +53,20 @@ function makeWMSrequest(dataPoint) {
 
 
     let url = rqtHead + rqtTail;
-    if (dataPoint.stdt == "10-Mar-2019 14:09:59") {
-    }
+
 
     // Use the "get" method defined in the fileReader.js
-    resp = get(url,
+    resp = get(DataType.TEXT, url,
         function () {
+
             // We expect a return to look like this, so you parse on the quote and get the 7th field
             //  GetFeatureInfo results:
             // Layer 'GEBCO_LATEST_2'
             // Feature 0:
             // x = '23.2375'
-            // y = '65.095833'
+            // y = '65.095833'"
             // value_list = '-101'
-
             dataPoint.wmsdepth = this.responseText.split("\'")[7];
         });
 
-    // console.log(depth);
 }

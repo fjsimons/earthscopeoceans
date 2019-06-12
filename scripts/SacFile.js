@@ -35,11 +35,11 @@ function SacFile(sacArrayBuffer) {
     let data = new Float32Array(sacArrayBuffer.slice(632, sacArrayBuffer.length));
 
     // for debugging purposes
-    // console.log("HdrF: ", HdrF);
-    // console.log("HdrI: ", HdrI);
-    // console.log("HdrL: ", HdrL);
-    // console.log("HdrK: ", HdrK);
-    // console.log("data: ", data);
+    console.log("HdrF: ", HdrF);
+    console.log("HdrI: ", HdrI);
+    console.log("HdrL: ", HdrL);
+    console.log("HdrK: ", HdrK);
+    console.log("data: ", data);
 
     // parsed header letiables
     let DELTA = HdrF[0];
@@ -90,11 +90,11 @@ function SacFile(sacArrayBuffer) {
     }
 
     // makes the plot
-    google.charts.setOnLoadCallback(drawChart(plotData, IDEPr));
+    // google.charts.setOnLoadCallback(drawChart(plotData, IDEPr));
 }
 
 // draw chart
-google.charts.load('current', {'packages': ['corechart']});
+// google.charts.load('current', {'packages': ['corechart']});
 
 function drawChart(sacData, IDEPr) {
     let data = google.visualization.arrayToDataTable([
