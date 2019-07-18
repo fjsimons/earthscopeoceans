@@ -128,7 +128,7 @@ function initMap(listener) {
 		}
 
                 // Alternate coloring for floats...
-		if (dataPoints[i].name === "P007") {
+		if (dataPoints[i].name === "P006" || dataPoints[i].name === "P007") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
 		} else if (dataPoints[i].name[0] === "P") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/orange-dot.png');
@@ -200,10 +200,10 @@ function initMap(listener) {
 		// close existing windows
 		closeIWindows();
 		markerIndex = i;
-
+		console.log(map.getBounds());
 		// Pan to include entire infowindow
 		let center = new google.maps.LatLng(
-						    parseFloat(marker.position.lat()),
+						    parseFloat(marker.position.lat()+4),
 						    parseFloat(marker.position.lng())
 						    );
 		map.panTo(center);
