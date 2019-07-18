@@ -1,9 +1,9 @@
 /**
- DataPoint object class
+DataPoint object class
 
- @author Jonah Rubin
- 03/12/2019
- */
+@author Jonah Rubin
+07/28/2019
+*/
 
 // create datapoint object
 function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, Prange, cmdrdc, f2up, fupl) {
@@ -67,10 +67,10 @@ function getDisplacement(datapt1, datapt2) {
     let R = 6378.137;
     let dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
     let dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
-    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    let a = Math.sin(dLat/2) * Math.sin(dLat/2) +
         Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     let d = R * c;
     return d * 1000; // meters
 }
@@ -80,19 +80,19 @@ function getDistance(dataPoints) {
     let distance = 0;
 
     for (let i = 0; i < dataPoints.length - 1; i++) {
-        distance += getDisplacement(dataPoints[i], dataPoints[i + 1]);
+        distance += getDisplacement(dataPoints[i], dataPoints[i+1]);
     }
-
+    
     return distance;
 }
 
 // switch to radix if the datasize grows substantially
-function selectionSort(arr) {
+function selectionSort(arr){
     let minIdx, temp,
         len = arr.length;
     for (let i = 0; i < len; i++) {
         minIdx = i;
-        for (let j = i + 1; j < len; j++) {
+        for (let j = i+1; j < len; j++) {
             if (arr[j].loct.getTime() < arr[minIdx].loct.getTime()) {
                 minIdx = j;
             }

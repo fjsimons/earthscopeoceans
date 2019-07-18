@@ -1,9 +1,9 @@
 /**
- File reader class
+   File reader class
 
- @author Jonah Rubin
- 03/12/2019
- */
+   @author Jonah Rubin
+   07/28/2019
+*/
 
 // for textfiles
 // function get(url, callback) {
