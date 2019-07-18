@@ -1,8 +1,8 @@
 /**
-	DataPoint object class
+DataPoint object class
 
-	@author Jonah Rubin
-	03/12/2019
+@author Jonah Rubin
+07/28/2019
 */
 
 // create datapoint object
@@ -27,9 +27,11 @@ function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, P
 
 // INPUT is in UTC, convert to browser time
 function toLocDate(stdt) {
-    const MonthConversions = {"Jan": 0, "Feb": 1, "Mar": 2, "Apr": 3, "May": 4, "Jun": 5,
-			      "Jul": 6, "Aug": 7, "Sep": 8, "Oct": 9, "Nov": 10, "Dec": 11};
-
+    const MonthConversions = {
+	"Jan": 0, "Feb": 1, "Mar": 2, "Apr": 3, "May": 4, "Jun": 5,
+	"Jul": 6, "Aug": 7, "Sep": 8, "Oct": 9, "Nov": 10, "Dec": 11
+    };
+ 
     // parse date info
     day = parseInt(stdt.substring(0, 2));
     month = MonthConversions[stdt.substring(3, 6)];
@@ -49,7 +51,7 @@ function toLocDate(stdt) {
 }
 
 // get time elapsed between datapoints in hours
-function getTimeElapsed (datapt1, datapt2) {
+function getTimeElapsed(datapt1, datapt2) {
     return (datapt2.loct.getTime() - datapt1.loct.getTime()) / (1000 * 60 * 60);
 }
 
@@ -62,36 +64,36 @@ function getDisplacement(datapt1, datapt2) {
     lon2 = datapt2.stlo;
 
     // Radius of earth in KM
-    var R = 6378.137;
-    var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
-    var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
-    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+    let  R = 6378.137;
+    let  dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
+    let  dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
+    let a = Math.sin(dLat/2) * Math.sin(dLat/2) +
 	Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
 	Math.sin(dLon/2) * Math.sin(dLon/2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    var d = R * c;
+    let  c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    let  d = R * c;
     return d * 1000; // meters
 }
 
 // get rough distance by getting displacement between all locations
 function getDistance(dataPoints) {
-    var distance = 0
-
-	for (var i = 0; i < dataPoints.length - 1; i++) {
-	    distance += getDisplacement(dataPoints[i], dataPoints[i+1]);
-	}
-
+    let distance = 0;
+    
+    for (let  i = 0; i < dataPoints.length - 1; i++) {
+	distance += getDisplacement(dataPoints[i], dataPoints[i+1]);
+    }
+    
     return distance;
 }
 
 // switch to radix if the datasize grows substantially
 function selectionSort(arr){
-    var minIdx, temp,
+    let  minIdx, temp,
 	len = arr.length;
-    for(var i = 0; i < len; i++){
+    for (let  i = 0; i < len; i++) {
 	minIdx = i;
-	for(var j = i+1; j<len; j++){
-	    if(arr[j].loct.getTime() < arr[minIdx].loct.getTime()){
+	for (let j = i+1; j < len; j++) {
+	    if (arr[j].loct.getTime() < arr[minIdx].loct.getTime()) {
 		minIdx = j;
 	    }
 	}
