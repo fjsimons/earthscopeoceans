@@ -2,7 +2,7 @@
 	Map class
 	@author Jonah Rubin
 	@author Frederik Simons
-	03/12/2019
+	04/28/2019
 */
 
 function initMap() {
