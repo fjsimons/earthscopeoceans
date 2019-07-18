@@ -128,7 +128,7 @@ function initMap(listener) {
 		}
 
                 // Alternate coloring for floats...
-		if (dataPoints[i].name[0:3] === "P007") {
+		if (dataPoints[i].name === "P007") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
 		} else if (dataPoints[i].name[0] === "P") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/orange-dot.png');
