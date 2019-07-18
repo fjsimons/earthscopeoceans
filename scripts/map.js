@@ -203,7 +203,7 @@ function initMap(listener) {
 		console.log(map.getBounds());
 		// Pan to include entire infowindow
 		let center = new google.maps.LatLng(
-						    parseFloat(marker.position.lat()+4),
+						    parseFloat(marker.position.lat()),
 						    parseFloat(marker.position.lng())
 						    );
 		map.panTo(center);
