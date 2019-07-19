@@ -129,8 +129,10 @@ function initMap(listener) {
                 }
 
                 // Alternate coloring for floats...
-		if (dataPoints[i].name === "P006" || dataPoints[i].name === "P007") {
+		if (dataPoints[i].name === "P006") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+		} else if (dataPoints[i].name === "P007" || dataPoints[i].name === "N003") {
+                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
 		} else if (dataPoints[i].name[0] === "P") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/orange-dot.png');
                 } else if (dataPoints[i].name[0] === "N") {
