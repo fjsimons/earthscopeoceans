@@ -53,17 +53,17 @@ function initMap(listener) {
     // add data to map
     function addToMap(data, name) {
         let empty = Boolean(false);
-	
+
         // scrape data from text callback response
         let rows = data.split('\n');
-	
+
 	if (rows.length <= 1) {
             empty = Boolean(true);
         }
-	
-	if (empty === false) {
-	    
-	    for (let i = 0; i < rows.length - 1; i++) {
+
+        if (empty === false) {
+
+            for (let i = 0; i < rows.length - 1; i++) {
                 let corrupted = Boolean(false);
                 let elements = rows[i].split(/\s+/);
 
@@ -151,7 +151,7 @@ function initMap(listener) {
                     totalDistance = 0;
                     totalTime = 0;
                     avgVelocity = 0;
-		    
+
                 } else {
                     // net calculations for each datapoint
                     netDisplacement = getDisplacement(dataPoints[0], dataPoints[i]) / 1000;
@@ -163,7 +163,7 @@ function initMap(listener) {
                     } else {
                         avgVelocity = (totalDistance / totalTime);
                     }
-		    
+
                     // get displacement in m, convert to kilometers
                     legLength = getDisplacement(dataPoints[i-1], dataPoints[i]) / 1000;
                     legTime = getTimeElapsed(dataPoints[i-1], dataPoints[i]);
@@ -197,7 +197,7 @@ function initMap(listener) {
     function setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
                            totalTime, legLength, legSpeed, legTime) {
         makeWMSrequest(dataPoints[i]);
-	
+
         google.maps.event.addListener(marker, 'click', function(event) {
 		// close existing windows
 		closeIWindows();
@@ -262,10 +262,10 @@ function initMap(listener) {
 		    '<br/><b>Magnitude:</b> ' + "/* filler */" +
 		    '<br/><b>Great Circle Distance:</b> ' + "/* filler */" +
 		    '<br/><b>Source:</b> ' + "/* filler */";
-		
-		let floatName = '<div id="tabNames">' + '<b>Float Info</b> ';
-		
-		let earthquakeName = '<div id="tabNames">' + '<b>EarthQuake Info</b> ';
+
+            let floatName = '<div id="tabNames">' + '<b>Float Info</b> ';
+
+            let earthquakeName = '<div id="tabNames">' + '<b>EarthQuake Info</b> ';
 
 		let seismograms = '<div id="tabNames">' + '<b>Seismograms</b> ';
 
@@ -413,7 +413,7 @@ function initMap(listener) {
 	// 	let url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC";
 	// 	useBinCallback(url);
 	//     });
-	
+
         // clear event
         google.maps.event.addDomListener(clear, 'click', function() {
 		clearMarkers();
