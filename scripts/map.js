@@ -422,14 +422,23 @@ function initMap(listener) {
     google.maps.event.addDomListener(document, 'keyup', function(e) {
 	    let code = (e.keyCode ? e.keyCode : e.which);
 	    if (markerIndex !== -1) {
-		if (code === 39 && markerIndex < markers.length - 1) {
-		    markerIndex++;
+            if (code === 39) {
+                if (markerIndex == markers.length - 1) {
+                    markerIndex = 1;
+                } else {
+                    markerIndex++;
+                }
 		    google.maps.event.trigger(markers[markerIndex], 'click');
 
-		} else if (code === 37 && markerIndex > 1) {
-		    markerIndex--;
+            } else if (code === 37) {
+                if (markerIndex == 1) {
+                    markerIndex = markers.length - 1
+                } else {
+                    markerIndex--;
+                }
 		    google.maps.event.trigger(markers[markerIndex], 'click');
-        } else if (code === 27) {
+
+            } else if (code === 27) {
             closeIWindows();
         }
 	    }
