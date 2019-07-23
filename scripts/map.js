@@ -196,23 +196,23 @@ function initMap(listener) {
     // for dynamic info windows
     function setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
                            totalTime, legLength, legSpeed, legTime) {
-        makeWMSrequest(dataPoints[i]);
+    	makeWMSrequest(dataPoints[i]);
 
         google.maps.event.addListener(marker, 'click', function(event) {
 		// close existing windows
 		closeIWindows();
 		markerIndex = i;
 
-            // Pan to include entire infowindow
-            // -0.32+(3000000)/(1+(zoom/0.005)^{2.07}) is the best fit for panning
-            let offset = -0.32 + (3000000) / (1 + Math.pow((map.getZoom() / 0.005), 2.07));
+        	// Pan to include entire infowindow
+        	// -0.32+(3000000)/(1+(zoom/0.005)^{2.07}) is the best fit for panning
+        	let offset = -0.32 + (3000000) / (1 + Math.pow((map.getZoom() / 0.005), 2.07));
 		let center = new google.maps.LatLng(
-            parseFloat(marker.position.lat() + offset),
-						    parseFloat(marker.position.lng())
-						    );
+            		parseFloat(marker.position.lat() + offset),
+			parseFloat(marker.position.lng())
+		);
 		map.panTo(center);
 
-            // info window preferences
+                // info window preferences
 		let iwindow = new InfoBubble({
 			maxWidth: 320,
 			maxHeight: 250,
@@ -263,9 +263,9 @@ function initMap(listener) {
 		    '<br/><b>Great Circle Distance:</b> ' + "/* filler */" +
 		    '<br/><b>Source:</b> ' + "/* filler */";
 
-            let floatName = '<div id="tabNames">' + '<b>Float Info</b> ';
+            	let floatName = '<div id="tabNames">' + '<b>Float Info</b> ';
 
-            let earthquakeName = '<div id="tabNames">' + '<b>EarthQuake Info</b> ';
+            	let earthquakeName = '<div id="tabNames">' + '<b>EarthQuake Info</b> ';
 
 		let seismograms = '<div id="tabNames">' + '<b>Seismograms</b> ';
 
