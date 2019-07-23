@@ -307,7 +307,7 @@ function initMap(listener) {
         }
 
         // This is using the get function defined in fileReader.js
-        resp = get(DataType.TEXT, url,
+        resp = get(url,
 		   // this callback is invoked after the response arrives
 		   function() {
 		       let data = this.responseText;
@@ -429,7 +429,9 @@ function initMap(listener) {
 		} else if (code === 37 && markerIndex > 1) {
 		    markerIndex--;
 		    google.maps.event.trigger(markers[markerIndex], 'click');
-		}
+        } else if (code === 27) {
+            closeIWindows();
+        }
 	    }
 	});
 }
