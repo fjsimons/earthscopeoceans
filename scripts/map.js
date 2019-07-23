@@ -205,7 +205,7 @@ function initMap(listener) {
 
             // Pan to include entire infowindow
             // -0.32+(3000000)/(1+(zoom/0.005)^{2.07}) is the best fit for panning
-            let offset = -0.32 + (3000000) / (1 + Math.pow((map.getZoom() / 0.005), 2.07))
+            let offset = -0.32 + (3000000) / (1 + Math.pow((map.getZoom() / 0.005), 2.07));
 		let center = new google.maps.LatLng(
             parseFloat(marker.position.lat() + offset),
 						    parseFloat(marker.position.lng())
