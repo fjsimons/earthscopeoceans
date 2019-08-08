@@ -2,7 +2,7 @@
    Map class
    @author Jonah Rubin
    @author Frederik Simons
-   07/18/2019
+   08/08/2019
 */
 
 function initMap(listener) {
@@ -204,11 +204,10 @@ function initMap(listener) {
 		markerIndex = i;
 
         	// Pan to include entire infowindow
-        	// -0.32+(3000000)/(1+(zoom/0.005)^{2.07}) is the best fit for panning
         	let offset = -0.32 + (3000000) / (1 + Math.pow((map.getZoom() / 0.005), 2.07));
 		let center = new google.maps.LatLng(
-            		parseFloat(marker.position.lat() + offset),
-			parseFloat(marker.position.lng())
+						    parseFloat(marker.position.lat() + offset),
+						    parseFloat(marker.position.lng())
 		);
 		map.panTo(center);
 
@@ -424,25 +423,25 @@ function initMap(listener) {
     google.maps.event.addDomListener(document, 'keyup', function(e) {
 	    let code = (e.keyCode ? e.keyCode : e.which);
 	    if (markerIndex !== -1) {
-            if (code === 39) {
-                if (markerIndex == markers.length - 1) {
-                    markerIndex = 1;
-                } else {
-                    markerIndex++;
-                }
+		if (code === 39) {
+		    if (markerIndex == markers.length - 1) {
+			markerIndex = 1;
+		    } else {
+			markerIndex++;
+		    }
 		    google.maps.event.trigger(markers[markerIndex], 'click');
-
-            } else if (code === 37) {
-                if (markerIndex == 1) {
-                    markerIndex = markers.length - 1
-                } else {
-                    markerIndex--;
-                }
+		    
+		} else if (code === 37) {
+		    if (markerIndex == 1) {
+			markerIndex = markers.length - 1
+			    } else {
+			markerIndex--;
+		    }
 		    google.maps.event.trigger(markers[markerIndex], 'click');
-
-            } else if (code === 27) {
-            closeIWindows();
-        }
+		    
+		} else if (code === 27) {
+		    closeIWindows();
+		}
 	    }
 	});
 }
