@@ -25,7 +25,7 @@ function makeWMSrequest(dataPoint) {
 
 	let url = rqtHead + rqtTail;
 
-    console.log(url);
+    // console.log(url);
 
     // Use the "get" method defined in the fileReader.js
     resp = get(url,
