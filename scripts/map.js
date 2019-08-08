@@ -136,7 +136,7 @@ function initMap(listener) {
 		} else if (dataPoints[i].name === "P007" || dataPoints[i].name === "N003") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
 		// SUSTECH MERMAIDs
-		} else if (dataPoints[i].name[0] === "P0026" || dataPoints[i].name[0] === "P0027" || dataPoints[i].name[0] === "P0028" || dataPoints[i].name[0] === "P0029") {
+		} else if (dataPoints[i].name === "P0026" || dataPoints[i].name === "P0027" || dataPoints[i].name === "P0028" || dataPoints[i].name === "P0029") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
 		// Princeton MERMAIDs
 		} else if (dataPoints[i].name[0] === "P") {
