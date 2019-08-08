@@ -129,12 +129,19 @@ function initMap(listener) {
                 }
 
                 // Alternate coloring for floats...
+		// GEOAZUR MERMAIDs
 		if (dataPoints[i].name === "P006") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+                // Dead MERMAIDs
 		} else if (dataPoints[i].name === "P007" || dataPoints[i].name === "N003") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
+		// SUSTECH MERMAIDs
+		} else if (dataPoints[i].name[0] === "P026" || dataPoints[i].name[0] === "P027" || dataPoints[i].name[0] === "P028" || dataPoints[i].name[0] === "P029") {
+                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+		// Princeton MERMAIDs
 		} else if (dataPoints[i].name[0] === "P") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/orange-dot.png');
+                // JAMSTEC MERMAIDs
                 } else if (dataPoints[i].name[0] === "N") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
                 }
@@ -373,8 +380,8 @@ function initMap(listener) {
 
     function setUpEvents() {
         // make buttons dynamically - ALL numbers generated (but see below)... up  to:
-        // this is the maximum
-        const numFloats = 25;
+        // this is the maximum. Also set the labels explicitly in ../index.html.
+        const numFloats = 29;
         addEvents("all");
         markerIndex = 0;
 
