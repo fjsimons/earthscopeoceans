@@ -7,7 +7,7 @@
 
 // for textfiles
 function get(url, callback) {
-    let xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
 	// defensive check
