@@ -21,6 +21,31 @@ function initMap(listener) {
     let guyot = {lat: 40.34585, lng: -74.65475};
     let papeete = {lat: -17.53733, lng: -149.5665};
 
+    // set up icons
+    let iconBase = 'http://maps.google.com/mapfiles/ms/icons/';
+    let icons = {
+        geoazur: {
+            name: 'GEOAZUR',
+            icon: iconBase + 'blue-dot.png'
+        },
+        dead: {
+            name: 'Dead',
+            icon: iconBase + 'purple-dot.png'
+        },
+        sustech: {
+            name: 'SUSTECH',
+            icon: iconBase + 'yellow-dot.png'
+        },
+        princeton: {
+            name: 'Princeton',
+            icon: iconBase + 'orange-dot.png'
+        },
+        jamstec: {
+            name: 'JAMSTEC',
+            icon: iconBase + 'red-dot.png'
+        }
+    };
+
     // our default map center
     let map = new google.maps.Map(mapDiv, {
 	    // zoom: 13,
@@ -437,16 +462,16 @@ function initMap(listener) {
 			markerIndex++;
 		    }
 		    google.maps.event.trigger(markers[markerIndex], 'click');
-		    
-		} else if (code === 37) {
+
+        } else if (code === 37) {
 		    if (markerIndex == 1) {
 			markerIndex = markers.length - 1
 			    } else {
 			markerIndex--;
 		    }
 		    google.maps.event.trigger(markers[markerIndex], 'click');
-		    
-		} else if (code === 27) {
+
+        } else if (code === 27) {
 		    closeIWindows();
 		}
 	    }
