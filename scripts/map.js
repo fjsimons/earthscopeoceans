@@ -362,7 +362,7 @@ function initMap(listener) {
     function setUpEvents() {
 	// make buttons dynamically - ALL numbers generated (but see below)... up  to:
 	// this is the maximum. Also set the labels explicitly in ../index.html.
-	const numFloats = 29;
+	const numFloats = 32;
 	addEvents("all");
         markerIndex = 0;
 
