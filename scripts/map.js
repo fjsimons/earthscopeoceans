@@ -135,7 +135,7 @@ function initMap(listener) {
 		} else if (dataPoints[i].name === "P007" || dataPoints[i].name === "N003") {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
 		// SUSTECH MERMAIDs
-		} else if (dataPoints[i].name === "P0026" || dataPoints[i].name === "P0027" || dataPoints[i].name === "P0028" || dataPoints[i].name === "P0029" || dataPoints[i].name === "P0031" || dataPoints[i].name === "P0032"  ) {
+		} else if (dataPoints[i].name === "P0026" || dataPoints[i].name === "P0027" || dataPoints[i].name === "P0028" || dataPoints[i].name === "P0029" || dataPoints[i].name === "P0031" || dataPoints[i].name === "P0032" || dataPoints[i].name === "P0033" || dataPoints[i].name === "P0034" || dataPoints[i].name === "P0035" || dataPoints[i].name === "P0036" || dataPoints[i].name === "P0037" || dataPoints[i].name === "P0038" || dataPoints[i].name === "P0039" || dataPoints[i].name === "P0040" || dataPoints[i].name === "P0041" || dataPoints[i].name === "P0042" || dataPoints[i].name === "P0043" || dataPoints[i].name === "P0044" || dataPoints[i].name === "P0045" || dataPoints[i].name === "P0046" || dataPoints[i].name === "P0047" || dataPoints[i].name === "P0048" || dataPoints[i].name === "P0049"  ) {
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
 		// Princeton MERMAIDs
 		} else if (dataPoints[i].name[0] === "P") {
