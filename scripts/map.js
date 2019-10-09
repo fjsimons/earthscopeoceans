@@ -2,7 +2,7 @@
    Map class
    @author Jonah Rubin
    @author Frederik Simons
-   08/08/2019
+ 10/09/2019
 */
 
 function initMap(listener) {
@@ -16,10 +16,42 @@ function initMap(listener) {
     let markers = [];
     let iwindows = [];
     let markerIndex = -1;
-	
+
+    // flpat origins
+    let geoAzur = [];
+    let JAMSTEC = [];
+    let Princeton = [];
+    let SUSTech = [];
+    let dead = [];
+
     // some default locations
     let guyot = {lat: 40.34585, lng: -74.65475};
     let papeete = {lat: -17.53733, lng: -149.5665};
+
+    // set up icons
+    let iconBase = 'http://maps.google.com/mapfiles/ms/icons/';
+    let icons = {
+        geoazur: {
+            name: 'geoAzur',
+            icon: iconBase + 'blue-dot.png'
+        },
+        sustech: {
+            name: 'SUSTech',
+            icon: iconBase + 'yellow-dot.png'
+        },
+        princeton: {
+            name: 'Princeton',
+            icon: iconBase + 'orange-dot.png'
+        },
+        jamstec: {
+            name: 'JAMSTEC',
+            icon: iconBase + 'red-dot.png'
+        },
+        dead: {
+            name: 'Dead',
+            icon: iconBase + 'purple-dot.png'
+        }
+    };
 
     // our default map center
     let map = new google.maps.Map(mapDiv, {
@@ -38,6 +70,20 @@ function initMap(listener) {
         TEXT: 1,
         BINARY: 2
     };
+
+    var IconColor = {}
+
+    var legend = document.getElementById('legend');
+    for (var key in icons) {
+        var type = icons[key];
+        var name = type.name;
+        var icon = type.icon;
+        var div = document.createElement('div');
+        div.innerHTML = '<img src="' + icon + '"> ' + name;
+        legend.appendChild(div);
+    }
+
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
 
     // landing page
     useCallback("all");
@@ -127,23 +173,26 @@ function initMap(listener) {
 			});
 		}
 
-                // Alternate coloring for floats...
+            id = parseInt(dataPoints[i].name.substring(1, dataPoints[i].name.length));
+
+            // Alternate coloring for floats...
 		// GEOAZUR MERMAIDs
-		if (dataPoints[i].name === "P006") {
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+            if (id === 6) {
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
                 // Dead MERMAIDs
-		} else if (dataPoints[i].name === "P007" || dataPoints[i].name === "N003") {
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
-		// SUSTECH MERMAIDs
-		} else if (dataPoints[i].name === "P0026" || dataPoints[i].name === "P0027" || dataPoints[i].name === "P0028" || dataPoints[i].name === "P0029" || dataPoints[i].name === "P0031" || dataPoints[i].name === "P0032"  ) {
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
-		// Princeton MERMAIDs
+            } else if (id === 7 || id === 3) {
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
+                // SUSTECH MERMAIDs
+            } else if (26 <= id && id <= 49) {
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+                // Princeton MERMAIDs
 		} else if (dataPoints[i].name[0] === "P") {
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/orange-dot.png');
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/orange-dot.png');
                 // JAMSTEC MERMAIDs
-                } else if (dataPoints[i].name[0] === "N") {
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
-                }
+            } else if (dataPoints[i].name[0] === "N") {
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+            }
+
 
 		// expand bounds to fit all markers
 		bounds.extend(marker.getPosition());
@@ -339,7 +388,9 @@ function initMap(listener) {
 
     }
 
+
     setUpEvents();
+
 
     //################################################################################//
     //  We used to  make individual buttons like this
@@ -377,6 +428,25 @@ function initMap(listener) {
 	    } else {
 		floatID = ("P" + i.toString());
 	    }
+
+        // Alternate coloring for floats...
+        // // GEOAZUR MERMAIDs
+        // if (dataPoints[i].name === "P006") {
+        // 	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+        // 	// Dead MERMAIDs
+        // } else if (dataPoints[i].name === "P007" || dataPoints[i].name === "N003") {
+        // 	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
+        // 	// SUSTECH MERMAIDs
+        // } else if (dataPoints[i].name === "P0026" || dataPoints[i].name === "P0027" || dataPoints[i].name === "P0028" || dataPoints[i].name === "P0029" || dataPoints[i].name === "P0031" || dataPoints[i].name === "P0032" || dataPoints[i].name === "P0033" || dataPoints[i].name === "P0034" || dataPoints[i].name === "P0035" || dataPoints[i].name === "P0036" || dataPoints[i].name === "P0037" || dataPoints[i].name === "P0038" || dataPoints[i].name === "P0039" || dataPoints[i].name === "P0040" || dataPoints[i].name === "P0041" || dataPoints[i].name === "P0042" || dataPoints[i].name === "P0043" || dataPoints[i].name === "P0044" || dataPoints[i].name === "P0045" || dataPoints[i].name === "P0046" || dataPoints[i].name === "P0047" || dataPoints[i].name === "P0048" || dataPoints[i].name === "P0049"  ) {
+        // 	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+        // 	// Princeton MERMAIDs
+        // } else if (dataPoints[i].name[0] === "P") {
+        // 	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/orange-dot.png');
+        // 	// JAMSTEC MERMAIDs
+        // } else if (dataPoints[i].name[0] === "N") {
+        // 	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+        // }
+
 
 	    addEvents(floatID);
 	}
