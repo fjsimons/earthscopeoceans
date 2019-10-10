@@ -2,7 +2,7 @@
    Map class
    @author Jonah Rubin
    @author Frederik Simons
- 10/09/2019
+   10/09/2019
 */
 
 function initMap(listener) {
@@ -16,13 +16,6 @@ function initMap(listener) {
     let markers = [];
     let iwindows = [];
     let markerIndex = -1;
-
-    // flpat origins
-    let geoAzur = [];
-    let JAMSTEC = [];
-    let Princeton = [];
-    let SUSTech = [];
-    let dead = [];
 
     // some default locations
     let guyot = {lat: 40.34585, lng: -74.65475};
@@ -64,7 +57,7 @@ function initMap(listener) {
 	    streetViewControl: false,
 	    rotateControl: false,
 	    fullscreenControl: true
-	});
+    });
 
     var DataType = {
         TEXT: 1,
@@ -173,26 +166,25 @@ function initMap(listener) {
 			});
 		}
 
-            id = parseInt(dataPoints[i].name.substring(1, dataPoints[i].name.length));
+		id = parseInt(dataPoints[i].name.substring(1, dataPoints[i].name.length));
 
-            // Alternate coloring for floats...
+		// Alternate coloring for floats...
 		// GEOAZUR MERMAIDs
-            if (id === 6) {
-                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+		if (id === 6) {
+                    marker.setIcon(icons.geoazur.icon);
                 // Dead MERMAIDs
-            } else if (id === 7 || id === 3) {
-                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
+		} else if (id === 7 || id === 3) {
+                    marker.setIcon(icons.dead.icon);
                 // SUSTECH MERMAIDs
-            } else if (26 <= id && id <= 49) {
-                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+		} else if (26 <= id && id <= 49) {
+                    marker.setIcon(icons.sustech.icon);
                 // Princeton MERMAIDs
 		} else if (dataPoints[i].name[0] === "P") {
-                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/orange-dot.png');
+                marker.setIcon(icons.princeton.icon);
                 // JAMSTEC MERMAIDs
-            } else if (dataPoints[i].name[0] === "N") {
-                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
-            }
-
+		} else if (dataPoints[i].name[0] === "N") {
+                    marker.setIcon(icons.jamstec.icon);
+		}
 
 		// expand bounds to fit all markers
 		bounds.extend(marker.getPosition());
@@ -428,25 +420,6 @@ function initMap(listener) {
 	    } else {
 		floatID = ("P" + i.toString());
 	    }
-
-        // Alternate coloring for floats...
-        // // GEOAZUR MERMAIDs
-        // if (dataPoints[i].name === "P006") {
-        // 	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
-        // 	// Dead MERMAIDs
-        // } else if (dataPoints[i].name === "P007" || dataPoints[i].name === "N003") {
-        // 	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
-        // 	// SUSTECH MERMAIDs
-        // } else if (dataPoints[i].name === "P0026" || dataPoints[i].name === "P0027" || dataPoints[i].name === "P0028" || dataPoints[i].name === "P0029" || dataPoints[i].name === "P0031" || dataPoints[i].name === "P0032" || dataPoints[i].name === "P0033" || dataPoints[i].name === "P0034" || dataPoints[i].name === "P0035" || dataPoints[i].name === "P0036" || dataPoints[i].name === "P0037" || dataPoints[i].name === "P0038" || dataPoints[i].name === "P0039" || dataPoints[i].name === "P0040" || dataPoints[i].name === "P0041" || dataPoints[i].name === "P0042" || dataPoints[i].name === "P0043" || dataPoints[i].name === "P0044" || dataPoints[i].name === "P0045" || dataPoints[i].name === "P0046" || dataPoints[i].name === "P0047" || dataPoints[i].name === "P0048" || dataPoints[i].name === "P0049"  ) {
-        // 	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
-        // 	// Princeton MERMAIDs
-        // } else if (dataPoints[i].name[0] === "P") {
-        // 	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/orange-dot.png');
-        // 	// JAMSTEC MERMAIDs
-        // } else if (dataPoints[i].name[0] === "N") {
-        // 	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
-        // }
-
 
 	    addEvents(floatID);
 	}
