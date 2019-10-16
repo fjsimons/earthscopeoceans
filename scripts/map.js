@@ -9,13 +9,19 @@ function initMap(listener) {
     // ID the map
     let mapDiv = document.getElementById('map');
 
-    // store data points
+	// store data points
     let dataPoints = [];
+
+    // set up slideshow
+    let slideShowOn = false;
+    const slideShowInterval = 3000;
     
     // keep track of markers and their info windows
-    let markers = [];
+	const numFloats = 54;
+	let markers = [];
     let iwindows = [];
     let markerIndex = -1;
+    let floatIDS = [];
 
     // some default locations
     let guyot = {lat: 40.34585, lng: -74.65475};
@@ -380,7 +386,6 @@ function initMap(listener) {
 
     }
 
-
     setUpEvents();
 
 
@@ -405,7 +410,6 @@ function initMap(listener) {
     function setUpEvents() {
 	// make buttons dynamically - ALL numbers generated (but see below)... up  to:
 	// this is the maximum. Also set the labels explicitly in ../index.html.
-	const numFloats = 54;
 	addEvents("all");
         markerIndex = 0;
 
@@ -420,7 +424,6 @@ function initMap(listener) {
 	    } else {
 		floatID = ("P" + i.toString());
 	    }
-
 	    addEvents(floatID);
 	}
 	
@@ -428,9 +431,12 @@ function initMap(listener) {
 	function addEvents(id) {
 	    try {
 		google.maps.event.addDomListener(document.getElementById(id), 'click', function() {
+			//slideShowOn = false;
+
 			useCallback(id);
 			markerIndex = 0;
-		    });		
+		    });
+		floatIDS.push(id);
 	    }
 	    // If in the index there wasn't one needed  it doesn't get made
 	    catch(err) {
@@ -446,33 +452,56 @@ function initMap(listener) {
 
 	// clear event
 	google.maps.event.addDomListener(clear, 'click', function() {
-		clearMarkers();
-	    });
+	    //clearMarkers();
+	    slideShow();
+	});
     }
 
     // enable moving through markers with arrow keys
     google.maps.event.addDomListener(document, 'keyup', function(e) {
-	    let code = (e.keyCode ? e.keyCode : e.which);
-	    if (markerIndex !== -1) {
-		if (code === 39) {
-		    if (markerIndex == markers.length - 1) {
-			markerIndex = 1;
-		    } else {
-			markerIndex++;
-		    }
-		    google.maps.event.trigger(markers[markerIndex], 'click');
-		    
-		} else if (code === 37) {
-		    if (markerIndex == 1) {
-			markerIndex = markers.length - 1
-			    } else {
-			markerIndex--;
-		    }
-		    google.maps.event.trigger(markers[markerIndex], 'click');
-		    
-		} else if (code === 27) {
-		    closeIWindows();
+
+	let code = (e.keyCode ? e.keyCode : e.which);
+	if (markerIndex !== -1) {
+	    if (code === 39) {
+		if (markerIndex == markers.length - 1) {
+		    markerIndex = 1;
+		} else {
+		    markerIndex++;
+		}
+		google.maps.event.trigger(markers[markerIndex], 'click');
+		
+	    } else if (code === 37) {
+		if (markerIndex == 1) {
+		    markerIndex = markers.length - 1
+		} else {
+		    markerIndex--;
+		}
+		google.maps.event.trigger(markers[markerIndex], 'click');
+		
+	    } else if (code === 27) {
+		closeIWindows();
+	    }
+	}
+    });
+    
+    
+    function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    
+    async function slideShow() {
+	if (slideShowOn === false) {
+	    slideShowOn = true;
+	    for (let i = 1; i < floatIDS.length-20; i++) {
+		if (slideShowOn === true) {
+		    google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click');
+		    await sleep(2000);
 		}
 	    }
-	});
+	} else {
+	    slideShowOn = false;
+	}
+	
+    }
+    
 }
