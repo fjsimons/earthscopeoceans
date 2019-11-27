@@ -47,7 +47,7 @@ function initMap(listener) {
             icon: iconBase + 'red-dot.png'
         },
         dead: {
-            name: 'inactive',
+            name: 'Inactive',
             icon: iconBase + 'purple-dot.png'
         }
     };
@@ -161,27 +161,25 @@ function initMap(listener) {
 			    position: latLng,
 			    map: map,
 			    clickable: true
-			    // opacity between a minop and maxop
-			    // opacity: (i + 1) / dataPoints.length
 			});
 		} else {
 		    // if (slideShowOn === true) {
-            //     await sleep(1000);
-            // }
-            // // expand bounds to fit all markers
-            // bounds.extend(marker.getPosition());
-            marker = new google.maps.Marker({
+		    //     await sleep(1000);
+		    // }
+		    // // expand bounds to fit all markers
+		    // bounds.extend(marker.getPosition());
+
+		    marker = new google.maps.Marker({
 			    position: latLng,
 			    map: map,
 			    clickable: true,
+			    // opacity between a minop and maxop
 			    opacity: (i + 1) / dataPoints.length
 			});
-
 		}
 
-		id = parseInt(dataPoints[i].name.substring(1, dataPoints[i].name.length));
-
 		// Alternate coloring for floats...
+		id = parseInt(dataPoints[i].name.substring(1,dataPoints[i].name.length));
 		// GEOAZUR MERMAIDs
 		if (id === 6) {
                     marker.setIcon(icons.geoazur.icon);
@@ -438,7 +436,6 @@ function initMap(listener) {
 	function addEvents(id) {
 	    try {
 		google.maps.event.addDomListener(document.getElementById(id), 'click', function() {
-
 			useCallback(id);
 			markerIndex = 0;
 		    });
@@ -462,6 +459,7 @@ function initMap(listener) {
 	    slideShowOn = false;
 	});
 
+	// slideshow event
 	google.maps.event.addDomListener(slide, 'click', function() {
 		slideShow();
 	});
@@ -505,7 +503,7 @@ function initMap(listener) {
 	    for (let i = 1; i < floatIDS.length; i++) {
 		if (slideShowOn === true) {
 		    google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click');
-		    await sleep(2000);
+		    await sleep(slideShowInterval);
 		    if (i >= floatIDS.length-1) {
 		    	i = 1;
 			}
@@ -514,7 +512,5 @@ function initMap(listener) {
 	} else {
 	    slideShowOn = false;
 	}
-	
     }
-    
 }
