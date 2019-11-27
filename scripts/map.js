@@ -2,7 +2,7 @@
    Map class
    @author Jonah Rubin
    @author Frederik Simons
-   08/08/2019
+   11/27/2019
 */
 
 function initMap(listener) {
@@ -11,17 +11,48 @@ function initMap(listener) {
 
     // store data points
     let dataPoints = [];
+
+    // set up slideshow
+    let slideShowOn = false;
+    const slideShowInterval = 3000;
     
     // keep track of markers and their info windows
+    const numFloats = 54;
     let markers = [];
     let iwindows = [];
     let markerIndex = -1;
+    let floatIDS = [];
 	
     // some default locations
     let guyot = {lat: 40.34585, lng: -74.65475};
     let papeete = {lat: -17.53733, lng: -149.5665};
+ 
+    // set up icons
+    let iconBase = 'http://maps.google.com/mapfiles/ms/icons/';
+    let icons = {
+        geoazur: {
+            name: 'G&eacute;oazur',
+            icon: iconBase + 'blue-dot.png'
+        },
+        sustech: {
+            name: 'SUSTech',
+            icon: iconBase + 'yellow-dot.png'
+        },
+        princeton: {
+            name: 'Princeton',
+            icon: iconBase + 'orange-dot.png'
+        },
+        jamstec: {
+            name: 'JAMSTEC',
+            icon: iconBase + 'red-dot.png'
+        },
+        dead: {
+            name: 'inactive',
+            icon: iconBase + 'purple-dot.png'
+        }
+    };
 
-    // our default map center
+   // our default map center
     let map = new google.maps.Map(mapDiv, {
 	    // zoom: 13,
 	    // center: papeete
@@ -38,6 +69,21 @@ function initMap(listener) {
         TEXT: 1,
         BINARY: 2
     };
+
+    var IconColor = {}
+
+    // legend generation
+    var legend = document.getElementById('legend');
+    for (var key in icons) {
+        var type = icons[key];
+        var name = type.name;
+        var icon = type.icon;
+        var div = document.createElement('div');
+        div.innerHTML = '<img src="' + icon + '"> ' + name;
+        legend.appendChild(div);
+    }
+
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
 
     // landing page
     useCallback("all");
@@ -362,7 +408,6 @@ function initMap(listener) {
     function setUpEvents() {
 	// make buttons dynamically - ALL numbers generated (but see below)... up  to:
 	// this is the maximum. Also set the labels explicitly in ../index.html.
-	const numFloats = 54;
 	addEvents("all");
         markerIndex = 0;
 
