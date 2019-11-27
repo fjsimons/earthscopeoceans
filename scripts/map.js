@@ -47,7 +47,7 @@ function initMap(listener) {
             icon: iconBase + 'red-dot.png'
         },
         dead: {
-            name: 'inactive',
+            name: 'Inactive',
             icon: iconBase + 'purple-dot.png'
         }
     };
