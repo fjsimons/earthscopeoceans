@@ -96,9 +96,9 @@ function initMap(listener) {
     }
 
     // add data to map
-    function addToMap(data, name) {
+    async function addToMap(data, name) {
 	let empty = Boolean(false);
-	
+
 	// scrape data from text callback response
 	let rows = data.split('\n');
 	
@@ -107,8 +107,8 @@ function initMap(listener) {
 	}
 	
 	if (empty === false) {
-	    
-	    for (let i = 0; i < rows.length - 1; i++) {
+
+        for (let i = 0; i < rows.length - 1; i++) {
 		let corrupted = Boolean(false);
 		let elements = rows[i].split(/\s+/);
 
@@ -164,12 +164,18 @@ function initMap(listener) {
 			    // opacity: (i + 1) / dataPoints.length
 			});
 		} else {
-		    marker = new google.maps.Marker({
+		    // if (slideShowOn === true) {
+            //     await sleep(1000);
+            // }
+            // // expand bounds to fit all markers
+            // bounds.extend(marker.getPosition());
+            marker = new google.maps.Marker({
 			    position: latLng,
 			    map: map,
 			    clickable: true,
 			    opacity: (i + 1) / dataPoints.length
 			});
+
 		}
 
 		id = parseInt(dataPoints[i].name.substring(1, dataPoints[i].name.length));
@@ -234,7 +240,7 @@ function initMap(listener) {
 			      totalTime, legLength, legSpeed, legTime);
 
 		markers.push(marker);
-	    }
+        }
 
 	    // pan to bounds
 	    // updated to use a min zoom (13) to avoid missing imagery
@@ -452,8 +458,12 @@ function initMap(listener) {
 
 	// clear event
 	google.maps.event.addDomListener(clear, 'click', function() {
-	    //clearMarkers();
-	    slideShow();
+	    clearMarkers();
+	    slideShowOn = false;
+	});
+
+	google.maps.event.addDomListener(slide, 'click', function() {
+		slideShow();
 	});
     }
 
