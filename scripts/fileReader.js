@@ -2,7 +2,7 @@
    File reader class
 
    @author Jonah Rubin
-   07/28/2019
+   11/27/2019
 */
 
 // for textfiles
@@ -21,6 +21,7 @@ function get(url, callback) {
     xhr.send();
 }
 
+// For future consolidation
 // function get(type, url, callback) {
 //     let xhr = new XMLHttpRequest();
 //     xhr.open("GET", url, true);
