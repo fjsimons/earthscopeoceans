@@ -2,14 +2,14 @@
    Map class
    @author Jonah Rubin
    @author Frederik Simons
-   10/09/2019
+   11/27/2019
 */
 
 function initMap(listener) {
     // ID the map
     let mapDiv = document.getElementById('map');
 
-	// store data points
+    // store data points
     let dataPoints = [];
 
     // set up slideshow
@@ -17,8 +17,8 @@ function initMap(listener) {
     const slideShowInterval = 3000;
     
     // keep track of markers and their info windows
-	const numFloats = 54;
-	let markers = [];
+    const numFloats = 54;
+    let markers = [];
     let iwindows = [];
     let markerIndex = -1;
     let floatIDS = [];
@@ -31,7 +31,7 @@ function initMap(listener) {
     let iconBase = 'http://maps.google.com/mapfiles/ms/icons/';
     let icons = {
         geoazur: {
-            name: 'geoAzur',
+            name: 'G&eacute;oazur',
             icon: iconBase + 'blue-dot.png'
         },
         sustech: {
@@ -47,7 +47,7 @@ function initMap(listener) {
             icon: iconBase + 'red-dot.png'
         },
         dead: {
-            name: 'Dead',
+            name: 'inactive',
             icon: iconBase + 'purple-dot.png'
         }
     };
@@ -72,6 +72,7 @@ function initMap(listener) {
 
     var IconColor = {}
 
+    // legend generation
     var legend = document.getElementById('legend');
     for (var key in icons) {
         var type = icons[key];
