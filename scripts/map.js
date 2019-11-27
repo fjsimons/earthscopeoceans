@@ -97,7 +97,7 @@ function initMap(listener) {
     }
 
     // add data to map
-    function addToMap(data, name) {
+    async function addToMap(data, name) {
 	let empty = Boolean(false);
 	
 	// scrape data from text callback response
@@ -161,35 +161,41 @@ function initMap(listener) {
 			    position: latLng,
 			    map: map,
 			    clickable: true
-			    // opacity between a minop and maxop
-			    // opacity: (i + 1) / dataPoints.length
 			});
 		} else {
+		    // if (slideShowOn === true) {
+		    //     await sleep(1000);
+		    // }
+		    // // expand bounds to fit all markers
+		    // bounds.extend(marker.getPosition());
+
 		    marker = new google.maps.Marker({
 			    position: latLng,
 			    map: map,
 			    clickable: true,
+			    // opacity between a minop and maxop
 			    opacity: (i + 1) / dataPoints.length
 			});
 		}
 
                 // Alternate coloring for floats...
+		id = parseInt(dataPoints[i].name.substring(1,dataPoints[i].name.length));
 		// GEOAZUR MERMAIDs
-		if (dataPoints[i].name === "P006") {
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+		if (id === 6) {
+                    marker.setIcon(icons.geoazur.icon);
                 // Dead MERMAIDs
-		} else if (dataPoints[i].name === "P007" || dataPoints[i].name === "N003") {
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
-		// SUSTECH MERMAIDs
-		} else if (dataPoints[i].name === "P0026" || dataPoints[i].name === "P0027" || dataPoints[i].name === "P0028" || dataPoints[i].name === "P0029" || dataPoints[i].name === "P0031" || dataPoints[i].name === "P0032" || dataPoints[i].name === "P0033" || dataPoints[i].name === "P0034" || dataPoints[i].name === "P0035" || dataPoints[i].name === "P0036" || dataPoints[i].name === "P0037" || dataPoints[i].name === "P0038" || dataPoints[i].name === "P0039" || dataPoints[i].name === "P0040" || dataPoints[i].name === "P0041" || dataPoints[i].name === "P0042" || dataPoints[i].name === "P0043" || dataPoints[i].name === "P0044" || dataPoints[i].name === "P0045" || dataPoints[i].name === "P0046" || dataPoints[i].name === "P0047" || dataPoints[i].name === "P0048" || dataPoints[i].name === "P0049"  ) {
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
-		// Princeton MERMAIDs
+		} else if (id === 7 || id === 3) {
+                    marker.setIcon(icons.dead.icon);
+                // SUSTECH MERMAIDs
+		} else if (26 <= id && id <= 49) {
+                    marker.setIcon(icons.sustech.icon);
+                // Princeton MERMAIDs
 		} else if (dataPoints[i].name[0] === "P") {
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/orange-dot.png');
+                marker.setIcon(icons.princeton.icon);
                 // JAMSTEC MERMAIDs
-                } else if (dataPoints[i].name[0] === "N") {
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
-                }
+		} else if (dataPoints[i].name[0] === "N") {
+                    marker.setIcon(icons.jamstec.icon);
+		}
 
 		// expand bounds to fit all markers
 		bounds.extend(marker.getPosition());
@@ -433,6 +439,7 @@ function initMap(listener) {
 			useCallback(id);
 			markerIndex = 0;
 		    });		
+		floatIDS.push(id);
 	    }
 	    // If in the index there wasn't one needed  it doesn't get made
 	    catch(err) {
@@ -449,6 +456,12 @@ function initMap(listener) {
 	// clear event
 	google.maps.event.addDomListener(clear, 'click', function() {
 		clearMarkers();
+		slideShowOn = false;
+	    });
+
+	// slideshow event
+	google.maps.event.addDomListener(slide, 'click', function() {
+		slideShow();
 	    });
     }
 
@@ -477,4 +490,26 @@ function initMap(listener) {
 		}
 	    }
 	});
+
+    function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    
+    async function slideShow() {
+	if (slideShowOn === false) {
+	    slideShowOn = true;
+	    for (let i = 1; i < floatIDS.length; i++) {
+		if (slideShowOn === true) {
+		    google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click');
+		    await sleep(slideShowInterval);
+		    if (i >= floatIDS.length-1) {
+		    	i = 1;
+			}
+		}
+	    }
+	} else {
+	    slideShowOn = false;
+	}
+    }
 }
+
