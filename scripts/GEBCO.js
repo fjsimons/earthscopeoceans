@@ -1,3 +1,4 @@
+// Last modified by JNR and FJS 11/27/2019
 function makeWMSrequest(dataPoint) {
     // This is inspired by the known 2014 resolution
     const bb = 1/60/2;
