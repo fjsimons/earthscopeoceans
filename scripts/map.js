@@ -437,7 +437,6 @@ function initMap(listener) {
 	function addEvents(id) {
 	    try {
 		google.maps.event.addDomListener(document.getElementById(id), 'click', function() {
-			//slideShowOn = false;
 
 			useCallback(id);
 			markerIndex = 0;
@@ -502,10 +501,13 @@ function initMap(listener) {
     async function slideShow() {
 	if (slideShowOn === false) {
 	    slideShowOn = true;
-	    for (let i = 1; i < floatIDS.length-20; i++) {
+	    for (let i = 1; i < floatIDS.length; i++) {
 		if (slideShowOn === true) {
 		    google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click');
 		    await sleep(2000);
+		    if (i >= floatIDS.length-1) {
+		    	i = 1;
+			}
 		}
 	    }
 	} else {
