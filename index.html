@@ -525,6 +525,7 @@
 		      <div class="scrollmenu">
 			<a href="#clear:void(0)" id="clear">Clear</a>
 			<a href="#all:void(0)"   id="all">All</a>
+                        <a href="#slide:void(0)" id="slide">Slide</a>
 			<a href="#P001:void(0)"  id="P001">P001</a>
 			<a href="#P002:void(0)"  id="P002">P002</a>
 			<a href="#P003:void(0)"  id="P003">P003</a>
@@ -577,17 +578,34 @@
 			<a href="#P054:void(0)"  id="P054">P054</a>
 		      </div>
 		      <div id="map"></div>
-		      <!-- ###################### MAP APPEARANCE  ########################################################## -->
+		      <div id="legend"><h3>Origin</h3></div>
+                      <!-- ###################### MAP APPEARANCE  ########################################################## -->
 		      <style>
 			#map {
 			height: 600px;
 			width:  100%;
 			}
+
+                       #legend {
+				font-family: Arial, sans-serif;
+				background: #fff;
+				padding: 10px;
+				margin: 10px;
+				border: 3px solid #000;
+			}
+
+			#legend h3 {
+				margin-top: 0;
+			}
+
+			#legend img {
+				vertical-align: middle;
+			}
 		      </style>
 
 		      <!-- ###################### MAP SCRIPTS  ########################################################## -->
 		      <script src="scripts/fileReader.js"></script>
-          <script src="scripts/GEBCO.js"></script>
+                      <script src="scripts/GEBCO.js"></script>
 		      <script src="scripts/DataPoint.js"></script>
 		      <script src="scripts/map.js"></script>
 		      <script src="scripts/infobubble.js"></script>
