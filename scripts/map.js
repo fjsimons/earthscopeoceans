@@ -435,7 +435,10 @@ function initMap(listener) {
 	// float events
 	function addEvents(id) {
 	    try {
-		google.maps.event.addDomListener(document.getElementById(id), 'click', function() {
+		google.maps.event.addDomListener(document.getElementById(id), 'click', function(referer) {
+			if (referer !== "slideShow") {
+				slideShowOn = false;
+			}
 			useCallback(id);
 			markerIndex = 0;
 		    });
@@ -501,7 +504,8 @@ function initMap(listener) {
 	    slideShowOn = true;
 	    for (let i = 1; i < floatIDS.length; i++) {
 		if (slideShowOn === true) {
-		    google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click');
+			let referer = "slideShow";
+		    google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click', referer);
 		    await sleep(slideShowInterval);
 		    if (i >= floatIDS.length-1) {
 		    	i = 1;
