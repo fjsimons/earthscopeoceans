@@ -2,7 +2,7 @@
    Map class
    @author Jonah Rubin
    @author Frederik Simons
-   11/27/2019
+   12/03/2019
 */
 
 function initMap(listener) {
@@ -437,7 +437,7 @@ function initMap(listener) {
 	    try {
 		google.maps.event.addDomListener(document.getElementById(id), 'click', function(referer) {
 			if (referer !== "slideShow") {
-				slideShowOn = false;
+			    slideShowOn = false;
 			}
 			useCallback(id);
 			markerIndex = 0;
@@ -504,7 +504,7 @@ function initMap(listener) {
 	    slideShowOn = true;
 	    for (let i = 1; i < floatIDS.length; i++) {
 		if (slideShowOn === true) {
-			let referer = "slideShow";
+		    let referer = "slideShow";
 		    google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click', referer);
 		    await sleep(slideShowInterval);
 		    if (i >= floatIDS.length-1) {
