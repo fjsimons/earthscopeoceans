@@ -15,13 +15,14 @@ function initMap(listener) {
     // set up slideshow
     let slideShowOn = false;
     const slideShowInterval = 3000;
-    
+
     // keep track of markers and their info windows
     const numFloats = 54;
     let markers = [];
     let iwindows = [];
     let markerIndex = -1;
     let floatIDS = [];
+
 
     // some default locations
     let guyot = {lat: 40.34585, lng: -74.65475};
@@ -31,7 +32,7 @@ function initMap(listener) {
     let iconBase = 'http://maps.google.com/mapfiles/ms/icons/';
     let icons = {
         geoazur: {
-            name: 'G&eacute;oazur',
+            name: 'Géoazur',
             icon: iconBase + 'blue-dot.png'
         },
         sustech: {
@@ -70,7 +71,7 @@ function initMap(listener) {
         BINARY: 2
     };
 
-    var IconColor = {}
+    var IconColor = {};
 
     // legend generation
     var legend = document.getElementById('legend');
@@ -79,9 +80,15 @@ function initMap(listener) {
         var name = type.name;
         var icon = type.icon;
         var div = document.createElement('div');
-        div.innerHTML = '<img src="' + icon + '"> ' + name;
+        div.innerHTML = '<img src="' + icon + '" id="' + name + '">' + name;
         legend.appendChild(div);
+
+        google.maps.event.addDomListener(document.getElementById(name), 'click', function () {
+            alert("clicked")
+
+        });
     }
+    console.log("here");
 
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
 
@@ -102,11 +109,11 @@ function initMap(listener) {
 
 	// scrape data from text callback response
 	let rows = data.split('\n');
-	
+
 	if (rows.length <= 1) {
 	    empty = Boolean(true);
 	}
-	
+
 	if (empty === false) {
 
         for (let i = 0; i < rows.length - 1; i++) {
@@ -178,29 +185,29 @@ function initMap(listener) {
 			});
 		}
 
-		// Alternate coloring for floats...
-		id = parseInt(dataPoints[i].name.substring(1,dataPoints[i].name.length));
+            // Alternate coloring for floats..
+            let owner = getOwner(dataPoints[i].name);
 		// GEOAZUR MERMAIDs
-		if (id === 6) {
+            if (owner === "geoazur") {
                     marker.setIcon(icons.geoazur.icon);
                 // Dead MERMAIDs
-		} else if (id === 7 || id === 3) {
+            } else if (owner === "dead") {
                     marker.setIcon(icons.dead.icon);
                 // SUSTECH MERMAIDs
-		} else if (26 <= id && id <= 49) {
+            } else if (owner === "sustech") {
                     marker.setIcon(icons.sustech.icon);
                 // Princeton MERMAIDs
-		} else if (dataPoints[i].name[0] === "P") {
+            } else if (owner === "princeton") {
                 marker.setIcon(icons.princeton.icon);
                 // JAMSTEC MERMAIDs
-		} else if (dataPoints[i].name[0] === "N") {
+            } else if (owner === "N") {
                     marker.setIcon(icons.jamstec.icon);
 		}
 
 		// expand bounds to fit all markers
 		bounds.extend(marker.getPosition());
-		
-		// first datapoint initialized to 0
+
+            // first datapoint initialized to 0
 		if (i === 0) {
 		    legLength = 0;
 		    legSpeed = 0;
@@ -209,14 +216,14 @@ function initMap(listener) {
 		    totalDistance = 0;
 		    totalTime = 0;
 		    avgVelocity = 0;
-		    
-		} else {
+
+        } else {
 		    // net calculations for each datapoint
 		    netDisplacement = getDisplacement(dataPoints[0], dataPoints[i]) / 1000;
 		    totalDistance = getDistance(dataPoints.slice(0, i+1)) / 1000;
 		    totalTime = getTimeElapsed(dataPoints[0], dataPoints[i]);
-		    
-		    if (totalTime === 0) {
+
+            if (totalTime === 0) {
 			avgVelocty = 0;
 		    } else {
 			avgVelocity = (totalDistance / totalTime);
@@ -251,6 +258,27 @@ function initMap(listener) {
 	}
     }
 
+    function getOwner(name) {
+        // Alternate coloring for floats...
+        id = parseInt(name.substring(1, name.length));
+        // GEOAZUR MERMAIDs
+        if (id === 6) {
+            return ("geoazur");
+            // Dead MERMAIDs
+        } else if (id === 7 || id === 3) {
+            return ("dead");
+            // SUSTECH MERMAIDs
+        } else if (26 <= id && id <= 49) {
+            return ("sustech");
+            // Princeton MERMAIDs
+        } else if (name[0] === "P") {
+            return ("princeton");
+            // JAMSTEC MERMAIDs
+        } else if (name[0] === "N") {
+            return ("jamstec");
+        }
+    }
+
     // for dynamic info windows
     function setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
 			   totalTime, legLength, legSpeed, legTime) {
@@ -268,8 +296,8 @@ function initMap(listener) {
 						    parseFloat(marker.position.lng())
 						    );
 		map.panTo(center);
-		
-		// info window preferences
+
+        // info window preferences
 		let  iwindow = new InfoBubble({
 			maxWidth: 320,
 			maxHeight: 250,
@@ -319,14 +347,14 @@ function initMap(listener) {
 			'<br/><b>Magnitude:</b> '  + "/* filler */" +
 			'<br/><b>Great Circle Distance:</b> ' + "/* filler */" +
 			'<br/><b>Source:</b> ' + "/* filler */";
-		    
-		    let floatName      = '<div id="tabNames">' + '<b>Float Info</b> ';
-		    
-		    let earthquakeName = '<div id="tabNames">' + '<b>EarthQuake Info</b> ';
-		    
-		    let seismograms    = '<div id="tabNames">' + '<b>Seismograms</b> ';
-			
-		    // add info window tabs
+
+        let floatName      = '<div id="tabNames">' + '<b>Float Info</b> ';
+
+        let earthquakeName = '<div id="tabNames">' + '<b>EarthQuake Info</b> ';
+
+        let seismograms    = '<div id="tabNames">' + '<b>Seismograms</b> ';
+
+        // add info window tabs
 		    iwindow.addTab(floatName, floatTabContent);
 		// iwindow.addTab(earthquakeName, earthquakeTabContent);
 		// iwindow.addTab(seismograms, "");
@@ -431,8 +459,8 @@ function initMap(listener) {
 	    }
 	    addEvents(floatID);
 	}
-	
-	// float events
+
+        // float events
 	function addEvents(id) {
 	    try {
 		google.maps.event.addDomListener(document.getElementById(id), 'click', function(referer) {
@@ -449,8 +477,8 @@ function initMap(listener) {
 		console.log(err.message);
 	    }
 	}
-	
-	// sac event
+
+        // sac event
 	// google.maps.event.addDomListener(plot, 'click', function() {
 	// 	let url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC";
 	// 	    useBinCallback(url);
@@ -474,31 +502,31 @@ function initMap(listener) {
 	let code = (e.keyCode ? e.keyCode : e.which);
 	if (markerIndex !== -1) {
 	    if (code === 39) {
-		if (markerIndex == markers.length - 1) {
+            if (markerIndex === markers.length - 1) {
 		    markerIndex = 1;
 		} else {
 		    markerIndex++;
 		}
 		google.maps.event.trigger(markers[markerIndex], 'click');
-		
-	    } else if (code === 37) {
-		if (markerIndex == 1) {
+
+        } else if (code === 37) {
+            if (markerIndex === 1) {
 		    markerIndex = markers.length - 1
 		} else {
 		    markerIndex--;
 		}
 		google.maps.event.trigger(markers[markerIndex], 'click');
-		
-	    } else if (code === 27) {
+
+        } else if (code === 27) {
 		closeIWindows();
 	    }
 	}
     });
-    
+
     function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
     }
-    
+
     async function slideShow() {
 	if (slideShowOn === false) {
 	    slideShowOn = true;
