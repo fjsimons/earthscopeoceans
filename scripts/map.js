@@ -2,7 +2,7 @@
    Map class
    @author Jonah Rubin
    @author Frederik Simons
-   12/03/2019
+   1/17/2019
 */
 
 function initMap(listener) {
@@ -185,6 +185,8 @@ function initMap(listener) {
 			});
 		}
 
+
+
             // Alternate coloring for floats..
             let owner = getOwner(dataPoints[i].name);
 		// GEOAZUR MERMAIDs
@@ -200,9 +202,10 @@ function initMap(listener) {
             } else if (owner === "princeton") {
                 marker.setIcon(icons.princeton.icon);
                 // JAMSTEC MERMAIDs
-            } else if (owner === "N") {
+            } else if (owner === "jamstec") {
                     marker.setIcon(icons.jamstec.icon);
-		}
+
+			}
 
 		// expand bounds to fit all markers
 		bounds.extend(marker.getPosition());
@@ -394,7 +397,7 @@ function initMap(listener) {
 	}
 
 	// This is using the get function defined in fileReader.js
-	resp = get(url,
+	resp = get("text", url,
 		   // this callback is invoked after the response arrives
 		   function() {
 		       let data  = this.responseText;
@@ -403,7 +406,7 @@ function initMap(listener) {
     }
 
     function useBinCallback(url) {
-	resp = getBin(url,
+	resp = get("bin", url,
 		      // this callback is invoked after the response arrives
 		      function() {
 			  let blob = this.response;
