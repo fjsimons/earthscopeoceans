@@ -29,7 +29,8 @@ function makeWMSrequest(dataPoint) {
     // console.log(url);
 
     // Use the "get" method defined in the fileReader.js
-    resp = get(url,
+    //console.log(url);
+    resp = get("text", url,
 	       function () {
 		   // We expect a return to look like this, so you parse on the quote and get the 7th field
 		   //  GetFeatureInfo results:
@@ -39,9 +40,9 @@ function makeWMSrequest(dataPoint) {
 		   // y = '65.095833'
 		   // value_list = '-101'
 
-		   // console.log(this.responseText.split("\'")[7]);
+               console.log(this.responseText.split("\'")[7]);
 		   dataPoint.wmsdepth = this.responseText.split("\'")[7];
 	       });
 
-    // console.log(depth);
+    //console.log(depth);
 }
