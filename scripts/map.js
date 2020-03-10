@@ -74,11 +74,6 @@ function initMap(listener) {
 	    fullscreenControl: true
 	});
 
-    var DataType = {
-        TEXT: 1,
-        BINARY: 2
-    };
-
     var IconColor = {};
 
     // legend generation
@@ -388,7 +383,7 @@ function initMap(listener) {
 	}
 
 	// This is using the get function defined in fileReader.js
-	resp = get("text", url,
+	resp = get(DataType.TEXT, url,
 		   // this callback is invoked after the response arrives
 		   function () {
 		       let data = this.responseText;
@@ -397,7 +392,7 @@ function initMap(listener) {
     }
 
     function useBinCallback(url) {
-	resp = get("bin", url,
+	resp = get(DataType.BINARY, url,
 		   // this callback is invoked after the response arrives
 		   function() {
 		       let blob = this.response;
