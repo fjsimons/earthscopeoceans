@@ -30,7 +30,7 @@ function makeWMSrequest(dataPoint) {
 
     // Use the "get" method defined in the fileReader.js
     //console.log(url);
-    resp = get("text", url,
+    resp = get(DataType.TEXT, url,
 	       function () {
 		   // We expect a return to look like this, so you parse on the quote and get the 7th field
 		   //  GetFeatureInfo results:
