@@ -8,8 +8,8 @@ DataPoint object class
 // create datapoint object
 function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, Prange, cmdrdc, f2up, fupl) {
     this.name = name;
-    this.owner =
-        this.stdt = stdt;
+    this.owner = getOwner(this.name);
+    this.stdt = stdt;
     this.loct = toLocDate(stdt);
     this.stla = stla;
     this.stlo = stlo;
@@ -24,7 +24,30 @@ function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, P
     this.f2up = f2up;
     this.fupl = fupl;
     this.wmsdepth = 0;
+    this.showIcon = true;
 }
+
+function getOwner(name) {
+    // Alternate coloring for floats...
+    id = parseInt(name.substring(1, name.length));
+    // GEOAZUR MERMAIDs
+    if (id === 6) {
+        return ("geoazur");
+        // Dead MERMAIDs
+    } else if (id === 7 || id === 3) {
+        return ("dead");
+        // SUSTECH MERMAIDs
+    } else if (26 <= id && id <= 49) {
+        return ("sustech");
+        // Princeton MERMAIDs
+    } else if (name[0] === "P") {
+        return ("princeton");
+        // JAMSTEC MERMAIDs
+    } else if (name[0] === "N") {
+        return ("jamstec");
+    }
+}
+
 
 // INPUT is in UTC, convert to browser time
 function toLocDate(stdt) {
