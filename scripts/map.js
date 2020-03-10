@@ -82,13 +82,10 @@ function initMap(listener) {
         var div = document.createElement('div');
         div.innerHTML = '<img src="' + icon + '" id="' + name + '">' + name;
         legend.appendChild(div);
+		console.log(div.innerHTML)
 
-        google.maps.event.addDomListener(document.getElementById(name), 'click', function () {
-            alert("clicked")
-
-        });
+		legendClosure(name, key);
     }
-    console.log("here");
 
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
 
@@ -102,6 +99,12 @@ function initMap(listener) {
     function roundit(num) {
 	return parseFloat(num).toFixed(3);
     }
+
+	function legendClosure(name, key) {
+		google.maps.event.addDomListener(document.getElementById(name), 'click', function () {
+			console.log(key);
+		});
+	}
 
     // add data to map
     async function addToMap(data, name) {
@@ -506,14 +509,14 @@ function initMap(listener) {
 	if (markerIndex !== -1) {
 	    if (code === 39) {
             if (markerIndex === markers.length - 1) {
-		    markerIndex = 1;
+				markerIndex = 0;
 		} else {
 		    markerIndex++;
 		}
 		google.maps.event.trigger(markers[markerIndex], 'click');
 
         } else if (code === 37) {
-            if (markerIndex === 1) {
+			if (markerIndex === 0) {
 		    markerIndex = markers.length - 1
 		} else {
 		    markerIndex--;

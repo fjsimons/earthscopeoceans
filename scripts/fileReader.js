@@ -2,16 +2,15 @@
    File reader class
 
    @author Jonah Rubin
-   11/27/2019
-*/
+ 1/22/2019
+ */
 
-// for textfiles
+// for text or binary files
 function get(type, url, callback) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     if (type === "bin") {
         xhr.responseType = 'blob';
-
     }
     xhr.onreadystatechange = function () {
         // defensive check

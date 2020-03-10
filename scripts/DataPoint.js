@@ -8,7 +8,8 @@ DataPoint object class
 // create datapoint object
 function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, Prange, cmdrdc, f2up, fupl) {
     this.name = name;
-    this.stdt = stdt;
+    this.owner =
+        this.stdt = stdt;
     this.loct = toLocDate(stdt);
     this.stla = stla;
     this.stlo = stlo;
