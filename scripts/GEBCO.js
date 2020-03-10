@@ -40,7 +40,6 @@ function makeWMSrequest(dataPoint) {
 		   // y = '65.095833'
 		   // value_list = '-101'
 
-               console.log(this.responseText.split("\'")[7]);
 		   dataPoint.wmsdepth = this.responseText.split("\'")[7];
 	       });
 
