@@ -2,8 +2,8 @@
    File reader class
 
    @author Jonah Rubin
- 1/22/2019
- */
+   03/10/2020
+*/
 
 // for text or binary files
 function get(type, url, callback) {
