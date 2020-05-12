@@ -178,6 +178,8 @@ function initMap(listener) {
 	    // input came sorted already
 	    dataPoints = selectionSort(dataPoints);
 
+	    console.log("datapoints size given name: "+ name + "  " + dataPoints.length);
+
 	    // set up panning bounds
 	    let bounds = new google.maps.LatLngBounds();
 
@@ -536,16 +538,25 @@ function initMap(listener) {
     async function slideShow() {
 	if (slideShowOn === false) {
 	    slideShowOn = true;
-	    for (let i = 1; i < floatIDS.length; i++) {
-		if (slideShowOn === true && showDict[dataPoints[i].owner] === true) {
-		    let referer = "slideShow";
-		    google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click', referer);
-		    await sleep(slideShowInterval);
-		    if (i >= floatIDS.length - 1) {
-			i = 1;
-		    }
-		}
-	    }
+			for (let i = 1; i < floatIDS.length; i++) {
+				let showFloat = false;
+
+				// try {
+				// 	showFloat = showDict[dataPoints[i].owner];
+				// } catch {
+				// 	showFloat = false
+				// }
+
+				if (slideShowOn === true && showDict[getOwner(idToName(i))] === true) {
+					let referer = "slideShow";
+					google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click', referer);
+					await sleep(slideShowInterval);
+					if (i >= floatIDS.length - 1) {
+						i = 1;
+					}
+				}
+			}
+
 	} else {
 	    slideShowOn = false;
 	}
