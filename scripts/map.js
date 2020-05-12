@@ -26,7 +26,7 @@ function initMap(listener) {
     let showAll = false;
 	let showTail = "_030.txt";
 
-    // legend initial state
+	// legend initial state
     let showDict = {
 	"geoazur": true,
 	"dead": true,
@@ -100,11 +100,13 @@ function initMap(listener) {
 
 	google.maps.event.addDomListener(document.getElementById('toggle'), 'click', function () {
 		showAll = !showAll;
-		if (showAll === true) {
+		if (showAll === false) {
 			showTail = '_030.txt';
 		} else {
 			showTail = '_all.txt';
 		}
+
+		console.log("show all: " + showAll);
 
 		// convert id then use
 		useCallback(idToName(id));
