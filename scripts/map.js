@@ -23,6 +23,9 @@ function initMap(listener) {
     let markerIndex = -1;
     let floatIDS = [];
 
+    let showAll = false;
+	let showTail = "_030.txt";
+
     // legend initial state
     let showDict = {
 	"geoazur": true,
@@ -85,12 +88,33 @@ function initMap(listener) {
         var div = document.createElement('div');
         div.innerHTML = '<img src="' + icon + '" id="' + name + '">' + name;
         legend.appendChild(div);
-	// console.log(div.innerHTML)
 
 	    legendClosure(name, key);
     }
 
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+
+	var toggle = document.getElementById('toggle');
+	var div2 = document.createElement('div');
+	var toggleSrc = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/aux/history.png";
+	div2.innerHTML = '<img src="' + toggleSrc + '" id="' + 'toggleButton' + '">';
+
+	google.maps.event.addDomListener(document.getElementById('toggle'), 'click', function () {
+		showAll = !showAll;
+		if (showAll === true) {
+			showTail = '_030.txt';
+		} else {
+			showTail = '_all.txt';
+		}
+
+		// convert id then use
+		useCallback(idToName(id));
+
+	});
+
+	toggle.appendChild(div2);
+
+	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+	map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(toggle);
 
     // landing page
     useCallback("all");
@@ -379,7 +403,7 @@ function initMap(listener) {
 	if (name === "all") {
 	    url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt";
 	} else {
-	    url = "http://geoweb.princeton.edu/people/simons/SOM/" + name + "_030.txt";
+	    url = "http://geoweb.princeton.edu/people/simons/SOM/" + name + showTail;
 	}
 
 	// This is using the get function defined in fileReader.js
@@ -438,14 +462,8 @@ function initMap(listener) {
 	// autogenerate "numFloats" events
 	// if they do not exist, the button will not be created
 	for (let i = 0; i <= numFloats; i++) {
-	    let floatID;
-	    if (i < 10) {
-		floatID = ("P00" + i.toString());
-	    } else if (i < 100) {
-		floatID = ("P0" + i.toString());
-	    } else {
-		floatID = ("P" + i.toString());
-	    }
+	    let floatID = idToName(i);
+
 	    addEvents(floatID);
 	}
 
@@ -532,4 +550,17 @@ function initMap(listener) {
 	    slideShowOn = false;
 	}
     }
+
+    // take float number and convert to name
+    function idToName(id) {
+		let floatName;
+		if (id < 10) {
+			floatName = ("P00" + id.toString());
+		} else if (id < 100) {
+			floatName = ("P0" + id.toString());
+		} else {
+			floatName = ("P" + id.toString());
+		}
+    	return floatName;
+	}
 }
