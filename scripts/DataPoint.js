@@ -37,7 +37,7 @@ function getOwner(name) {
     } else if (id === 7 || id === 3) {
         return ("dead");
         // SUSTECH MERMAIDs
-    } else if (26 <= id && id <= 49) {
+    } else if (26 <= id && id <= 50) {
         return ("sustech");
         // Princeton MERMAIDs
     } else if (name[0] === "P") {
