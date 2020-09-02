@@ -39,6 +39,9 @@ function getOwner(name) {
         // SUSTECH MERMAIDs
     } else if (26 <= id && id <= 49) {
         return ("sustech");
+        // JAMSTEC MERMAIDs
+    } else if (50 <= id && id <= 54) {
+        return ("jamstec");
         // Princeton MERMAIDs
     } else if (name[0] === "P") {
         return ("princeton");

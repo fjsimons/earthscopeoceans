@@ -2,7 +2,7 @@
    Map class
    @author Jonah Rubin
    @author Frederik Simons
-   03/20/2020
+ 05/12/2020
 */
 
 function initMap(listener) {
@@ -86,10 +86,11 @@ function initMap(listener) {
         var name = type.name;
         var icon = type.icon;
         var div = document.createElement('div');
-        div.innerHTML = '<img src="' + icon + '" id="' + name + '">' + name;
-        legend.appendChild(div);
+		div.innerHTML = '<img src="' + icon + '" id="' + name + '">' + type.name;
 
-	    legendClosure(name, key);
+		legend.appendChild(div);
+
+		legendClosure(name, key);
     }
 
 
@@ -128,8 +129,8 @@ function initMap(listener) {
     function roundit(num) {
 	return parseFloat(num).toFixed(3);
     }
-    
-    // enabling legend toggling without hanging in the last state
+
+	// enabling legend toggling without hanging in the last state
     function legendClosure(name, key) {
 	google.maps.event.addDomListener(document.getElementById(name), 'click', function () {
 		// the real legend toggling
