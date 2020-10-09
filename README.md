@@ -1,2 +1,3 @@
 # earthscopeoceans (version of record)
-Website (and some other sundries) for www.earthscopeoceans.org
+Website materials for www.earthscopeoceans.org
+
