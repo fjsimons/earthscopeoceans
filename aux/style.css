@@ -1,0 +1,201 @@
+body  {
+    /* background-image: url("images/21.jpg"); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/*main jumbotron*/
+.jumbotron {
+  margin-bottom: 20px;
+    background-image: url(../images/water01crop.jpg);
+  background-position: 0% 25%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  font-size: 1.3em;
+  height: 400px
+}
+
+/* secondary buttons */
+.btn-secondary{
+  border-color: #000F35;
+  background-color: #000F35;
+  margin-top:30px;
+}
+
+/* secondary buttons */
+.about-earthscope{
+  margin-top: 35px;
+  font-size: 1.3em;
+}
+
+/* map jumbotron */
+.map-jumbotron{
+  width:100%;
+    height: 80%;
+  background-color: #000F35;
+  background-image: none;
+  padding:10px;
+  margin:0px;
+  text-align: center;
+}
+
+/* scrollbar */
+div.scrollmenu {
+  margin-top: 25px;
+  background-color: #000F35;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
+}
+
+#map {
+    height: 600px;
+  width:  100%;
+  margin-bottom: 25px;
+}
+
+#legend {
+    font-family: Arial, sans-serif;
+    color: black;
+    text-align: justify;
+    background: #fff;
+    padding: 10px;
+    margin: 10px;
+    border: 3px solid #000;
+}
+
+#legend h3 {
+    margin-top: 0;
+}
+
+#legend img {
+    vertical-align: middle;
+}
+
+#toggle {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    padding: 10px;
+    margin: 10px;
+    border: 3px solid #000;
+}
+
+#toggle h3 {
+    margin-top: 0;
+}
+
+#toggle img {
+    vertical-align: middle;
+}
+/*info window text*/
+#tabContent {
+   font-size: 1.3em;
+   color: black;
+   text-align: left;
+ }
+
+ /*info window tab names*/
+ #tabNames {
+   font-size: 1.1em;
+   color: black;
+   text-align: left;
+ }
+
+/*navbar*/
+.navbar-inverse {
+  background-color: #000F35;
+}
+
+.navbar-logo {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+
+.col1 {
+  background-image: url(images/mermaid01.jpg);
+  height: 450px;
+  background-repeat: no-repeat;
+}
+
+.col2 {
+  background-image: url(images/inthewater01.jpg);
+  height: 450px;
+  background-repeat: no-repeat;
+}
+
+.col3{
+  background-image: url(images/mermaid02.jpg);
+  height: 450px;
+  background-repeat: no-repeat;
+}
+
+.triplet-container {
+  margin-top: 0px;
+}
+
+.triplet-jumbotron {
+  background-color: #000F35;
+  background-image: none;
+  height: 570px
+}
+
+/*fade effect*/
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #000F35;
+  text-align: center;
+  line-height: 450px;
+}
+
+.col-md-4:hover .overlay {
+  opacity: .85;
+}
+
+.box-shadow {
+  border-width: 0px;
+  border-color: #000F35
+}
+
+/*footer links*/
+.footer-jumbotron {
+  margin-top: 30px;
+  color: #000F35;
+  background-image: none;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: white;
+  font-size: 1.8em;
+  height: 30px;
+}
+
+.copyright-jumbotron {
+  margin-top: 25px;
+  line-height: 10px;
+  font-size: 1.0em;
+
+  text-align: center;
+  height: 20px;
+  background-color: #000F35;
+  background-image: none;
+}
