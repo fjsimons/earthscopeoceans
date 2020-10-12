@@ -7,7 +7,7 @@ body  {
 /*main jumbotron*/
 .jumbotron {
   margin-bottom: 20px;
-    background-image: url(../images/water01crop.jpg);
+  background-image: url(../images/water01crop.jpg);
   background-position: 0% 25%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -125,19 +125,19 @@ div.scrollmenu a:hover {
 }
 
 .col1 {
-  background-image: url(images/mermaid01.jpg);
+  background-image: url(../images/mermaid01.jpg);
   height: 450px;
   background-repeat: no-repeat;
 }
 
 .col2 {
-  background-image: url(images/inthewater01.jpg);
+  background-image: url(../images/inthewater01.jpg);
   height: 450px;
   background-repeat: no-repeat;
 }
 
 .col3{
-  background-image: url(images/mermaid02.jpg);
+  background-image: url(../images/mermaid02.jpg);
   height: 450px;
   background-repeat: no-repeat;
 }
