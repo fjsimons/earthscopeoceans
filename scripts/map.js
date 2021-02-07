@@ -279,8 +279,10 @@ function initMap(listener) {
 			}
 		    }
 
+            let allPage = name === 'all';
+
 		    // create info windows
-		    setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
+            setInfoWindow(allPage, i, marker, netDisplacement, totalDistance, avgVelocity,
 				  totalTime, legLength, legSpeed, legTime);
 
 		    markers.push(marker);
@@ -298,8 +300,8 @@ function initMap(listener) {
     }
 
     // for dynamic info windows
-    function setInfoWindow(i, marker, netDisplacement, totalDistance, avgVelocity,
-			   totalTime, legLength, legSpeed, legTime) {
+    function setInfoWindow(allPage, i, marker, netDisplacement, totalDistance, avgVelocity,
+                           totalTime, legLength, legSpeed, legTime) {
 
 	makeWMSrequest(dataPoints[i]);
 
@@ -334,28 +336,47 @@ function initMap(listener) {
 			disableAnimation: 'true'
 		    });
 
+        let floatTabContent;
 
-		// content for float data tab
-		let floatTabContent = '<div id="tabContent">' +
-		    '<b>Float Name:</b> ' + dataPoints[i].name +
-		    '<br/><b>UTC Date:</b> ' + dataPoints[i].stdt +
-		    '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
-		    '<br/><b>GPS Lat/Lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
-		    '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
-		    '<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
-		    '<br/><b>Internal Pressure:</b> ' + dataPoints[i].Pint + ' Pa' +
-		    '<br/><b>External Pressure:</b> ' + dataPoints[i].Pext + ' mbar' +
-		    '<br/> ' +
-		    '<br/><b>Leg Length:</b> ' + roundit(legLength) + ' km' +
-		    '<br/><b>Leg Time:</b> ' + roundit(legTime) + ' h' +
-		    '<br/><b>Leg Speed:</b> ' + roundit(legSpeed) + ' km/h' +
+        if (allPage === true) {
+            // content for float data tab
+            floatTabContent = '<div id="tabContent">' +
+                '<b>Float Name:</b> ' + dataPoints[i].name +
+                '<br/><b>UTC Date:</b> ' + dataPoints[i].stdt +
+                '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
+                '<br/><b>GPS Lat/Lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
+                '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
+                '<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
+                '<br/><b>Internal Pressure:</b> ' + dataPoints[i].Pint + ' Pa' +
+                '<br/><b>External Pressure:</b> ' + dataPoints[i].Pext + ' mbar' +
+                '<br/> ' +
+                '<br/><b>Total Time:</b> ' + roundit(totalTime) + ' h' +
+                '<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
+                '<br/><b>Average Speed:</b> ' + roundit(avgVelocity) + ' km/h' +
+                '<br/><b>Net Displacement:</b> ' + roundit(netDisplacement) + ' km' +
+                '<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m';
+        } else {
+            // content for float data tab
+            floatTabContent = '<div id="tabContent">' +
+                '<b>Float Name:</b> ' + dataPoints[i].name +
+                '<br/><b>UTC Date:</b> ' + dataPoints[i].stdt +
+                '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
+                '<br/><b>GPS Lat/Lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
+                '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
+                '<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
+                '<br/><b>Internal Pressure:</b> ' + dataPoints[i].Pint + ' Pa' +
+                '<br/><b>External Pressure:</b> ' + dataPoints[i].Pext + ' mbar' +
+                '<br/> ' +
+                '<br/><b>Leg Length:</b> ' + roundit(legLength) + ' km' +
+                '<br/><b>Leg Time:</b> ' + roundit(legTime) + ' h' +
+                '<br/><b>Leg Speed:</b> ' + roundit(legSpeed) + ' km/h' +
 
-		    '<br/><b>Total Time:</b> ' + roundit(totalTime) + ' h' +
-		    '<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
-		    '<br/><b>Average Speed:</b> ' + roundit(avgVelocity) + ' km/h' +
-		    '<br/><b>Net Displacement:</b> ' + roundit(netDisplacement) + ' km' +
-		    '<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m';
-
+                '<br/><b>Total Time:</b> ' + roundit(totalTime) + ' h' +
+                '<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
+                '<br/><b>Average Speed:</b> ' + roundit(avgVelocity) + ' km/h' +
+                '<br/><b>Net Displacement:</b> ' + roundit(netDisplacement) + ' km' +
+                '<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m';
+        }
 		// content for earthquake tabs
 		let earthquakeTabContent = '<div id="tabContent">' +
 		    '<b>Code:</b> ' + "/* filler */" +
