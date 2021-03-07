@@ -4,6 +4,18 @@ body  {
     background-attachment: fixed;
 }
 
+.crop {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+}
+
+.crop img {
+    width: 400px;
+    height: 400px;
+    margin: -100px 0 0 -100px;
+}
+
 /*main jumbotron*/
 .jumbotron {
   margin-bottom: 20px;
