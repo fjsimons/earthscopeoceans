@@ -16,6 +16,11 @@ body  {
     margin: -100px 0 0 -100px;
 }
 
+.carousel-container {
+  width: 450px;
+  height: 450px;
+}
+
 /*main jumbotron*/
 .jumbotron {
   margin-bottom: 20px;
