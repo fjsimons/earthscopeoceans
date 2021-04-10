@@ -179,16 +179,25 @@
       <div class="container">
 	<!-- Example row of columns -->
 	<div class="row about-earthscope">
-	    <h1>Seismic Data</h1>
+	    <h1><a name="data">Seismic Data</a></h1>
 	</div>
 	<div class="row about-earthscope">
 	  <p>
-	    Seismic data are with the <a href="http://ds.iris.edu/ds/nodes/dmc/">IRIS Data Management Center</a>. Public requests wil be allowed soon.<br>
 	    MERMAID's <a href="http://www.fdsn.org/networks/detail/MH/">International Federation of Digital Seismograph Networks</a> FDSN code is MH.<br>
+	    Seismic data are in SEED format and available from  the <a href="http://ds.iris.edu/ds/nodes/dmc/">IRIS Data Management Center</a>.<br>
+	    Access is temporarily restricted following
+	    standard <a href="http://www.iris.edu">IRIS</a>
+	    and <a href="http://www.nsf.gov">NSF</a> policy. See <a href="metadata.html#authentication">below</a>.<br> 
 	    <br>
+	    MERMAID automatically reports <b>triggered</b> seismograms (time series of acoustic
+	    pressure),<br> but <b>requests</b> can be made for data continuously
+	    recorded on its one-year rolling buffer.
+	    <br><br>
+	    If you are interested in making such a data request,
+	    contact <a href="mailto:jdsimon@alumni.princeton.edu">Joel D. Simon</a>. 
 	</div>
 	<div class="row about-earthscope">
-	    <h1>Metadata</h1>
+	    <h1><a name="metadata">Metadata</a></h1>
 	</div>
 	<div class="row about-earthscope">
 	  <p>
@@ -251,7 +260,32 @@
 	    <a href="http://geoweb.princeton.edu/people/simons/SOM/P054_all.txt">P054</a> (Kobe/JAMSTEC)<br>
 	  </p>
 	</div>
-	
+
+	<div class="row about-earthscope">
+	    <h1><a name="authentication">Authentication</a></h1>
+	</div>
+	<div class="row about-earthscope">
+	  <p>
+	    <a href="http://ds.iris.edu/ds/nodes/dmc/data/types/restricted">Restricted data</a> are managed by three pieces of information:<br>
+	    <ol>
+	      <li>The <b>experiment network password</b> is used to verify that a
+		user requesting access to the experiment should be given access. This
+		password is passed from the PIs to users who should be allowed
+		access. Contact <a href="mailto:jdsimon@alumni.princeton.edu">Joel D. Simon</a>.
+	      </li>
+              <li>The <b>web-authentication password</b> allows users access to data via
+		Web Services for experiments that they are permitted to view. It is directly
+		coupled with an email address. 
+	      </li>
+              <li>The <b>ssl-encryption password</b> allows users to unscramble
+		<i>breq_fast</i> requests to restricted experiments. This password
+		is also coupled to user's email addresses.
+	      </li>
+	    </ol>
+	    If you have the &nbsp; <b>experiment network password</b>, you can register
+	    for data access &nbsp;<a href="http://www.iris.edu/data/restricted_req.htm">here</a>.
+	  </p>
+	</div>
 	<hr>
 
       </div> <!-- /container -->
