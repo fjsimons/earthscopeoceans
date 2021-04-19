@@ -2,12 +2,12 @@
    Map class
    @author Jonah Rubin
    @author Frederik Simons
-   05/12/2020
+ 05/12/2020
 */
 
 function initMap(listener) {
     // ID the map
-    let mapDiv = document.getElementById("map");
+    let mapDiv = document.getElementById('map');
 
     // store data points
     let dataPoints = [];
@@ -24,44 +24,44 @@ function initMap(listener) {
     let floatIDS = [];
 
     let showAll = false;
-    let showTail = "_030.txt";
+	let showTail = "_030.txt";
 
-    // legend initial state
+	// legend initial state
     let showDict = {
-	geoazur: true,
-	dead: true,
-	princeton: true,
-	sustech: true,
-	jamstec: true,
+	"geoazur": true,
+	"dead": true,
+	"princeton": true,
+	"sustech": true,
+	"jamstec": true
     };
 
     // some default locations
-    let guyot = { lat: 40.34585, lng: -74.65475 };
-    let papeete = { lat: -17.53733, lng: -149.5665 };
+    let guyot = {lat: 40.34585, lng: -74.65475};
+    let papeete = {lat: -17.53733, lng: -149.5665};
 
     // set up icons
-    let iconBase = "http://maps.google.com/mapfiles/ms/icons/";
+    let iconBase = 'http://maps.google.com/mapfiles/ms/icons/';
     let icons = {
-	geoazur: {
-	    name: "Géoazur",
-	    icon: iconBase + "blue-dot.png",
-	},
-	sustech: {
-	    name: "SUSTech",
-	    icon: iconBase + "yellow-dot.png",
-	},
-	princeton: {
-	    name: "Princeton",
-	    icon: iconBase + "orange-dot.png",
-	},
-	jamstec: {
-	    name: "JAMSTEC",
-	    icon: iconBase + "red-dot.png",
-	},
-	dead: {
-	    name: "Inactive",
-	    icon: iconBase + "purple-dot.png",
-	},
+        geoazur: {
+            name: 'Géoazur',
+            icon: iconBase + 'blue-dot.png'
+        },
+        sustech: {
+            name: 'SUSTech',
+            icon: iconBase + 'yellow-dot.png'
+        },
+        princeton: {
+            name: 'Princeton',
+            icon: iconBase + 'orange-dot.png'
+        },
+        jamstec: {
+            name: 'JAMSTEC',
+            icon: iconBase + 'red-dot.png'
+        },
+        dead: {
+            name: 'Inactive',
+            icon: iconBase + 'purple-dot.png'
+        }
     };
 
     // our default map center
@@ -74,76 +74,69 @@ function initMap(listener) {
 	    scaleControl: true,
 	    streetViewControl: false,
 	    rotateControl: false,
-	    fullscreenControl: true,
+	    fullscreenControl: true
 	});
 
     var IconColor = {};
 
     // legend generation
-    var legend = document.getElementById("legend");
+    var legend = document.getElementById('legend');
     for (var key in icons) {
-	var type = icons[key];
-	var name = type.name;
-	var icon = type.icon;
-	var div = document.createElement("div");
-	div.innerHTML = '<img src="' + icon + '" id="' + name + '">' + type.name;
+        var type = icons[key];
+        var name = type.name;
+        var icon = type.icon;
+        var div = document.createElement('div');
+		div.innerHTML = '<img src="' + icon + '" id="' + name + '">' + type.name;
 
-	legend.appendChild(div);
+		legend.appendChild(div);
 
-	legendClosure(name, key);
+		legendClosure(name, key);
     }
 
-    var toggle = document.getElementById("toggle");
-    var div2 = document.createElement("div");
-    var toggleSrc =
-	"http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/aux/history.png";
-    div2.innerHTML = '<img src="' + toggleSrc + '" id="' + "toggleButton" + '">';
 
-    google.maps.event.addDomListener(
-				     document.getElementById("toggle"),
-				     "click",
-				     function () {
-					 showAll = !showAll;
-					 if (showAll === false) {
-					     showTail = "_030.txt";
-					 } else {
-					     showTail = "_all.txt";
-					 }
+	var toggle = document.getElementById('toggle');
+	var div2 = document.createElement('div');
+	var toggleSrc = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/aux/history.png";
+	div2.innerHTML = '<img src="' + toggleSrc + '" id="' + 'toggleButton' + '">';
 
-					 console.log("show all: " + showAll);
+	google.maps.event.addDomListener(document.getElementById('toggle'), 'click', function () {
+		showAll = !showAll;
+		if (showAll === false) {
+			showTail = '_030.txt';
+		} else {
+			showTail = '_all.txt';
+		}
 
-					 // convert id then use
-					 useCallback(idToName(id));
-				     }
-				     );
+		console.log("show all: " + showAll);
 
-    toggle.appendChild(div2);
+		// convert id then use
+		useCallback(idToName(id));
 
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
-    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(toggle);
+	});
+
+	toggle.appendChild(div2);
+
+	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+	map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(toggle);
 
     // landing page
     useCallback("all");
 
     //other option: terrain
-    map.setMapTypeId("satellite");
+    map.setMapTypeId('satellite');
 
     // for rounding to three decimal places
     function roundit(num) {
 	return parseFloat(num).toFixed(3);
     }
 
-    // enabling legend toggling without hanging in the last state
+	// enabling legend toggling without hanging in the last state
     function legendClosure(name, key) {
-	google.maps.event.addDomListener(
-					 document.getElementById(name),
-					 "click",
-					 function () {
-					     // the real legend toggling
-					     showDict[key] = !showDict[key];
-					     useCallback("all");
-					 }
-					 );
+	google.maps.event.addDomListener(document.getElementById(name), 'click', function () {
+		// the real legend toggling
+		showDict[key] = !showDict[key];
+		useCallback("all");
+	    });
     }
 
     // add data to map
@@ -151,47 +144,33 @@ function initMap(listener) {
 	let empty = Boolean(false);
 
 	// scrape data from text callback response
-	let rows = data.split("\n");
+	let rows = data.split('\n');
 
 	if (rows.length <= 1) {
 	    empty = Boolean(true);
 	}
 
 	if (empty === false) {
+
 	    for (let i = 0; i < rows.length - 1; i++) {
 		let corrupted = Boolean(false);
 		let elements = rows[i].split(/\s+/);
 
-		if (elements.length !== 15)
-		    corrupted = Boolean(true);
-		else {
-		    // check to make sure everything but the date is a number
-		    for (let j = 3; j < elements.length; j++) {
-			if (isNaN(elements[j])) {
-			    console.log("Corrupted");
-			    corrupted = Boolean(true);
-			}
+		// check to make sure everything but the date is a number
+		for (let j = 3; j < elements.length; j++) {
+		    if (isNaN(elements[j])) {
+			console.log("Corrupted");
+			corrupted = Boolean(true);
 		    }
 		}
 
 		// store each data point as an object
 		if (corrupted === false) {
-		    let dataPoint = new DataPoint(
-						  elements[0],
-						  elements[1] + " " + elements[2],
-						  elements[3],
-						  elements[4],
-						  elements[5],
-						  elements[6],
-						  elements[7],
-						  elements[8],
-						  elements[9],
-						  elements[10],
-						  elements[11],
-						  elements[12],
-						  elements[13],
-						  elements[14]
-						  );
+		    let dataPoint = new DataPoint(elements[0], elements[1] + " " + elements[2],
+						  elements[3], elements[4], elements[5],
+						  elements[6], elements[7], elements[8],
+						  elements[9], elements[10], elements[11],
+						  elements[12], elements[13], elements[14]);
 		    dataPoints.push(dataPoint);
 		}
 	    }
@@ -202,9 +181,7 @@ function initMap(listener) {
 	    // input came sorted already
 	    dataPoints = selectionSort(dataPoints);
 
-	    console.log(
-			"datapoints size given name: " + name + "  " + dataPoints.length
-			);
+	    console.log("datapoints size given name: "+ name + "  " + dataPoints.length);
 
 	    // set up panning bounds
 	    let bounds = new google.maps.LatLngBounds();
@@ -221,18 +198,15 @@ function initMap(listener) {
 
 	    // iterate over arrays, placing markers
 	    for (let i = 0; i < dataPoints.length; i++) {
-		let latLng = new google.maps.LatLng(
-						    dataPoints[i].stla,
-						    dataPoints[i].stlo
-						    );
+		let latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
 
 		// set up marker, fade on age, unless using the 'all' option
 		if (showDict[dataPoints[i].owner] === true) {
-		    if (name === "all") {
+		    if (name === 'all') {
 			marker = new google.maps.Marker({
 				position: latLng,
 				map: map,
-				clickable: true,
+				clickable: true
 			    });
 		    } else {
 			// if (slideShowOn === true) {
@@ -246,7 +220,7 @@ function initMap(listener) {
 				map: map,
 				clickable: true,
 				// opacity between a minop and maxop
-				opacity: (i + 1) / dataPoints.length,
+				opacity: (i + 1) / dataPoints.length
 			    });
 		    }
 
@@ -270,7 +244,6 @@ function initMap(listener) {
 
 		    // expand bounds to fit all markers
 		    bounds.extend(marker.getPosition());
-		    // console.log(bounds);
 
 		    // first datapoint initialized to 0
 		    if (i === 0) {
@@ -281,22 +254,21 @@ function initMap(listener) {
 			totalDistance = 0;
 			totalTime = 0;
 			avgVelocity = 0;
+
 		    } else {
 			// net calculations for each datapoint
-			netDisplacement =
-			    getDisplacement(dataPoints[0], dataPoints[i]) / 1000;
-			totalDistance = getDistance(dataPoints.slice(0, i + 1)) / 1000;
+			netDisplacement = getDisplacement(dataPoints[0], dataPoints[i]) / 1000;
+			totalDistance = getDistance(dataPoints.slice(0, i+1)) / 1000;
 			totalTime = getTimeElapsed(dataPoints[0], dataPoints[i]);
 
 			if (totalTime === 0) {
 			    avgVelocty = 0;
 			} else {
-			    avgVelocity = totalDistance / totalTime;
+			    avgVelocity = (totalDistance / totalTime);
 			}
 
 			// get displacement in m, convert to kilometers
-			legLength =
-			    getDisplacement(dataPoints[i - 1], dataPoints[i]) / 1000;
+			legLength = getDisplacement(dataPoints[i - 1], dataPoints[i]) / 1000;
 			legTime = getTimeElapsed(dataPoints[i - 1], dataPoints[i]);
 
 			// avoid division by zero when calculating velocity
@@ -307,21 +279,11 @@ function initMap(listener) {
 			}
 		    }
 
-		    let allPage = name === "all";
+            let allPage = name === 'all';
 
 		    // create info windows
-		    setInfoWindow(
-				  allPage,
-				  i,
-				  marker,
-				  netDisplacement,
-				  totalDistance,
-				  avgVelocity,
-				  totalTime,
-				  legLength,
-				  legSpeed,
-				  legTime
-				  );
+            setInfoWindow(allPage, i, marker, netDisplacement, totalDistance, avgVelocity,
+				  totalTime, legLength, legSpeed, legTime);
 
 		    markers.push(marker);
 		}
@@ -330,37 +292,25 @@ function initMap(listener) {
 	    // pan to bounds
 	    // updated to use a min zoom (13) to avoid missing imagery
 	    map.fitBounds(bounds);
-
 	    let listener = google.maps.event.addListener(map, "idle", function () {
-		    if (map.getZoom() > 13)
-			map.setZoom(13);
+		    if (map.getZoom() > 13) map.setZoom(13);
 		    google.maps.event.removeListener(listener);
 		});
 	}
     }
 
     // for dynamic info windows
-    function setInfoWindow(
-			   allPage,
-			   i,
-			   marker,
-			   netDisplacement,
-			   totalDistance,
-			   avgVelocity,
-			   totalTime,
-			   legLength,
-			   legSpeed,
-			   legTime
-			   ) {
+    function setInfoWindow(allPage, i, marker, netDisplacement, totalDistance, avgVelocity,
+                           totalTime, legLength, legSpeed, legTime) {
+
 	makeWMSrequest(dataPoints[i]);
 
-	google.maps.event.addListener(marker, "click", function (event) {
+	google.maps.event.addListener(marker, 'click', function (event) {
 		// close existing windows
 		closeIWindows();
 		markerIndex = i;
 		// Pan to include entire infowindow
-		let offset =
-		    -0.32 + 3000000 / (1 + Math.pow(map.getZoom() / 0.005, 2.07));
+		let offset = -0.32 + (3000000) / (1 + Math.pow((map.getZoom() / 0.005), 2.07));
 		let center = new google.maps.LatLng(
 						    parseFloat(marker.position.lat() + offset),
 						    parseFloat(marker.position.lng())
@@ -373,142 +323,75 @@ function initMap(listener) {
 			maxHeight: 250,
 			shadowStyle: 1,
 			padding: 10,
-			backgroundColor: "rgb(255,255,255)",
+			backgroundColor: 'rgb(255,255,255)',
 			borderRadius: 4,
 			arrowSize: 20,
 			borderWidth: 2,
-			borderColor: "#000F35",
+			borderColor: '#000F35',
 			disableAutoPan: true,
 			hideCloseButton: false,
 			arrowPosition: 30,
-			backgroundClassName: "phoney",
+			backgroundClassName: 'phoney',
 			arrowStyle: 0,
-			disableAnimation: "true",
+			disableAnimation: 'true'
 		    });
 
-		let floatTabContent;
+        let floatTabContent;
 
-		if (allPage === true) {
-		    // content for float data tab
-		    floatTabContent =
-			'<div id="tabContent">' +
-			"<b>Float Name:</b> " +
-			dataPoints[i].name +
-			"<br/><b>UTC Date:</b> " +
-			dataPoints[i].stdt +
-			"<br/><b>Your Date:</b> " +
-			dataPoints[i].loct +
-			"<br/><b>GPS Lat/Lon:</b> " +
-			dataPoints[i].stla +
-			", " +
-			dataPoints[i].stlo +
-			"<br/><b>GPS Hdop/Vdop:</b> " +
-			dataPoints[i].hdop +
-			" m , " +
-			dataPoints[i].vdop +
-			" m" +
-			"<br/><b>Battery:</b> " +
-			dataPoints[i].Vbat +
-			" mV" +
-			"<br/><b>Internal Pressure:</b> " +
-			dataPoints[i].Pint +
-			" Pa" +
-			"<br/><b>External Pressure:</b> " +
-			dataPoints[i].Pext +
-			" mbar" +
-			"<br/> " +
-			"<br/><b>Total Time:</b> " +
-			roundit(totalTime) +
-			" h" +
-			"<br/><b>Distance Travelled:</b> " +
-			roundit(totalDistance) +
-			" km" +
-			"<br/><b>Average Speed:</b> " +
-			roundit(avgVelocity) +
-			" km/h" +
-			"<br/><b>Net Displacement:</b> " +
-			roundit(netDisplacement) +
-			" km" +
-			"<br/><b>GEBCO WMS Depth:</b> " +
-			dataPoints[i].wmsdepth +
-			" m";
-		} else {
-		    // content for float data tab
-		    floatTabContent =
-			'<div id="tabContent">' +
-			"<b>Float Name:</b> " +
-			dataPoints[i].name +
-			"<br/><b>UTC Date:</b> " +
-			dataPoints[i].stdt +
-			"<br/><b>Your Date:</b> " +
-			dataPoints[i].loct +
-			"<br/><b>GPS Lat/Lon:</b> " +
-			dataPoints[i].stla +
-			", " +
-			dataPoints[i].stlo +
-			"<br/><b>GPS Hdop/Vdop:</b> " +
-			dataPoints[i].hdop +
-			" m , " +
-			dataPoints[i].vdop +
-			" m" +
-			"<br/><b>Battery:</b> " +
-			dataPoints[i].Vbat +
-			" mV" +
-			"<br/><b>Internal Pressure:</b> " +
-			dataPoints[i].Pint +
-			" Pa" +
-			"<br/><b>External Pressure:</b> " +
-			dataPoints[i].Pext +
-			" mbar" +
-			"<br/> " +
-			"<br/><b>Leg Length:</b> " +
-			roundit(legLength) +
-			" km" +
-			"<br/><b>Leg Time:</b> " +
-			roundit(legTime) +
-			" h" +
-			"<br/><b>Leg Speed:</b> " +
-			roundit(legSpeed) +
-			" km/h" +
-			"<br/><b>Total Time:</b> " +
-			roundit(totalTime) +
-			" h" +
-			"<br/><b>Distance Travelled:</b> " +
-			roundit(totalDistance) +
-			" km" +
-			"<br/><b>Average Speed:</b> " +
-			roundit(avgVelocity) +
-			" km/h" +
-			"<br/><b>Net Displacement:</b> " +
-			roundit(netDisplacement) +
-			" km" +
-			"<br/><b>GEBCO WMS Depth:</b> " +
-			dataPoints[i].wmsdepth +
-			" m";
-		}
+        if (allPage === true) {
+            // content for float data tab
+            floatTabContent = '<div id="tabContent">' +
+                '<b>Float Name:</b> ' + dataPoints[i].name +
+                '<br/><b>UTC Date:</b> ' + dataPoints[i].stdt +
+                '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
+                '<br/><b>GPS Lat/Lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
+                '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
+                '<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
+                '<br/><b>Internal Pressure:</b> ' + dataPoints[i].Pint + ' Pa' +
+                '<br/><b>External Pressure:</b> ' + dataPoints[i].Pext + ' mbar' +
+                '<br/> ' +
+                '<br/><b>Total Time:</b> ' + roundit(totalTime) + ' h' +
+                '<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
+                '<br/><b>Average Speed:</b> ' + roundit(avgVelocity) + ' km/h' +
+                '<br/><b>Net Displacement:</b> ' + roundit(netDisplacement) + ' km' +
+                '<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m';
+        } else {
+            // content for float data tab
+            floatTabContent = '<div id="tabContent">' +
+                '<b>Float Name:</b> ' + dataPoints[i].name +
+                '<br/><b>UTC Date:</b> ' + dataPoints[i].stdt +
+                '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
+                '<br/><b>GPS Lat/Lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
+                '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
+                '<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
+                '<br/><b>Internal Pressure:</b> ' + dataPoints[i].Pint + ' Pa' +
+                '<br/><b>External Pressure:</b> ' + dataPoints[i].Pext + ' mbar' +
+                '<br/> ' +
+                '<br/><b>Leg Length:</b> ' + roundit(legLength) + ' km' +
+                '<br/><b>Leg Time:</b> ' + roundit(legTime) + ' h' +
+                '<br/><b>Leg Speed:</b> ' + roundit(legSpeed) + ' km/h' +
+
+                '<br/><b>Total Time:</b> ' + roundit(totalTime) + ' h' +
+                '<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
+                '<br/><b>Average Speed:</b> ' + roundit(avgVelocity) + ' km/h' +
+                '<br/><b>Net Displacement:</b> ' + roundit(netDisplacement) + ' km' +
+                '<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m';
+        }
 		// content for earthquake tabs
-		let earthquakeTabContent =
-		    '<div id="tabContent">' +
-		    "<b>Code:</b> " +
-		    "/* filler */" +
-		    "<br/><b>UTC Date:</b> " +
-		    "/* filler */" +
-		    "<br/><b>Your Date:</b> " +
-		    "/* filler */" +
-		    "<br/><b>Lat/Lon:</b> " +
-		    "/* filler */" +
-		    "<br/><b>Magnitude:</b> " +
-		    "/* filler */" +
-		    "<br/><b>Great Circle Distance:</b> " +
-		    "/* filler */" +
-		    "<br/><b>Source:</b> " +
-		    "/* filler */";
+		let earthquakeTabContent = '<div id="tabContent">' +
+		    '<b>Code:</b> ' + "/* filler */" +
+		    '<br/><b>UTC Date:</b> ' + "/* filler */" +
+		    '<br/><b>Your Date:</b> ' + "/* filler */" +
+		    '<br/><b>Lat/Lon:</b> ' + "/* filler */" +
+		    '<br/><b>Magnitude:</b> ' + "/* filler */" +
+		    '<br/><b>Great Circle Distance:</b> ' + "/* filler */" +
+		    '<br/><b>Source:</b> ' + "/* filler */";
 
-		let floatName = '<div id="tabNames">' + "<b>Float Info</b> ";
+		let floatName = '<div id="tabNames">' + '<b>Float Info</b> ';
 
-		let earthquakeName = '<div id="tabNames">' + "<b>EarthQuake Info</b> ";
+		let earthquakeName = '<div id="tabNames">' + '<b>EarthQuake Info</b> ';
 
-		let seismograms = '<div id="tabNames">' + "<b>Seismograms</b> ";
+		let seismograms = '<div id="tabNames">' + '<b>Seismograms</b> ';
 
 		// add info window tabs
 		iwindow.addTab(floatName, floatTabContent);
@@ -532,10 +415,10 @@ function initMap(listener) {
 
     // close ALL info windows (stuff could have been left hanging if you click too quickly)
     function closeIWindows() {
-	for (let i = 0; i < iwindows.length; i++) {
-	    iwindows[i].close();
-	}
-	iwindows = [];
+        for (let i = 0; i < iwindows.length; i++) {
+            iwindows[i].close();
+        }
+        iwindows = [];
     }
 
     // handles async use of data
@@ -550,37 +433,33 @@ function initMap(listener) {
 	}
 
 	// This is using the get function defined in fileReader.js
-	resp = get(
-		   DataType.TEXT,
-		   url,
+	resp = get(DataType.TEXT, url,
 		   // this callback is invoked after the response arrives
 		   function () {
 		       let data = this.responseText;
 		       addToMap(data, name);
-		   }
-		   );
+		   });
     }
 
     function useBinCallback(url) {
-	resp = get(
-		   DataType.BINARY,
-		   url,
+	resp = get(DataType.BINARY, url,
 		   // this callback is invoked after the response arrives
-		   function () {
+		   function() {
 		       let blob = this.response;
 		       let reader = new FileReader();
 
-		       reader.addEventListener("loadend", function () {
+		       reader.addEventListener("loadend", function() {
 			       ab = reader.result;
 			       let sacFile = new SacFile(ab);
 			   });
 
 		       reader.readAsArrayBuffer(blob);
-		   }
-		   );
+		   });
+
     }
 
     setUpEvents();
+
 
     //################################################################################//
     //  We used to  make individual buttons like this
@@ -604,7 +483,7 @@ function initMap(listener) {
 	// make buttons dynamically - ALL numbers generated (but see below)... up  to:
 	// this is the maximum. Also set the labels explicitly in ../index.html.
 	addEvents("all");
-	markerIndex = 0;
+        markerIndex = 0;
 
 	// autogenerate "numFloats" events
 	// if they do not exist, the button will not be created
@@ -614,48 +493,45 @@ function initMap(listener) {
 	    addEvents(floatID);
 	}
 
-	// float events
+        // float events
 	function addEvents(id) {
 	    try {
-		google.maps.event.addDomListener(
-						 document.getElementById(id),
-						 "click",
-						 function (referer) {
-						     if (referer !== "slideShow") {
-							 slideShowOn = false;
-						     }
-						     useCallback(id);
-						     markerIndex = 0;
-						 }
-						 );
+		google.maps.event.addDomListener(document.getElementById(id), 'click', function(referer) {
+			if (referer !== "slideShow") {
+			    slideShowOn = false;
+			}
+			useCallback(id);
+			markerIndex = 0;
+		    });
 		floatIDS.push(id);
-	    } catch (err) {
-		// If in the index there wasn't one needed  it doesn't get made
+	    }
+	    // If in the index there wasn't one needed  it doesn't get made
+	    catch(err) {
 		console.log(err.message);
 	    }
 	}
 
-	// sac event
+        // sac event
 	// google.maps.event.addDomListener(plot, 'click', function() {
 	// 	let url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC";
 	// 	    useBinCallback(url);
 	//     });
 
 	// clear event
-	google.maps.event.addDomListener(clear, "click", function () {
+	google.maps.event.addDomListener(clear, 'click', function() {
 		clearMarkers();
 		slideShowOn = false;
 	    });
 
 	// slideshow event
-	google.maps.event.addDomListener(slide, "click", function () {
+	google.maps.event.addDomListener(slide, 'click', function() {
 		slideShow();
 	    });
     }
 
     // enable moving through markers with arrow keys
-    google.maps.event.addDomListener(document, "keyup", function (e) {
-	    let code = e.keyCode ? e.keyCode : e.which;
+    google.maps.event.addDomListener(document, 'keyup', function(e) {
+	    let code = (e.keyCode ? e.keyCode : e.which);
 	    if (markerIndex !== -1) {
 		if (code === 39) {
 		    if (markerIndex === markers.length - 1) {
@@ -663,14 +539,16 @@ function initMap(listener) {
 		    } else {
 			markerIndex++;
 		    }
-		    google.maps.event.trigger(markers[markerIndex], "click");
+		    google.maps.event.trigger(markers[markerIndex], 'click');
+
 		} else if (code === 37) {
 		    if (markerIndex === 0) {
-			markerIndex = markers.length - 1;
-		    } else {
+			markerIndex = markers.length - 1
+			    } else {
 			markerIndex--;
 		    }
-		    google.maps.event.trigger(markers[markerIndex], "click");
+		    google.maps.event.trigger(markers[markerIndex], 'click');
+
 		} else if (code === 27) {
 		    closeIWindows();
 		}
@@ -678,34 +556,31 @@ function initMap(listener) {
 	});
 
     function sleep(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
+	return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     async function slideShow() {
 	if (slideShowOn === false) {
 	    slideShowOn = true;
-	    for (let i = 1; i < floatIDS.length; i++) {
-		let showFloat = false;
+			for (let i = 1; i < floatIDS.length; i++) {
+				let showFloat = false;
 
-		// try {
-		// 	showFloat = showDict[dataPoints[i].owner];
-		// } catch {
-		// 	showFloat = false
-		// }
+				// try {
+				// 	showFloat = showDict[dataPoints[i].owner];
+				// } catch {
+				// 	showFloat = false
+				// }
 
-		if (slideShowOn === true && showDict[getOwner(idToName(i))] === true) {
-		    let referer = "slideShow";
-		    google.maps.event.trigger(
-					      document.getElementById(floatIDS[i]),
-					      "click",
-					      referer
-					      );
-		    await sleep(slideShowInterval);
-		    if (i >= floatIDS.length - 1) {
-			i = 1;
-		    }
-		}
-	    }
+				if (slideShowOn === true && showDict[getOwner(idToName(i))] === true) {
+					let referer = "slideShow";
+					google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click', referer);
+					await sleep(slideShowInterval);
+					if (i >= floatIDS.length - 1) {
+						i = 1;
+					}
+				}
+			}
+
 	} else {
 	    slideShowOn = false;
 	}
@@ -713,14 +588,14 @@ function initMap(listener) {
 
     // take float number and convert to name
     function idToName(id) {
-	let floatName;
-	if (id < 10) {
-	    floatName = "P00" + id.toString();
-	} else if (id < 100) {
-	    floatName = "P0" + id.toString();
-	} else {
-	    floatName = "P" + id.toString();
+		let floatName;
+		if (id < 10) {
+			floatName = ("P00" + id.toString());
+		} else if (id < 100) {
+			floatName = ("P0" + id.toString());
+		} else {
+			floatName = ("P" + id.toString());
+		}
+    	return floatName;
 	}
-	return floatName;
-    }
 }
