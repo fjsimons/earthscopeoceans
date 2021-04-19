@@ -19,14 +19,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
 	    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
 	    crossorigin="anonymous"></script>
+    <script src="../scripts/BioPopup.js"></script>
   </body>
 </html>
 
 <html lang="en">
   <head>
-
-    <link rel="icon" href="../images/eso1.jpg">
-
     <link rel='shortcut icon' href='../images/eso1.jpg'/>
     <link rel='apple-touch-icon' href='../images/eso1.jpg'/>
 
@@ -42,6 +40,8 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="../aux/style.css">
+    <link rel="stylesheet" href="../aux/popup.css">
+    <link rel="stylesheet" href="../aux/button.css">
 
     <!-- Favicon -->
     <link rel='shortcut icon' href='../images/eso1.jpg'/>
@@ -188,18 +188,58 @@
       <div class="album py-5 bg-light">
 	<div class="container">
 	  <div class="card-group">
-	    <div class="card">
-              <div class="card-body">
-		<h5 class="card-title"></h5>
-		<p class="card-text"></p>
-              </div>
-	    </div>
+	    <!-- <div class="card"> -->
+            <!--   <div class="card-body"> -->
+	    <!-- 	<h5 class="card-title"></h5> -->
+	    <!-- 	<p class="card-text"></p> -->
+            <!--   </div> -->
+	    <!-- </div> -->
 	    <div class="card">
 	      <img class="card-img-top" src="../facebook/TimAhern.png" alt="img">
               <div class="card-body">
 		<h5 class="card-title"><a href="https://www.iris.edu/hq/staff/employee/ahern">Tim Ahern</a></h5>
                 <p class="card-text"><a href="https://www.iris.edu">IRIS</a> (Emeritus)</p>
-<a tabindex="0" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="Tim's bio goes here">Biosketch</a><br>
+		<div class="popup" onclick="myFunction('TimBio')"><button class="bioButton">Bio</button>
+		  <div class="popuptext" id="TimBio">
+		    <p>
+		    Dr. Tim Ahern was the Director of Data Services for the
+		    Incorporated Research Institutions for Seismology (IRIS) for
+		    32 years. IRIS is an NSF funded not-for-profit corporation
+		    that supports the global research infrastructure in
+		    seismology. He retired in 2019 but continues as Director of
+		    Data Services, Emeritus.<br>
+
+		    He earned a BS degree in Physics at Whitworth University and
+		    a M.Sc. and Ph.D. in Geophysics at the University of British
+		    Columbia.  Following his graduate work he joined the staff
+		    of Standard Oil of Indiana’s Amoco Production Company’s
+		    Research Center as a Senior Research Scientist.  His
+		    research focused on the development of real time marine
+		    seismic processing systems for use in oil exploration. In
+		    1987 he began his career with IRIS where he led the
+		    development of the IRIS Data Management Center the primary
+		    node in IRIS’ Data Services directorate.<br>
+
+		    He served as the Secretary of the International Federation
+		    of Digital Seismograph Networks (FDSN), a commission of
+		    IASPEI for 12 years and also acted as the chair of several
+		    working groups within the FDSN. He was active for many years
+		    with international efforts in seismology related to
+		    standards development and coordinating international
+		    efforts.<br>
+
+		    Since retiring, Dr. Ahern has remained active in several
+		    national and international projects including the
+		    development of school seismometer networks, the development
+		    of metadata standards for legacy seismic data, serves on the
+		    Scientific Program Committee of the Comprehensive Test Ban
+		    Treaty Science and Technology Conferences, and serves as the
+		    chair of the Standing Committee on Data within
+		    EarthScope-Oceans.<br>
+		    </p>
+		  </div>
+		</div>
+		<br>
 		<a href="mailto:Tim-ahern@comcast.net">Email</a> 
               </div>
 	    </div>
@@ -208,13 +248,74 @@
               <div class="card-body">
 		<h5 class="card-title"><a href="https://geosciences.princeton.edu/people/joel-d-simon">Joel Simon</a></h5>
                 <p class="card-text"><a href="http://www.princeton.edu">Princeton University</a></p>
+		<div class="popup" onclick="myFunction('JoelBio')"><button class="bioButton">Bio</button>
+		  <div class="popuptext" id="JoelBio">
+		    <p>
+		      Joel D Simon is a Postdoctoral Researcher in the
+		      Department of Geosciences at Princeton University, where
+		      he also received his PhD in Geophysics in 2020. He is a
+		      member of the Standing Committee on Data for the
+		      international consortium EarthScope-Oceans which oversees
+		      a drifting array of fifty MERMAID floats. His research
+		      pairs hydroacoustics with global seismology to address
+		      questions concerning the structure of the Earth, and he is
+		      particularly interested in signal processing techniques
+		      useful to extract signals from noisy time series.
+                    </p>
+		  </div>
+		</div>
+		<br>
 		<a href="mailto:jdsimon@alumni.princeton.edu">Email</a>
               </div>
 	    </div>
 	    <div class="card">
+              <img class="card-img-top" src="../facebook/ChristophWaldmann.png" alt="img">
               <div class="card-body">
-		<h5 class="card-title"></h5>
-		<p class="card-text"></p>
+		<h5 class="card-title"><a href="">Christoph Waldmann</a></h5>
+                <p class="card-text"><a href="http://www.princeton.edu">Princeton University</a></p>
+		<div class="popup" onclick="myFunction('ChristophBio')"><button class="bioButton">Bio</button>
+		  <div class="popuptext" id="ChristophBio">
+		    <p>
+		      Dr. Christoph Waldmann has worked as a group leader at the
+		      Center for Marine Environmental in Bremen, Germany, for
+		      now over 24 years. MARUM is the first and only Research
+		      Faculty at the University of Bremen and also is the home
+		      of the Cluster of Excellence <i>The Ocean Floor – Earth's
+		      Uncharted Interface</i> as well as other national and
+		      international research projects like IODP.<br>
+
+		      He earned am intermediate diploma degree in Physics at
+		      Ludwig-Maximilians-Universitaet, Munich, and a Diploma and
+		      Ph.D. in Applied Physics at the University of Kiel,
+		      Germany, in 1985.  After a time as a DFG Postdoc Fellow
+		      that allowed him to work as a guest investigator at the
+		      Woods Hole Oceanographic Institution, MA, in 1987 he
+		      started working at the Alfred-Wegener-Institute for Polar
+		      Research. His research focused on the development and
+		      assessment of ocean density measurement methods. In 1996
+		      he began his career with MARUM where he led the
+		      development of autonomous operating underwater platforms
+		      for long-term deployments.<br>
+
+		      He has been a member of the IEEE Oceanic Engineering
+		      Society since 1986 and is now serving as the Chair of the
+		      OES Standing Committee on Standards. Since 2018 he has
+		      served as a Member of the Advisory Board of the NOAA/IOOS
+		      program QARTOD. He is also a member of the WMO Expert Team
+		      on Measurement Uncertainties and was involved in a number
+		      of international projects that aimed at standards
+		      development and coordination of international efforts.<br>
+
+		      During his professional career Christoph Waldmann has
+		      built up an expertise in ocean technology and data
+		      management.
+                    </p>
+		  </div>
+		</div>
+		<br>
+		<a href="mailto:waldmann@marum.de">Email</a>
+              </div>
+	    </div>
               </div>
 	    </div>
 	  </div>
