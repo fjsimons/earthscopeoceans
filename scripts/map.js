@@ -162,7 +162,7 @@ function initMap(listener) {
 				let corrupted = Boolean(false);
 				let elements = rows[i].split(/\s+/);
 
-				if (elements.length !== 15)
+				if (elements.length < 15)
 					corrupted = Boolean(true);
 				else {
 					// check to make sure everything but the date is a number
