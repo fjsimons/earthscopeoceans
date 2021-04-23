@@ -142,19 +142,19 @@ div.scrollmenu a:hover {
 }
 
 .col1 {
-  background-image: url(images/mermaid01.jpg);
+  background-image: url(../images/mermaid01.jpg);
   height: 450px;
   background-repeat: no-repeat;
 }
 
 .col2 {
-  background-image: url(images/inthewater01.jpg);
+  background-image: url(../images/inthewater01.jpg);
   height: 450px;
   background-repeat: no-repeat;
 }
 
 .col3{
-  background-image: url(images/mermaid02.jpg);
+  background-image: url(../images/mermaid02.jpg);
   height: 450px;
   background-repeat: no-repeat;
 }
