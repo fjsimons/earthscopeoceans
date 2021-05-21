@@ -169,196 +169,132 @@
       <div class="jumbotron">
 	<div class="container">
 	  <h1 class="display-3">
-	    <b>EARTHSCOPE-<i>OCEANS</i></b>
+	    <b>THE SECOND GENERATION</b>
 	  </h1>
-	  <p><a class="btn btn-secondary btn-lg" href="https://www.geoazur.fr/GLOBALSEIS/Mermaid.html" role="button">MERMAID:
-	      An autonomous mid-column oceanic float &raquo;</a></p>
 	</div>
       </div>
       <!-- END Main jumbotron for a primary homepage -->
 
+
       <div class="container">
-	<div class="row about-earthscope"> 
-	  <p> EarthScope-Oceans is an organization
-	    founded by a multidisciplinary group of geoscientists who are
-	    coordinating efforts to create a global network of sensors
-	    that monitor the Earth from within the oceanic environment. As
-	    other organizations are doing for the land-based seismological
-	    communities today, EarthScope-Oceans shepherds national
-	    projects into the international arena where globally relevant,
-	    applicable, and mutually agreed-upon decisions can be made on
-	    instrument development, science objectives, data management,
-	    and outreach. As MERMAID technology develops,
-	    EarthScope-Oceans is expected to become more multidisciplinary
-	    and include seismologists, biologists, geochemists,
-	    meteorologists, oceanographers and others. Collaboration with
-	    ocean-observing programs will enable complementary observation
-	    of ocean temperature, salinity, and biogeochemical tracers,
-	    and cost-effective instrument deployment and recovery by ships
-	    of opportunity. 
-	  </p> 
+	<!-- Example row of columns -->
+	<div class="row about-earthscope">
+	  <p>
+	    The early success of MERMAID belied its drawing power for
+	    further funding by US agencies (are these the wages of
+	    interdisciplinarity?), but the move of <b>Guust Nolet</b> to
+	    Géoazur at Sophia Antipolis, France, proved to be the impetus
+	    for the crucial second phase. His collaboration with <b>Yann
+	    Hello</b> at Géoazur gave rise to the second-generation model
+	    and led to a series of science deployments. A mariner’s dozen
+	    APEX (<i>Autonomous Profiling Explorer</i>) floats, built by
+	    Teledyne Webb Research, were equipped with a Rafos II Benthos
+	    hydrophone, sensitive down to 0.1 Hz, and deployed in a number
+	    of different locations from the Mediterranean to the Indian
+	    Ocean, and in the Pacific Ocean for a first tomographic science
+	    experiment dedicated to imaging the deep roots of the Galápagos
+	    plume.<br><br>
+
+	    As with the first-generation instrument, algorithms development
+	    and their electronic implementation on dedicated low-power
+	    boards, carried out by French engineering firm OSEAN, were just
+	    as critically important as hardware improvements. <b>Alexey
+	    Sukhovich</b>, now at the University of Brest, took the
+	    wavelet-based detection and discrimination routines of the
+	    first-generation MERMAID to a new level, endowing them with a
+	    probabilistic evaluation and scoring system that intelligently
+	    guides MERMAID towards sound decision making. In continued use
+	    on all instruments built to the present day, the algorithm
+	    confidently picks out segments of seismological interest and
+	    reports them to the receiving data centers, making MERMAID fully
+	    autonomous and capable of reporting data in near
+	    real-time.<br><br>
+
+	    In this context, one often wonders whether MERMAID technology
+	    could be useful for tsunami detection and early-warning
+	    systems. The chief trade-off will be with cruising depth:
+	    current ascent speeds are on the order of 300 m/h (descent
+	    around −100 m/h). MERMAID would have to hold off triggering its
+	    ascent (which stops the recording) to report the seismic arrival
+	    from the causative earthquake. Issues with hydrophone or
+	    pressure-sensor calibration at very low frequencies (below 0.01
+	    Hz) require to be resolved. But, since tsunami waves caused by
+	    an earthquake in, e.g., Chile, reach French Polynesia, Hawaii,
+	    and Japan about 10, 15, and 22 hours after the main event,
+	    respectively, there is, in the recommendation of <b>Masayuki
+	    Obayashi</b> from JAMSTEC, a space for a worldwide array of
+	    instruments to fill this important niche.<br><br>
+
+	    On their various runs roaming at depths between 1500 and 2000 m
+	    across the Mediterranean Sea and the Indian Ocean,
+	    second-generation MERMAID established itself as a reliable
+	    purveyor of signals from earthquakes large and small. While
+	    signal-to-noise environments vary vastly between oceans, with
+	    the seasons, and according to the parking depth, multiple
+	    deployments revealed that between 35 and 63% of worldwide
+	    earthquakes with moment magnitudes greater than 6.5 can be
+	    recorded—and magnitudes smaller than 6.0 under favorable noise
+	    conditions. Over the course of four weeks in 2013, one of the
+	    floats unexpectedly reported no fewer than 235 seismograms from
+	    an earthquake swarm following a magnitude 5.1 main shock that
+	    occurred on 24 November 2013 on the triple junction where the
+	    African, Indian and Antarctic plates meet. These aftershocks had
+	    magnitudes between 2.7 and 3.4, thereby establishing a lower
+	    magnitude threshold in these noisiest of environments. Nearby
+	    land stations recorded only 25 of the largest of these
+	    aftershocks (all greater than 4.4 and all but two within four
+	    days of the main shock). While global seismology continues to
+	    focus on larger and more distant earthquakes, scientists
+	    interested in the seismic budget of closely collocated crustal
+	    earthquakes in the oceans will find MERMAID perfectly capable of
+	    being optimized for their recovery.
+	    <br><br>
+
+	    The first mid-scale coordinated "scientific" experiment was
+	    dedicated to imaging the mantle roots of the Galápagos volcanic
+	    hot spot. Nine second-generation MERMAIDs launched by Ecuadorean
+	    INOCAR vessel LAE Sirius remained in operation for about two
+	    years each, altogether returning 580 crucial arrival times
+	    sampling different ray paths, illuminating mantle corridors
+	    unresolved by any other seismic information. In combination with
+	    data from land stations, the tomographic inversion revealed that
+	    the Galápagos archipelago is underlain by a deeply-rooted (about
+	    1900 km), 200–300 km wide plume: rocks buoyed up by excess
+	    temperature, carrying a heat flux likely much larger than that
+	    predicted from the swell bathymetry.
+	  </p>
 	</div>
+
 	<hr>
+
       </div> <!-- /container -->
 
-      <!-- START jumbotron for map-->
-      <div class="jumbotron map-jumbotron">
-	<div class="container">
-	  <!-- ###################### SCROLLBAR ACTION BUTTONS  ########################################################## -->
-	  <div class="scrollmenu">
-	    <a href="#clear:void(0)" id="clear">Clear</a>
-	    <a href="#all:void(0)" id="all">All</a>
-	    <a href="#slide:void(0)" id="slide">Slide</a>
-	    <a href="#P001:void(0)" id="P001">P001</a>
-	    <a href="#P002:void(0)" id="P002">P002</a>
-	    <a href="#P003:void(0)" id="P003">P003</a>
-	    <a href="#P004:void(0)" id="P004">P004</a>
-	    <a href="#P005:void(0)" id="P005">P005</a>
-	    <a href="#P006:void(0)" id="P006">P006</a>
-	    <a href="#P007:void(0)" id="P007">P007</a>
-	    <a href="#P008:void(0)" id="P008">P008</a>
-	    <a href="#P009:void(0)" id="P009">P009</a>
-	    <a href="#P010:void(0)" id="P010">P010</a>
-	    <a href="#P011:void(0)" id="P011">P011</a>
-	    <a href="#P012:void(0)" id="P012">P012</a>
-	    <a href="#P013:void(0)" id="P013">P013</a>
-	    <a href="#P016:void(0)" id="P016">P016</a>
-	    <a href="#P017:void(0)" id="P017">P017</a>
-	    <a href="#P018:void(0)" id="P018">P018</a>
-	    <a href="#P019:void(0)" id="P019">P019</a>
-	    <a href="#P020:void(0)" id="P020">P020</a>
-	    <a href="#P021:void(0)" id="P021">P021</a>
-	    <a href="#P022:void(0)" id="P022">P022</a>
-	    <a href="#P023:void(0)" id="P023">P023</a>
-	    <a href="#P024:void(0)" id="P024">P024</a>
-	    <a href="#P025:void(0)" id="P025">P025</a>
-	    <a href="#P026:void(0)" id="P026">P026</a>
-	    <a href="#P027:void(0)" id="P027">P027</a>
-	    <a href="#P028:void(0)" id="P028">P028</a>
-	    <a href="#P029:void(0)" id="P029">P029</a>
-	    <a href="#P031:void(0)" id="P031">P031</a>
-	    <a href="#P032:void(0)" id="P032">P032</a>
-	    <a href="#P033:void(0)" id="P033">P033</a>
-	    <a href="#P034:void(0)" id="P034">P034</a>
-	    <a href="#P035:void(0)" id="P035">P035</a>
-	    <a href="#P036:void(0)" id="P036">P036</a>
-	    <a href="#P037:void(0)" id="P037">P037</a>
-	    <a href="#P038:void(0)" id="P038">P038</a>
-	    <a href="#P039:void(0)" id="P039">P039</a>
-	    <a href="#P040:void(0)" id="P040">P040</a>
-	    <a href="#P041:void(0)" id="P041">P041</a>
-	    <a href="#P042:void(0)" id="P042">P042</a>
-	    <a href="#P043:void(0)" id="P043">P043</a>
-	    <a href="#P044:void(0)" id="P044">P044</a>
-	    <a href="#P045:void(0)" id="P045">P045</a>
-	    <a href="#P046:void(0)" id="P046">P046</a>
-	    <a href="#P047:void(0)" id="P047">P047</a>
-	    <a href="#P048:void(0)" id="P048">P048</a>
-	    <a href="#P049:void(0)" id="P049">P049</a>
-	    <a href="#P050:void(0)" id="P050">P050</a>
-	    <a href="#P052:void(0)" id="P052">P052</a>
-	    <a href="#P053:void(0)" id="P053">P053</a>
-	    <a href="#P054:void(0)" id="P054">P054</a>
-	  </div>
+      <!-- ########## BEGIN LOGO JUMBOTRON ##########-->
+      <nav class="navbar navbar-light bg-white">
+	<a class="navbar-brand" href="#">
+	  <img src="images/eso1.jpg" width="120" height="80" alt="">
+	</a>
+	<a class="navbar-brand" href="#">
+	  <img src="images/eso2.jpg" width="312" height="110" alt="">
+	</a>
+	<a class="navbar-brand" href="#">
+	  <img src="images/eso1.jpg" width="120" height="80" alt="">
+	</a>
+      </nav>
+      <!-- ########## END LOGO JUMBOTRON ##########-->
 
-	  <div id="map"></div>
-	  <div id="toggle"></div>
-	  <div id="legend"></div>
+    </main>
 
-	  <!-- ###################### MAP SCRIPTS  ########################################################## -->
-	  <script src="scripts/infobubble.js"></script>
-	  <script src="scripts/GEBCO.js"></script>
-	  <script src="scripts/fileReader.js"></script>
-	  <script src="scripts/DataPoint.js"></script>
-	  <script src="scripts/map.js"></script>
+    <div class="jumbotron copyright-jumbotron">
+      <footer class="container copyright">
+	<p>Copyright ©2021 Frederik J Simons | Jonah N Rubin </p>
+      </footer>
+    </div>
 
-	  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJDvo3C9Di8Usn-3N4zPNfsS_N7oDKMiA&callback=initMap"></script>
-	</div>
-      </div>
-   </div>
-   <!-- END jumbotron for map-->
-
-   <div class="container">
-     <!-- Text row -->
-     <div class="row about-earthscope">
-       <p>In the last few decades seismologists have mapped out elastic wavespeeds of the Earth's interior with
-	 often perplexing if not always uncontested detail. Earthquake sources used in seismic tomography lie
-	 mostly on plate boundaries; receivers mostly on dry land. The uneven coverage resulting from this
-	 fundamentally inadequate source-station distribution leaves large volumes inside the Earth entirely
-	 unsampled. Placing seismic stations on the ocean bottom is often touted as the only solution. MERMAID,
-	 short for Mobile Earthquake Recorder in Marine Areas by Independent Divers, is a radical low-cost
-	 alternative that uses passively drifting autonomous hydrophones with a now proven potential to record
-	 hundreds of distant earthquakes over their projected life span. </p>
-     </div>
-     
-     <hr>
-     
-   </div> <!-- /container -->
-
-   <!-- ########## START IMAGE TRIPLET JUMBOTRON ##########-->
-   <div class="jumbotron triplet-jumbotron">
-     <div class="container triplet-container">
-       <div class="row">
-	 
-	 <div class="col-md-4">
-	   <div class="card mb-4 box-shadow">
-	     <img class="card-img-top" src="images/mermaid00.jpg" alt="Card image cap">
-	     <div class="overlay">
-	       <div class="text"><a href="firstgeneration.html">The First Generation</a></div>
-	     </div>
-	   </div>
-	 </div>
-
-	 <div class="col-md-4">
-	   <div class="card mb-4 box-shadow">
-	     <img class="card-img-top" src="images/inthewater01.jpg" alt="Card image cap">
-	     <div class="overlay">
-	       <div class="text"><a href="secondgeneration.html">The Second Generation</a></div>
-	     </div>
-	   </div>
-	 </div>
-
-	 <div class="col-md-4">
-	   <div class="card mb-4 box-shadow">
-	     <img class="card-img-top" src="images/mermaid01.jpg" alt="Card image cap">
-	     <div class="overlay">
-	       <div class="text"><a href="thirdgeneration.html">The Third Generation</a></div>
-	     </div>
-	   </div>
-	 </div>
-       </div>
-       <hr>
-     </div> <!-- /container -->
-   </div>
-   <!-- ########## END IMAGE TRIPLET JUMBOTRON ##########-->
-
-
-   <!-- ########## BEGIN LOGO JUMBOTRON ##########-->
-   <nav class="navbar navbar-light bg-white">
-     <a class="navbar-brand" href="#">
-       <img src="images/eso1.jpg" width="120" height="80" alt="">
-     </a>
-     <a class="navbar-brand" href="#">
-       <img src="images/eso2.jpg" width="312" height="110" alt="">
-     </a>
-     <a class="navbar-brand" href="#">
-       <img src="images/eso1.jpg" width="120" height="80" alt="">
-     </a>
-   </nav>
-   <!-- ########## END LOGO JUMBOTRON ##########-->
-
-   </main>
-
-   <div class="jumbotron copyright-jumbotron">
-     <footer class="container copyright">
-       <p>Copyright ©2021 Frederik J Simons | Jonah N Rubin </p>
-     </footer>
-   </div>
-   
-   <!-- Bootstrap core JavaScript ================================ -->
-   <!-- Placed at the end of the document so the pages load faster -->
-   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	   crossorigin="anonymous"></script>
-   </body>
+    <!-- Bootstrap core JavaScript ================================ -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	    crossorigin="anonymous"></script>
+  </body>
 </html>

@@ -169,196 +169,170 @@
       <div class="jumbotron">
 	<div class="container">
 	  <h1 class="display-3">
-	    <b>EARTHSCOPE-<i>OCEANS</i></b>
+	    <b>THE THIRD GENERATION</b>
 	  </h1>
-	  <p><a class="btn btn-secondary btn-lg" href="https://www.geoazur.fr/GLOBALSEIS/Mermaid.html" role="button">MERMAID:
-	      An autonomous mid-column oceanic float &raquo;</a></p>
 	</div>
       </div>
       <!-- END Main jumbotron for a primary homepage -->
 
+
       <div class="container">
-	<div class="row about-earthscope"> 
-	  <p> EarthScope-Oceans is an organization
-	    founded by a multidisciplinary group of geoscientists who are
-	    coordinating efforts to create a global network of sensors
-	    that monitor the Earth from within the oceanic environment. As
-	    other organizations are doing for the land-based seismological
-	    communities today, EarthScope-Oceans shepherds national
-	    projects into the international arena where globally relevant,
-	    applicable, and mutually agreed-upon decisions can be made on
-	    instrument development, science objectives, data management,
-	    and outreach. As MERMAID technology develops,
-	    EarthScope-Oceans is expected to become more multidisciplinary
-	    and include seismologists, biologists, geochemists,
-	    meteorologists, oceanographers and others. Collaboration with
-	    ocean-observing programs will enable complementary observation
-	    of ocean temperature, salinity, and biogeochemical tracers,
-	    and cost-effective instrument deployment and recovery by ships
-	    of opportunity. 
-	  </p> 
+	<!-- Example row of columns -->
+	<div class="row about-earthscope">
+	  <p>
+	    In making the ten-year leap from prototype to scientific
+	    workhorse, low-cost and nimble MERMAID established itself as a
+	    vital partner in the seismic exploration of the Earth’s deep
+	    interior. Freely-drifting midwater hydrophones will forever fit
+	    in a balanced diet that must also contain increased ocean-bottom
+	    sensor coverage, among permanent networks of (is)land-based
+	    sensors, and possibly even more exotic types of data
+	    gathering. Employed in this fashion, MERMAIDs will swarm in the
+	    ocean like nodes on land (today’s equivalents to the "Texans"
+	    from yesteryear), much as today’s temporary PASSCAL deployments
+	    continue to so usefully complement longer-lived installations
+	    such as the USArray. Autonomous hydrophones appeal but won’t
+	    replace three-component ocean-bottom seismometers (OBS) as a
+	    backbone, in the sense of, e.g., the PacificArray, espoused by
+	    <b>Hitoshi Kawakatsu</b> at the Earthquake Research Institute of the
+	    University of Tokyo. But while those OBS arrays remain dreams of
+	    the future, MERMAID rules in the ocean today.<br><br>
+
+	    Meanwhile, back in France, Géoazur research engineer <b>Yann
+	    Hello</b> and the team led by <b>Olivier Philippe</b> at OSEAN
+	    SAS set their sights upon a from-the-ground-up redevelopment of
+	    MERMAID that would solve the last of the sticking points: the
+	    longevity of its autonomy.<br></br>
+
+	    Out went the narrow spar-buoy design
+	    of the SOLO and APEX/Rafos floats. In its stead came a 17-inch
+	    (43 cm, diameter) glass sphere encapsulating (lithium)
+	    batteries, electronics (a low-power acquisition board and a
+	    controller), and hydraulic components regulating the transfer of
+	    oil from an internal reservoir to the external bladder to
+	    achieve neutral buoyancy in the water column. In the current
+	    commercial version, MERMAID can maintain acoustic operability
+	    down to about 3000 m, a depth determined by the rating of the
+	    HTI-96-MIN/HEX hydrophone. Cruising comfortably down to depths
+	    of 4000 m, its hydraulics hold down to 5500 m, and the sphere
+	    itself withstands pressures up to 7000 m. New models designed to
+	    sustain performance to deeper, possibly full-ocean, depths will
+	    have upgraded pumps and carry different hydrophones.<br><br>
+
+	    <b>Hiroko Sugioka</b> from Kobe University and <b>Masayuki
+	    Obayashi</b> from JAMSTEC led an international crew on a test
+	    expedition aboard the training ship Fukae-maru during a 24 h
+	    deployment in which MERMAID was so lucky as to catch a local
+	    magnitude 5.2 event. Recording at 40 Hz with 24-bit precision
+	    and surfacing approximately weekly to report a handful of
+	    quality-ranked 200 s segments of triggered seismograms endows
+	    the third-generation MERMAID model with a lifetime of
+	    approximately 5 years.<br><br>
+
+	    The breakdown of the time-domain signal into wavelet
+	    coefficients over five scale bands serves to identify the likely
+	    nature of the signal and to give it a quality rating. It also
+	    allows for reducing the data transmission rates. Under typical
+	    settings MERMAID only transmits scales 1 through 4 out of 5
+	    wavelet scales, which cuts the data rate by half, for an
+	    effective bandwidth out to 20 Hz. With these settings IRIDIUM
+	    communication costs add up to about $75 per float per month. At
+	    every surfacing MERMAID not only transmits seismogram, but it
+	    also receives a command file with instructions, mission
+	    parameters and software settings. In this manner, MERMAID, while
+	    passively drifting, can be "piloted" to some degree. As and when
+	    future versions will be equipped with "landing" capabilities,
+	    MERMAID can become a temporary ocean-bottom hydrophone (OBH),
+	    which will allow some researchers to shift their focus from the
+	    global recording of teleseismic earthquakes to monitoring local
+	    and regional events without fear of drifting away from the area
+	    of interest, listening for landslides, cracking glaciers, and
+	    other such pursuits.<br><br>
+
+	    Software and analysis development targets moved to the
+	    perfection of post-processing routines of the transmitted data
+	    files. <b>Sébastien Bonnieux</b> from the Université de la Côte
+	    d’Azur was the architect behind Automaid, a suite of Python
+	    tools to handle data recovery, dive reports, system log and
+	    command files, suitable for the end user whose main interest is
+	    the seismological data analysis. <b>Joel Simon</b> from
+	    Princeton University became the force behind the analysis
+	    pipeline, mostly written in MATLAB, focusing on earthquake
+	    event-catalog matching of the probabilistically triggered but
+	    unidentified segments, on making accurate travel-time
+	    measurements for individual earthquake phases bolstered by
+	    information-theoretical considerations, at multiple wavelet
+	    scales, and on their uncertainty quantification.<br><br>
+
+	    <b>Jonah Rubin</b>, an undergraduate from the University of
+	    Vermont, built the code and the dynamic tools powering this
+	    website. Undergraduates at Princeton University, under
+	    the current lead developer <b>Peter Mwesigwa</b>, managed to
+	    release a first version of an iOS MERMAID tracker app,
+	    Adopt-A-Float, written in Objective-C, for use in research and
+	    educational settings. All source code is being freely shared
+	    under version control on the GitHub platform, adhering to FAIR
+	    principles (Findability, Accessibility, Interoperability, and
+	    Reuse) as best as possible.<br><br>
+
+	    With <b>Yongshun John Chen</b> and his team in the lead at the
+	    newly established Department of Ocean Science and Engineering at
+	    the Southern University of Science and Technology (SUSTECH) in
+	    Shenzhen, China, the French (Géoazur), Japanese (Kobe/JAMSTEC)
+	    and US (Princeton) partners joined forces. The volcanic islands
+	    of French Polynesia became the focus of the first large-scale
+	    science experiment: the ongoing the South Pacific Plume Imaging
+	    and Modeling (SPPIM) project. Fifty MERMAIDS so far were
+	    launched, with twenty-five additional units in the queue (as of
+	    2021).<br><br>
+
+	    Polynesian geography is one of myriad islands, seamounts,
+	    hotspot tracks, and large swaths of anomalously elevated oceanic
+	    crust known as the South Pacific Superswell. Among all global
+	    seismological models there is consensus that broad regions of
+	    anomalously slow wave velocities lie at the base of the mantle
+	    under the South Pacific: a region known as the Pacific Large
+	    Low-Velocity Province (LLVP). Global tomography suggests that a
+	    source region in the deep mantle may feed the surface expression
+	    of hot spots and swell via conduits of hot uprising rock that
+	    may stretch from the core-mantle boundary to the
+	    surface. Elucidating the fine-scale nature of this planetary
+	    heat-engine plumbing system through regional-scale tomography
+	    cannot be accomplished without considerably widening the
+	    aperture of seismic arrays beyond the few available ocean-island
+	    stations: hence that is the primary scientific target of the
+	    SPPIM collaboration for data collection and analysis.
+	  </p>
 	</div>
+
 	<hr>
-      </div> <!-- /container -->
 
-      <!-- START jumbotron for map-->
-      <div class="jumbotron map-jumbotron">
-	<div class="container">
-	  <!-- ###################### SCROLLBAR ACTION BUTTONS  ########################################################## -->
-	  <div class="scrollmenu">
-	    <a href="#clear:void(0)" id="clear">Clear</a>
-	    <a href="#all:void(0)" id="all">All</a>
-	    <a href="#slide:void(0)" id="slide">Slide</a>
-	    <a href="#P001:void(0)" id="P001">P001</a>
-	    <a href="#P002:void(0)" id="P002">P002</a>
-	    <a href="#P003:void(0)" id="P003">P003</a>
-	    <a href="#P004:void(0)" id="P004">P004</a>
-	    <a href="#P005:void(0)" id="P005">P005</a>
-	    <a href="#P006:void(0)" id="P006">P006</a>
-	    <a href="#P007:void(0)" id="P007">P007</a>
-	    <a href="#P008:void(0)" id="P008">P008</a>
-	    <a href="#P009:void(0)" id="P009">P009</a>
-	    <a href="#P010:void(0)" id="P010">P010</a>
-	    <a href="#P011:void(0)" id="P011">P011</a>
-	    <a href="#P012:void(0)" id="P012">P012</a>
-	    <a href="#P013:void(0)" id="P013">P013</a>
-	    <a href="#P016:void(0)" id="P016">P016</a>
-	    <a href="#P017:void(0)" id="P017">P017</a>
-	    <a href="#P018:void(0)" id="P018">P018</a>
-	    <a href="#P019:void(0)" id="P019">P019</a>
-	    <a href="#P020:void(0)" id="P020">P020</a>
-	    <a href="#P021:void(0)" id="P021">P021</a>
-	    <a href="#P022:void(0)" id="P022">P022</a>
-	    <a href="#P023:void(0)" id="P023">P023</a>
-	    <a href="#P024:void(0)" id="P024">P024</a>
-	    <a href="#P025:void(0)" id="P025">P025</a>
-	    <a href="#P026:void(0)" id="P026">P026</a>
-	    <a href="#P027:void(0)" id="P027">P027</a>
-	    <a href="#P028:void(0)" id="P028">P028</a>
-	    <a href="#P029:void(0)" id="P029">P029</a>
-	    <a href="#P031:void(0)" id="P031">P031</a>
-	    <a href="#P032:void(0)" id="P032">P032</a>
-	    <a href="#P033:void(0)" id="P033">P033</a>
-	    <a href="#P034:void(0)" id="P034">P034</a>
-	    <a href="#P035:void(0)" id="P035">P035</a>
-	    <a href="#P036:void(0)" id="P036">P036</a>
-	    <a href="#P037:void(0)" id="P037">P037</a>
-	    <a href="#P038:void(0)" id="P038">P038</a>
-	    <a href="#P039:void(0)" id="P039">P039</a>
-	    <a href="#P040:void(0)" id="P040">P040</a>
-	    <a href="#P041:void(0)" id="P041">P041</a>
-	    <a href="#P042:void(0)" id="P042">P042</a>
-	    <a href="#P043:void(0)" id="P043">P043</a>
-	    <a href="#P044:void(0)" id="P044">P044</a>
-	    <a href="#P045:void(0)" id="P045">P045</a>
-	    <a href="#P046:void(0)" id="P046">P046</a>
-	    <a href="#P047:void(0)" id="P047">P047</a>
-	    <a href="#P048:void(0)" id="P048">P048</a>
-	    <a href="#P049:void(0)" id="P049">P049</a>
-	    <a href="#P050:void(0)" id="P050">P050</a>
-	    <a href="#P052:void(0)" id="P052">P052</a>
-	    <a href="#P053:void(0)" id="P053">P053</a>
-	    <a href="#P054:void(0)" id="P054">P054</a>
-	  </div>
+      <!-- ########## BEGIN LOGO JUMBOTRON ##########-->
+      <nav class="navbar navbar-light bg-white">
+	<a class="navbar-brand" href="#">
+	  <img src="images/eso1.jpg" width="120" height="80" alt="">
+	</a>
+	<a class="navbar-brand" href="#">
+	  <img src="images/eso2.jpg" width="312" height="110" alt="">
+	</a>
+	<a class="navbar-brand" href="#">
+	  <img src="images/eso1.jpg" width="120" height="80" alt="">
+	</a>
+      </nav>
+      <!-- ########## END LOGO JUMBOTRON ##########-->
 
-	  <div id="map"></div>
-	  <div id="toggle"></div>
-	  <div id="legend"></div>
+    </main>
 
-	  <!-- ###################### MAP SCRIPTS  ########################################################## -->
-	  <script src="scripts/infobubble.js"></script>
-	  <script src="scripts/GEBCO.js"></script>
-	  <script src="scripts/fileReader.js"></script>
-	  <script src="scripts/DataPoint.js"></script>
-	  <script src="scripts/map.js"></script>
+    <div class="jumbotron copyright-jumbotron">
+      <footer class="container copyright">
+	<p>Copyright ©2021 Frederik J Simons | Jonah N Rubin </p>
+      </footer>
+    </div>
 
-	  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJDvo3C9Di8Usn-3N4zPNfsS_N7oDKMiA&callback=initMap"></script>
-	</div>
-      </div>
-   </div>
-   <!-- END jumbotron for map-->
-
-   <div class="container">
-     <!-- Text row -->
-     <div class="row about-earthscope">
-       <p>In the last few decades seismologists have mapped out elastic wavespeeds of the Earth's interior with
-	 often perplexing if not always uncontested detail. Earthquake sources used in seismic tomography lie
-	 mostly on plate boundaries; receivers mostly on dry land. The uneven coverage resulting from this
-	 fundamentally inadequate source-station distribution leaves large volumes inside the Earth entirely
-	 unsampled. Placing seismic stations on the ocean bottom is often touted as the only solution. MERMAID,
-	 short for Mobile Earthquake Recorder in Marine Areas by Independent Divers, is a radical low-cost
-	 alternative that uses passively drifting autonomous hydrophones with a now proven potential to record
-	 hundreds of distant earthquakes over their projected life span. </p>
-     </div>
-     
-     <hr>
-     
-   </div> <!-- /container -->
-
-   <!-- ########## START IMAGE TRIPLET JUMBOTRON ##########-->
-   <div class="jumbotron triplet-jumbotron">
-     <div class="container triplet-container">
-       <div class="row">
-	 
-	 <div class="col-md-4">
-	   <div class="card mb-4 box-shadow">
-	     <img class="card-img-top" src="images/mermaid00.jpg" alt="Card image cap">
-	     <div class="overlay">
-	       <div class="text"><a href="firstgeneration.html">The First Generation</a></div>
-	     </div>
-	   </div>
-	 </div>
-
-	 <div class="col-md-4">
-	   <div class="card mb-4 box-shadow">
-	     <img class="card-img-top" src="images/inthewater01.jpg" alt="Card image cap">
-	     <div class="overlay">
-	       <div class="text"><a href="secondgeneration.html">The Second Generation</a></div>
-	     </div>
-	   </div>
-	 </div>
-
-	 <div class="col-md-4">
-	   <div class="card mb-4 box-shadow">
-	     <img class="card-img-top" src="images/mermaid01.jpg" alt="Card image cap">
-	     <div class="overlay">
-	       <div class="text"><a href="thirdgeneration.html">The Third Generation</a></div>
-	     </div>
-	   </div>
-	 </div>
-       </div>
-       <hr>
-     </div> <!-- /container -->
-   </div>
-   <!-- ########## END IMAGE TRIPLET JUMBOTRON ##########-->
-
-
-   <!-- ########## BEGIN LOGO JUMBOTRON ##########-->
-   <nav class="navbar navbar-light bg-white">
-     <a class="navbar-brand" href="#">
-       <img src="images/eso1.jpg" width="120" height="80" alt="">
-     </a>
-     <a class="navbar-brand" href="#">
-       <img src="images/eso2.jpg" width="312" height="110" alt="">
-     </a>
-     <a class="navbar-brand" href="#">
-       <img src="images/eso1.jpg" width="120" height="80" alt="">
-     </a>
-   </nav>
-   <!-- ########## END LOGO JUMBOTRON ##########-->
-
-   </main>
-
-   <div class="jumbotron copyright-jumbotron">
-     <footer class="container copyright">
-       <p>Copyright ©2021 Frederik J Simons | Jonah N Rubin </p>
-     </footer>
-   </div>
-   
-   <!-- Bootstrap core JavaScript ================================ -->
-   <!-- Placed at the end of the document so the pages load faster -->
-   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	   crossorigin="anonymous"></script>
-   </body>
+    <!-- Bootstrap core JavaScript ================================ -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	    crossorigin="anonymous"></script>
+  </body>
 </html>
