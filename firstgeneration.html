@@ -169,11 +169,103 @@
       <div class="jumbotron">
 	<div class="container">
 	  <h1 class="display-3">
-	    <b>INSTRUMENTATION</b>
+	    <b>THE FIRST GENERATION</b>
 	  </h1>
 	</div>
       </div>
       <!-- END Main jumbotron for a primary homepage -->
+
+      <div class="container">
+	<!-- Example row of columns -->
+	<div class="row about-earthscope">
+	  <p>
+	    Born from ideas hatched by <b>Guust Nolet</b> in the 1990s, and
+	    further developed by <b>Frederik J. Simons</b> at Princeton,
+	    MERMAID-001 was built by <b>Jeff Babcock</b>, <b>John
+	    Orcutt</b>, <b>Russ Davis</b>, and their groups at the Scripps
+	    Institution of Oceanography in 2003, with funding from the US
+	    National Science Foundation. A prototype in the traditional
+	    sense of the word, it fulfilled the core requirements of
+	    seismological functionality. A modified SOLO (<i>Sounding
+	    Oceanographic Lagranian Observer</i>) float, the acoustic payload
+	    was a High Tech HTI-90-U hydrophone. Data were sampled at 20 Hz,
+	    recorded with 16-bit precision, and stored on a flash memory
+	    card.<br><br>
+
+	    All in all, MERMAID-001 gathered a mere 120 hours of acoustic
+	    pressure data from a depth of around 700 m offshore La Jolla,
+	    without telemetry. The results were nevertheless encouraging:
+	    over the course of three recovered field tests in November 2003,
+	    September 2004, and August 2007, several positive earthquake
+	    identifications stood out from the noise. One of these was a
+	    tremor offshore Colombia, of sufficient magnitude (moment
+	    magnitude 6.0) and epicentral distance (46.5°, an equivalent
+	    5170 km measured along the surface of the earth, which qualifies
+	    it as <i>teleseismic</i>) to prove the potential of MERMAID
+	    ultimately improving seismic coverage in the oceans. Several
+	    smaller-magnitude events were, strictly
+	    speaking, <i>bycatch</i>: not useful for deep-earth imaging, but
+	    suitable for assessments of local and regional seismicity, and
+	    to study crustal structure.<br><br>
+
+	    Funding from the UK Natural Environment Research Council (NERC)
+	    and the Nuffield Foundation, and from Princeton University,
+	    proved essential to ensuring continued innovation.<br><br> 
+
+            Central to the early development was the crafting of algorithms
+	    that enable MERMAID to, completely independently and on an
+	    ongoing basis, detect segments of incoming energy, and identify
+	    any signals of seismological interest. Detection was carried out
+	    by way of traditional STA/LTA analysis, whereby ratios of
+	    short-term over long-term average amplitude are monitored for
+	    threshold exceedance, as is commonly done for telemetered
+	    seismometers worldwide. The discrete wavelet transform (DWT)
+	    proved particularly adept at the task of discrimination and
+	    identification, with a custom algorithm developed by <b>Frederik
+	    J. Simons</b> at Princeton University, later at University
+	    College London.<br><br>
+
+	    Implemented in integer arithmetic with in-place calculation via
+	    the fast lifting algorithm, the streaming time-domain samples
+	    are reduced to an evolving bar code whose character quite
+	    clearly reveals which records are due to distant earthquakes,
+	    compared to arrivals from regional and local events whose
+	    high-frequency energy has survived selective removal by
+	    intrinsic attenuation and geometrical spreading in the solid
+	    Earth. Another distinct acoustic fingerprint is from <i>T</i>
+	    phases from very shallow sources, whose energy carries over long
+	    distances, bouncing around in the Sound Fixing and Ranging
+	    (SOFAR) low-velocity channel of the ocean itself. Most lately,
+	    these have been used for seismic thermometry over long spatial
+	    and temporal baselines.<br><br>
+
+	    Simple pattern recognition (no machine-learning required!) in
+	    the two-dimensional space of time versus wavelet scale removes
+	    potential triggering due to non-seismological sources
+	    (e.g. shipping noise, volcanic eruptions, glacial calving, rain,
+	    biological signals—not to mention mysterious plane crashes). The
+	    breakdown of time-domain acoustic pressure variations into
+	    scale-dependent wavelet coefficients provides useful ways of
+	    data denoising and compression, and has revealed its utility in
+	    applications for seismometry on land, e.g., for earthquake
+	    early-warning studies. Adaptations targeting rather than
+	    avoiding such competing sources of energy are straightforward:
+	    after all, one maid’s noise is another one’s signal. Indeed,
+	    independently developed profiling floats with acoustic packages
+	    tailor-made for cetacean (whales!) census research, and wind and
+	    rainfall intensity, i.e., meteorology, are to be considered part
+	    of the extended family of "Lagrangian" "quasi-Eulerian"
+	    hydroacoustic marine devices.<br><br>
+
+	    MERMAID-001 retired to the University of Rhode Island, where she
+	    went on display on the Narragansett campus in the lab of <b>Harold T. "Bud"
+	    Vincent</b>.
+	  </p>
+	</div>
+
+	<hr>
+
+      </div> <!-- /container -->
 
       <!-- ########## BEGIN LOGO JUMBOTRON ##########-->
       <nav class="navbar navbar-light bg-white">
