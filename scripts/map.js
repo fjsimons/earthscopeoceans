@@ -1,8 +1,7 @@
 /**
    Map class
-   @author Jonah Rubin
-   @author Frederik Simons
- 05/12/2020
+   @author Jonah Rubin and Frederik J Simons
+ 06/25/2021
 */
 
 function initMap(listener) {
@@ -460,7 +459,6 @@ function initMap(listener) {
 
     setUpEvents();
 
-
     //################################################################################//
     //  We used to  make individual buttons like this
 
@@ -590,11 +588,11 @@ function initMap(listener) {
     function idToName(id) {
 		let floatName;
 		if (id < 10) {
-			floatName = ("P00" + id.toString());
+			floatName = ("P000" + id.toString());
 		} else if (id < 100) {
-			floatName = ("P0" + id.toString());
+			floatName = ("P00" + id.toString());
 		} else {
-			floatName = ("P" + id.toString());
+			floatName = ("P0" + id.toString());
 		}
     	return floatName;
 	}
