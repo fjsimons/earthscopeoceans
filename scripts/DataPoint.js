@@ -1,8 +1,8 @@
 /**
 DataPoint object class
 
-@author Jonah Rubin
-07/28/2019
+@author Jonah Rubin and Frederik J Simons
+06/25/2021
 */
 
 // create datapoint object
@@ -50,7 +50,6 @@ function getOwner(name) {
         return ("jamstec");
     }
 }
-
 
 // INPUT is in UTC, convert to browser time
 function toLocDate(stdt) {
