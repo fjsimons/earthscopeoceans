@@ -155,14 +155,18 @@ function initMap(listener) {
 		let corrupted = Boolean(false);
 		let elements = rows[i].split(/\s+/);
 
-		// check to make sure everything but the date is a number
-		for (let j = 3; j < elements.length; j++) {
-		    if (isNaN(elements[j])) {
-			console.log("Corrupted");
-			corrupted = Boolean(true);
+		if (elements.length !== 15)
+		    corrupted = Boolean(true);
+		else {
+		    // check to make sure everything but the date is a number
+		    for (let j = 3; j < elements.length; j++) {
+			if (isNaN(elements[j])) {
+			    console.log("Corrupted");
+			    corrupted = Boolean(true);
+			}
 		    }
-		}
-
+                }		    
+		    
 		// store each data point as an object
 		if (corrupted === false) {
 		    let dataPoint = new DataPoint(elements[0], elements[1] + " " + elements[2],
