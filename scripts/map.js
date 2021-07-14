@@ -1,7 +1,6 @@
 /**
    Map class
-   @author Jonah Rubin and Frederik J Simons
- 06/25/2021
+   @author Jonah Rubin and Frederik J Simons 07/14/2021
 */
 
 function initMap(listener) {
@@ -129,7 +128,7 @@ function initMap(listener) {
 	return parseFloat(num).toFixed(3);
     }
 
-	// enabling legend toggling without hanging in the last state
+    // enabling legend toggling without hanging in the last state
     function legendClosure(name, key) {
 	google.maps.event.addDomListener(document.getElementById(name), 'click', function () {
 		// the real legend toggling
@@ -154,7 +153,7 @@ function initMap(listener) {
 	    for (let i = 0; i < rows.length - 1; i++) {
 		let corrupted = Boolean(false);
 		let elements = rows[i].split(/\s+/);
-
+		// The next "if" wasn't there for a good while, latest change
 		if (elements.length !== 15)
 		    corrupted = Boolean(true);
 		else {
@@ -482,8 +481,8 @@ function initMap(listener) {
     // and then one for every explicit number, but now that is all replaced by:
 
     function setUpEvents() {
-	// make buttons dynamically - ALL numbers generated (but see below)... up  to:
-	// this is the maximum. Also set the labels explicitly in ../index.html.
+	// make buttons dynamically - ALL numbers generated (but see below)... up to: numFloats
+	// this is the maximum. Also need to set the labels explicitly in ../index.html.
 	addEvents("all");
         markerIndex = 0;
 
@@ -507,7 +506,7 @@ function initMap(listener) {
 		    });
 		floatIDS.push(id);
 	    }
-	    // If in the index there wasn't one needed  it doesn't get made
+	    // If in the index there wasn't one needed it doesn't get made
 	    catch(err) {
 		console.log(err.message);
 	    }
