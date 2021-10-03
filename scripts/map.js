@@ -1,6 +1,6 @@
 /**
    Map class
-   @author Jonah Rubin and Frederik J Simons 07/14/2021
+   @author Jonah Rubin and Frederik J Simons 10/31/2021
 */
 
 function initMap(listener) {
@@ -24,7 +24,7 @@ function initMap(listener) {
     let showAll = false;
 	let showTail = "_030.txt";
 
-	// legend initial state
+    // legend initial state
     let showDict = {
 	"geoazur": true,
 	"dead": true,
@@ -56,6 +56,10 @@ function initMap(listener) {
             name: 'JAMSTEC',
             icon: iconBase + 'red-dot.png'
         },
+        stanford: {
+            name: 'Stanford',
+            icon: iconBase + 'green-dot.png'
+        },
         dead: {
             name: 'Inactive',
             icon: iconBase + 'purple-dot.png'
@@ -84,38 +88,37 @@ function initMap(listener) {
         var name = type.name;
         var icon = type.icon;
         var div = document.createElement('div');
-		div.innerHTML = '<img src="' + icon + '" id="' + name + '">' + type.name;
+	div.innerHTML = '<img src="' + icon + '" id="' + name + '">' + type.name;
 
-		legend.appendChild(div);
+	legend.appendChild(div);
 
-		legendClosure(name, key);
+	legendClosure(name, key);
     }
 
+    var toggle = document.getElementById('toggle');
+    var div2 = document.createElement('div');
+    var toggleSrc = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/aux/history.png";
+    div2.innerHTML = '<img src="' + toggleSrc + '" id="' + 'toggleButton' + '">';
 
-	var toggle = document.getElementById('toggle');
-	var div2 = document.createElement('div');
-	var toggleSrc = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/aux/history.png";
-	div2.innerHTML = '<img src="' + toggleSrc + '" id="' + 'toggleButton' + '">';
+    google.maps.event.addDomListener(document.getElementById('toggle'), 'click', function () {
+	    showAll = !showAll;
+	    if (showAll === false) {
+		showTail = '_030.txt';
+	    } else {
+		showTail = '_all.txt';
+	    }
 
-	google.maps.event.addDomListener(document.getElementById('toggle'), 'click', function () {
-		showAll = !showAll;
-		if (showAll === false) {
-			showTail = '_030.txt';
-		} else {
-			showTail = '_all.txt';
-		}
+	    console.log("show all: " + showAll);
 
-		console.log("show all: " + showAll);
-
-		// convert id then use
-		useCallback(idToName(id));
+	    // convert id then use
+	    useCallback(idToName(id));
 
 	});
 
-	toggle.appendChild(div2);
+    toggle.appendChild(div2);
 
-	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
-	map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(toggle);
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(toggle);
 
     // landing page
     useCallback("all");
@@ -239,6 +242,9 @@ function initMap(listener) {
 			// Princeton MERMAIDs
 		    } else if (dataPoints[i].owner === "princeton") {
 			marker.setIcon(icons.princeton.icon);
+			// Stanford MERMAIDs
+		    } else if (dataPoints[i].owner === "stanford") {
+			marker.setIcon(icons.stanford.icon);
 			// JAMSTEC MERMAIDs
 		    } else if (dataPoints[i].owner === "jamstec") {
 			marker.setIcon(icons.jamstec.icon);
@@ -322,7 +328,7 @@ function initMap(listener) {
 		// info window preferences
 		let iwindow = new InfoBubble({
 			maxWidth: 320,
-			maxHeight: 250,
+			maxHeight: 265,
 			shadowStyle: 1,
 			padding: 10,
 			backgroundColor: 'rgb(255,255,255)',
@@ -464,20 +470,16 @@ function initMap(listener) {
 
     //################################################################################//
     //  We used to  make individual buttons like this
-
     // // clear
     // google.maps.event.addDomListener(clear, 'click', function() {
     // 	clearMarkers();
     //     });
-
     // google.maps.event.addDomListener(all, 'click', function() {
     // 	useCallback("all");
     //     });
-
     // google.maps.event.addDomListener(P006, 'click', function() {
     // 	useCallback("P006");
     //     });
-
     // and then one for every explicit number, but now that is all replaced by:
 
     function setUpEvents() {
@@ -511,7 +513,6 @@ function initMap(listener) {
 		console.log(err.message);
 	    }
 	}
-
         // sac event
 	// google.maps.event.addDomListener(plot, 'click', function() {
 	// 	let url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC";
@@ -563,24 +564,24 @@ function initMap(listener) {
     async function slideShow() {
 	if (slideShowOn === false) {
 	    slideShowOn = true;
-			for (let i = 1; i < floatIDS.length; i++) {
-				let showFloat = false;
+	    for (let i = 1; i < floatIDS.length; i++) {
+		let showFloat = false;
 
-				// try {
-				// 	showFloat = showDict[dataPoints[i].owner];
-				// } catch {
-				// 	showFloat = false
-				// }
+		// try {
+		// 	showFloat = showDict[dataPoints[i].owner];
+		// } catch {
+		// 	showFloat = false
+		// }
 
-				if (slideShowOn === true && showDict[getOwner(idToName(i))] === true) {
-					let referer = "slideShow";
-					google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click', referer);
-					await sleep(slideShowInterval);
-					if (i >= floatIDS.length - 1) {
-						i = 1;
-					}
-				}
-			}
+		if (slideShowOn === true && showDict[getOwner(idToName(i))] === true) {
+		    let referer = "slideShow";
+		    google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click', referer);
+		    await sleep(slideShowInterval);
+		    if (i >= floatIDS.length - 1) {
+			i = 1;
+		    }
+		}
+	    }
 
 	} else {
 	    slideShowOn = false;
@@ -590,7 +591,9 @@ function initMap(listener) {
     // take float number and convert to name
     function idToName(id) {
 		let floatName;
-		if (id < 10) {
+		if (id < 6) {
+			floatName = ("N000" + id.toString());
+		} else if (id < 10) {
 			floatName = ("P000" + id.toString());
 		} else if (id < 100) {
 			floatName = ("P00" + id.toString());
