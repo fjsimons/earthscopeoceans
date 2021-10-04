@@ -34,7 +34,7 @@ function getOwner(name) {
     if (id === 6) {
         return ("geoazur");
         // Dead MERMAIDs
-     } else if (id === 3 || id === 7 || id === 34 || id === 47 ) {
+     } else if (id === 7 || id === 3 || id === 34 || id === 47 ) {
         return ("dead");
         // SUSTECH MERMAIDs
     } else if (26 <= id && id <= 49) {
