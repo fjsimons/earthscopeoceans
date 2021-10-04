@@ -1,2 +1,3 @@
-# earthscopeoceans (developer's version)
-Website (and some other sundries) for www.earthscopeoceans.org
+# earthscopeoceans (version of record)
+Website materials for www.earthscopeoceans.org developed by Jonah N. Rubin and Frederik J. Simons
+
