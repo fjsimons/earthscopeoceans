@@ -1,0 +1,16 @@
+.idea
+.vscode
+.DS_Store
+images/
+
+archiveIndex.html
+test.html
+geoTest.html
+
+EEZ.js
+Entry.js
+geoMap.js
+
+geoMapEntries.csv
+*.png
+
