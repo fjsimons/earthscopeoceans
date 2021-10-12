@@ -453,23 +453,6 @@ function initMap(listener) {
 
 	}
 
-	function useBinCallback(url) {
-		resp = get(DataType.BINARY, url,
-			// this callback is invoked after the response arrives
-			function () {
-				let blob = this.response;
-				let reader = new FileReader();
-
-				reader.addEventListener("loadend", function () {
-					ab = reader.result;
-					let sacFile = new SacFile(ab);
-				});
-
-				reader.readAsArrayBuffer(blob);
-			});
-
-	}
-
 	setUpEvents();
 
 	//################################################################################//

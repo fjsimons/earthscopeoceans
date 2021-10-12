@@ -5,26 +5,6 @@ DataPoint object class
 06/25/2021
 */
 
-/**
- * # So... KOBE \ GEOAZUR \ PRINCETON \ SUSTECH \ KOBE
-#   ... STANFORD (renumbered with different serial number and letter)
-# Remember NOTHING can follow the continuation symbol on the same line...
-set lettrs = ( N  N  N  N  N \ % JAMSTEC=KOBE
-               P  P \          % GEOAZUR
-               P  P  P  P  P  P     P  P  P  P  P  P  P  P  P P \ % PRINCETON
-               P  P  P  P     P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P \ % SUSTECH
-               P     P  P  P \.   % JAMSTEC=KOBE
-                  R  R  R  R  R  R ) % STANFORD
-
-set floats = (01 02 03 04 05 \
-              06 07 \
-              08 09 10 11 12 13    16 17 18 19 20 21 22 23 24 25 \
-              26 27 28 29    31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 \
-              50    52 53 54 \
-                 02 03 04 05 06 07)
-
- */
-
 const JAMSTEC_FLOATS = [
     "N0001", "N0002", "N0004", "N0005", "P0050",
     "P0052", "P0053", "P0054"
