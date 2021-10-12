@@ -5,6 +5,51 @@ DataPoint object class
 06/25/2021
 */
 
+/**
+ * # So... KOBE \ GEOAZUR \ PRINCETON \ SUSTECH \ KOBE
+#   ... STANFORD (renumbered with different serial number and letter)
+# Remember NOTHING can follow the continuation symbol on the same line...
+set lettrs = ( N  N  N  N  N \ % JAMSTEC=KOBE
+               P  P \          % GEOAZUR
+               P  P  P  P  P  P     P  P  P  P  P  P  P  P  P P \ % PRINCETON
+               P  P  P  P     P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P \ % SUSTECH
+               P     P  P  P \.   % JAMSTEC=KOBE
+                  R  R  R  R  R  R ) % STANFORD
+
+set floats = (01 02 03 04 05 \
+              06 07 \
+              08 09 10 11 12 13    16 17 18 19 20 21 22 23 24 25 \
+              26 27 28 29    31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 \
+              50    52 53 54 \
+                 02 03 04 05 06 07)
+
+ */
+
+const JAMSTEC_FLOATS = [
+    "N0001", "N0002", "N0004", "N0005", "P0050",
+    "P0052", "P0053", "P0054"
+];
+const GEOAZUR_FLOATS = [
+    "P0006"
+];
+const PRINCETON_FLOATS = [
+    "P0008", "P0009", "P0010", "P0011", "P0012", "P0013",
+    "P0016", "P0017", "P0018", "P0019", "P0020", "P0021",
+    "P0022", "P0023", "P0024", "P0025"
+];
+const SUSTECH_FLOATS = [
+    "P0026", "P0027", "P0028", "P0029", "P0031", "P0032",
+    "P0033", "P0035", "P0036", "P0037", "P0038", "P0039", 
+    "P0040", "P0041", "P0042", "P0043", "P0044", "P0045", 
+    "P0046", "P0048", "P0049"
+];
+const STANFORD_FLOATS = [
+    "R0002", "R0003", "R0004", "R0005", "R0006", "R0007"
+];
+const DEAD_FLOATS = [
+    "N0003", "P0007", "P0034", "P0047"
+]
+
 // create datapoint object
 function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, Prange, cmdrdc, f2up, fupl) {
     this.name = name;
@@ -28,30 +73,27 @@ function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, P
 }
 
 function getOwner(name) {
-    // Alternate coloring for floats...
-    id = parseInt(name.substring(1, name.length));
-    // GEOAZUR MERMAIDs
-    if (id === 6) {
-        return ("geoazur");
-        // Dead MERMAIDs
-     } else if (id === 7 || id === 3 || id === 34 || id === 47 ) {
-        return ("dead");
-        // SUSTECH MERMAIDs
-    } else if (26 <= id && id <= 49) {
-        return ("sustech");
-        // JAMSTEC MERMAIDs
-    } else if (50 <= id && id <= 54) {
-        return ("jamstec");
-        // Princeton MERMAIDs
-    } else if (name[0] === "P") {
-        return ("princeton");
-        // JAMSTEC MERMAIDs
-    } else if (name[0] === "N") {
-        return ("jamstec");
-        // Stanford MERMAIDs
-    } else if (name[0] === "R") {
-        return ("stanford");
-    }
+    if (DEAD_FLOATS.includes(name))
+        return("dead")
+    if (JAMSTEC_FLOATS.includes(name))
+        return("jamstec");
+    if (GEOAZUR_FLOATS.includes(name))
+        return("geoazur");
+    if (PRINCETON_FLOATS.includes(name))
+        return("princeton");
+    if (SUSTECH_FLOATS.includes(name))
+        return("sustech");
+    if (STANFORD_FLOATS.includes(name))
+        return("stanford");
+}
+
+function getAllFloatNames() {
+    all = [];
+    all = all.concat(
+        JAMSTEC_FLOATS, GEOAZUR_FLOATS, PRINCETON_FLOATS, SUSTECH_FLOATS, STANFORD_FLOATS, DEAD_FLOATS
+    )
+
+    return all
 }
 
 // INPUT is in UTC, convert to browser time
@@ -96,10 +138,10 @@ function getDisplacement(datapt1, datapt2) {
     let R = 6378.137;
     let dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
     let dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
-    let a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
         Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(dLon/2) * Math.sin(dLon/2);
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     let d = R * c;
     return d * 1000; // meters
 }
@@ -109,19 +151,18 @@ function getDistance(dataPoints) {
     let distance = 0;
 
     for (let i = 0; i < dataPoints.length - 1; i++) {
-        distance += getDisplacement(dataPoints[i], dataPoints[i+1]);
+        distance += getDisplacement(dataPoints[i], dataPoints[i + 1]);
     }
-    
+
     return distance;
 }
 
-// switch to radix if the datasize grows substantially
-function selectionSort(arr){
+function selectionSort(arr) {
     let minIdx, temp,
         len = arr.length;
     for (let i = 0; i < len; i++) {
         minIdx = i;
-        for (let j = i+1; j < len; j++) {
+        for (let j = i + 1; j < len; j++) {
             if (arr[j].loct.getTime() < arr[minIdx].loct.getTime()) {
                 minIdx = j;
             }
@@ -132,3 +173,5 @@ function selectionSort(arr){
     }
     return arr;
 }
+
+

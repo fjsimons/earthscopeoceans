@@ -30,7 +30,8 @@ function initMap(listener) {
 		"dead": true,
 		"princeton": true,
 		"sustech": true,
-		"jamstec": true
+		"jamstec": true,
+		"stanford": true
 	};
 
 	// some default locations
@@ -300,7 +301,7 @@ function initMap(listener) {
 			// updated to use a min zoom (13) to avoid missing imagery
 			map.fitBounds(bounds);
 			let listener = google.maps.event.addListener(map, "idle", function () {
-				if (map.getZoom() > 13) map.setZoom(13);
+				if (map.getZoom() > 12) map.setZoom(12);
 				google.maps.event.removeListener(listener);
 			});
 		}
@@ -490,7 +491,6 @@ function initMap(listener) {
 		// this is the maximum. Also need to set the labels explicitly in ../index.html.
 		addEvents("all");
 		markerIndex = 0;
-
 		allFloats = getAllFloatNames();
 
 		// autogenerate "numFloats" events
