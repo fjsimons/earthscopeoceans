@@ -325,7 +325,7 @@ function initMap(listener) {
 			closeIWindows();
 			markerIndex = i;
 			// Pan to include entire infowindow
-			let offset = -0.32 + (3000000) / (1 + Math.pow((map.getZoom() / 0.007), 2.07));
+			let offset = -0.32 + (3000000) / (1 + Math.pow((map.getZoom() / 0.0055), 2.07));
 			let center = new google.maps.LatLng(
 				parseFloat(marker.position.lat() + offset /2),
 				parseFloat(marker.position.lng())
