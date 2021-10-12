@@ -491,12 +491,12 @@ function initMap(listener) {
 		addEvents("all");
 		markerIndex = 0;
 
+		allFloats = getAllFloatNames();
+
 		// autogenerate "numFloats" events
 		// if they do not exist, the button will not be created
-		for (let i = 0; i <= numFloats; i++) {
-			let floatID = idToName(i);
-
-			addEvents(floatID);
+		for (let i = 0; i <= allFloats.length; i++) {
+			addEvents(allFloats[i]);
 		}
 
 		// float events
