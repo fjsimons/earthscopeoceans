@@ -20,7 +20,7 @@ function initMap(listener) {
 	let iwindows = [];
 	let markerIndex = -1;
 	let floatIDS = [];
-
+	let currFloat = "";
 	let showAll = false;
 	let showTail = "_030.txt";
 
@@ -112,7 +112,7 @@ function initMap(listener) {
 		console.log("show all: " + showAll);
 
 		// convert id then use
-		handlePlotRequest(idToName(id));
+		handlePlotRequest(currFloat);
 
 	});
 
@@ -308,6 +308,7 @@ function initMap(listener) {
 	}
 
 	function handlePlotRequest(name) {
+		currFloat = name;
 		getFloatData(name).then((value) => {
 			console.log(value);
 			addToMap(value, 'all');
@@ -551,15 +552,8 @@ function initMap(listener) {
 		if (slideShowOn === false) {
 			slideShowOn = true;
 			for (let i = 1; i < floatIDS.length; i++) {
-				let showFloat = false;
 
-				// try {
-				// 	showFloat = showDict[dataPoints[i].owner];
-				// } catch {
-				// 	showFloat = false
-				// }
-
-				if (slideShowOn === true && showDict[getOwner(idToName(i))] === true) {
+				if (slideShowOn === true && showDict[getOwner(floatIDS[i])] === true) {
 					let referer = "slideShow";
 					google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click', referer);
 					await sleep(slideShowInterval);
@@ -568,24 +562,8 @@ function initMap(listener) {
 					}
 				}
 			}
-
 		} else {
 			slideShowOn = false;
 		}
-	}
-
-	// take float number and convert to name
-	function idToName(id) {
-		let floatName;
-		if (id < 6) {
-			floatName = ("N000" + id.toString());
-		} else if (id < 10) {
-			floatName = ("P000" + id.toString());
-		} else if (id < 100) {
-			floatName = ("P00" + id.toString());
-		} else {
-			floatName = ("P0" + id.toString());
-		}
-		return floatName;
 	}
 }
