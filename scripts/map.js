@@ -311,7 +311,7 @@ function initMap(listener) {
 		currFloat = name;
 		getFloatData(name).then((value) => {
 			console.log(value);
-			addToMap(value, 'all');
+			addToMap(value, name);
 		});
 	}
 
