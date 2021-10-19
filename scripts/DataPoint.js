@@ -24,7 +24,7 @@ const SUSTECH_FLOATS = [
     "P0046", "P0048", "P0049"
 ];
 const STANFORD_FLOATS = [
-    "R0002", "R0003", "R0004", "R0005", "R0006", "R0007"
+    "R0001","R0002", "R0003", "R0004", "R0005", "R0006", "R0007"
 ];
 const DEAD_FLOATS = [
     "N0003", "P0007", "P0034", "P0047"
