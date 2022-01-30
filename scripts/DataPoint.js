@@ -2,7 +2,7 @@
 DataPoint object class
 
 @author Jonah Rubin and Frederik J Simons
-10/24/2021
+01/21/2022
 */
 
 const JAMSTEC_FLOATS = [
@@ -26,10 +26,10 @@ const SUSTECH_FLOATS = [
     "R0071", "R0072", "R0073"
 ];
 const STANFORD_FLOATS = [
-    "R0001","R0002", "R0003", "R0004", "R0005", "R0006", "R0007"
+    "R0001","R0002", "R0003", "R0004", "R0005", "R0007"
 ];
 const DEAD_FLOATS = [
-    "N0003", "P0007", "P0034", "P0047"
+     "N0003", "P0007", "P0034", "P0047","R0006"
 ]
 
 // create datapoint object
