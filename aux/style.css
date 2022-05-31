@@ -17,14 +17,24 @@ body  {
 }
 
 .carousel-container {
-  width: 650px;
+  width: 666px;
+  height: 500px;
+}
+
+.carousel-wide {
+  width: 750px;
+  height: 500px;
+}
+
+.carousel-wider {
+  width: 889px;
   height: 500px;
 }
 
 /*main jumbotron*/
 .jumbotron {
   margin-bottom: 20px;
-    background-image: url(../images/water01.jpg);
+  background-image: url(../images/water01.jpg);
   background-position: 0% 25%;
   background-size: cover;
   background-repeat: no-repeat;
