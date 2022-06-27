@@ -302,7 +302,7 @@ async function initMap(listener) {
 			totalTime = data[iniIndex+i][4];
 
 			if (totalTime === 0) {
-			    avgVelocty = 0;
+			    avgVelocity = 0;
 			} else {
 			    avgVelocity = (totalDistance / totalTime);
 			}
