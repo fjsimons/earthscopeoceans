@@ -1,9 +1,9 @@
 /**
-   Map class
-   @author Jonah Rubin and Frederik J Simons 10/31/2021
+ * Map class
+ @author Jonah Rubin, Stefan Kildal-Brandt, and Frederik J Simons 6/22/2022
 */
 
-function initMap(listener) {
+async function initMap(listener) {
     // ID the map
     let mapDiv = document.getElementById('map');
     
@@ -33,6 +33,12 @@ function initMap(listener) {
 	"jamstec": true,
 	"stanford": true
     };
+
+    //Initializing list of All EEZ and their coordinates
+    let EEZList = await fetchAndDecodeFloatData('http://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/EEZData/AllEEZ','text');
+    EEZList = JSON.parse(EEZList);
+    let AllGeometries = await fetchAndDecodeFloatData('http://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/EEZData/Geometries/AllGeometries.txt','text');
+    AllGeometries = JSON.parse(AllGeometries);
 
     // some default locations
     let guyot = { lat: 40.34585, lng: -74.65475 };
@@ -69,7 +75,7 @@ function initMap(listener) {
 
     // our default map center
     let map = new google.maps.Map(mapDiv, {
-	    // zoom: 13,
+	    zoom: 7,
 	    // center: papeete
 	    disableDefaultUI: true,
 	    zoomControl: true,
@@ -77,7 +83,17 @@ function initMap(listener) {
 	    scaleControl: true,
 	    streetViewControl: false,
 	    rotateControl: false,
-	    fullscreenControl: true
+	    fullscreenControl: true,
+	    keyboardShortcuts: false,
+	    minZoom: 2,
+	    maxZoom: 9,
+	    restriction: {latLngBounds: {
+		    north: 85,
+		    south: -85,
+		    east: 360,
+		    west: -360
+		},
+	    },
 	});
 
     var IconColor = {};
@@ -185,7 +201,6 @@ function initMap(listener) {
 	    // requires work but for the individual floats the
 	    // input came sorted already
 	    dataPoints = selectionSort(dataPoints);
-
 	    console.log("datapoints size given name: " + name + "  " + dataPoints.length);
 
 	    // set up panning bounds
@@ -199,14 +214,39 @@ function initMap(listener) {
 	    let totalDistance;
 	    let totalTime;
 	    let avgVelocity;
+	    let EEZ;
+	    let GEBCODepth;
 	    let marker;
-
+	
 	    // iterate over arrays, placing markers
+	    let k = 0; //k value labels floats in cases where some are turned off in legend (fixes problems with arrow keys on map)
+	    let initial=0;
+	    let data;
+
+	    //Grab data for floats given the tab the map is currentlu in
+	    if (name === 'all') {
+		data = await grabAllData();
+	    }
+	    else {
+		data = await grabIndData(name);
+	    }
+	    //Properly account for the index of the data table given we are only looking for the most recent 30 float points
+	    let iniIndex=0;
+	    if (showAll === false){
+		iniIndex=data.length-60;
+		if(iniIndex<0){
+		    iniIndex=0;
+		}
+	    }
+
 	    for (let i = 0; i < dataPoints.length; i++) {
 		let latLng = new google.maps.LatLng(dataPoints[i].stla, dataPoints[i].stlo);
 
 		// set up marker, fade on age, unless using the 'all' option
 		if (showDict[dataPoints[i].owner] === true) {
+		    if(k===0){
+			initial = k;
+		    }
 		    if (name === 'all') {
 			marker = new google.maps.Marker({
 				position: latLng,
@@ -253,21 +293,13 @@ function initMap(listener) {
 		    // expand bounds to fit all markers
 		    bounds.extend(marker.getPosition());
 
-		    // first datapoint initialized to 0
-		    if (i === 0) {
-			legLength = 0;
-			legSpeed = 0;
-			legTime = 0;
-			netDisplacement = 0;
-			totalDistance = 0;
-			totalTime = 0;
-			avgVelocity = 0;
-
-		    } else {
-			// net calculations for each datapoint
-			netDisplacement = getDisplacement(dataPoints[0], dataPoints[i]) / 1000;
-			totalDistance = getDistance(dataPoints.slice(0, i + 1)) / 1000;
-			totalTime = getTimeElapsed(dataPoints[0], dataPoints[i]);
+		    //Handle case of all floats separately from individual floats
+		    if (name !== 'all'){
+			EEZ = await eezFinder(dataPoints[i].stla, dataPoints[i].stlo, EEZList, AllGeometries);
+			// Get float data from data array
+			netDisplacement = data[iniIndex+i][2]/1000;
+			totalDistance = data[iniIndex+i][3]/1000;
+			totalTime = data[iniIndex+i][4];
 
 			if (totalTime === 0) {
 			    avgVelocty = 0;
@@ -275,9 +307,8 @@ function initMap(listener) {
 			    avgVelocity = (totalDistance / totalTime);
 			}
 
-			// get displacement in m, convert to kilometers
-			legLength = getDisplacement(dataPoints[i - 1], dataPoints[i]) / 1000;
-			legTime = getTimeElapsed(dataPoints[i - 1], dataPoints[i]);
+			legLength = data[iniIndex+i][0]/1000;
+			legTime = data[iniIndex+i][1];
 
 			// avoid division by zero when calculating velocity
 			if (legTime === 0) {
@@ -285,15 +316,28 @@ function initMap(listener) {
 			} else {
 			    legSpeed = legLength / legTime;
 			}
+		    } else if (name === 'all') { //Gather proper float information for all floats
+			EEZ = await eezFinder(dataPoints[i].stla, dataPoints[i].stlo, EEZList, AllGeometries);
+			let dataArr = data.filter(item => item[0]===dataPoints[i].name);
+			netDisplacement = dataArr[0][1]/1000;
+			totalDistance = dataArr[0][2]/1000;
+			totalTime = dataArr[0][3];
+			GEBCODepth = dataArr[0][4]
+			    if (totalTime === 0) {
+				avgVelocty = 0;
+			    } else {
+				avgVelocity = (totalDistance / totalTime);
+			    }
 		    }
 
 		    let allPage = name === 'all';
 
 		    // create info windows
-		    setInfoWindow(allPage, i, marker, netDisplacement, totalDistance, avgVelocity,
-				  totalTime, legLength, legSpeed, legTime);
+		    setInfoWindow(allPage, k, i, marker, netDisplacement, totalDistance, avgVelocity,
+				  totalTime, legLength, legSpeed, legTime, GEBCODepth, EEZ);
 
 		    markers.push(marker);
+		    k++;
 		}
 	    }
 
@@ -316,20 +360,20 @@ function initMap(listener) {
     }
 
     // for dynamic info windows
-    function setInfoWindow(allPage, i, marker, netDisplacement, totalDistance, avgVelocity,
-			   totalTime, legLength, legSpeed, legTime) {
+    function setInfoWindow(allPage, k, i, marker, netDisplacement, totalDistance, avgVelocity,
+			   totalTime, legLength, legSpeed, legTime, GEBCODepth, EEZ) {
 
-	makeWMSrequest(dataPoints[i]);
+	//makeWMSrequest(dataPoints[k]);
 
 	google.maps.event.addListener(marker, 'click', function (event) {
 		// close existing windows
 		closeIWindows();
-		markerIndex = i;
+		markerIndex = k;
 		// Pan to include entire infowindow
-		let offset = -0.32 + (3000000) / (1 + Math.pow((map.getZoom() / 0.0055), 2.07));
+		let offset = -0.32 + (10000000) / (1 + Math.pow((map.getZoom() / 0.0035), 2.07));
 		let center = new google.maps.LatLng(
-						    parseFloat(marker.position.lat() + offset /2),
-						    parseFloat(marker.position.lng())
+						    parseFloat(marker.position.lat() + offset / 1.5),
+						    parseFloat(marker.position.lng() + offset / 2)
 						    );
 		map.panTo(center);
 
@@ -370,7 +414,9 @@ function initMap(listener) {
 			'<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
 			'<br/><b>Average Speed:</b> ' + roundit(avgVelocity) + ' km/h' +
 			'<br/><b>Net Displacement:</b> ' + roundit(netDisplacement) + ' km' +
-			'<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m';
+			'<br/><b>GEBCO WMS Depth:</b> ' + GEBCODepth + ' m' +
+			'<br/><b>EEZ:</b> ' + EEZ;
+
 		} else {
 		    // content for float data tab
 		    floatTabContent = '<div id="tabContent">' +
@@ -391,7 +437,9 @@ function initMap(listener) {
 			'<br/><b>Distance Travelled:</b> ' + roundit(totalDistance) + ' km' +
 			'<br/><b>Average Speed:</b> ' + roundit(avgVelocity) + ' km/h' +
 			'<br/><b>Net Displacement:</b> ' + roundit(netDisplacement) + ' km' +
-			'<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m';
+			'<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m' +
+			'<br/><b>EEZ:</b> ' + EEZ;
+
 		}
 		// content for earthquake tabs
 		let earthquakeTabContent = '<div id="tabContent">' +
@@ -522,6 +570,9 @@ function initMap(listener) {
     google.maps.event.addDomListener(document, 'keyup', function (e) {
 	    let code = (e.keyCode ? e.keyCode : e.which);
 	    if (markerIndex !== -1) {
+		if (markerIndex > markers.length - 1){
+		    markerIndex=0
+			}
 		if (code === 39) {
 		    if (markerIndex === markers.length - 1) {
 			markerIndex = 0;
@@ -565,5 +616,28 @@ function initMap(listener) {
 	} else {
 	    slideShowOn = false;
 	}
+    }
+
+    //Grab float data from distances.txt
+    async function grabAllData(){
+	let dataArr=[];
+	let data = await fetchAndDecodeFloatData("http://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/FloatInfo/distances.txt", 'text');
+	tempArr = data.split('\n');
+	for(let i=0; i<tempArr.length;i++){
+	    let splitArr = tempArr[i].split(' ');
+	    dataArr.push([splitArr[0], parseInt(splitArr[1]), parseInt(splitArr[2]), parseFloat(splitArr[3]), parseInt(splitArr[4])]);
+	}
+	return dataArr
+	    }
+    
+    async function grabIndData(Float){
+	let dataArr=[];
+	let data = await fetchAndDecodeFloatData(`http://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/FloatInfo/${Float}.txt`, 'text');
+        tempArr = data.split('\n');
+        for(let i=0; i<tempArr.length;i++){
+	    let splitArr = tempArr[i].split(' ');
+	    dataArr.push([parseInt(splitArr[0]), parseFloat(splitArr[1]), parseInt(splitArr[2]), parseInt(splitArr[3]), parseFloat(splitArr[4])]);
+	}
+	return dataArr;
     }
 }
