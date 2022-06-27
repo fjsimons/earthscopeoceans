@@ -35,9 +35,9 @@ async function initMap(listener) {
     };
 
     //Initializing list of All EEZ and their coordinates
-    let EEZList = await fetchAndDecodeFloatData('http://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/EEZData/AllEEZ','text');
+    let EEZList = await fetchAndDecodeFloatData('http://geoweb.princeton.edu/people/simons/earthscopeoceans/data/EEZData/AllEEZ','text');
     EEZList = JSON.parse(EEZList);
-    let AllGeometries = await fetchAndDecodeFloatData('http://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/EEZData/Geometries/AllGeometries.txt','text');
+    let AllGeometries = await fetchAndDecodeFloatData('http://geoweb.princeton.edu/people/simons/earthscopeoceans/data/AllGeometries','text');
     AllGeometries = JSON.parse(AllGeometries);
 
     // some default locations
@@ -114,7 +114,7 @@ async function initMap(listener) {
 
     var toggle = document.getElementById('toggle');
     var div2 = document.createElement('div');
-    var toggleSrc = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/aux/history.png";
+    var toggleSrc = "http://geoweb.princeton.edu/people/simons/earthscopeoceans/aux/history.png";
     div2.innerHTML = '<img src="' + toggleSrc + '" id="' + 'toggleButton' + '">';
 
     google.maps.event.addDomListener(document.getElementById('toggle'), 'click', function () {
@@ -621,7 +621,7 @@ async function initMap(listener) {
     //Grab float data from distances.txt
     async function grabAllData(){
 	let dataArr=[];
-	let data = await fetchAndDecodeFloatData("http://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/FloatInfo/distances.txt", 'text');
+	let data = await fetchAndDecodeFloatData("http://geoweb.princeton.edu/people/simons/earthscopeoceans/FloatInfo/distances.txt", 'text');
 	tempArr = data.split('\n');
 	for(let i=0; i<tempArr.length;i++){
 	    let splitArr = tempArr[i].split(' ');
@@ -632,7 +632,7 @@ async function initMap(listener) {
     
     async function grabIndData(Float){
 	let dataArr=[];
-	let data = await fetchAndDecodeFloatData(`http://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/FloatInfo/${Float}.txt`, 'text');
+	let data = await fetchAndDecodeFloatData(`http://geoweb.princeton.edu/people/simons/earthscopeoceans/FloatInfo/${Float}.txt`, 'text');
         tempArr = data.split('\n');
         for(let i=0; i<tempArr.length;i++){
 	    let splitArr = tempArr[i].split(' ');
