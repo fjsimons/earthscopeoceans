@@ -37,7 +37,7 @@ async function initMap(listener) {
     //Initializing list of All EEZ and their coordinates
     let EEZList = await fetchAndDecodeFloatData('http://geoweb.princeton.edu/people/simons/earthscopeoceans/data/EEZData/AllEEZ','text');
     EEZList = JSON.parse(EEZList);
-    let AllGeometries = await fetchAndDecodeFloatData('http://geoweb.princeton.edu/people/simons/earthscopeoceans/data/AllGeometries','text');
+    let AllGeometries = await fetchAndDecodeFloatData('http://geoweb.princeton.edu/people/simons/earthscopeoceans/data/EEZData/AllGeometries','text');
     AllGeometries = JSON.parse(AllGeometries);
 
     // some default locations
