@@ -363,7 +363,7 @@ async function initMap(listener) {
     function setInfoWindow(allPage, k, i, marker, netDisplacement, totalDistance, avgVelocity,
 			   totalTime, legLength, legSpeed, legTime, GEBCODepth, EEZ) {
 
-	//makeWMSrequest(dataPoints[k]);
+	makeWMSrequest(dataPoints[k]);
 
 	google.maps.event.addListener(marker, 'click', function (event) {
 		// close existing windows
@@ -639,5 +639,5 @@ async function initMap(listener) {
 	    dataArr.push([parseInt(splitArr[0]), parseFloat(splitArr[1]), parseInt(splitArr[2]), parseInt(splitArr[3]), parseFloat(splitArr[4])]);
 	}
 	return dataArr;
-    }
+   }
 }
