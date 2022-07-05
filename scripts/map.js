@@ -1,6 +1,6 @@
 /**
  * Map class
- @author Jonah Rubin, Stefan Kildal-Brandt, and Frederik J Simons 6/22/2022
+ @author Jonah Rubin, Stefan Kildal-Brandt, and Frederik J Simons 7/05/2022
 */
 
 async function initMap(listener) {
@@ -403,7 +403,7 @@ async function initMap(listener) {
 		    floatTabContent = '<div id="tabContent">' +
 			'<b>Float Name:</b> ' + dataPoints[i].name +
 			'<br/><b>UTC Date:</b> ' + dataPoints[i].stdt +
-			'<br/><b>Your Date:</b> ' + dataPoints[i].loct +
+			// '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
 			'<br/><b>GPS Lat/Lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
 			'<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
 			'<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
@@ -422,7 +422,7 @@ async function initMap(listener) {
 		    floatTabContent = '<div id="tabContent">' +
 			'<b>Float Name:</b> ' + dataPoints[i].name +
 			'<br/><b>UTC Date:</b> ' + dataPoints[i].stdt +
-			'<br/><b>Your Date:</b> ' + dataPoints[i].loct +
+			// '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
 			'<br/><b>GPS Lat/Lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
 			'<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
 			'<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
