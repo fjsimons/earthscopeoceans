@@ -12,23 +12,29 @@
   /* The actual popup */
   .popup .popuptext {
     visibility: hidden;
-    width: 760px;
+    width: calc(25vw + 200px);
     background-color: #777;
     color: #fff;
     text-align: left;
+    font-size: calc(6px + .75vw);
     border-radius: 6px;
     padding: 18px;
     position: absolute;
     z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -80px;
+    bottom: 100%;
   }
-  
+
+/* positions popups correctly for big screens */
+@media (min-width: 750px){
+    .popuptext {
+        left: -7.5vw;
+    }
+}
+
   /* Popup arrow */
   .popup .popuptext::after {
     content: "";
-    position: absolute;
+    position: relative;
     top: 100%;
     left: 50%;
     margin-left: -5px;
