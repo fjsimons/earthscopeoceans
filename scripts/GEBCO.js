@@ -1,4 +1,5 @@
-// Last modified by JNR and FJS 6/28/22
+// Last modified by SKB, JNR, and FJS 6/28/22
+// Function to get GEBCO depth from a datapoint parameter
 function makeWMSrequest(dataPoint) {
     // This is inspired by the known 2014 resolution
     const bb = 1/60/2;
@@ -7,7 +8,7 @@ function makeWMSrequest(dataPoint) {
     stlam = parseFloat(dataPoint.stla) + bb;
     stlom = parseFloat(dataPoint.stlo) + bb;
 
-    const rqtHead = 'http://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?';
+    const rqtHead = 'https://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?';
 
     // Integer width and height of the map (when requesting a feature, keep it small!)
     const pxw = 5;
