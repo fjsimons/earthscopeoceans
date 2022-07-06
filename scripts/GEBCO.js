@@ -1,4 +1,4 @@
-// Last modified by JNR and FJS 11/27/2019
+// Last modified by JNR and FJS 6/28/22
 function makeWMSrequest(dataPoint) {
     // This is inspired by the known 2014 resolution
     const bb = 1/60/2;
@@ -44,4 +44,36 @@ function makeWMSrequest(dataPoint) {
 	       });
 
     //console.log(depth);
+}
+
+//Function to get GEBCO depth from coordinate parameters
+async function makeWMSrequestCoords(lat, lng) {
+    // This is inspired by the known 2014 resolution
+    const bb = 1/60/2;
+    stlap = parseFloat(lat) - bb;
+    stlop = parseFloat(lng) - bb;
+    stlam = parseFloat(lat) + bb;
+    stlom = parseFloat(lng) + bb;
+
+    const rqtHead = 'https://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?';
+
+    // Integer width and height of the map (when requesting a feature, keep it small!)
+    const pxw = 5;
+    const pxh = 5;
+
+    // Integer pixel count inside the map where you want to extract the point
+    const pxx = 2;
+    const pxy = 2;
+
+    // get featureInfo
+    const rqt = 'getfeatureinfo';
+
+    const rqtTail = 'request=' + rqt + '&service=wms&crs=EPSG:4326&layers=gebco_latest_2&query_layers=gebco_latest_2&BBOX='
+        + stlap + ',' + stlop + ',' + stlam + ',' + stlom + '&info_format=text/plain&service=wms&x='
+        + pxx + '&y=' + pxy + '&width=' + pxw + '&height=' + pxh + '&version=1.3.0';
+
+        let url = rqtHead + rqtTail;
+    //returns the data fetched from GEBCO website
+    resp = await fetchAndDecodeFloatData(url, 'text')
+    return resp.split("\'")[7];
 }
