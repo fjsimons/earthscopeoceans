@@ -1,5 +1,4 @@
 body  {
-    /* background-image: url("images/21.jpg"); */
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -17,102 +16,102 @@ body  {
 }
 
 .carousel-container {
-  width: calc(200px + 30vw);
-  height: calc(-50 + 50vh);
+    width: calc(200px + 30vw);
+    height: calc(-50 + 50vh);
 }
 
-.carousel-wider {
-  width: calc(200px + 40vw);
-  height: calc(-50 + 50vh);
+.carousel-wide {
+    width: calc(200px + 40vw);
+    height: calc(-50 + 50vh);
 }
 
 /*main jumbotron*/
 .jumbotron {
-  margin-bottom: 20px;
-  background-image: url(../images/water01.jpg);
-  background-position: 0% 25%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: white;
-  font-size: 1.3em;
-  height: 400px
-  max-height: 100%;
-  width: auto;
+    margin-bottom: 20px;
+    background-image: url(../images/water01.jpg);
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    font-size: 1.3em;
+    height: 400px
+    max-height: 100%;
+    width: auto;
 }
 
 .title{
-  font-size: calc(14px + 4vw);
-  padding-top: calc(7vh + 48px);
+    font-size: calc(14px + 4vw);
+    padding-top: calc(7vh + 48px);
 }
 
 .textcss{
-  font-size: min( calc(10px + 1.1vw), 22px);
-  padding-right: 16px;
-  padding-left: 16px;
-  text-align: left;
+    font-size: min( calc(10px + 1.1vw), 22px);
+    padding-right: 16px;
+    padding-left: 16px;
+    text-align: left;
 }
 
 .headercss{
-  font-size: min( calc(14px + 1.1vw), 32px);
-  padding-right: 8px;
-  padding-left: 8px;
-  text-align: left;
+    font-size: min( calc(14px + 1.1vw), 32px);
+    padding-right: 8px;
+    padding-left: 8px;
+    text-align: left;
 }
 
 .text{
-  font-size: calc(1.1vw + 2px);
+    font-size: calc(1.1vw + 2px);
 }
 
 /* secondary buttons */
 .btn-secondary{
-  border-color: #000F35;
-  background-color: #000F35;
-  margin-top:30px;
-  max-width: 100%;
-  height: auto;
+    border-color: #000F35;
+    background-color: #000F35;
+    margin-top:30px;
+    max-width: 100%;
+    height: auto;
 }
 
 /* secondary buttons */
 .about-earthscope{
-  margin-top: 35px;
-  font-size: min( calc(10px + 1.6vw), 22px);
+    margin-top: 35px;
+    font-size: min( calc(10px + 1.6vw), 22px);
 }
 
 /* map jumbotron */
 .map-jumbotron{
-  width:100%;
+    width:100%;
     height: 80%;
-  background-color: #000F35;
-  background-image: none;
-  padding:10px;
-  margin:0px;
-  text-align: center;
+    background-color: #000F35;
+    background-image: none;
+    padding:10px;
+    margin:0px;
+    text-align: center;
 }
 
 /* scrollbar */
 div.scrollmenu {
-  margin-top: 25px;
-  background-color: #000F35;
-  overflow: auto;
-  white-space: nowrap;
+    margin-top: 25px;
+    background-color: #000F35;
+    overflow: auto;
+    white-space: nowrap;
 }
 
 div.scrollmenu a {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  text-decoration: none;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
 }
 
 div.scrollmenu a:hover {
-  background-color: #777;
+    background-color: #777;
 }
 
 #map {
-  height: 600px;
-  width:  100%;
-  margin-bottom: 25px;
+    height: 600px;
+    width:  100%;
+    margin-bottom: 25px;
 }
 
 #legend {
@@ -150,159 +149,159 @@ div.scrollmenu a:hover {
 }
 /*info window text*/
 #tabContent {
-   font-size: 1.3em;
-   color: black;
-   text-align: left;
- }
+    font-size: 1.3em;
+    color: black;
+    text-align: left;
+}
 
- /*info window tab names*/
- #tabNames {
-   font-size: 1.1em;
-   color: black;
-   text-align: left;
- }
+/*info window tab names*/
+#tabNames {
+    font-size: 1.6em;
+    color: black;
+    text-align: left;
+}
 
 /*navbar*/
 .navbar-inverse {
-  background-color: #000F35;
+    background-color: #000F35;
 }
 
 .navbar-logo {
-  display: inline-block;
-  float: none;
-  vertical-align: top;
+    display: inline-block;
+    float: none;
+    vertical-align: top;
 }
 
 .col1 {
-  background-image: url(../images/mermaid01.jpg);
-  height: 450px;
-  background-repeat: no-repeat;
+    background-image: url(../images/mermaid01.jpg);
+    height: 450px;
+    background-repeat: no-repeat;
 }
 
 .col2 {
-  background-image: url(../images/inthewater01.jpg);
-  height: 450px;
-  background-repeat: no-repeat;
+    background-image: url(../images/inthewater01.jpg);
+    height: 450px;
+    background-repeat: no-repeat;
 }
 
 .col3{
-  background-image: url(../images/mermaid02.jpg);
-  height: 450px;
-  background-repeat: no-repeat;
+    background-image: url(../images/mermaid02.jpg);
+    height: 450px;
+    background-repeat: no-repeat;
 }
 
 .triplet-container {
-  margin-top: 0px;
+    margin-top: 0px;
 }
 
 .triplet-jumbotron {
-  background-color: #000F35;
-  background-image: none;
-  height: min(50vw, 600px);
+    background-color: #000F35;
+    background-image: none;
+    height: min(50vw, 600px);
 }
 
 .triplet-image{
-flex: 1;
-max-width: 100%;
-height: auto;
-width: auto;
-object-fit: contain;
+    flex: 1;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    object-fit: contain;
 }
 
 .triplet-flex{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  justify-content: space-around;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: space-around;
 }
 
 .triplet-a {
-  position: relative;
-  overflow: hidden;
+    position: relative;
+    overflow: hidden;
 }
 
 .triplet-a:hover .overlay{
-  height: 100%;
+    height: 100%;
 }
 
 /*fade effect*/
 .overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%
-  height: auto;
-  opacity: 0;
-  transition: .5s ease;
-  background-color: #000F35;
-  text-align: center;
-  overflow: hidden;
-  line-height: calc(20vw + 30px);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%
+    height: auto;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #000F35;
+    text-align: center;
+    overflow: hidden;
+    line-height: calc(20vw + 30px);
 }
 
 .col-md-4:hover .overlay {
-  opacity: .85;
+    opacity: .85;
 }
 
 .box-shadow {
-  border-width: 0px;
-  border-color: #000F35;
+    border-width: 0px;
+    border-color: #000F35;
 }
 
 .box-style {
-  position: relative;
-  overflow: hidden;
-  min-width: 75px;
+    position: relative;
+    overflow: hidden;
+    min-width: 75px;
 }
 
 /*footer links*/
 .footer-jumbotron {
-  margin-top: 30px;
-  color: #000F35;
-  background-image: none;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: white;
-  font-size: 1.8em;
-  height: 30px;
+    margin-top: 30px;
+    color: #000F35;
+    background-image: none;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: white;
+    font-size: 1.8em;
+    height: 30px;
 }
 
 .logo-jumbotron{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 
 .logo1{
-  flex:1;
-  max-width: 8%;
-  max-height: 8%;
-  height: auto;
-  width: auto;
-  object-fit: contain;
+    flex:1;
+    max-width: 8%;
+    max-height: 8%;
+    height: auto;
+    width: auto;
+    object-fit: contain;
 }
 
 .logo2{
-  flex:1;
-  max-width: 19%;
-  max-height: 19%;
-  height: auto;
-  width: auto;
-  object-fit: contain;
+    flex:1;
+    max-width: 19%;
+    max-height: 19%;
+    height: auto;
+    width: auto;
+    object-fit: contain;
 }
 
 .copyright-jumbotron {
-  margin-top: 25px;
-  line-height: 10px;
-  font-size: calc(1vw + 6px);
+    margin-top: 25px;
+    line-height: 10px;
+    font-size: calc(1vw + 6px);
 
-  text-align: center;
-  height: 20px;
-  background-color: #000F35;
-  background-image: none;
+    text-align: center;
+    height: 20px;
+    background-color: #000F35;
+    background-image: none;
 }
