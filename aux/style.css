@@ -20,13 +20,14 @@ body  {
     height: calc(-50 + 50vh);
 }
 
-.carousel-wide {
+.carousel-wider {
     width: calc(200px + 40vw);
     height: calc(-50 + 50vh);
 }
 
 /*main jumbotron*/
 .jumbotron {
+    margin-top: 30px;
     margin-bottom: 20px;
     background-image: url(../images/water01.jpg);
     background-position: 0% 25%;
