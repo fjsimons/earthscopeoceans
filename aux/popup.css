@@ -33,11 +33,11 @@
 
   /* Popup arrow */
   .popup .popuptext::after {
-    content: "";
+    /* content: ""; */
     position: relative;
     top: 100%;
     left: 50%;
-    margin-left: -5px;
+    margin-left: 0px;
     border-width: 5px;
     border-style: solid;
     border-color: #555 transparent transparent transparent;
