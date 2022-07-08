@@ -132,7 +132,7 @@ for flo in floats:
             currTime = round(currTime + legTime, 2)
             GEBCODepth = getGEBCODepth(latLng)
             string = '{} {} {} {} {} {}'.format(legDist, legTime, totDisp, currDist, currTime, GEBCODepth)
-            if index!=-numNewLines:
+
                 appendFile.write('\n')
             appendFile.write(string)
         appendFile.close()
