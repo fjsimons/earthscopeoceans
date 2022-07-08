@@ -479,7 +479,7 @@ async function initMap(listener) {
 		let floatName;
 
 		if (allPage === 'drop') {
-		    floatName = '<div id="tabNames">' + '<b>' + 'Dropped Pin' + '</b> ';
+		    floatName = '<div id="tabNames">' + '<b>' + 'Drop Pin' + '</b> ';
 		} else {
 		    floatName = '<div id="tabNames">' + '<b>' + dataPoints[i].name + '</b> ';
 		}
