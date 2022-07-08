@@ -86,7 +86,7 @@ async function initMap(listener) {
 	    fullscreenControl: true,
 	    keyboardShortcuts: false,
 	    minZoom: 2,
-	    maxZoom: 11,
+	    // maxZoom: 11,
 	    restriction: {latLngBounds: {
 		    north: 85,
 		    south: -85,
@@ -448,7 +448,9 @@ async function initMap(listener) {
 			// '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
 			'<br/><b>GPS Lat/Lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
 			// '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
-			'<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m' +
+			// We're not making a WMS request here so no more datapoint and now more that field
+			// '<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m' +
+			'<br/><b>GEBCO WMS Depth:</b> ' + GEBCODepth + ' m' +
 			'<br/><b>EEZ:</b> ' + EEZ +
 			// '<br/> ' +
 			// '<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
@@ -474,8 +476,14 @@ async function initMap(listener) {
 		    '<br/><b>Great Circle Distance:</b> ' + "/* filler */" +
 		    '<br/><b>Source:</b> ' + "/* filler */";
 
-		let floatName = '<div id="tabNames">' + '<b>' + dataPoints[i].name + '</b> ';
+		let floatName;
 
+		if (allPage === 'drop') {
+		    floatName = '<div id="tabNames">' + '<b>' + 'Dropped Pin' + '</b> ';
+		} else {
+		    floatName = '<div id="tabNames">' + '<b>' + dataPoints[i].name + '</b> ';
+		}
+		
 		let earthquakeName = '<div id="tabNames">' + '<b>EarthQuake Info</b> ';
 
 		let seismograms = '<div id="tabNames">' + '<b>Seismograms</b> ';
