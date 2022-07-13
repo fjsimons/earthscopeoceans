@@ -51,7 +51,7 @@ def toUTCTime(str):
     return timestamp
 
 #Grabs GEBCODepth from gebco.net given a latitude and longitude
-def getGEBCODepth(latlon):
+def getGEBCODepth(latlon, bounds=5):
     bb = .0083333333333
     stlap = latlon[0] - bb
     stlop = latlon[1] - bb
@@ -60,7 +60,7 @@ def getGEBCODepth(latlon):
     rqtHead = 'https://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?'
     rqtTail = ('request=getfeatureinfo&service=wms&crs=EPSG:4326&layers=gebco_latest_2&query_layers=gebco_latest_2&BBOX='
               + str(stlap) + ',' + str(stlop) + ',' + str(stlam) + ',' + str(stlom)
-              + '&info_format=text/plain&service=wms&x=2&y=2&width=5&height=5&version=1.3.0')
+              + '&info_format=text/plain&service=wms&x=2&y=2&width=' + str(bounds) + '&height=' + str(bounds) + '&version=1.3.0')
     url = rqtHead + rqtTail
     file = urllib2.urlopen(url)
     try:
@@ -68,6 +68,16 @@ def getGEBCODepth(latlon):
         return data.split("\'")[7]
     except HTTPError as err:
         print(err)
+        return 0
+    except IndexError as err:
+        print(err)
+        print("Retrying with bigger bounding box")
+        if bounds<10:
+            return getGEBCODepth(latlon, bounds+1)
+        return 0
+    except Exception as err:
+        print(err)
+        return 0
 
 #List of all floats at time of this scripts creation
 floats = ["N0001", "N0002", "N0003", "N0004", "N0005", "P0050",
@@ -132,7 +142,7 @@ for flo in floats:
             currTime = round(currTime + legTime, 2)
             GEBCODepth = getGEBCODepth(latLng)
             string = '{} {} {} {} {} {}'.format(legDist, legTime, totDisp, currDist, currTime, GEBCODepth)
-
+            if not(index==-numNewLines and '\n' in fileArr[-1]):
                 appendFile.write('\n')
             appendFile.write(string)
         appendFile.close()
