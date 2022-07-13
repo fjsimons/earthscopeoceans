@@ -186,7 +186,55 @@
       </div>
       <!-- END Main jumbotron for a primary homepage -->
 
-      <!-- Put one image here from ../images -->
+
+      <div class="container">
+	<div class="row about-earthscope textcss">
+	  <p>
+	    <!-- Caption. -->
+	  </p>
+	</div>
+        <div class="container carousel-container">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="d-block w-100" size="100%" src="../images/distmagsnr.jpg" alt="Distance, magnitude, and signal-to-noise ratio ">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" size="100%" src="../images/disthist.jpg" alt="Distance histogram">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" size="100%" src="../images/maghist.jpg" alt="Magnitude histogram">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" size="100%" src="../images/shallow.jpg" alt="Shallow earthquakes recorded">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" size="100%" src="../images/intermediate.jpg" alt="Intermediate earthquakes recorded">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" size="100%" src="../images/deep.jpg" alt="Deep earthquakes recorded">
+              </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div> <!-- /container -->
+
+
       <div class="container">
 	<!-- Example row of columns -->
 	<div class="row about-earthscope headercss">
@@ -194,12 +242,16 @@
 	</div>
 	<div class="row about-earthscope textcss">
 	  <p>
+	    <a href="https://ds.iris.edu/mda/MH/">General overview.</a><br><br>
+	    <a href="https://service.iris.edu/fdsnws/availability/1/query?format=text&net=MH&sta=*&loc=*&cha=*&starttime=2000-01-01T00:00:00&endtime=2059-12-23T59:59:99&orderby=nslc_time_quality_samplerate&includerestricted=true&nodata=404">All the data</a> deposited with the IRIS DMC to date.<br>
+	    <a href="https://service.iris.edu/fdsnws/availability/1/query?format=text&net=MH&sta=*&loc=*&cha=*&starttime=2000-01-01T00:00:00&endtime=2059-12-23T59:59:99&orderby=nslc_time_quality_samplerate&includerestricted=false&nodata=404">Data accessible</a> as of <b>right now</b>.<br><br>
+
 	    MERMAID's <a href="http://www.fdsn.org/networks/detail/MH/">International Federation of Digital Seismograph Networks</a> FDSN code is MH.<br>
 	    Seismic data are in SEED format and available from  the <a href="http://ds.iris.edu/ds/nodes/dmc/">IRIS Data Management Center</a>.<br><br>
-	    Access to data from floats P0008, P0010, and P0016 is unrestricted.<br><br>
+	    Access to data from floats P0008, P0010, and P0016 is <b>unrestricted</b>.<br><br>
 	    Access to other floats is temporarily restricted following
 	    standard <a href="http://www.iris.edu">IRIS</a>
-	    and <a href="http://www.nsf.gov">NSF</a> policy. See <a href="metadata.html#authentication">below</a>.<br> 
+	    and <a href="http://www.nsf.gov">NSF</a> policy. See below for  <a href="metadata.html#authentication">authentication</a>.<br> 
 	    <br>
 	    MERMAID automatically reports <b>triggered</b> seismograms (time series of acoustic
 	    pressure),<br> but <b>requests</b> can be made for data continuously
@@ -210,10 +262,11 @@
 	    </p>
 	</div>
 	<div class="row about-earthscope headercss">
-	    <h1><a name="metadata">Metadata</a></h1>
+	    <h1><a name="metadata">Real-Time Metadata</a></h1>
 	</div>
 	<div class="row about-earthscope textcss">
 	  <p>
+	    <a href="http://ds.iris.edu/data/reports/MH/">General overview.</a><br><br>
 	    Instrument <a href="http://geoweb.princeton.edu/people/simons/SOM/misalo.txt">deployment dates</a>. Trajectory <a href="http://geoweb.princeton.edu/people/simons/SOM/hdr.txt">metadata header</a>.<br><br>
 	    Trajectory metadata for 
 	    <a href="http://geoweb.princeton.edu/people/simons/SOM/N0001_all.txt">N0001</a>
@@ -259,9 +312,9 @@
 	    <a href="http://geoweb.princeton.edu/people/simons/SOM/P0035_all.txt">P0035</a>
 	    <a href="http://geoweb.princeton.edu/people/simons/SOM/P0036_all.txt">P0036</a>
 	    <a href="http://geoweb.princeton.edu/people/simons/SOM/P0037_all.txt">P0037</a>
-	    <a href="http://geoweb.princeton.edu/people/simons/SOM/P0038_all.txt">P0038</a>
-	    <a href="http://geoweb.princeton.edu/people/simons/SOM/P0039_all.txt">P0039</a><br>
+	    <a href="http://geoweb.princeton.edu/people/simons/SOM/P0038_all.txt">P0038</a><br>
             <font color="white">Trajectory metadata for</font>
+	    <a href="http://geoweb.princeton.edu/people/simons/SOM/P0039_all.txt">P0039</a>
 	    <a href="http://geoweb.princeton.edu/people/simons/SOM/P0040_all.txt">P0040</a>
 	    <a href="http://geoweb.princeton.edu/people/simons/SOM/P0041_all.txt">P0041</a>
 	    <a href="http://geoweb.princeton.edu/people/simons/SOM/P0042_all.txt">P0042</a>
@@ -290,7 +343,8 @@
 	    <a href="http://geoweb.princeton.edu/people/simons/SOM/R0004_all.txt">R0004</a>
 	    <a href="http://geoweb.princeton.edu/people/simons/SOM/R0005_all.txt">R0005</a>
 	    <a href="http://geoweb.princeton.edu/people/simons/SOM/R0006_all.txt">R0006</a>
-	    <a href="http://geoweb.princeton.edu/people/simons/SOM/R0007_all.txt">R0007</a> (Stanford)<br>
+	    <a href="http://geoweb.princeton.edu/people/simons/SOM/R0007_all.txt">R0007</a> (Stanford)<br><br>
+	    For the example of MERMAID P0006, queries returning the station information in <a href="https://service.iris.edu/fdsnws/station/1/query?net=MH&sta=P0006&loc=00&cha=BDH&level=station&format=xml&includecomments=true&nodata=404">StationXML</a>, the <a href="http://ds.iris.edu/data/reports/MH/P0008/archive/P0008:2022-06-07T21:10:13Z/meta/">GeoCSV</a> positional information, the <a href="https://service.iris.edu/irisws/evalresp/1/query?net=MH&sta=P0006&loc=00&cha=BDH&units=def&output=plot&annotate=true">instrument response</a> plot, and the instrument response in <a href="https://service.iris.edu/irisws/sacpz/1/query?net=MH&sta=P0006&loc=00&cha=BDH">SACPZ</a> and in <a href="https://service.iris.edu/irisws/resp/1/query?net=MH&sta=P0006&loc=00&cha=BDH">RESP</a> formats.<br>
 	  </p>
 	</div>
 
@@ -321,6 +375,16 @@
 	    for data access &nbsp;<a href="http://www.iris.edu/data/restricted_req.htm">here</a>.
 	  </p>
 	</div>
+
+
+	<!-- <div class="row about-earthscope headercss"> -->
+	<!--     <h1><a name="details">Details</a></h1> -->
+	<!-- </div> -->
+	<!-- <div class="row about-earthscope textcss"> -->
+	<!--   <p> -->
+
+	<!-- </div> -->
+        <!--    </p> -->
 	<hr>
 
       </div> <!-- /container -->
@@ -333,7 +397,7 @@
       </div>
       <!-- ########## END LOGO JUMBOTRON ##########-->
 
-    </main>
+   </main>
 
     <div class="jumbotron copyright-jumbotron">
       <footer class="container copyright">
