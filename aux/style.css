@@ -150,11 +150,11 @@ div.scrollmenu a:hover {
     vertical-align: middle;
 }
 
-.toggle-hidden {
+.button-hidden {
     display: none;
 }
 
-.toggle-visible {
+.button-visible {
     display: block;
     cursor: pointer;
 }
