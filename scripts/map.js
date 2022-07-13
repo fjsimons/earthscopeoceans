@@ -35,9 +35,9 @@ async function initMap(listener) {
     };
 
     //Initializing list of All EEZ and their coordinates
-    let EEZList = await fetchAndDecodeFloatData('http://geoweb.princeton.edu/people/simons/earthscopeoceans/data/EEZData/AllEEZ','text');
+    let EEZList = await fetchAndDecodeFloatData('https://geoweb.princeton.edu/people/simons/earthscopeoceans/data/EEZData/AllEEZ','text');
     EEZList = JSON.parse(EEZList);
-    let AllGeometries = await fetchAndDecodeFloatData('http://geoweb.princeton.edu/people/simons/earthscopeoceans/data/EEZData/AllGeometries','text');
+    let AllGeometries = await fetchAndDecodeFloatData('https://geoweb.princeton.edu/people/simons/earthscopeoceans/data/EEZData/AllGeometries','text');
     AllGeometries = JSON.parse(AllGeometries);
 
     // some default locations
@@ -45,7 +45,7 @@ async function initMap(listener) {
     let papeete = { lat: -17.53733, lng: -149.5665 };
 
     // set up icons
-    let iconBase = 'http://maps.google.com/mapfiles/ms/icons/';
+    let iconBase = 'https://maps.google.com/mapfiles/ms/icons/';
     let icons = {
         geoazur: {
             name: 'Géoazur',
@@ -104,30 +104,33 @@ async function initMap(listener) {
 
     // legend generation
     var legend = document.getElementById('legend');
+    legend.setAttribute('class','button-visible');
     for (var key in icons) {
         var type = icons[key];
         var name = type.name;
         var icon = type.icon;
         var div = document.createElement('div');
-        div.innerHTML = '<img src="' + icon + '" id="' + name + '">' + type.name;
+        div.innerHTML = '<img src="' + icon + '" id="' + name + '" style=cursor:pointer;">' + type.name;
 
         legend.appendChild(div);
 
         legendClosure(name, key);
     }
 
+    //Creates toggle button and drop pin button and configures their html/css
     var toggle = document.getElementById('toggle');
-    toggle.setAttribute('class', 'toggle-hidden');
-    var toggleSrc = "http://geoweb.princeton.edu/people/simons/earthscopeoceans/aux/history.png";
-    var revToggleSrc = "http://geoweb.princeton.edu/people/simons/earthscopeoceans/aux/future.png";
+    toggle.setAttribute('class', 'button-hidden');
+    var toggleSrc = "https://geoweb.princeton.edu/people/simons/earthscopeoceans/aux/history.png";
+    var revToggleSrc = "https://geoweb.princeton.edu/people/simons/earthscopeoceans/aux/future.png";
     var div2 = document.createElement('div');
     div2.innerHTML = '<img src="' + toggleSrc + '" id="' + 'toggleButton' + '">';
     let dropButton = document.getElementById('drop-button');
-    dropButton.setAttribute('class', 'toggle-visible');
-    let dropButtonSrc = "http://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/aux/dropper.png"
+    dropButton.setAttribute('class', 'button-visible');
+    let dropButtonSrc = "https://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/aux/dropper.png"
     let div3 = document.createElement('div');
     div3.innerHTML = '<img src="' + dropButtonSrc + '" id="' + 'drop-button-div' + '">';
 
+    //Adds functionality to the toggle button
     google.maps.event.addDomListener(toggle, 'click', function () {
             if (dropListener){
                 google.maps.event.removeListener(dropListener);
@@ -149,6 +152,7 @@ async function initMap(listener) {
             handlePlotRequest(currFloat);
         });
     
+    //Adds functionality to the drop pin button
     google.maps.event.addDomListener(dropButton, 'click', function (dropEvent) {
             if(dropListener) {
                 google.maps.event.removeListener(dropListener);
@@ -177,10 +181,10 @@ async function initMap(listener) {
     toggle.appendChild(div2);
     dropButton.appendChild(div3);
 
+    //Places the buttons in their respective quadrants of the map
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(dropButton);
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(toggle);
-   // map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(dropButton);
 
     handlePlotRequest("all");
 
@@ -197,6 +201,11 @@ async function initMap(listener) {
         google.maps.event.addDomListener(document.getElementById(name), 'click', function () {
             // the real legend toggling
             showDict[key] = !showDict[key];
+            if (showDict[key]!=true) {
+                document.getElementById(name).src="https://maps.google.com/mapfiles/ms/icons/ltblue-dot.png";
+            } else {
+                document.getElementById(name).src=icons[key].icon;
+            }
             handlePlotRequest("all");
         });
     }
@@ -553,9 +562,9 @@ async function initMap(listener) {
 
         let url;
         if (name === "all") {
-            url = "http://geoweb.princeton.edu/people/simons/SOM/all.txt";
+            url = "https://geoweb.princeton.edu/people/simons/SOM/all.txt";
         } else {
-            url = "http://geoweb.princeton.edu/people/simons/SOM/" + name + showTail;
+            url = "https://geoweb.princeton.edu/people/simons/SOM/" + name + showTail;
         }
 
         let dataPromise = fetchAndDecodeFloatData(url, 'text');
@@ -601,11 +610,18 @@ async function initMap(listener) {
                             slideShowOn = false;
                         }
                         if (id==='all') {
-                            toggle.setAttribute('class', 'toggle-hidden');
+                            //Toggles visibility of buttons
+                            toggle.setAttribute('class', 'button-hidden');
+                            legend.setAttribute('class','button-visible');
                         } else {
-                            toggle.setAttribute('class', 'toggle-visible');
+                            //Toggles visibility of buttons
+                            toggle.setAttribute('class', 'button-visible');
+                            legend.setAttribute('class','button-hidden');
+                            //Turn legend on for this float
+                            showDict[getOwner(id)]=true;
+                            document.getElementById(icons[getOwner(id)].name).src=icons[getOwner(id)].icon;
                         }
-                        dropButton.setAttribute('class', 'toggle-visible');
+                        dropButton.setAttribute('class', 'button-visible');
                         if (dropListener) {
                              google.maps.event.removeListener(dropListener);
                         }
@@ -621,14 +637,15 @@ async function initMap(listener) {
         }
         // sac event
         // google.maps.event.addDomListener(plot, 'click', function() {
-        //  let url = "http://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC";
+        //  let url = "https://geoweb.princeton.edu/people/jnrubin/DEVearthscopeoceans/testSAC2.SAC";
         //      useBinCallback(url);
         //     });
 
         // clear event
         google.maps.event.addDomListener(clear, 'click', function () {
                 clearMarkers();
-                toggle.setAttribute('class','toggle-hidden');
+                toggle.setAttribute('class','button-hidden');
+                legend.setAttribute('class','button-hidden');
                 if (dropListener) {
                     google.maps.event.removeListener(dropListener);
                 }
@@ -640,14 +657,16 @@ async function initMap(listener) {
                 if (dropListener) {
                     google.maps.event.removeListener(dropListener);
                 }
-                dropButton.setAttribute('class', 'toggle-visible')
+                legend.setAttribute('class','button-visible');
+                dropButton.setAttribute('class', 'button-visible')
                 slideShow();
             });
         // drop marker event
         google.maps.event.addDomListener(drop, 'click', async function() {
                 clearMarkers();
-                toggle.setAttribute('class','toggle-hidden');
-                dropButton.setAttribute('class', 'toggle-hidden');
+                toggle.setAttribute('class','button-hidden');
+                dropButton.setAttribute('class', 'button-hidden');
+                legend.setAttribute('class','button-hidden');
                 slideShowOn = false;
                 map.setZoom(2);
                 if (dropListener) {
@@ -711,9 +730,10 @@ async function initMap(listener) {
     async function slideShow() {
         if (slideShowOn === false) {
             slideShowOn = true;
+            const tempDict = {...showDict};
             for (let i = 1; i < floatIDS.length; i++) {
 
-                if (slideShowOn === true && showDict[getOwner(floatIDS[i])] === true) {
+                if (slideShowOn === true && tempDict[getOwner(floatIDS[i])] === true) {
                     let referer = "slideShow";
                     google.maps.event.trigger(document.getElementById(floatIDS[i]), 'click', referer);
                     await sleep(slideShowInterval);
@@ -730,7 +750,7 @@ async function initMap(listener) {
     //Grab float data from distances.txt
     async function grabAllData(){
         let dataArr=[];
-        let data = await fetchAndDecodeFloatData("http://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/data/FloatInfo/distances.txt", 'text');
+        let data = await fetchAndDecodeFloatData("https://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/data/FloatInfo/distances.txt", 'text');
         tempArr = data.split('\n');
         for(let i=0; i<tempArr.length;i++){
             let splitArr = tempArr[i].split(' ');
@@ -742,7 +762,7 @@ async function initMap(listener) {
     // Gets time, distance, and depth
     async function grabIndData(Float){
         let dataArr=[];
-        let data = await fetchAndDecodeFloatData(`http://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/data/FloatInfo/${Float}.txt`, 'text');
+        let data = await fetchAndDecodeFloatData(`https://geoweb.princeton.edu/people/sk8609/DEVearthscopeoceans/data/FloatInfo/${Float}.txt`, 'text');
         tempArr = data.split('\n');
         for(let i=0; i<tempArr.length;i++){
             let splitArr = tempArr[i].split(' ');
