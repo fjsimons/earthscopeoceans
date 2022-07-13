@@ -139,6 +139,7 @@ div.scrollmenu a:hover {
     padding: 10px;
     margin: 10px;
     border: 3px solid #000;
+    margin-bottom: -5px
 }
 
 #toggle h3 {
@@ -148,6 +149,32 @@ div.scrollmenu a:hover {
 #toggle img {
     vertical-align: middle;
 }
+
+.toggle-hidden {
+    display: none;
+}
+
+.toggle-visible {
+    display: block;
+    cursor: pointer;
+}
+
+#drop-button {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    padding: 10px;
+    margin: 10px;
+    border: 3px solid #000;
+}
+
+#drop-button h3 {
+    margin-top: 0;
+}
+
+#drop-button img {
+    vertical-align: middle;
+}
+
 /*info window text*/
 #tabContent {
     font-size: 1.3em;
@@ -299,7 +326,7 @@ div.scrollmenu a:hover {
 .copyright-jumbotron {
     margin-top: 25px;
     line-height: 10px;
-    font-size: calc(1vw + 6px);
+    font-size: calc(1vw + 5px);
 
     text-align: center;
     height: 20px;
