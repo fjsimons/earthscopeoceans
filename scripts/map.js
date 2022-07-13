@@ -12,7 +12,7 @@ async function initMap(listener) {
 
     // set up slideshow
     let slideShowOn = false;
-    const slideShowInterval = 3000;
+    const slideShowInterval = 6000;
 
     // keep track of markers and their info windows
     const numFloats = 54;
