@@ -17,6 +17,7 @@ async function initMap(listener) {
     // keep track of markers and their info windows
     const numFloats = 54;
     let markers = [];
+    let dropMarkers = [];
     let iwindows = [];
     let markerIndex = -1;
     let floatIDS = [];
@@ -44,7 +45,7 @@ async function initMap(listener) {
     let guyot = { lat: 40.34585, lng: -74.65475 };
     let papeete = { lat: -17.53733, lng: -149.5665 };
 
-    // set up icons
+    // set up icons found at https://sites.google.com/site/gmapsdevelopment/
     let iconBase = 'https://maps.google.com/mapfiles/ms/icons/';
     let icons = {
         geoazur: {
@@ -101,6 +102,7 @@ async function initMap(listener) {
     //inialize dropListener variable on top scope so that the listener can
     //be removed at various places after it is enabled
     var dropListener;
+    var markerNum;
 
     // legend generation
     var legend = document.getElementById('legend');
@@ -110,7 +112,7 @@ async function initMap(listener) {
         var name = type.name;
         var icon = type.icon;
         var div = document.createElement('div');
-        div.innerHTML = '<img src="' + icon + '" id="' + name + '" style=cursor:pointer;">' + type.name;
+        div.innerHTML = '<div id="' + name + '_div"><img src="' + icon + '" id="' + name + '" style=cursor:pointer;"/>' + type.name + '</div>';
 
         legend.appendChild(div);
 
@@ -163,15 +165,17 @@ async function initMap(listener) {
                             position: dropEvent.latLng,
                             map: map,
                             clickable: true,
-                            icon: icons.dead.icon,
+                            icon: "https://maps.google.com/mapfiles/ms/icons/ltblue-dot.png",
+                            title: markerNum.toString(),
                         });
+                    markerNum++;
                     let lat = dropEvent.latLng.toJSON().lat.toFixed(6);
                     let lng = dropEvent.latLng.toJSON().lng.toFixed(6);
                     EEZ = await eezFinder(lat, lng, EEZList, AllGeometries);
                     GEBCODepth = await makeWMSrequestCoords(lat, lng);
-                    markers.push(marker);
+                    dropMarkers.push(marker);
                     //Sets an info marker for the map
-                    setInfoWindow('drop', 0, 0, marker, 0, 0, 0, 0, 0, 0, 0, GEBCODepth, EEZ, lat, lng);
+                    await setInfoWindow('drop', 0, 0, marker, 0, 0, 0, 0, 0, 0, 0, GEBCODepth, EEZ, lat, lng);
                     google.maps.event.trigger(marker, 'click');
                     google.maps.event.removeListener(dropListener);
                 });
@@ -198,7 +202,7 @@ async function initMap(listener) {
 
     // enabling legend toggling without hanging in the last state
     function legendClosure(name, key) {
-        google.maps.event.addDomListener(document.getElementById(name), 'click', function () {
+        google.maps.event.addDomListener(document.getElementById(name + '_div'), 'click', function () {
             // the real legend toggling
             showDict[key] = !showDict[key];
             if (showDict[key]!=true) {
@@ -423,7 +427,20 @@ async function initMap(listener) {
         google.maps.event.addListener(marker, 'click', function (event) {
                 // close existing windows
                 closeIWindows();
-                markerIndex = k;
+                if (allPage!=='drop'){
+                    markerIndex = k;
+                }
+
+                //Redeclare variables for jQuery (it doesn't work if I don't do this, I have no idea why)
+                dropMarkerList = dropMarkers;
+                currentMarker = dropMarkers.findIndex(item => {
+                        if (item.title === marker.title) {
+                            return true;
+                        }
+                        return false;
+                    });
+                tempClose = closeIWindows;
+
                 // Pan to include entire infowindow
                 let offset = -0.32 + (10000000) / (1 + Math.pow((map.getZoom() / 0.0035), 2.07));
                 let center = new google.maps.LatLng(
@@ -431,11 +448,12 @@ async function initMap(listener) {
                                                     parseFloat(marker.position.lng() + offset / 2)
                                                     );
                 map.panTo(center);
-
+                let iwindow;
                 // info window preferences
-                let iwindow = new InfoBubble({
-                        maxWidth: 320,
-                        maxHeight: 265,
+                if (allPage==="drop") {
+                    iwindow = new InfoBubble({
+                        maxWidth: 270,
+                        maxHeight: 150,
                         shadowStyle: 1,
                         padding: 10,
                         backgroundColor: 'rgb(255,255,255)',
@@ -450,6 +468,26 @@ async function initMap(listener) {
                         arrowStyle: 0,
                         disableAnimation: 'true'
                     });
+
+                } else {
+                    iwindow = new InfoBubble({
+                            maxWidth: 320,
+                            maxHeight: 265,
+                            shadowStyle: 1,
+                            padding: 10,
+                            backgroundColor: 'rgb(255,255,255)',
+                            borderRadius: 4,
+                            arrowSize: 20,
+                            borderWidth: 2,
+                            borderColor: '#000F35',
+                            disableAutoPan: true,
+                            hideCloseButton: false,
+                            arrowPosition: 30,
+                            backgroundClassName: 'phoney',
+                            arrowStyle: 0,
+                            disableAnimation: 'true'
+                        });
+                }
 
                 let floatTabContent;
 
@@ -478,7 +516,9 @@ async function initMap(listener) {
                     floatTabContent = '<div id="tabContent">' +
                         '<br/><b>GPS Lat/Lon:</b> ' + lat + ', ' + lng +
                         '<br/><b>GEBCO WMS Depth:</b> ' + GEBCODepth + ' m' +
-                        '<br/><b>EEZ:</b> ' + EEZ;
+                        '<br/><b>EEZ:</b> ' + EEZ +
+                        //This next line we create an <a> tag with an href that calls a javascript function using jQuery
+                        '<br/><br/><span style="cursor:pointer;display:inline-block;"><a href="javascript:dropMarkerList[currentMarker].setMap(null);tempClose();void dropMarkerList.splice(currentMarker,1);"><b>Clear Marker</b></a></span>';
                 } else {
                     // content for float data tab
                     floatTabContent = '<div id="tabContent">' +
@@ -527,7 +567,7 @@ async function initMap(listener) {
                 let earthquakeName = '<div id="tabNames">' + '<b>EarthQuake Info</b> ';
 
                 let seismograms = '<div id="tabNames">' + '<b>Seismograms</b> ';
-
+               
                 // add info window tabs
                 iwindow.addTab(floatName, floatTabContent);
                 // iwindow.addTab(earthquakeName, earthquakeTabContent);
@@ -543,7 +583,12 @@ async function initMap(listener) {
         for (let i = 0; i < markers.length; i++) {
             markers[i].setMap(null);
         }
+        for (let i = 0; i < dropMarkers.length; i++) {
+            dropMarkers[i].setMap(null);
+        }
+        markerNum=0;
         markers.length = 0;
+        dropMarkers.length=0;
         dataPoints.length = 0;
         closeIWindows();
     }
@@ -621,7 +666,9 @@ async function initMap(listener) {
                             showDict[getOwner(id)]=true;
                             document.getElementById(icons[getOwner(id)].name).src=icons[getOwner(id)].icon;
                         }
-                        dropButton.setAttribute('class', 'button-visible');
+                        if (slideShowOn==false) {
+                            dropButton.setAttribute('class', 'button-visible');
+                        }
                         if (dropListener) {
                              google.maps.event.removeListener(dropListener);
                         }
@@ -658,7 +705,7 @@ async function initMap(listener) {
                     google.maps.event.removeListener(dropListener);
                 }
                 legend.setAttribute('class','button-visible');
-                dropButton.setAttribute('class', 'button-visible')
+                dropButton.setAttribute('class', 'button-hidden')
                 slideShow();
             });
         // drop marker event
@@ -680,13 +727,14 @@ async function initMap(listener) {
                                 position: dropEvent.latLng,
                                 map: map,
                                 clickable: true,
-                                icon: icons.dead.icon,
+                                icon: "https://maps.google.com/mapfiles/ms/icons/ltblue-dot.png",
+                                title: markerNum.toString(),
                             });
                         let lat = dropEvent.latLng.toJSON().lat.toFixed(6);
                         let lng = dropEvent.latLng.toJSON().lng.toFixed(6);
                         EEZ = await eezFinder(lat, lng, EEZList, AllGeometries);
                         GEBCODepth = await makeWMSrequestCoords(lat, lng);
-                        markers.push(marker);
+                        dropMarkers.push(marker);
                         //Sets an info marker for the map
                         setInfoWindow('drop', 0, 0, marker, 0, 0, 0, 0, 0, 0, 0, GEBCODepth, EEZ, lat, lng);
                         google.maps.event.trigger(marker, 'click');
@@ -698,29 +746,40 @@ async function initMap(listener) {
     google.maps.event.addDomListener(document, 'keyup', function (e) {
             let code = (e.keyCode ? e.keyCode : e.which);
             if (markerIndex !== -1) {
-                if (markerIndex > markers.length - 1){
+                if (markerIndex > markers.length + dropMarkers.length - 1){
                     markerIndex=0
                 }
                 if (code === 39) {
-                    if (markerIndex === markers.length - 1) {
+                    if (markerIndex >= markers.length + dropMarkers.length - 1) {
                         markerIndex = 0;
                     } else {
                         markerIndex++;
                     }
-                    google.maps.event.trigger(markers[markerIndex], 'click');
+
+                    if(markerIndex < markers.length) {
+                        google.maps.event.trigger(markers[markerIndex], 'click');
+                    } else {
+                        google.maps.event.trigger(dropMarkers[markerIndex - markers.length], 'click');
+                    }
 
                 } else if (code === 37) {
                     if (markerIndex === 0) {
-                        markerIndex = markers.length - 1
+                        markerIndex = markers.length + dropMarkers.length - 1;
                     } else {
                         markerIndex--;
                     }
-                    google.maps.event.trigger(markers[markerIndex], 'click');
+
+                    if(markerIndex < markers.length) {
+                        google.maps.event.trigger(markers[markerIndex], 'click');
+                    } else {
+                        google.maps.event.trigger(dropMarkers[markerIndex - markers.length], 'click');
+                    }
 
                 } else if (code === 27) {
                     closeIWindows();
                 }
             }
+            console.log(markerIndex);
         });
 
     function sleep(ms) {
