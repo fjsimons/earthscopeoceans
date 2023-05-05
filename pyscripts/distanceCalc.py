@@ -1,7 +1,7 @@
-#Last modified by Stefan Kildal-Brandt 6/28/22
+# Last modified by Stefan Kildal-Brandt 6/28/22
 
-#This script takes a few hours to run
-#Recommended to only use to build list of float data from scratch
+# This script takes a few hours to run
+# Recommended to only use to build list of float data from scratch
 
 import urllib2
 from urllib2 import HTTPError
@@ -86,7 +86,7 @@ floats = ["N0001", "N0002", "N0003", "N0004", "N0005", "P0050",
 "R0072", "R0073", "R0001", "R0002", "R0003", "R0004", "R0005", "R0007",
 "N0003", "P0007", "P0034", "P0047", "R0006"]
 
-#Script to grab and decode float data from Professor Simon's pages
+#Script to grab and decode float data from Professor Simons' pages
 arr = []
 for i in floats:
     url = "https://geoweb.princeton.edu/people/simons/SOM/{}_all.txt".format(i)
@@ -103,7 +103,8 @@ for i in floats:
         temparr.append([latLon, timestamp])
     arr.append(temparr)
 
-#Writes the proper displacement, distance, and time for each float into an string and creates an array of the strings for all floats
+#Writes the proper displacement, distance, and time for each float
+#into a string and creates an array of the strings for all floats 
 k=0
 strArr = []
 for item in arr:
@@ -130,7 +131,8 @@ for item in arr:
                 f.write('\n')
         f.close()
 
-    #Writes the proper displacement, distance, and time for each float into an string and creates an array of the strings for all floats
+    #Writes the proper displacement, distance, and time for each float
+    #into a string and creates an array of the strings for all floats 
     totalDistance = 0
     for i in range(len(item)-1):
         totalDistance += getDisplacement(item[i][0], item[i+1][0])
