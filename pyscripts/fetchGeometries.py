@@ -87,7 +87,7 @@ def writeAllFile(list):
 		obj['{}'.format(MRGID)] = arr
 	string = json.dumps(obj)
 	string = string.replace(', ', ',')
-	with open('/home/www/people/simon/earthscopeoceans/data/EEZData/AllGeometries','w') as f:
+	with open('/home/www/people/simons/earthscopeoceans/data/EEZData/AllGeometries','w') as f:
 		f.write(string)
 		f.close()
 
