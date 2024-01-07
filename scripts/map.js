@@ -15,7 +15,7 @@ async function initMap(listener) {
     const slideShowInterval = 6000;
 
     // keep track of markers and their info windows
-    const numFloats = 54;
+    const numFloats = 67;
     let markers = [];
     let dropMarkers = [];
     let iwindows = [];
