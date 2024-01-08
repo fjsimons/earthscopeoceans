@@ -1,5 +1,5 @@
 /**
- * Map class
+* Map class
  @author Jonah Rubin, Stefan Kildal-Brandt, and Frederik J Simons 07/06/2022
 */
 
@@ -15,7 +15,7 @@ async function initMap(listener) {
     const slideShowInterval = 6000;
 
     // keep track of markers and their info windows
-    const numFloats = 67;
+    const numFloats = 68;
     let markers = [];
     let dropMarkers = [];
     let iwindows = [];
