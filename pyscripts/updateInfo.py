@@ -1,4 +1,5 @@
-#Written by Stefan Kildal-Brandt on 7/1/22
+#Written by Stefan Kildal-Brandt on 7/1/2022
+# Last update by Frederik J Simons on 1/7/2024
 #Main Script for updating float info. Much faster than building float info files from scratch
 
 import urllib2
@@ -81,14 +82,14 @@ def getGEBCODepth(latlon, bounds=5):
 
 #List of all floats at time of this scripts creation
 floats = ["N0001", "N0002", "N0003", "N0004", "N0005", "P0050",
-"P0052", "P0053", "P0054", "P0006", "P0008", "P0009", "P0010", "P0011",
-"P0012", "P0013", "P0016", "P0017", "P0018", "P0019", "P0020", "P0021",
-"P0022", "P0023", "P0024", "P0025", "P0026", "P0027", "P0028", "P0029",
-"P0031", "P0032", "P0033", "P0035", "P0036", "P0037", "P0038", "P0039",
-"P0040", "P0041", "P0042", "P0043", "P0044", "P0045", "P0046", "P0048", "P0049",
-"R0058", "R0059", "R0061", "R0063", "R0065", "R0067", "R0069", "R0071",
-"R0072", "R0073", "R0001", "R0002", "R0003", "R0004", "R0005", "R0007",
-"N0003", "P0007", "P0034", "P0047", "R0006"]
+          "P0052", "P0053", "P0054", "P0006", "P0008", "P0009", "P0010", "P0011",
+          "P0012", "P0013", "P0016", "P0017", "P0018", "P0019", "P0020", "P0021",
+          "P0022", "P0023", "P0024", "P0025", "P0026", "P0027", "P0028", "P0029",
+          "P0031", "P0032", "P0033", "P0035", "P0036", "P0037", "P0038", "P0039",
+          "P0040", "P0041", "P0042", "P0043", "P0044", "P0045", "P0046", "P0048",
+          "P0049", "R0058", "R0059", "R0061", "R0063", "R0065", "R0067", "R0069",
+          "R0071", "R0072", "R0073", "R0001", "R0002", "R0003", "R0004", "R0005",
+          "R0007", "N0003", "P0007", "P0034", "P0047", "R0006", "R0062"]
 
 #Iterate through all of the given floats
 allInfoStrings = []
@@ -101,7 +102,7 @@ for flo in floats:
     fileArrLines = [fileArr[i].split(' ') for i in range(len(fileArr))]
     file.close()
     
-    #Grab the data that is stored on Professor Simons' SOM server for that float
+    #Grab the data that is stored on geoweb's SOM server for that float
     urlFile = urllib2.urlopen('https://geoweb.princeton.edu/people/simons/SOM/{}_all.txt'.format(flo))
     urlArr = []
     for line in urlFile:
