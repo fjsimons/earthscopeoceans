@@ -7,7 +7,7 @@ DataPoint object class
 
 const JAMSTEC_FLOATS = [
     "N0001", "N0002", "N0004", "N0005", "P0050",
-    "P0053", "P0054"
+    "P0053", "P0054", "T0100"
 ];
 const GEOAZUR_FLOATS = [
     "P0006"
@@ -28,7 +28,8 @@ const STANFORD_FLOATS = [
     "R0002", "R0003", "R0004", "R0005", "R0007"
 ];
 const DEAD_FLOATS = [
-    "N0003", "P0007", "P0034", "P0047", "R0006", "P0008", "R0001", "R0065", "R0067", "P0009","P0043", "R0063", "P0052"
+    "N0003", "P0007", "P0034", "P0047", "R0006", "P0008", "R0001", "R0065",
+    "R0066", "R0067", "P0009","P0043", "R0063", "P0052"
 ]
 
 // create datapoint object
