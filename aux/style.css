@@ -15,16 +15,22 @@ body  {
     margin: -100px 0 0 -100px;
 }
 
-/*images like Mediterranean2021 and metadata*/
+/*images like Mediterranean2021*/
 .carousel-container {
     width: calc(200px + 30vw);
-    height: calc(-50 + 50vh);
+    height:  auto;
 }
 
 /*images like Polynesia2018*/
 .carousel-wider {
     width: calc(200px + 40vw);
-    height: calc(-50 + 50vh);
+    height: auto;
+}
+
+/*images like metadata*/
+.carousel-data {
+    width: calc(100px + 30vw);
+    height:  450px;
 }
 
 /*main jumbotron*/
