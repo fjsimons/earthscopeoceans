@@ -176,6 +176,9 @@ async function initMap(listener) {
                     try{
                         GEBCODepth = await makeWMSrequestCoords(lat, lng);
                     }
+                    catch (err){
+                          console.log(err)
+                    }
                     dropMarkers.push(marker);
                     //Sets an info marker for the map
                     await setInfoWindow('drop', 0, 0, marker, 0, 0, 0, 0, 0, 0, 0, GEBCODepth, EEZ, lat, lng);
@@ -728,8 +731,8 @@ async function initMap(listener) {
                             GEBCODepth = await makeWMSrequestCoords(lat, lng);
                         }
                         catch (err){
-                        console.log(err)
-                    }
+                           console.log(err)
+                        }
                         dropMarkers.push(marker);
                         //Sets an info marker for the map
                         setInfoWindow('drop', 0, 0, marker, 0, 0, 0, 0, 0, 0, 0, GEBCODepth, EEZ, lat, lng);
