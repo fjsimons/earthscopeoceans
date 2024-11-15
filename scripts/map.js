@@ -172,7 +172,10 @@ async function initMap(listener) {
                     let lat = dropEvent.latLng.toJSON().lat.toFixed(6);
                     let lng = dropEvent.latLng.toJSON().lng.toFixed(6);
                     EEZ = await eezFinder(lat, lng, EEZList, AllGeometries);
-                    GEBCODepth = await makeWMSrequestCoords(lat, lng);
+                    GEBCODepth = NaN
+                    try{
+                        GEBCODepth = await makeWMSrequestCoords(lat, lng);
+                    }
                     dropMarkers.push(marker);
                     //Sets an info marker for the map
                     await setInfoWindow('drop', 0, 0, marker, 0, 0, 0, 0, 0, 0, 0, GEBCODepth, EEZ, lat, lng);
