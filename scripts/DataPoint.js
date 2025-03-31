@@ -15,7 +15,7 @@ const GEOAZUR_FLOATS = [
 const PRINCETON_FLOATS = [
     "P0011", "P0013",
     "P0016", "P0017", "P0018", "P0019", "P0020", "P0021",
-    "P0022", "P0023", "P0024", "P0025"
+    "P0023", "P0024", "P0025"
 ];
 const SUSTECH_FLOATS = [
     "P0026", "P0027", "P0028", "P0029", "P0031", "P0032",
@@ -30,7 +30,7 @@ const STANFORD_FLOATS = [
 const DEAD_FLOATS = [
     "N0003", "P0007", "P0034", "P0047", "R0006", "P0008", "R0001", "R0065",
     "R0066", "R0067", "P0009","P0043", "R0063", "P0052", "P0050", "P0010",
-    "P0012"
+    "P0012", "P0022"
 ]
 
 // create datapoint object
