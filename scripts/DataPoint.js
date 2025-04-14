@@ -2,7 +2,7 @@
 DataPoint object class
 
 @author Jonah Rubin and Frederik J Simons 04/17/2024
-Last modified by Frederik J Simons 03/30/2025
+Last modified by Frederik J Simons 04/09/2025
 */
 
 const JAMSTEC_FLOATS = [
@@ -20,17 +20,19 @@ const PRINCETON_FLOATS = [
 const SUSTECH_FLOATS = [
     "P0026", "P0028", "P0029", "P0031", "P0032",
     "P0033", "P0035", "P0036", "P0037", "P0038", 
-    "P0040", "P0044", "R0061", 
-    "R0062", "R0069", "R0073"
+    "P0040", "P0044"
 ];
 const STANFORD_FLOATS = [
     "R0002", "R0003", "R0004", "R0005", "R0007"
 ];
 const DEAD_FLOATS = [
-    "N0003", "P0007", "P0034", "P0047", "R0006", "P0008", "R0001", "R0065",
-    "R0066", "R0067", "P0009", "P0043", "R0063", "P0052", "P0050", "P0010",
-    "P0012", "P0022", "R0072", "R0071", "R0058", "R0059", "P0049", "P0048",
+    "N0003", "P0007", "P0034", "P0047", "R0006", "P0008", "R0001",
+    "P0009", "P0043", "P0052", "P0050", "P0010",
+    "P0012", "P0022", "P0049", "P0048",
     "P0045", "P0046", "P0041", "P0042", "P0027", "P0039", "N0002"
+]
+const NO_FLOATS = [
+    "R0058", "R0059", "R0061", "R0062", "R0063", "R0065", "R0069", "R0071", "R0072", "R0073", "R0066", "R0067"
 ]
 
 // create datapoint object
