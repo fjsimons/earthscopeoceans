@@ -1,6 +1,6 @@
 # Written by Stefan Kildal-Brandt on 7/1/2022
-# Main Script for updating float info. Much faster than building float info files from scratch
-# Last update by Frederik J Simons on 4/18/2024
+# Main script for updating float info. Much faster than building float info files from scratch
+# Last update by Frederik J Simons on 06/10/2026
 
 import urllib2
 from urllib2 import HTTPError
