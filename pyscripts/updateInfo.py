@@ -1,5 +1,5 @@
 # Written by Stefan Kildal-Brandt on 7/1/2022
-# Main Script for updating float info. Much faster than building float info files from scratch.
+# Main Script for updating float info. Much faster than building float info files from scratch
 # Last update by Frederik J Simons on 4/18/2024
 
 import urllib2
@@ -96,7 +96,7 @@ allInfoStrings = []
 for flo in floats:
     print(flo)
 
-    # Grab the current data that is stored for that float
+    # Grab the current data that are stored on geoweb for that float
     file = open('/home/www/people/simons/earthscopeoceans/data/FloatInfo/{}.txt'.format(flo), 'r')
     fileArr = file.readlines()
     fileArrLines = [fileArr[i].split(' ') for i in range(len(fileArr))]
