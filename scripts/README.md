@@ -1,5 +1,5 @@
 # earthscopeoceans (version of record)
 
-Javascript materials for www.earthscopeoceans.org developed by Jonah N. Rubin
+JavaScript materials for www.earthscopeoceans.org developed by Jonah N. Rubin
 and Frederik J. Simons at Princeton University
 
