@@ -1,5 +1,8 @@
 # Written by Stefan Kildal-Brandt on 7/1/2022
-# Main script for updating float info. Much faster than building float info files from scratch
+# Main script for cron updating float info
+#
+# Looks at SOM float data and runs an update to add to FloatInfo
+# 
 # Last update by Frederik J Simons on 06/10/2026
 # Last update by Stefan Kildal-Brandt on 6/23/2026
 
