@@ -1,4 +1,4 @@
-// Last modified by SKB, JNR, and FJS 6/28/22
+// Last modified by SKB, JNR, and FJS 6/23/26
 // Function to get GEBCO depth from a datapoint parameter
 function makeWMSrequest(dataPoint) {
     // This is inspired by the known 2014 resolution
@@ -8,7 +8,7 @@ function makeWMSrequest(dataPoint) {
     stlam = parseFloat(dataPoint.stla) + bb;
     stlom = parseFloat(dataPoint.stlo) + bb;
 
-    const rqtHead = 'https://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?';
+    const rqtHead = 'https://wms.gebco.net/mapserv?';
 
     // Integer width and height of the map (when requesting a feature, keep it small!)
     const pxw = 5;
@@ -21,11 +21,11 @@ function makeWMSrequest(dataPoint) {
     // get featureInfo
     const rqt = 'getfeatureinfo';
 
-    const rqtTail = 'request=' + rqt + '&service=wms&crs=EPSG:4326&layers=gebco_latest_2&query_layers=gebco_latest_2&BBOX='
-	+ stlap + ',' + stlop + ',' + stlam + ',' + stlom + '&info_format=text/plain&service=wms&x='
-	+ pxx + '&y=' + pxy + '&width=' + pxw + '&height=' + pxh + '&version=1.3.0';
+    const rqtTail = 'request=' + rqt + '&service=wms&crs=EPSG:4326&layers=GEBCO_LATEST_2&query_layers=GEBCO_LATEST_2&BBOX='
+          + stlap + ',' + stlop + ',' + stlam + ',' + stlom + '&info_format=text/plain&service=wms&i='
+          + pxx + '&j=' + pxy + '&width=' + pxw + '&height=' + pxh + '&version=1.3.0';
 
-	let url = rqtHead + rqtTail;
+    let url = rqtHead + rqtTail;
 
     // console.log(url);
 
@@ -56,7 +56,7 @@ async function makeWMSrequestCoords(lat, lng) {
     stlam = parseFloat(lat) + bb;
     stlom = parseFloat(lng) + bb;
 
-    const rqtHead = 'https://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?';
+    const rqtHead = 'https://wms.gebco.net/mapserv?';
 
     // Integer width and height of the map (when requesting a feature, keep it small!)
     const pxw = 5;
@@ -69,11 +69,11 @@ async function makeWMSrequestCoords(lat, lng) {
     // get featureInfo
     const rqt = 'getfeatureinfo';
 
-    const rqtTail = 'request=' + rqt + '&service=wms&crs=EPSG:4326&layers=gebco_latest_2&query_layers=gebco_latest_2&BBOX='
-        + stlap + ',' + stlop + ',' + stlam + ',' + stlom + '&info_format=text/plain&service=wms&x='
-        + pxx + '&y=' + pxy + '&width=' + pxw + '&height=' + pxh + '&version=1.3.0';
+    const rqtTail = 'request=' + rqt + '&service=wms&crs=EPSG:4326&layers=GEBCO_LATEST_2&query_layers=GEBCO_LATEST_2&BBOX='
+          + stlap + ',' + stlop + ',' + stlam + ',' + stlom + '&info_format=text/plain&service=wms&i='
+          + pxx + '&j=' + pxy + '&width=' + pxw + '&height=' + pxh + '&version=1.3.0';
 
-        let url = rqtHead + rqtTail;
+    let url = rqtHead + rqtTail;
     //returns the data fetched from GEBCO website
     resp = await fetchAndDecodeFloatData(url, 'text')
     return resp.split("\'")[7];
