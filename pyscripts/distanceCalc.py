@@ -1,4 +1,4 @@
-# Last modified by Stefan Kildal-Brandt 6/28/22
+# Last modified by Stefan Kildal-Brandt 6/23/26
 
 # This script takes a few hours to run
 # Recommended to only use to build list of float data from scratch
@@ -59,13 +59,13 @@ def getGEBCODepth(latlon):
     stlop = latlon[1] - bb
     stlam = latlon[0] + bb
     stlom = latlon[1] + bb
-    rqtHead = 'https://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?'
-    rqtTail = ('request=getfeatureinfo&service=wms&crs=EPSG:4326&layers=gebco_latest_2&query_layers=gebco_latest_2&BBOX='
+    rqtHead = 'https://wms.gebco.net/mapserv?'
+    rqtTail = ('request=getfeatureinfo&service=wms&crs=EPSG:4326&layers=GEBCO_LATEST_2&query_layers=GEBCO_LATEST_2&BBOX='
               + str(stlap) + ',' + str(stlop) + ',' + str(stlam) + ',' + str(stlom)
-              + '&info_format=text/plain&service=wms&x=2&y=2&width=5&height=5&version=1.3.0')
+              + '&info_format=text/plain&service=wms&i=2&j=2&width=5&height=5&version=1.3.0')
     url = rqtHead + rqtTail
-    file = urllib2.urlopen(url)
     try:
+        file = urllib2.urlopen(url)
         data = str(file.read())
         return data.split("\'")[7]
     except HTTPError as err:
@@ -121,10 +121,10 @@ for item in arr:
             legTime = round((item[j][1]-item[j-1][1])/(60*60), 2)
             currDistance += legDistance
             currTime = round(currTime + legTime, 2)
-        GEBCODepth = getGEBCODepth(item[j][0])
-        indStr ="{} {} {} {} {} {}".format(int(legDistance), legTime, int(getDisplacement(item[0][0], item[j][0])), int(currDistance), currTime, GEBCODepth)
-        indArr.append(indStr)
-    with open('/home/www/people/simons/earthscopeoceans/data/FloatInfo/{}.txt'.format(floats[k]), 'w') as f:
+            GEBCODepth = getGEBCODepth(item[j][0])
+            indStr ="{} {} {} {} {} {}".format(int(legDistance), legTime, int(getDisplacement(item[0][0], item[j][0])), int(currDistance), currTime, GEBCODepth)
+            indArr.append(indStr)
+     with open('/home/www/people/simons/earthscopeoceans/data/FloatInfo/{}.txt'.format(floats[k]), 'w') as f:
         for line in indArr:
             f.write(line)
             if line!=indArr[-1]:
