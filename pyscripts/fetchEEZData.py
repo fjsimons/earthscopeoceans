@@ -26,7 +26,7 @@ str = json.dumps(dataObj)
 str2 = json.dumps(MRGIDList)
 
 #Write the data into files
-with open('/home/www/people/simons/Vearthscopeoceans/data/EEZData/AllEEZ','w') as f:
+with open('/home/www/people/simons/earthscopeoceans/data/EEZData/AllEEZ','w') as f:
 	f.write(str)
 	f.close()
 
