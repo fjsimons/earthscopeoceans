@@ -24,7 +24,8 @@ function makeWMSrequest(dataPoint) {
     const rqtTail = 'request=' + rqt + '&service=wms&crs=EPSG:4326&layers=GEBCO_LATEST_2&query_layers=GEBCO_LATEST_2&BBOX='
           + stlap + ',' + stlop + ',' + stlam + ',' + stlom + '&info_format=text/plain&service=wms&i='
           + pxx + '&j=' + pxy + '&width=' + pxw + '&height=' + pxh + '&version=1.3.0';
-
+    // Write out one ACTUAL example that we can handcopy in the browser
+    //
     let url = rqtHead + rqtTail;
 
     // console.log(url);
