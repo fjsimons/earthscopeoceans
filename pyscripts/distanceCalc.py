@@ -1,5 +1,11 @@
 # Last modified by Stefan Kildal-Brandt 6/23/26
-
+#
+# Turns the SOM/*_all.txt float information into
+#           FloatInfo/*.txt for every float
+#           FloatInfo/distance.txt at the very end
+# suitable for later cron updates by updateInfo.py
+# knowing that map.js reads a combination of SOM and FloatInfo
+#
 # This script takes a few hours to run
 # Recommended to only use to build list of float data from scratch
 
