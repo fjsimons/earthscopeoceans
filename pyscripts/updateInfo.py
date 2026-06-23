@@ -1,6 +1,7 @@
 # Written by Stefan Kildal-Brandt on 7/1/2022
 # Main script for updating float info. Much faster than building float info files from scratch
 # Last update by Frederik J Simons on 06/10/2026
+# Last update by Stefan Kildal-Brandt on 6/23/2026
 
 import urllib2
 from urllib2 import HTTPError
@@ -58,13 +59,13 @@ def getGEBCODepth(latlon, bounds=5):
     stlop = latlon[1] - bb
     stlam = latlon[0] + bb
     stlom = latlon[1] + bb
-    rqtHead = 'https://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?'
-    rqtTail = ('request=getfeatureinfo&service=wms&crs=EPSG:4326&layers=gebco_latest_2&query_layers=gebco_latest_2&BBOX='
+    rqtHead = 'https://wms.gebco.net/mapserv?'
+    rqtTail = ('request=getfeatureinfo&service=wms&crs=EPSG:4326&layers=GEBCO_LATEST_2&query_layers=GEBCO_LATEST_2&BBOX='
               + str(stlap) + ',' + str(stlop) + ',' + str(stlam) + ',' + str(stlom)
-              + '&info_format=text/plain&service=wms&x=2&y=2&width=' + str(bounds) + '&height=' + str(bounds) + '&version=1.3.0')
+              + '&info_format=text/plain&service=wms&i=2&j=2&width=' + str(bounds) + '&height=' + str(bounds) + '&version=1.3.0')
     url = rqtHead + rqtTail
-    file = urllib2.urlopen(url)
     try:
+        file = urllib2.urlopen(url)
         data = str(file.read())
         return data.split("\'")[7]
     except HTTPError as err:
