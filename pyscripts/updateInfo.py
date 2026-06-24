@@ -4,12 +4,13 @@
 # Looks at SOM float data and runs an update to add to FloatInfo
 # 
 # Last update by Frederik J Simons on 06/10/2026
-# Last update by Stefan Kildal-Brandt on 6/23/2026
+# Last update by Stefan Kildal-Brandt on 6/24/2026
 
 import urllib2
 from urllib2 import HTTPError
 from datetime import datetime
 import math
+import os
 
 # Haversine Displacement Calculation
 def getDisplacement(datapt1, datapt2):
@@ -101,11 +102,17 @@ for flo in floats:
     print(flo)
 
     # Grab the current data that are stored on geoweb for that float
-    file = open('/home/www/people/simons/earthscopeoceans/data/FloatInfo/{}.txt'.format(flo), 'r')
-    fileArr = file.readlines()
-    fileArrLines = [fileArr[i].split(' ') for i in range(len(fileArr))]
-    file.close()
-    
+    floatInfoPath = '/home/www/people/simons/earthscopeoceans/data/FloatInfo/{}.txt'.format(flo)
+    if os.path.exists(floatInfoPath):
+        file = open(floatInfoPath, 'r')
+        fileArr = file.readlines()
+        fileArrLines = [fileArr[i].split(' ') for i in range(len(fileArr))]
+        file.close()
+    else:
+        print("No existing file for {}. Creating one.".format(flo))
+        fileArr = []
+        fileArrLines = []
+
     # Grab the data that are stored on geoweb for that float
     urlFile = urllib2.urlopen('https://geoweb.princeton.edu/people/simons/SOM/{}_all.txt'.format(flo))
     urlArr = []
@@ -131,25 +138,40 @@ for flo in floats:
     # If there is new data on the geoweb server, grab that and append it to our individual float data
     if len(urlArr) > len(fileArr):
         numNewLines = len(urlArr) - len(fileArr)
-        currDist = int(fileArrLines[-1][3])
-        currTime = float(fileArrLines[-1][4])
+        if len(fileArr) == 0:
+            currDist = 0
+            currTime = 0.0
+        else:
+            currDist = int(fileArrLines[-1][3])
+            currTime = float(fileArrLines[-1][4])
         initLatLng = [float(urlArr[0][3]), float(urlArr[0][4])]
 
-        appendFile = open('/home/www/people/simons/earthscopeoceans/data/FloatInfo/{}.txt'.format(flo), 'a')
+        appendFile = open(floatInfoPath, 'a')
         for index in range(-numNewLines, 0):
-            prevLatLng = [float(urlArr[index-1][3]), float(urlArr[index-1][4])]
             latLng = [float(urlArr[index][3]), float(urlArr[index][4])]
             totDisp = int(getDisplacement(initLatLng, latLng))
-            legDist = int(getDisplacement(prevLatLng, latLng))
-            currDist += legDist
-            legTime = round((toUTCTime('{} {}'.format(urlArr[index][1], urlArr[index][2]))
+
+            # If this is the first line of a brand-new file, there is no previous point
+            if len(fileArr) == 0 and index == -numNewLines:
+                legDist = 0
+                legTime = 0.0
+            else:
+                prevLatLng = [float(urlArr[index-1][3]), float(urlArr[index-1][4])]
+                legDist = int(getDisplacement(prevLatLng, latLng))
+                currDist += legDist
+                legTime = round((toUTCTime('{} {}'.format(urlArr[index][1], urlArr[index][2]))
                              - toUTCTime('{} {}'.format(urlArr[index-1][1], urlArr[index-1][2])))/(60*60), 2)
-            currTime = round(currTime + legTime, 2)
+                currTime = round(currTime + legTime, 2)
+            
             GEBCODepth = getGEBCODepth(latLng)
             string = '{} {} {} {} {} {}'.format(legDist, legTime, totDisp, currDist, currTime, GEBCODepth)
-            if not(index==-numNewLines and '\n' in fileArr[-1]):
-                appendFile.write('\n')
+
+            # Add newline unless this is the first line of a brand-new file
+            if not(len(fileArr) == 0 and index == -numNewLines):
+                if len(fileArr) == 0 or not(index == -numNewLines and '\n' in fileArr[-1]):
+                     appendFile.write('\n')
             appendFile.write(string)
+
         appendFile.close()
 
 # Write data in for all tabs
