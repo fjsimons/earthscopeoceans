@@ -5,7 +5,7 @@
 //      Here is an example of a working link:
 //          https://wms.gebco.net/mapserv?request=getfeatureinfo&crs=EPSG:4326&layers=GEBCO_LATEST_2&query_layers=GEBCO_LATEST_2&BBOX=65.0874996667,23.2291666667,65.1041663333,23.2458333333&info_format=text/plain&service=wms&i=2&j=2&width=5&height=5&version=1.3.0
 //
-//          https://wms.gebco.net/mapserv?request=getfeatureinfo&crs=EPSG:4326&layers=GEBCO_LATEST_2&query_layers=GEBCO_LATEST_2&BBOX=50.9542,-199875,50.9708,-19.9708&info_format=text/plain&service=wms&i=2&j=2&width=5&height=5&version=1.3.0
+//          https://wms.gebco.net/mapserv?request=getfeatureinfo&crs=EPSG:4326&layers=GEBCO_LATEST_2&query_layers=GEBCO_LATEST_2&BBOX=50.9542,-19.9875,50.9708,-19.9708&info_format=text/plain&service=wms&i=2&j=2&width=5&height=5&version=1.3.0
 //
 // Function to get GEBCO depth from a datapoint parameter
 function makeWMSrequest(dataPoint) {
