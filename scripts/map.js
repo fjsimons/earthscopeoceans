@@ -1,7 +1,7 @@
 /**
 * Map class
  @author Jonah Rubin and Stefan Kildal-Brandt 07/06/2022
- Last modified by Frederik J Simons 01/07/2024
+ Last modified by Frederik J Simons 06/26/2026
 */
 
 async function initMap(listener) {
@@ -46,6 +46,7 @@ async function initMap(listener) {
     let papeete = { lat: -17.53733, lng: -149.5665 };
 
     // set up icons found at https://sites.google.com/site/gmapsdevelopment/
+    // note it didn't like the semicolon for the &oacute
     let iconBase = 'https://maps.google.com/mapfiles/ms/icons/';
     let icons = {
         geoazur: {
@@ -68,9 +69,13 @@ async function initMap(listener) {
             name: 'Stanford',
             icon: iconBase + 'green-dot.png'
         },
+        observatorio: {
+            name: 'Observat&oacuterio',
+            icon: iconBase + 'purple-dot.png'
+        },
         dead: {
             name: 'Inactive',
-            icon: iconBase + 'purple-dot.png'
+            icon: iconBase + 'purple.png'
         }
     };
 
