@@ -2,11 +2,11 @@
 DataPoint object class
 
 @author Jonah Rubin and Frederik J Simons 04/17/2024
-Last modified by Frederik J Simons 06/10/2026
+Last modified by Frederik J Simons 06/26/2026
 */
 
 const JAMSTEC_FLOATS = [
-    "N0001", "N0005", 
+    "N0001", "N0005", "P0056", "P0057",
     "P0053", "P0054", "T0101"
 ];
 const GEOAZUR_FLOATS = [
@@ -21,6 +21,9 @@ const SUSTECH_FLOATS = [
 const STANFORD_FLOATS = [
     "R0002", "R0004", "R0007"
 ];
+const OBSERVATORIO_FLOATS = [
+    "T0095","T0096","T0097","T0098","T0099","U0106","U0107","U0108"
+];
 const DEAD_FLOATS = [
     "N0003", "P0007", "P0034", "P0047", "R0006", "P0008", "R0001",
     "P0009", "P0043", "P0052", "P0050", "P0010", "R0003", "N0004",
@@ -31,10 +34,35 @@ const DEAD_FLOATS = [
     "P0026", "P0028", "P0029", "P0031", "P0032",
     "P0033", "P0035", "P0036", "P0037", "P0038", "T0102",
     "P0040", "P0044", "R0061", "R0062", "R0069", "R0073", "T0100"
-]
+];
 // Anything you wish to hide?
 const NO_FLOATS = [
-]
+];
+
+function getOwner(name) {
+    if (DEAD_FLOATS.includes(name))
+        return("dead")
+    if (JAMSTEC_FLOATS.includes(name))
+        return("jamstec");
+    if (GEOAZUR_FLOATS.includes(name))
+        return("geoazur");
+    if (PRINCETON_FLOATS.includes(name))
+        return("princeton");
+    if (SUSTECH_FLOATS.includes(name))
+        return("sustech");
+    if (STANFORD_FLOATS.includes(name))
+        return("stanford");
+    if (OBSERVATORIO_FLOATS.includes(name))
+        return("observatorio");
+}
+
+function getAllFloatNames() {
+    all = [];
+    all = all.concat(
+        JAMSTEC_FLOATS, GEOAZUR_FLOATS, PRINCETON_FLOATS, SUSTECH_FLOATS, STANFORD_FLOATS, DEAD_FLOATS, OBSERVATORIO_FLOATS
+    )
+    return all
+}
 
 // create datapoint object
 function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, Prange, cmdrdc, f2up, fupl) {
@@ -56,30 +84,6 @@ function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, P
     this.fupl = fupl;
     this.wmsdepth = 0;
     this.showIcon = true;
-}
-
-function getOwner(name) {
-    if (DEAD_FLOATS.includes(name))
-        return("dead")
-    if (JAMSTEC_FLOATS.includes(name))
-        return("jamstec");
-    if (GEOAZUR_FLOATS.includes(name))
-        return("geoazur");
-    if (PRINCETON_FLOATS.includes(name))
-        return("princeton");
-    if (SUSTECH_FLOATS.includes(name))
-        return("sustech");
-    if (STANFORD_FLOATS.includes(name))
-        return("stanford");
-}
-
-function getAllFloatNames() {
-    all = [];
-    all = all.concat(
-        JAMSTEC_FLOATS, GEOAZUR_FLOATS, PRINCETON_FLOATS, SUSTECH_FLOATS, STANFORD_FLOATS, DEAD_FLOATS
-    )
-
-    return all
 }
 
 // INPUT is in UTC, convert to browser time
