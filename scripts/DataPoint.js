@@ -12,9 +12,7 @@ const JAMSTEC_FLOATS = [
 const GEOAZUR_FLOATS = [
 ];
 const PRINCETON_FLOATS = [
-    "P0013",
-    "P0018", "P0019", "P0020", "P0021",
-    "P0023"
+    "P0013","P0018", "P0019", "P0020", "P0021","P0023"
 ];
 const SUSTECH_FLOATS = [
 ];
@@ -27,34 +25,17 @@ const OBSERVATORIO_FLOATS = [
 const DEAD_FLOATS = [
     "N0003", "P0007", "P0034", "P0047", "R0006", "P0008", "R0001",
     "P0009", "P0043", "P0052", "P0050", "P0010", "R0003", "N0004",
-    "P0012", "P0022", "P0049", "P0048", "P0016",
-    "P0045", "P0046", "P0041", "P0042", "P0027", "P0039", "N0002",
-    "P0006", "P0011", "P0025", "P0017", "P0024", "R0005", "R0058",
-    "R0059", "R0063", "R0065", "R0066", "R0067", "R0071", "R0072",
-    "P0026", "P0028", "P0029", "P0031", "P0032",
-    "P0033", "P0035", "P0036", "P0037", "P0038", "T0102",
-    "P0040", "P0044", "R0061", "R0062", "R0069", "R0073", "T0100"
+    "P0012", "P0022", "P0049", "P0048", "P0016", "P0045", "P0046",
+    "P0041", "P0042", "P0027", "P0039", "N0002", "P0006", "P0011",
+    "P0025", "P0017", "P0024", "R0005", "R0058", "R0059", "R0063",
+    "R0065", "R0066", "R0067", "R0071", "R0072", "P0026", "P0028",
+    "P0029", "P0031", "P0032", "P0033", "P0035", "P0036", "P0037",
+    "P0038", "T0102", "P0040", "P0044", "R0061", "R0062", "R0069",
+    "R0073", "T0100"
 ];
 // Anything you wish to hide?
 const NO_FLOATS = [
 ];
-
-function getOwner(name) {
-    if (DEAD_FLOATS.includes(name))
-        return("dead")
-    if (JAMSTEC_FLOATS.includes(name))
-        return("jamstec");
-    if (GEOAZUR_FLOATS.includes(name))
-        return("geoazur");
-    if (PRINCETON_FLOATS.includes(name))
-        return("princeton");
-    if (SUSTECH_FLOATS.includes(name))
-        return("sustech");
-    if (STANFORD_FLOATS.includes(name))
-        return("stanford");
-    if (OBSERVATORIO_FLOATS.includes(name))
-        return("observatorio");
-}
 
 function getAllFloatNames() {
     all = [];
@@ -84,6 +65,23 @@ function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, P
     this.fupl = fupl;
     this.wmsdepth = 0;
     this.showIcon = true;
+}
+
+function getOwner(name) {
+    if (DEAD_FLOATS.includes(name))
+        return("dead")
+    if (JAMSTEC_FLOATS.includes(name))
+        return("jamstec");
+    if (GEOAZUR_FLOATS.includes(name))
+        return("geoazur");
+    if (PRINCETON_FLOATS.includes(name))
+        return("princeton");
+    if (SUSTECH_FLOATS.includes(name))
+        return("sustech");
+    if (STANFORD_FLOATS.includes(name))
+        return("stanford");
+    if (OBSERVATORIO_FLOATS.includes(name))
+        return("observatorio");
 }
 
 // INPUT is in UTC, convert to browser time
