@@ -37,9 +37,9 @@ async function initMap(listener) {
     };
 
     //Initializing list of All EEZ and their coordinates
-    let EEZList = await fetchAndDecodeFloatData('https://geoweb.princeton.edu/people/simons/earthscopeoceans/data/EEZData/AllEEZ','text');
+    let EEZList = await fetchAndDecodeFloatData('data/EEZData/AllEEZ','text');
     EEZList = JSON.parse(EEZList);
-    let AllGeometries = await fetchAndDecodeFloatData('https://geoweb.princeton.edu/people/simons/earthscopeoceans/data/EEZData/AllGeometries','text');
+    let AllGeometries = await fetchAndDecodeFloatData('data/EEZData/AllGeometries','text');
     AllGeometries = JSON.parse(AllGeometries);
 
     // some default locations
@@ -615,7 +615,7 @@ async function initMap(listener) {
     iwindows = [];
     }
 
-    // handles async use of data
+    // Gets the SOM data as pushed to geoweb
     async function getFloatData(name) {
         clearMarkers();
 
@@ -629,7 +629,6 @@ async function initMap(listener) {
         let dataPromise = fetchAndDecodeFloatData(url, 'text');
         let values = await Promise.all([dataPromise]);
         return values[0];
-
     }
 
     setUpEvents();
@@ -813,10 +812,10 @@ async function initMap(listener) {
         }
     }
 
-    //Grab float data from distances.txt
+    //Grab float data from distances.txt as computed from pyscripts
     async function grabAllData(){
         let dataArr=[];
-        let data = await fetchAndDecodeFloatData("https://geoweb.princeton.edu/people/simons/earthscopeoceans/data/FloatInfo/distances.txt", 'text');
+        let data = await fetchAndDecodeFloatData("data/FloatInfo/distances.txt", 'text');
         tempArr = data.split('\n');
         for(let i=0; i<tempArr.length;i++){
             let splitArr = tempArr[i].split(' ');
@@ -825,10 +824,10 @@ async function initMap(listener) {
         return dataArr
     }
     
-    // Gets time, distance, and depth
+    // Gets time, distance, and depth as computed from pyscripts
     async function grabIndData(Float){
         let dataArr=[];
-        let data = await fetchAndDecodeFloatData(`https://geoweb.princeton.edu/people/simons/earthscopeoceans/data/FloatInfo/${Float}.txt`, 'text');
+        let data = await fetchAndDecodeFloatData(`data/FloatInfo/${Float}.txt`, 'text');
         tempArr = data.split('\n');
         for(let i=0; i<tempArr.length;i++){
             let splitArr = tempArr[i].split(' ');
