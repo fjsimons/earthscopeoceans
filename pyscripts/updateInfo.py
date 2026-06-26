@@ -13,16 +13,16 @@ import re
 
 from helper_functions import getDisplacement, monthToNum, toUTCTime, getGEBCODepth 
 
-# Grab the path
+# Grab the path from a headerless bare text file
 path_file = open('pathNames.txt', 'r')
 path = path_file.readlines()[0].strip()
 path_file.close()
 
-# Grab the floats
+# Grab the floats from a headerless bare text file
 float_file = open('floatNames.txt', 'r')
 floats = []
 float_lines = float_file.readlines()
-for line in float_lines[1:]:
+for line in float_lines[0:]:
     for flo in line.split(' '):
         flo = flo.strip()
         if flo:
