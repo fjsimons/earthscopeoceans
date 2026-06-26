@@ -2,6 +2,12 @@
 
 import urllib2 #Necessary for fetching data from marineregions server
 import json #Necessary for parsing the data into and out of Json format
+import os
+
+# Grab the path
+path_file = open('pathNames.txt', 'r')
+path = path_file.readlines()[0].strip()
+path_file.close()
 
 #Grab all EEZ's from Marineregions.org
 data = []
@@ -22,14 +28,14 @@ for i in data:
 		   "maxLatitude": i["maxLatitude"], "maxLongitude": i["maxLongitude"]})
 	dataObj.append(obj)
 	MRGIDList.append(i["MRGID"])
-str = json.dumps(dataObj)
+str1 = json.dumps(dataObj)
 str2 = json.dumps(MRGIDList)
 
 #Write the data into files
-with open('/home/www/people/simons/earthscopeoceans/data/EEZData/AllEEZ','w') as f:
-	f.write(str)
+with open(os.path.join(path, 'data', 'EEZData', 'AllEEZ'), 'w') as f:
+	f.write(str1)
 	f.close()
 
-with open('/home/www/people/simons/earthscopeoceans/data/EEZData/MRGIDList','w') as f:
+with open(os.path.join(path, 'data', 'EEZData', 'MRGIDList'), 'w') as f:
 	f.write(str2)
 	f.close()
