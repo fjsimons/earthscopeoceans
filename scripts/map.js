@@ -32,7 +32,8 @@ async function initMap(listener) {
         "princeton": true,
         "sustech": true,
         "jamstec": true,
-        "stanford": true
+        "stanford": true,
+	"observatorio": true
     };
 
     //Initializing list of All EEZ and their coordinates
@@ -71,7 +72,7 @@ async function initMap(listener) {
         },
         observatorio: {
             name: 'Observat&oacuterio',
-            icon: iconBase + 'purple-dot.png'
+            icon: iconBase + 'green-dot.png'
         },
         dead: {
             name: 'Inactive',
