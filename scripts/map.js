@@ -47,7 +47,7 @@ async function initMap(listener) {
     let papeete = { lat: -17.53733, lng: -149.5665 };
 
     // set up icons found at https://sites.google.com/site/gmapsdevelopment/
-    // note it didn't like the semicolon for the &oacute
+    // note it didn't like the semicolon for the &oacute etc
     let iconBase = 'https://maps.google.com/mapfiles/ms/icons/';
     let icons = {
         geoazur: {
@@ -71,12 +71,12 @@ async function initMap(listener) {
             icon: iconBase + 'green-dot.png'
         },
         observatorio: {
-            name: 'Observat&oacuterio',
-            icon: iconBase + 'green-dot.png'
+            name: 'Observatório',
+            icon: iconBase + 'purple-dot.png'
         },
         dead: {
             name: 'Inactive',
-            icon: iconBase + 'purple.png'
+            icon: iconBase + 'blue.png'
         }
     };
 
