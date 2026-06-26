@@ -358,6 +358,8 @@ async function initMap(listener) {
                         // JAMSTEC MERMAIDs
                     } else if (dataPoints[i].owner === "jamstec") {
                         marker.setIcon(icons.jamstec.icon);
+                    } else if (dataPoints[i].owner === "observatorio") {
+                        marker.setIcon(icons.observatorio.icon);
                     }
 
                     // expand bounds to fit all markers
