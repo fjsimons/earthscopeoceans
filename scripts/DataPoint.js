@@ -37,6 +37,23 @@ const DEAD_FLOATS = [
 const NO_FLOATS = [
 ];
 
+function getOwner(name) {
+    if (DEAD_FLOATS.includes(name))
+        return("dead")
+    if (JAMSTEC_FLOATS.includes(name))
+        return("jamstec");
+    if (GEOAZUR_FLOATS.includes(name))
+        return("geoazur");
+    if (PRINCETON_FLOATS.includes(name))
+        return("princeton");
+    if (SUSTECH_FLOATS.includes(name))
+        return("sustech");
+    if (STANFORD_FLOATS.includes(name))
+        return("stanford");
+    if (OBSERVATORIO_FLOATS.includes(name))
+        return("observatorio");
+}
+
 function getAllFloatNames() {
     all = [];
     all = all.concat(
@@ -65,23 +82,6 @@ function DataPoint(name, stdt, stla, stlo, hdop, vdop, Vbat, minV, Pint, Pext, P
     this.fupl = fupl;
     this.wmsdepth = 0;
     this.showIcon = true;
-}
-
-function getOwner(name) {
-    if (DEAD_FLOATS.includes(name))
-        return("dead")
-    if (JAMSTEC_FLOATS.includes(name))
-        return("jamstec");
-    if (GEOAZUR_FLOATS.includes(name))
-        return("geoazur");
-    if (PRINCETON_FLOATS.includes(name))
-        return("princeton");
-    if (SUSTECH_FLOATS.includes(name))
-        return("sustech");
-    if (STANFORD_FLOATS.includes(name))
-        return("stanford");
-    if (OBSERVATORIO_FLOATS.includes(name))
-        return("observatorio");
 }
 
 // INPUT is in UTC, convert to browser time
