@@ -33,7 +33,7 @@ async function initMap(listener) {
         "sustech": true,
         "jamstec": true,
         "stanford": true,
-	"observatorio": true
+        "observatorio": true
     };
 
     //Initializing list of All EEZ and their coordinates
