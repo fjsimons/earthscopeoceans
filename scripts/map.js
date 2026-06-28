@@ -218,7 +218,7 @@ async function initMap(listener) {
             // the real legend toggling
             showDict[key] = !showDict[key];
             if (showDict[key]!=true) {
-                document.getElementById(name).src="https://maps.google.com/mapfiles/ms/icons/ltblue-dot.png";
+                document.getElementById(name).src="https://maps.google.com/mapfiles/ms/icons/lightblue.png";
             } else {
                 document.getElementById(name).src=icons[key].icon;
             }
