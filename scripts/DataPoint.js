@@ -6,7 +6,7 @@ Last modified by Frederik J Simons 06/26/2026
 */
 
 const JAMSTEC_FLOATS = [
-    "N0001", "N0005", "P0056", "P0057",
+    "N0001", "N0005", "P0057",
     "P0053", "P0054", "T0101"
 ];
 const GEOAZUR_FLOATS = [
@@ -31,7 +31,7 @@ const DEAD_FLOATS = [
     "R0065", "R0066", "R0067", "R0071", "R0072", "P0026", "P0028",
     "P0029", "P0031", "P0032", "P0033", "P0035", "P0036", "P0037",
     "P0038", "T0102", "P0040", "P0044", "R0061", "R0062", "R0069",
-    "R0073", "T0100"
+    "R0073", "T0100", "P0056"
 ];
 // Anything you wish to hide?
 const NO_FLOATS = [
