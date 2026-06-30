@@ -48,6 +48,7 @@ async function initMap(listener) {
 
     // set up icons found at https://sites.google.com/site/gmapsdevelopment/
     // note it didn't like the semicolon for the &oacute etc
+    // See the findings https://kml4earth.appspot.com/icons.html
     let iconBase = 'https://maps.google.com/mapfiles/ms/icons/';
     let icons = {
         geoazur: {
@@ -513,8 +514,8 @@ async function initMap(listener) {
                         '<b>UTC:</b> ' + dataPoints[i].stdt +
                         // '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
                         '<br/><b>GPS Lat/Lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
-                        '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
-                        '<br/><b>GEBCO WMS Depth:</b> ' + GEBCODepth + ' m' +
+                        '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ', ' + dataPoints[i].vdop +
+                        '<br/><b>GEBCO WMS Elevation:</b> ' + GEBCODepth + ' m' +
                         '<br/><b>EEZ:</b> ' + EEZ +
                         '<br/> ' +
                         '<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
