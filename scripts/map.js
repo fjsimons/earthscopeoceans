@@ -179,16 +179,16 @@ async function initMap(listener) {
                     let lat = dropEvent.latLng.toJSON().lat.toFixed(6);
                     let lng = dropEvent.latLng.toJSON().lng.toFixed(6);
                     EEZ = await eezFinder(lat, lng, EEZList, AllGeometries);
-                    GEBCODepth = NaN
+                    GEBCO = NaN
                     try{
-                        GEBCODepth = await makeWMSrequestCoords(lat, lng);
+                        GEBCO = await makeWMSrequestCoords(lat, lng);
                     }
                     catch (err){
                         console.log(err)
                     }
                     dropMarkers.push(marker);
                     //Sets an info marker for the map
-                    await setInfoWindow('drop', 0, 0, marker, 0, 0, 0, 0, 0, 0, 0, GEBCODepth, EEZ, lat, lng);
+                    await setInfoWindow('drop', 0, 0, marker, 0, 0, 0, 0, 0, 0, 0, GEBCO, EEZ, lat, lng);
                     google.maps.event.trigger(marker, 'click');
                     google.maps.event.removeListener(dropListener);
                 });
@@ -286,7 +286,7 @@ async function initMap(listener) {
             let totalTime;
             let avgVelocity;
             let EEZ;
-            let GEBCODepth;
+            let GEBCO;
             let marker;
     
             // iterate over arrays, placing markers
@@ -374,7 +374,7 @@ async function initMap(listener) {
                         totalDistance = data[iniIndex+i][3]/1000;
                         totalTime = data[iniIndex+i][4];
                         // Fills data with depth so makeWMSrequest becomes superfluous
-                        GEBCODepth = data[iniIndex+i][5];
+                        GEBCO = data[iniIndex+i][5];
 
                         if (totalTime === 0) {
                             avgVelocity = 0;
@@ -397,7 +397,7 @@ async function initMap(listener) {
                         netDisplacement = dataArr[0][1]/1000;
                         totalDistance = dataArr[0][2]/1000;
                         totalTime = dataArr[0][3];
-                        GEBCODepth = dataArr[0][4]
+                        GEBCO = dataArr[0][4]
                         if (totalTime === 0) {
                             avgVelocty = 0;
                         } else {
@@ -409,7 +409,7 @@ async function initMap(listener) {
 
                     // create info windows
                     setInfoWindow(allPage, k, i, marker, netDisplacement, totalDistance, avgVelocity,
-                                  totalTime, legLength, legSpeed, legTime, GEBCODepth, EEZ, 0, 0);
+                                  totalTime, legLength, legSpeed, legTime, GEBCO, EEZ, 0, 0);
 
                     markers.push(marker);
                     k++;
@@ -435,7 +435,7 @@ async function initMap(listener) {
 
     // for dynamic info windows
     function setInfoWindow(allPage, k, i, marker, netDisplacement, totalDistance, avgVelocity,
-                           totalTime, legLength, legSpeed, legTime, GEBCODepth, EEZ, lat, lng) {
+                           totalTime, legLength, legSpeed, legTime, GEBCO, EEZ, lat, lng) {
         // No more live requests since the data get read by grabIndData
         // makeWMSrequest(dataPoints[k]);
 
@@ -515,7 +515,7 @@ async function initMap(listener) {
                         // '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
                         '<br/><b>GPS Lat/Lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
                         '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ', ' + dataPoints[i].vdop +
-                        '<br/><b>GEBCO WMS Elevation:</b> ' + GEBCODepth + ' m' +
+                        '<br/><b>GEBCO WMS Elevation:</b> ' + GEBCO + ' m' +
                         '<br/><b>EEZ:</b> ' + EEZ +
                         '<br/> ' +
                         '<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
@@ -530,7 +530,7 @@ async function initMap(listener) {
                     // content for dropped marker tab
                     floatTabContent = '<div id="tabContent">' +
                         '<br/><b>GPS Lat/Lon:</b> ' + lat + ', ' + lng +
-                        '<br/><b>GEBCO WMS Depth:</b> ' + GEBCODepth + ' m' +
+                        '<br/><b>GEBCO WMS Elevation:</b> ' + GEBCO + ' m' +
                         '<br/><b>EEZ:</b> ' + EEZ +
                         //This next line we create an <a> tag with an href that calls a javascript function using jQuery
                         '<br/><br/><span style="cursor:pointer;display:inline-block;"><a href="javascript:dropMarkerList[currentMarker].setMap(null);tempClose();void dropMarkerList.splice(currentMarker,1);"><b>Clear Marker</b></a></span>';
@@ -542,13 +542,13 @@ async function initMap(listener) {
                         '<b>UTC:</b> ' + dataPoints[i].stdt +
                         // '<br/><b>Your Date:</b> ' + dataPoints[i].loct +
                         '<br/><b>GPS Lat/Lon:</b> ' + dataPoints[i].stla + ', ' + dataPoints[i].stlo +
-                        // '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ' m , ' + dataPoints[i].vdop + ' m' +
-                        // We're not making a WMS request here so no more datapoint and now more that field
-                        // '<br/><b>GEBCO WMS Depth:</b> ' + dataPoints[i].wmsdepth + ' m' +
-                        '<br/><b>GEBCO WMS Depth:</b> ' + GEBCODepth + ' m' +
+                        '<br/><b>GPS Hdop/Vdop:</b> ' + dataPoints[i].hdop + ', ' + dataPoints[i].vdop + 
+                        // We're not making a new WMS request here 
+                        // '<br/><b>GEBCO WMS Elevation:</b> ' + dataPoints[i].wmselevation + ' m' +
+                        '<br/><b>GEBCO WMS Elevation:</b> ' + GEBCO + ' m' +
                         '<br/><b>EEZ:</b> ' + EEZ +
-                        // '<br/> ' +
-                        // '<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
+                        //'<br/> ' +
+                        //'<br/><b>Battery:</b> ' + dataPoints[i].Vbat + ' mV' +
                         // '<br/><b>Internal Pressure:</b> ' + dataPoints[i].Pint + ' Pa' +
                         // '<br/><b>External Pressure:</b> ' + dataPoints[i].Pext + ' mbar' +
                         '<br/> ' +
@@ -734,16 +734,16 @@ async function initMap(listener) {
                         let lat = dropEvent.latLng.toJSON().lat.toFixed(6);
                         let lng = dropEvent.latLng.toJSON().lng.toFixed(6);
                         EEZ = await eezFinder(lat, lng, EEZList, AllGeometries);
-                        GEBCODepth = NaN
+                        GEBCO = NaN
                         try{
-                            GEBCODepth = await makeWMSrequestCoords(lat, lng);
+                            GEBCO = await makeWMSrequestCoords(lat, lng);
                         }
                         catch (err){
                            console.log(err)
                         }
                         dropMarkers.push(marker);
                         //Sets an info marker for the map
-                        setInfoWindow('drop', 0, 0, marker, 0, 0, 0, 0, 0, 0, 0, GEBCODepth, EEZ, lat, lng);
+                        setInfoWindow('drop', 0, 0, marker, 0, 0, 0, 0, 0, 0, 0, GEBCO, EEZ, lat, lng);
                         google.maps.event.trigger(marker, 'click');
                     });
             });
